@@ -1,0 +1,790 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0653CFDA1F6BA0300054A818 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653CFD91F6BA0300054A818 /* main.m */; };
+		0653CFDD1F6BA0300054A818 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653CFDC1F6BA0300054A818 /* AppDelegate.m */; };
+		0653CFE51F6BA0300054A818 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0653CFE41F6BA0300054A818 /* Assets.xcassets */; };
+		0653CFE81F6BA0300054A818 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0653CFE61F6BA0300054A818 /* LaunchScreen.storyboard */; };
+		0653CFF31F6BA0300054A818 /* ZhiXiangTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653CFF21F6BA0300054A818 /* ZhiXiangTests.m */; };
+		0653CFFE1F6BA0300054A818 /* ZhiXiangUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653CFFD1F6BA0300054A818 /* ZhiXiangUITests.m */; };
+		0653D0141F6BA83A0054A818 /* ZXBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653D0131F6BA83A0054A818 /* ZXBaseViewController.m */; };
+		0653D01A1F6BA8810054A818 /* ZXBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653D0191F6BA8810054A818 /* ZXBaseNavigationController.m */; };
+		0653D0201F6BA9180054A818 /* UIImage+Additional.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653D01D1F6BA9180054A818 /* UIImage+Additional.m */; };
+		0653D0211F6BA9180054A818 /* UIView+Additional.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653D01F1F6BA9180054A818 /* UIView+Additional.m */; };
+		0653D02A1F6BAB250054A818 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653D0291F6BAB250054A818 /* HomeViewController.m */; };
+		0653D02D1F6BABB70054A818 /* NetworkConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653D02C1F6BABB70054A818 /* NetworkConfiguration.m */; };
+		0653D0371F6BABE50054A818 /* GCCGetInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653D0301F6BABE50054A818 /* GCCGetInfo.m */; };
+		0653D0381F6BABE50054A818 /* GCCKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653D0321F6BABE50054A818 /* GCCKeyChain.m */; };
+		0653D0391F6BABE50054A818 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653D0341F6BABE50054A818 /* Helper.m */; };
+		0653D03D1F6BAC5E0054A818 /* ZXTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653D03C1F6BAC5E0054A818 /* ZXTools.m */; };
+		0653D0431F6BAD8A0054A818 /* ConverUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653D0401F6BAD8A0054A818 /* ConverUtil.m */; };
+		0653D0441F6BAD8A0054A818 /* DesUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653D0421F6BAD8A0054A818 /* DesUtil.m */; };
+		0653D0471F6BB5920054A818 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653D0461F6BB5920054A818 /* LeftViewController.m */; };
+		AF1D023FFA7FF8408D32CBC9 /* libPods-ZhiXiang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27456E740AED9D909E7AAB2D /* libPods-ZhiXiang.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0653CFEF1F6BA0300054A818 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0653CFCD1F6BA0300054A818 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0653CFD41F6BA0300054A818;
+			remoteInfo = ZhiXiang;
+		};
+		0653CFFA1F6BA0300054A818 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0653CFCD1F6BA0300054A818 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0653CFD41F6BA0300054A818;
+			remoteInfo = ZhiXiang;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0653CFD51F6BA0300054A818 /* ZhiXiang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhiXiang.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0653CFD91F6BA0300054A818 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0653CFDB1F6BA0300054A818 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		0653CFDC1F6BA0300054A818 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0653CFE41F6BA0300054A818 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0653CFE71F6BA0300054A818 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0653CFE91F6BA0300054A818 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0653CFEE1F6BA0300054A818 /* ZhiXiangTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZhiXiangTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0653CFF21F6BA0300054A818 /* ZhiXiangTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiXiangTests.m; sourceTree = "<group>"; };
+		0653CFF41F6BA0300054A818 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0653CFF91F6BA0300054A818 /* ZhiXiangUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZhiXiangUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0653CFFD1F6BA0300054A818 /* ZhiXiangUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiXiangUITests.m; sourceTree = "<group>"; };
+		0653CFFF1F6BA0300054A818 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0653D0121F6BA83A0054A818 /* ZXBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXBaseViewController.h; sourceTree = "<group>"; };
+		0653D0131F6BA83A0054A818 /* ZXBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXBaseViewController.m; sourceTree = "<group>"; };
+		0653D0181F6BA8810054A818 /* ZXBaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXBaseNavigationController.h; sourceTree = "<group>"; };
+		0653D0191F6BA8810054A818 /* ZXBaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXBaseNavigationController.m; sourceTree = "<group>"; };
+		0653D01C1F6BA9180054A818 /* UIImage+Additional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Additional.h"; sourceTree = "<group>"; };
+		0653D01D1F6BA9180054A818 /* UIImage+Additional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Additional.m"; sourceTree = "<group>"; };
+		0653D01E1F6BA9180054A818 /* UIView+Additional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Additional.h"; sourceTree = "<group>"; };
+		0653D01F1F6BA9180054A818 /* UIView+Additional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Additional.m"; sourceTree = "<group>"; };
+		0653D0241F6BA9820054A818 /* ColorMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorMacro.h; sourceTree = "<group>"; };
+		0653D0251F6BA9820054A818 /* LayoutMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayoutMacro.h; sourceTree = "<group>"; };
+		0653D0261F6BA9820054A818 /* SystemMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemMacro.h; sourceTree = "<group>"; };
+		0653D0271F6BAAF80054A818 /* ZhiXiang.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhiXiang.pch; sourceTree = "<group>"; };
+		0653D0281F6BAB250054A818 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		0653D0291F6BAB250054A818 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		0653D02B1F6BABB70054A818 /* NetworkConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkConfiguration.h; sourceTree = "<group>"; };
+		0653D02C1F6BABB70054A818 /* NetworkConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkConfiguration.m; sourceTree = "<group>"; };
+		0653D02F1F6BABE50054A818 /* GCCGetInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCCGetInfo.h; sourceTree = "<group>"; };
+		0653D0301F6BABE50054A818 /* GCCGetInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCCGetInfo.m; sourceTree = "<group>"; };
+		0653D0311F6BABE50054A818 /* GCCKeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCCKeyChain.h; sourceTree = "<group>"; };
+		0653D0321F6BABE50054A818 /* GCCKeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCCKeyChain.m; sourceTree = "<group>"; };
+		0653D0331F6BABE50054A818 /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
+		0653D0341F6BABE50054A818 /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
+		0653D03B1F6BAC5E0054A818 /* ZXTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXTools.h; sourceTree = "<group>"; };
+		0653D03C1F6BAC5E0054A818 /* ZXTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXTools.m; sourceTree = "<group>"; };
+		0653D03F1F6BAD8A0054A818 /* ConverUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConverUtil.h; sourceTree = "<group>"; };
+		0653D0401F6BAD8A0054A818 /* ConverUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConverUtil.m; sourceTree = "<group>"; };
+		0653D0411F6BAD8A0054A818 /* DesUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DesUtil.h; sourceTree = "<group>"; };
+		0653D0421F6BAD8A0054A818 /* DesUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DesUtil.m; sourceTree = "<group>"; };
+		0653D0451F6BB5910054A818 /* LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftViewController.h; sourceTree = "<group>"; };
+		0653D0461F6BB5920054A818 /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
+		27456E740AED9D909E7AAB2D /* libPods-ZhiXiang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZhiXiang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5BD8DB7D842D638A790B92D6 /* Pods-ZhiXiang.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiXiang.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiXiang/Pods-ZhiXiang.release.xcconfig"; sourceTree = "<group>"; };
+		C2D321DBE16B956F50EB6893 /* Pods-ZhiXiang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiXiang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiXiang/Pods-ZhiXiang.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0653CFD21F6BA0300054A818 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF1D023FFA7FF8408D32CBC9 /* libPods-ZhiXiang.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0653CFEB1F6BA0300054A818 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0653CFF61F6BA0300054A818 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0653CFCC1F6BA0300054A818 = {
+			isa = PBXGroup;
+			children = (
+				0653CFD71F6BA0300054A818 /* ZhiXiang */,
+				0653CFF11F6BA0300054A818 /* ZhiXiangTests */,
+				0653CFFC1F6BA0300054A818 /* ZhiXiangUITests */,
+				0653CFD61F6BA0300054A818 /* Products */,
+				C0D7255E70A6ED76ACB7DBF1 /* Pods */,
+				BE940CDEEBF75CC16C2F528F /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		0653CFD61F6BA0300054A818 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0653CFD51F6BA0300054A818 /* ZhiXiang.app */,
+				0653CFEE1F6BA0300054A818 /* ZhiXiangTests.xctest */,
+				0653CFF91F6BA0300054A818 /* ZhiXiangUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0653CFD71F6BA0300054A818 /* ZhiXiang */ = {
+			isa = PBXGroup;
+			children = (
+				0653CFDB1F6BA0300054A818 /* AppDelegate.h */,
+				0653CFDC1F6BA0300054A818 /* AppDelegate.m */,
+				0653D0231F6BA9820054A818 /* Macro */,
+				0653D00F1F6BA4120054A818 /* Networks */,
+				0653D00D1F6BA2FA0054A818 /* Models */,
+				0653D00C1F6BA2F30054A818 /* Views */,
+				0653D00B1F6BA2E50054A818 /* ViewControllers */,
+				0653D00E1F6BA3080054A818 /* Helpers */,
+				0653CFE41F6BA0300054A818 /* Assets.xcassets */,
+				0653CFE61F6BA0300054A818 /* LaunchScreen.storyboard */,
+				0653CFE91F6BA0300054A818 /* Info.plist */,
+				0653CFD81F6BA0300054A818 /* Supporting Files */,
+			);
+			path = ZhiXiang;
+			sourceTree = "<group>";
+		};
+		0653CFD81F6BA0300054A818 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0653CFD91F6BA0300054A818 /* main.m */,
+				0653D0271F6BAAF80054A818 /* ZhiXiang.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0653CFF11F6BA0300054A818 /* ZhiXiangTests */ = {
+			isa = PBXGroup;
+			children = (
+				0653CFF21F6BA0300054A818 /* ZhiXiangTests.m */,
+				0653CFF41F6BA0300054A818 /* Info.plist */,
+			);
+			path = ZhiXiangTests;
+			sourceTree = "<group>";
+		};
+		0653CFFC1F6BA0300054A818 /* ZhiXiangUITests */ = {
+			isa = PBXGroup;
+			children = (
+				0653CFFD1F6BA0300054A818 /* ZhiXiangUITests.m */,
+				0653CFFF1F6BA0300054A818 /* Info.plist */,
+			);
+			path = ZhiXiangUITests;
+			sourceTree = "<group>";
+		};
+		0653D00B1F6BA2E50054A818 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0653D0111F6BA8110054A818 /* Base */,
+				0653D0101F6BA7FB0054A818 /* HomePage */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		0653D00C1F6BA2F30054A818 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0653D00D1F6BA2FA0054A818 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0653D00E1F6BA3080054A818 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0653D03E1F6BAD8A0054A818 /* DesUtil */,
+				0653D02E1F6BABE50054A818 /* CustomHelper */,
+				0653D01B1F6BA9180054A818 /* Additional */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		0653D00F1F6BA4120054A818 /* Networks */ = {
+			isa = PBXGroup;
+			children = (
+				0653D02B1F6BABB70054A818 /* NetworkConfiguration.h */,
+				0653D02C1F6BABB70054A818 /* NetworkConfiguration.m */,
+			);
+			path = Networks;
+			sourceTree = "<group>";
+		};
+		0653D0101F6BA7FB0054A818 /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				0653D0281F6BAB250054A818 /* HomeViewController.h */,
+				0653D0291F6BAB250054A818 /* HomeViewController.m */,
+				0653D0451F6BB5910054A818 /* LeftViewController.h */,
+				0653D0461F6BB5920054A818 /* LeftViewController.m */,
+			);
+			path = HomePage;
+			sourceTree = "<group>";
+		};
+		0653D0111F6BA8110054A818 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				0653D0121F6BA83A0054A818 /* ZXBaseViewController.h */,
+				0653D0131F6BA83A0054A818 /* ZXBaseViewController.m */,
+				0653D0181F6BA8810054A818 /* ZXBaseNavigationController.h */,
+				0653D0191F6BA8810054A818 /* ZXBaseNavigationController.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		0653D01B1F6BA9180054A818 /* Additional */ = {
+			isa = PBXGroup;
+			children = (
+				0653D01C1F6BA9180054A818 /* UIImage+Additional.h */,
+				0653D01D1F6BA9180054A818 /* UIImage+Additional.m */,
+				0653D01E1F6BA9180054A818 /* UIView+Additional.h */,
+				0653D01F1F6BA9180054A818 /* UIView+Additional.m */,
+			);
+			path = Additional;
+			sourceTree = "<group>";
+		};
+		0653D0231F6BA9820054A818 /* Macro */ = {
+			isa = PBXGroup;
+			children = (
+				0653D0241F6BA9820054A818 /* ColorMacro.h */,
+				0653D0251F6BA9820054A818 /* LayoutMacro.h */,
+				0653D0261F6BA9820054A818 /* SystemMacro.h */,
+			);
+			path = Macro;
+			sourceTree = "<group>";
+		};
+		0653D02E1F6BABE50054A818 /* CustomHelper */ = {
+			isa = PBXGroup;
+			children = (
+				0653D02F1F6BABE50054A818 /* GCCGetInfo.h */,
+				0653D0301F6BABE50054A818 /* GCCGetInfo.m */,
+				0653D0311F6BABE50054A818 /* GCCKeyChain.h */,
+				0653D0321F6BABE50054A818 /* GCCKeyChain.m */,
+				0653D0331F6BABE50054A818 /* Helper.h */,
+				0653D0341F6BABE50054A818 /* Helper.m */,
+				0653D03B1F6BAC5E0054A818 /* ZXTools.h */,
+				0653D03C1F6BAC5E0054A818 /* ZXTools.m */,
+			);
+			path = CustomHelper;
+			sourceTree = "<group>";
+		};
+		0653D03E1F6BAD8A0054A818 /* DesUtil */ = {
+			isa = PBXGroup;
+			children = (
+				0653D03F1F6BAD8A0054A818 /* ConverUtil.h */,
+				0653D0401F6BAD8A0054A818 /* ConverUtil.m */,
+				0653D0411F6BAD8A0054A818 /* DesUtil.h */,
+				0653D0421F6BAD8A0054A818 /* DesUtil.m */,
+			);
+			path = DesUtil;
+			sourceTree = "<group>";
+		};
+		BE940CDEEBF75CC16C2F528F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				27456E740AED9D909E7AAB2D /* libPods-ZhiXiang.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C0D7255E70A6ED76ACB7DBF1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C2D321DBE16B956F50EB6893 /* Pods-ZhiXiang.debug.xcconfig */,
+				5BD8DB7D842D638A790B92D6 /* Pods-ZhiXiang.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0653CFD41F6BA0300054A818 /* ZhiXiang */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0653D0021F6BA0300054A818 /* Build configuration list for PBXNativeTarget "ZhiXiang" */;
+			buildPhases = (
+				3155CDB775D73E36A478CCD5 /* [CP] Check Pods Manifest.lock */,
+				0653CFD11F6BA0300054A818 /* Sources */,
+				0653CFD21F6BA0300054A818 /* Frameworks */,
+				0653CFD31F6BA0300054A818 /* Resources */,
+				160D11E79F1A9B73EB67282F /* [CP] Embed Pods Frameworks */,
+				2649B114DF47FC7F44AE2C3C /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZhiXiang;
+			productName = ZhiXiang;
+			productReference = 0653CFD51F6BA0300054A818 /* ZhiXiang.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0653CFED1F6BA0300054A818 /* ZhiXiangTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0653D0051F6BA0300054A818 /* Build configuration list for PBXNativeTarget "ZhiXiangTests" */;
+			buildPhases = (
+				0653CFEA1F6BA0300054A818 /* Sources */,
+				0653CFEB1F6BA0300054A818 /* Frameworks */,
+				0653CFEC1F6BA0300054A818 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0653CFF01F6BA0300054A818 /* PBXTargetDependency */,
+			);
+			name = ZhiXiangTests;
+			productName = ZhiXiangTests;
+			productReference = 0653CFEE1F6BA0300054A818 /* ZhiXiangTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		0653CFF81F6BA0300054A818 /* ZhiXiangUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0653D0081F6BA0300054A818 /* Build configuration list for PBXNativeTarget "ZhiXiangUITests" */;
+			buildPhases = (
+				0653CFF51F6BA0300054A818 /* Sources */,
+				0653CFF61F6BA0300054A818 /* Frameworks */,
+				0653CFF71F6BA0300054A818 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0653CFFB1F6BA0300054A818 /* PBXTargetDependency */,
+			);
+			name = ZhiXiangUITests;
+			productName = ZhiXiangUITests;
+			productReference = 0653CFF91F6BA0300054A818 /* ZhiXiangUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0653CFCD1F6BA0300054A818 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "郭春城";
+				TargetAttributes = {
+					0653CFD41F6BA0300054A818 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 922V2U92Z9;
+						ProvisioningStyle = Manual;
+					};
+					0653CFED1F6BA0300054A818 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 922V2U92Z9;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 0653CFD41F6BA0300054A818;
+					};
+					0653CFF81F6BA0300054A818 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 922V2U92Z9;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 0653CFD41F6BA0300054A818;
+					};
+				};
+			};
+			buildConfigurationList = 0653CFD01F6BA0300054A818 /* Build configuration list for PBXProject "ZhiXiang" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0653CFCC1F6BA0300054A818;
+			productRefGroup = 0653CFD61F6BA0300054A818 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0653CFD41F6BA0300054A818 /* ZhiXiang */,
+				0653CFED1F6BA0300054A818 /* ZhiXiangTests */,
+				0653CFF81F6BA0300054A818 /* ZhiXiangUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0653CFD31F6BA0300054A818 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0653CFE81F6BA0300054A818 /* LaunchScreen.storyboard in Resources */,
+				0653CFE51F6BA0300054A818 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0653CFEC1F6BA0300054A818 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0653CFF71F6BA0300054A818 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		160D11E79F1A9B73EB67282F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZhiXiang/Pods-ZhiXiang-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2649B114DF47FC7F44AE2C3C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZhiXiang/Pods-ZhiXiang-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3155CDB775D73E36A478CCD5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0653CFD11F6BA0300054A818 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0653D03D1F6BAC5E0054A818 /* ZXTools.m in Sources */,
+				0653D01A1F6BA8810054A818 /* ZXBaseNavigationController.m in Sources */,
+				0653D0211F6BA9180054A818 /* UIView+Additional.m in Sources */,
+				0653CFDD1F6BA0300054A818 /* AppDelegate.m in Sources */,
+				0653D02D1F6BABB70054A818 /* NetworkConfiguration.m in Sources */,
+				0653D0201F6BA9180054A818 /* UIImage+Additional.m in Sources */,
+				0653D0471F6BB5920054A818 /* LeftViewController.m in Sources */,
+				0653D0381F6BABE50054A818 /* GCCKeyChain.m in Sources */,
+				0653D0371F6BABE50054A818 /* GCCGetInfo.m in Sources */,
+				0653CFDA1F6BA0300054A818 /* main.m in Sources */,
+				0653D0431F6BAD8A0054A818 /* ConverUtil.m in Sources */,
+				0653D0391F6BABE50054A818 /* Helper.m in Sources */,
+				0653D02A1F6BAB250054A818 /* HomeViewController.m in Sources */,
+				0653D0141F6BA83A0054A818 /* ZXBaseViewController.m in Sources */,
+				0653D0441F6BAD8A0054A818 /* DesUtil.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0653CFEA1F6BA0300054A818 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0653CFF31F6BA0300054A818 /* ZhiXiangTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0653CFF51F6BA0300054A818 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0653CFFE1F6BA0300054A818 /* ZhiXiangUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0653CFF01F6BA0300054A818 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0653CFD41F6BA0300054A818 /* ZhiXiang */;
+			targetProxy = 0653CFEF1F6BA0300054A818 /* PBXContainerItemProxy */;
+		};
+		0653CFFB1F6BA0300054A818 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0653CFD41F6BA0300054A818 /* ZhiXiang */;
+			targetProxy = 0653CFFA1F6BA0300054A818 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0653CFE61F6BA0300054A818 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0653CFE71F6BA0300054A818 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0653D0001F6BA0300054A818 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0653D0011F6BA0300054A818 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0653D0031F6BA0300054A818 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C2D321DBE16B956F50EB6893 /* Pods-ZhiXiang.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 922V2U92Z9;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ZhiXiang/ZhiXiang.pch;
+				INFOPLIST_FILE = ZhiXiang/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hottopics.zhixiang;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "4acd7f33-02a2-4f8b-ac8c-f9d5f96fd3ec";
+				PROVISIONING_PROFILE_SPECIFIER = ZhiXiangDevelopment;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		0653D0041F6BA0300054A818 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5BD8DB7D842D638A790B92D6 /* Pods-ZhiXiang.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 922V2U92Z9;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ZhiXiang/ZhiXiang.pch;
+				INFOPLIST_FILE = ZhiXiang/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hottopics.zhixiang;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "40776f7d-1c39-404a-86c8-b71e0201d5b6";
+				PROVISIONING_PROFILE_SPECIFIER = "ZhiXiangAd-Hoc";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		0653D0061F6BA0300054A818 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 922V2U92Z9;
+				INFOPLIST_FILE = ZhiXiangTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hottopic.zhixiang.ZhiXiangTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZhiXiang.app/ZhiXiang";
+			};
+			name = Debug;
+		};
+		0653D0071F6BA0300054A818 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 922V2U92Z9;
+				INFOPLIST_FILE = ZhiXiangTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hottopic.zhixiang.ZhiXiangTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZhiXiang.app/ZhiXiang";
+			};
+			name = Release;
+		};
+		0653D0091F6BA0300054A818 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 922V2U92Z9;
+				INFOPLIST_FILE = ZhiXiangUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hottopic.zhixiang.ZhiXiangUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ZhiXiang;
+			};
+			name = Debug;
+		};
+		0653D00A1F6BA0300054A818 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 922V2U92Z9;
+				INFOPLIST_FILE = ZhiXiangUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hottopic.zhixiang.ZhiXiangUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ZhiXiang;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0653CFD01F6BA0300054A818 /* Build configuration list for PBXProject "ZhiXiang" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0653D0001F6BA0300054A818 /* Debug */,
+				0653D0011F6BA0300054A818 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0653D0021F6BA0300054A818 /* Build configuration list for PBXNativeTarget "ZhiXiang" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0653D0031F6BA0300054A818 /* Debug */,
+				0653D0041F6BA0300054A818 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0653D0051F6BA0300054A818 /* Build configuration list for PBXNativeTarget "ZhiXiangTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0653D0061F6BA0300054A818 /* Debug */,
+				0653D0071F6BA0300054A818 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0653D0081F6BA0300054A818 /* Build configuration list for PBXNativeTarget "ZhiXiangUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0653D0091F6BA0300054A818 /* Debug */,
+				0653D00A1F6BA0300054A818 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0653CFCD1F6BA0300054A818 /* Project object */;
+}

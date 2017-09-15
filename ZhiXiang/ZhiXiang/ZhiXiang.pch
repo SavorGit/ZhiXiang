@@ -1,0 +1,42 @@
+//
+//  ZhiXiang.pch
+//  ZhiXiang
+//
+//  Created by 郭春城 on 2017/9/15.
+//  Copyright © 2017年 郭春城. All rights reserved.
+//
+
+#ifndef ZhiXiang_pch
+#define ZhiXiang_pch
+
+#define TEST_DEV_TYPE 1 //测试环境切换宏，1代表线上环境，0代表测试环境
+
+#import "ColorMacro.h"
+#import "LayoutMacro.h"
+#import "SystemMacro.h"
+#import "Masonry.h"
+
+#if TEST_DEV_TYPE
+#define AliyunBucketName @"redian-produce"
+#define HOSTURL @"http://mobile.littlehotspot.com/" //正式地址
+#define AliynEndPoint @"http://oss.littlehotspot.com/"
+#define NSLog(...) {}
+
+#else
+#define AliyunBucketName @"redian-development"
+#define HOSTURL @"http://devp.mobile.littlehotspot.com/"  //测试地址
+#define AliynEndPoint @"http://devp.oss.littlehotspot.com/"
+#define NSLog(...) NSLog(__VA_ARGS__)
+#endif
+
+#define kVersionCode 2017090701
+
+#define keychainID @"ZhiXiangKeychainID"
+
+#define DocumentPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
+#define FileCachePath [NSString stringWithFormat:@"%@/FileCache", DocumentPath]
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* ZhiXiang_pch */
