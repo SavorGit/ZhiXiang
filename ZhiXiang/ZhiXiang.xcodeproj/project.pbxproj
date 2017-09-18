@@ -26,6 +26,10 @@
 		0653D0431F6BAD8A0054A818 /* ConverUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653D0401F6BAD8A0054A818 /* ConverUtil.m */; };
 		0653D0441F6BAD8A0054A818 /* DesUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653D0421F6BAD8A0054A818 /* DesUtil.m */; };
 		0653D0471F6BB5920054A818 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653D0461F6BB5920054A818 /* LeftViewController.m */; };
+		069C371E1F6F697C00FE2BB0 /* TYCyclePagerTransformLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C37191F6F697C00FE2BB0 /* TYCyclePagerTransformLayout.m */; };
+		069C371F1F6F697C00FE2BB0 /* TYCyclePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C371B1F6F697C00FE2BB0 /* TYCyclePagerView.m */; };
+		069C37201F6F697C00FE2BB0 /* TYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C371D1F6F697C00FE2BB0 /* TYPageControl.m */; };
+		069C37271F6F6A3400FE2BB0 /* HomeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C37261F6F6A3400FE2BB0 /* HomeCollectionViewCell.m */; };
 		AF1D023FFA7FF8408D32CBC9 /* libPods-ZhiXiang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27456E740AED9D909E7AAB2D /* libPods-ZhiXiang.a */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +94,14 @@
 		0653D0421F6BAD8A0054A818 /* DesUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DesUtil.m; sourceTree = "<group>"; };
 		0653D0451F6BB5910054A818 /* LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftViewController.h; sourceTree = "<group>"; };
 		0653D0461F6BB5920054A818 /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
+		069C37181F6F697C00FE2BB0 /* TYCyclePagerTransformLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYCyclePagerTransformLayout.h; sourceTree = "<group>"; };
+		069C37191F6F697C00FE2BB0 /* TYCyclePagerTransformLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYCyclePagerTransformLayout.m; sourceTree = "<group>"; };
+		069C371A1F6F697C00FE2BB0 /* TYCyclePagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYCyclePagerView.h; sourceTree = "<group>"; };
+		069C371B1F6F697C00FE2BB0 /* TYCyclePagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYCyclePagerView.m; sourceTree = "<group>"; };
+		069C371C1F6F697C00FE2BB0 /* TYPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYPageControl.h; sourceTree = "<group>"; };
+		069C371D1F6F697C00FE2BB0 /* TYPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYPageControl.m; sourceTree = "<group>"; };
+		069C37251F6F6A3400FE2BB0 /* HomeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCollectionViewCell.h; sourceTree = "<group>"; };
+		069C37261F6F6A3400FE2BB0 /* HomeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCollectionViewCell.m; sourceTree = "<group>"; };
 		27456E740AED9D909E7AAB2D /* libPods-ZhiXiang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZhiXiang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BD8DB7D842D638A790B92D6 /* Pods-ZhiXiang.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiXiang.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiXiang/Pods-ZhiXiang.release.xcconfig"; sourceTree = "<group>"; };
 		C2D321DBE16B956F50EB6893 /* Pods-ZhiXiang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiXiang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiXiang/Pods-ZhiXiang.debug.xcconfig"; sourceTree = "<group>"; };
@@ -201,6 +213,8 @@
 		0653D00C1F6BA2F30054A818 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				069C37231F6F6A1500FE2BB0 /* CollectionViewCell */,
+				069C37211F6F69DA00FE2BB0 /* TableViewCell */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -215,6 +229,7 @@
 		0653D00E1F6BA3080054A818 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				069C37171F6F697C00FE2BB0 /* TYCyclePagerView */,
 				0653D03E1F6BAD8A0054A818 /* DesUtil */,
 				0653D02E1F6BABE50054A818 /* CustomHelper */,
 				0653D01B1F6BA9180054A818 /* Additional */,
@@ -298,6 +313,43 @@
 				0653D0421F6BAD8A0054A818 /* DesUtil.m */,
 			);
 			path = DesUtil;
+			sourceTree = "<group>";
+		};
+		069C37171F6F697C00FE2BB0 /* TYCyclePagerView */ = {
+			isa = PBXGroup;
+			children = (
+				069C37181F6F697C00FE2BB0 /* TYCyclePagerTransformLayout.h */,
+				069C37191F6F697C00FE2BB0 /* TYCyclePagerTransformLayout.m */,
+				069C371A1F6F697C00FE2BB0 /* TYCyclePagerView.h */,
+				069C371B1F6F697C00FE2BB0 /* TYCyclePagerView.m */,
+				069C371C1F6F697C00FE2BB0 /* TYPageControl.h */,
+				069C371D1F6F697C00FE2BB0 /* TYPageControl.m */,
+			);
+			path = TYCyclePagerView;
+			sourceTree = "<group>";
+		};
+		069C37211F6F69DA00FE2BB0 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		069C37231F6F6A1500FE2BB0 /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				069C37241F6F6A2400FE2BB0 /* Home */,
+			);
+			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		069C37241F6F6A2400FE2BB0 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				069C37251F6F6A3400FE2BB0 /* HomeCollectionViewCell.h */,
+				069C37261F6F6A3400FE2BB0 /* HomeCollectionViewCell.m */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		BE940CDEEBF75CC16C2F528F /* Frameworks */ = {
@@ -506,6 +558,7 @@
 				0653D03D1F6BAC5E0054A818 /* ZXTools.m in Sources */,
 				0653D01A1F6BA8810054A818 /* ZXBaseNavigationController.m in Sources */,
 				0653D0211F6BA9180054A818 /* UIView+Additional.m in Sources */,
+				069C37271F6F6A3400FE2BB0 /* HomeCollectionViewCell.m in Sources */,
 				0653CFDD1F6BA0300054A818 /* AppDelegate.m in Sources */,
 				0653D02D1F6BABB70054A818 /* NetworkConfiguration.m in Sources */,
 				0653D0201F6BA9180054A818 /* UIImage+Additional.m in Sources */,
@@ -515,8 +568,11 @@
 				0653CFDA1F6BA0300054A818 /* main.m in Sources */,
 				0653D0431F6BAD8A0054A818 /* ConverUtil.m in Sources */,
 				0653D0391F6BABE50054A818 /* Helper.m in Sources */,
+				069C371F1F6F697C00FE2BB0 /* TYCyclePagerView.m in Sources */,
+				069C37201F6F697C00FE2BB0 /* TYPageControl.m in Sources */,
 				0653D02A1F6BAB250054A818 /* HomeViewController.m in Sources */,
 				0653D0141F6BA83A0054A818 /* ZXBaseViewController.m in Sources */,
+				069C371E1F6F697C00FE2BB0 /* TYCyclePagerTransformLayout.m in Sources */,
 				0653D0441F6BAD8A0054A818 /* DesUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
