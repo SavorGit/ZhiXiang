@@ -8,8 +8,10 @@
 
 #import "LeftViewController.h"
 #import "LeftTableViewCell.h"
+#import "MyCollectionViewController.h"
+#import "UIViewController+LGSideMenuController.h"
 
-@interface LeftViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface LeftViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UITableView * tableView; //表格展示视图
 @property (nonatomic, strong) NSArray * dataSource; //数据源
@@ -24,6 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationController.delegate = self;
     self.view.backgroundColor = [UIColor blackColor];
     [self initInfo];
     [self.tableView reloadData];
@@ -169,7 +172,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.row == 0) {
-        
+        [self hideLeftViewAnimated:nil];
+        MyCollectionViewController *mcVC = [[MyCollectionViewController alloc] init];
+         [(UINavigationController *)self.sideMenuController.rootViewController pushViewController:mcVC  animated:NO];
     }
 }
 

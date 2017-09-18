@@ -37,6 +37,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
     [self.view setBackgroundColor:VCBackgroundColor];
     [self initInfo];
     
@@ -58,6 +59,7 @@
 }
 
 - (void)initInfo{
+     self.title = @"我的收藏";
     _dataSource = [[NSMutableArray alloc] initWithCapacity:100];
 }
 
