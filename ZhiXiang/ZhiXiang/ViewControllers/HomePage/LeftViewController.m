@@ -111,6 +111,28 @@
     
 }
 
+- (UIView *)footView
+{
+    if (!_footView) {
+        _footView = [[UIView alloc] initWithFrame:CGRectZero];
+        _footView.backgroundColor = [UIColor clearColor];
+        
+        UILabel * label = [[UILabel alloc] initWithFrame:CGRectZero];
+        label.textColor = UIColorFromRGB(0xece6de);
+        label.numberOfLines = 2;
+        label.text = @"每天10条讯息\n让您知世界，享生活";
+        [_footView addSubview:label];
+        [label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(15);
+            make.right.mas_equalTo(-10);
+            make.height.mas_equalTo(60);
+            make.bottom.mas_equalTo(- 50);
+        }];
+    }
+    
+    return _footView;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -144,26 +166,11 @@
     return 35;
 }
 
-- (UIView *)footView
-{
-    if (!_footView) {
-        _footView = [[UIView alloc] initWithFrame:CGRectZero];
-        _footView.backgroundColor = [UIColor clearColor];
-
-        UILabel * label = [[UILabel alloc] initWithFrame:CGRectZero];
-        label.textColor = UIColorFromRGB(0xece6de);
-        label.numberOfLines = 2;
-        label.text = @"每天10条讯息\n让您知世界，享生活";
-        [_footView addSubview:label];
-        [label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(15);
-            make.right.mas_equalTo(-10);
-            make.height.mas_equalTo(60);
-            make.bottom.mas_equalTo(- 50);
-        }];
-    }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return _footView;
+    if (indexPath.row == 0) {
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -7,5 +7,5 @@ pod 'MJRefresh', '~> 3.1.12'
 pod 'LGSideMenuController', '~> 2.1.1'
 pod 'UMengUShare/UI'
 pod 'UMengUShare/Social/ReducedWeChat'
+pod 'SDWebImage', '~> 3.8.2'
 end
-

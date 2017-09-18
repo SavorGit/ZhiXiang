@@ -32,6 +32,14 @@
 		069C37271F6F6A3400FE2BB0 /* HomeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C37261F6F6A3400FE2BB0 /* HomeCollectionViewCell.m */; };
 		069C372A1F6F99B800FE2BB0 /* ZXLGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C37291F6F99B800FE2BB0 /* ZXLGViewController.m */; };
 		96D357731F6FAE6F00BF35EB /* LeftTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357721F6FAE6F00BF35EB /* LeftTableViewCell.m */; };
+		96D357771F6FBDC000BF35EB /* MyCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357761F6FBDC000BF35EB /* MyCollectionViewController.m */; };
+		96D357801F6FC08C00BF35EB /* RD_MJRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D3577D1F6FC08C00BF35EB /* RD_MJRefreshFooter.m */; };
+		96D357811F6FC08C00BF35EB /* RD_MJRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D3577F1F6FC08C00BF35EB /* RD_MJRefreshHeader.m */; };
+		96D357851F6FC16700BF35EB /* MyCollectionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357841F6FC16700BF35EB /* MyCollectionRequest.m */; };
+		96D357901F6FC27D00BF35EB /* Jastor.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D3578D1F6FC27D00BF35EB /* Jastor.m */; };
+		96D357911F6FC27D00BF35EB /* JastorRuntimeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D3578F1F6FC27D00BF35EB /* JastorRuntimeHelper.m */; };
+		96D357941F6FC2AF00BF35EB /* MyCollectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357931F6FC2AF00BF35EB /* MyCollectionModel.m */; };
+		96D3579A1F6FD00000BF35EB /* ImageTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357991F6FD00000BF35EB /* ImageTextTableViewCell.m */; };
 		AF1D023FFA7FF8408D32CBC9 /* libPods-ZhiXiang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27456E740AED9D909E7AAB2D /* libPods-ZhiXiang.a */; };
 /* End PBXBuildFile section */
 
@@ -110,6 +118,23 @@
 		5BD8DB7D842D638A790B92D6 /* Pods-ZhiXiang.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiXiang.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiXiang/Pods-ZhiXiang.release.xcconfig"; sourceTree = "<group>"; };
 		96D357711F6FAE6F00BF35EB /* LeftTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftTableViewCell.h; sourceTree = "<group>"; };
 		96D357721F6FAE6F00BF35EB /* LeftTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftTableViewCell.m; sourceTree = "<group>"; };
+		96D357751F6FBDC000BF35EB /* MyCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectionViewController.h; sourceTree = "<group>"; };
+		96D357761F6FBDC000BF35EB /* MyCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCollectionViewController.m; sourceTree = "<group>"; };
+		96D3577C1F6FC08C00BF35EB /* RD_MJRefreshFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RD_MJRefreshFooter.h; sourceTree = "<group>"; };
+		96D3577D1F6FC08C00BF35EB /* RD_MJRefreshFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RD_MJRefreshFooter.m; sourceTree = "<group>"; };
+		96D3577E1F6FC08C00BF35EB /* RD_MJRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RD_MJRefreshHeader.h; sourceTree = "<group>"; };
+		96D3577F1F6FC08C00BF35EB /* RD_MJRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RD_MJRefreshHeader.m; sourceTree = "<group>"; };
+		96D357831F6FC16700BF35EB /* MyCollectionRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectionRequest.h; sourceTree = "<group>"; };
+		96D357841F6FC16700BF35EB /* MyCollectionRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCollectionRequest.m; sourceTree = "<group>"; };
+		96D3578B1F6FC27D00BF35EB /* Jastor-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Jastor-Prefix.pch"; sourceTree = "<group>"; };
+		96D3578C1F6FC27D00BF35EB /* Jastor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Jastor.h; sourceTree = "<group>"; };
+		96D3578D1F6FC27D00BF35EB /* Jastor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Jastor.m; sourceTree = "<group>"; };
+		96D3578E1F6FC27D00BF35EB /* JastorRuntimeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JastorRuntimeHelper.h; sourceTree = "<group>"; };
+		96D3578F1F6FC27D00BF35EB /* JastorRuntimeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JastorRuntimeHelper.m; sourceTree = "<group>"; };
+		96D357921F6FC2AF00BF35EB /* MyCollectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectionModel.h; sourceTree = "<group>"; };
+		96D357931F6FC2AF00BF35EB /* MyCollectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCollectionModel.m; sourceTree = "<group>"; };
+		96D357981F6FD00000BF35EB /* ImageTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTextTableViewCell.h; sourceTree = "<group>"; };
+		96D357991F6FD00000BF35EB /* ImageTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTextTableViewCell.m; sourceTree = "<group>"; };
 		C2D321DBE16B956F50EB6893 /* Pods-ZhiXiang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiXiang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiXiang/Pods-ZhiXiang.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -210,6 +235,7 @@
 		0653D00B1F6BA2E50054A818 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				96D357741F6FBD9700BF35EB /* MyCollection */,
 				0653D0111F6BA8110054A818 /* Base */,
 				0653D0101F6BA7FB0054A818 /* HomePage */,
 			);
@@ -219,6 +245,7 @@
 		0653D00C1F6BA2F30054A818 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				96D3577B1F6FC08C00BF35EB /* Home */,
 				96D357701F6FAE3C00BF35EB /* LeftViewCell */,
 				069C37231F6F6A1500FE2BB0 /* CollectionViewCell */,
 				069C37211F6F69DA00FE2BB0 /* TableViewCell */,
@@ -229,6 +256,8 @@
 		0653D00D1F6BA2FA0054A818 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				96D3578A1F6FC27D00BF35EB /* Jastor */,
+				96D357861F6FC1C900BF35EB /* LeftViewModel */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -247,6 +276,7 @@
 		0653D00F1F6BA4120054A818 /* Networks */ = {
 			isa = PBXGroup;
 			children = (
+				96D357821F6FC16700BF35EB /* leftViewReauest */,
 				0653D02B1F6BABB70054A818 /* NetworkConfiguration.h */,
 				0653D02C1F6BABB70054A818 /* NetworkConfiguration.m */,
 			);
@@ -366,8 +396,60 @@
 			children = (
 				96D357711F6FAE6F00BF35EB /* LeftTableViewCell.h */,
 				96D357721F6FAE6F00BF35EB /* LeftTableViewCell.m */,
+				96D357981F6FD00000BF35EB /* ImageTextTableViewCell.h */,
+				96D357991F6FD00000BF35EB /* ImageTextTableViewCell.m */,
 			);
 			path = LeftViewCell;
+			sourceTree = "<group>";
+		};
+		96D357741F6FBD9700BF35EB /* MyCollection */ = {
+			isa = PBXGroup;
+			children = (
+				96D357751F6FBDC000BF35EB /* MyCollectionViewController.h */,
+				96D357761F6FBDC000BF35EB /* MyCollectionViewController.m */,
+			);
+			path = MyCollection;
+			sourceTree = "<group>";
+		};
+		96D3577B1F6FC08C00BF35EB /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				96D3577C1F6FC08C00BF35EB /* RD_MJRefreshFooter.h */,
+				96D3577D1F6FC08C00BF35EB /* RD_MJRefreshFooter.m */,
+				96D3577E1F6FC08C00BF35EB /* RD_MJRefreshHeader.h */,
+				96D3577F1F6FC08C00BF35EB /* RD_MJRefreshHeader.m */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		96D357821F6FC16700BF35EB /* leftViewReauest */ = {
+			isa = PBXGroup;
+			children = (
+				96D357831F6FC16700BF35EB /* MyCollectionRequest.h */,
+				96D357841F6FC16700BF35EB /* MyCollectionRequest.m */,
+			);
+			path = leftViewReauest;
+			sourceTree = "<group>";
+		};
+		96D357861F6FC1C900BF35EB /* LeftViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				96D357921F6FC2AF00BF35EB /* MyCollectionModel.h */,
+				96D357931F6FC2AF00BF35EB /* MyCollectionModel.m */,
+			);
+			path = LeftViewModel;
+			sourceTree = "<group>";
+		};
+		96D3578A1F6FC27D00BF35EB /* Jastor */ = {
+			isa = PBXGroup;
+			children = (
+				96D3578B1F6FC27D00BF35EB /* Jastor-Prefix.pch */,
+				96D3578C1F6FC27D00BF35EB /* Jastor.h */,
+				96D3578D1F6FC27D00BF35EB /* Jastor.m */,
+				96D3578E1F6FC27D00BF35EB /* JastorRuntimeHelper.h */,
+				96D3578F1F6FC27D00BF35EB /* JastorRuntimeHelper.m */,
+			);
+			path = Jastor;
 			sourceTree = "<group>";
 		};
 		BE940CDEEBF75CC16C2F528F /* Frameworks */ = {
@@ -563,7 +645,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -577,12 +659,17 @@
 				0653D01A1F6BA8810054A818 /* ZXBaseNavigationController.m in Sources */,
 				0653D0211F6BA9180054A818 /* UIView+Additional.m in Sources */,
 				069C37271F6F6A3400FE2BB0 /* HomeCollectionViewCell.m in Sources */,
+				96D357771F6FBDC000BF35EB /* MyCollectionViewController.m in Sources */,
 				0653CFDD1F6BA0300054A818 /* AppDelegate.m in Sources */,
 				0653D02D1F6BABB70054A818 /* NetworkConfiguration.m in Sources */,
+				96D357911F6FC27D00BF35EB /* JastorRuntimeHelper.m in Sources */,
 				0653D0201F6BA9180054A818 /* UIImage+Additional.m in Sources */,
 				069C372A1F6F99B800FE2BB0 /* ZXLGViewController.m in Sources */,
+				96D3579A1F6FD00000BF35EB /* ImageTextTableViewCell.m in Sources */,
+				96D357801F6FC08C00BF35EB /* RD_MJRefreshFooter.m in Sources */,
 				0653D0471F6BB5920054A818 /* LeftViewController.m in Sources */,
 				0653D0381F6BABE50054A818 /* GCCKeyChain.m in Sources */,
+				96D357941F6FC2AF00BF35EB /* MyCollectionModel.m in Sources */,
 				0653D0371F6BABE50054A818 /* GCCGetInfo.m in Sources */,
 				0653CFDA1F6BA0300054A818 /* main.m in Sources */,
 				0653D0431F6BAD8A0054A818 /* ConverUtil.m in Sources */,
@@ -590,9 +677,12 @@
 				96D357731F6FAE6F00BF35EB /* LeftTableViewCell.m in Sources */,
 				069C371F1F6F697C00FE2BB0 /* TYCyclePagerView.m in Sources */,
 				069C37201F6F697C00FE2BB0 /* TYPageControl.m in Sources */,
+				96D357901F6FC27D00BF35EB /* Jastor.m in Sources */,
 				0653D02A1F6BAB250054A818 /* HomeViewController.m in Sources */,
 				0653D0141F6BA83A0054A818 /* ZXBaseViewController.m in Sources */,
+				96D357811F6FC08C00BF35EB /* RD_MJRefreshHeader.m in Sources */,
 				069C371E1F6F697C00FE2BB0 /* TYCyclePagerTransformLayout.m in Sources */,
+				96D357851F6FC16700BF35EB /* MyCollectionRequest.m in Sources */,
 				0653D0441F6BAD8A0054A818 /* DesUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
