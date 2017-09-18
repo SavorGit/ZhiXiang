@@ -271,6 +271,7 @@ NS_INLINE TYIndexSection TYMakeIndexSection(NSInteger index, NSInteger section) 
         [_delegate pagerViewWillBeginScrollingAnimation:self];
     }
     CGFloat offset = [self caculateOffsetXAtIndexSection:indexSection];
+    
     [_collectionView setContentOffset:CGPointMake(offset, _collectionView.contentOffset.y) animated:animate];
 }
 
