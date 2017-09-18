@@ -7,11 +7,11 @@
 //
 
 #import "AppDelegate.h"
-#import "LGSideMenuController.h"
 #import "LeftViewController.h"
 #import "HomeViewController.h"
 #import "ZXBaseNavigationController.h"
 #import "ZXTools.h"
+#import "ZXLGViewController.h"
 
 @interface AppDelegate ()
 
@@ -38,13 +38,26 @@
     HomeViewController * home = [[HomeViewController alloc] init];
     ZXBaseNavigationController * homeNav = [[ZXBaseNavigationController alloc] initWithRootViewController:home];
     LeftViewController * left = [[LeftViewController alloc] init];
-    LGSideMenuController * menu = [[LGSideMenuController alloc] initWithRootViewController:homeNav leftViewController:left rightViewController:nil];
-    menu.leftViewPresentationStyle = LGSideMenuPresentationStyleSlideBelow;
-    menu.leftViewWidth = kMainBoundsWidth / 2;
+    ZXLGViewController * menu = [[ZXLGViewController alloc] initWithRootViewController:homeNav leftViewController:left rightViewController:nil];
+    menu.rootViewStatusBarStyle = UIStatusBarStyleDefault;
     
     self.window.rootViewController = menu;
     
     [self.window makeKeyAndVisible];
+    
+    UIImageView * imageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [imageView setImage:[UIImage imageNamed:@"launchImage375x667"]];
+    [self.window addSubview:imageView];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:.5f animations:^{
+            imageView.alpha = 0.2;
+        } completion:^(BOOL finished) {
+            menu.rootViewStatusBarStyle = UIStatusBarStyleLightContent;
+            [menu setNeedsStatusBarAppearanceUpdate];
+            [imageView removeFromSuperview];
+        }];
+    });
 }
 
 

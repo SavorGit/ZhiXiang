@@ -30,6 +30,7 @@
 		069C371F1F6F697C00FE2BB0 /* TYCyclePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C371B1F6F697C00FE2BB0 /* TYCyclePagerView.m */; };
 		069C37201F6F697C00FE2BB0 /* TYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C371D1F6F697C00FE2BB0 /* TYPageControl.m */; };
 		069C37271F6F6A3400FE2BB0 /* HomeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C37261F6F6A3400FE2BB0 /* HomeCollectionViewCell.m */; };
+		069C372A1F6F99B800FE2BB0 /* ZXLGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C37291F6F99B800FE2BB0 /* ZXLGViewController.m */; };
 		AF1D023FFA7FF8408D32CBC9 /* libPods-ZhiXiang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27456E740AED9D909E7AAB2D /* libPods-ZhiXiang.a */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +103,8 @@
 		069C371D1F6F697C00FE2BB0 /* TYPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYPageControl.m; sourceTree = "<group>"; };
 		069C37251F6F6A3400FE2BB0 /* HomeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCollectionViewCell.h; sourceTree = "<group>"; };
 		069C37261F6F6A3400FE2BB0 /* HomeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCollectionViewCell.m; sourceTree = "<group>"; };
+		069C37281F6F99B800FE2BB0 /* ZXLGViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXLGViewController.h; sourceTree = "<group>"; };
+		069C37291F6F99B800FE2BB0 /* ZXLGViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXLGViewController.m; sourceTree = "<group>"; };
 		27456E740AED9D909E7AAB2D /* libPods-ZhiXiang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZhiXiang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BD8DB7D842D638A790B92D6 /* Pods-ZhiXiang.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiXiang.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiXiang/Pods-ZhiXiang.release.xcconfig"; sourceTree = "<group>"; };
 		C2D321DBE16B956F50EB6893 /* Pods-ZhiXiang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiXiang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiXiang/Pods-ZhiXiang.debug.xcconfig"; sourceTree = "<group>"; };
@@ -264,6 +267,8 @@
 				0653D0131F6BA83A0054A818 /* ZXBaseViewController.m */,
 				0653D0181F6BA8810054A818 /* ZXBaseNavigationController.h */,
 				0653D0191F6BA8810054A818 /* ZXBaseNavigationController.m */,
+				069C37281F6F99B800FE2BB0 /* ZXLGViewController.h */,
+				069C37291F6F99B800FE2BB0 /* ZXLGViewController.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -562,6 +567,7 @@
 				0653CFDD1F6BA0300054A818 /* AppDelegate.m in Sources */,
 				0653D02D1F6BABB70054A818 /* NetworkConfiguration.m in Sources */,
 				0653D0201F6BA9180054A818 /* UIImage+Additional.m in Sources */,
+				069C372A1F6F99B800FE2BB0 /* ZXLGViewController.m in Sources */,
 				0653D0471F6BB5920054A818 /* LeftViewController.m in Sources */,
 				0653D0381F6BABE50054A818 /* GCCKeyChain.m in Sources */,
 				0653D0371F6BABE50054A818 /* GCCGetInfo.m in Sources */,

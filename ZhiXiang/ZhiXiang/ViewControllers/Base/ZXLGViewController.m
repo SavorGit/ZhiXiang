@@ -1,25 +1,37 @@
 //
-//  LeftViewController.m
+//  ZXLGViewController.m
 //  ZhiXiang
 //
-//  Created by 郭春城 on 2017/9/15.
+//  Created by 郭春城 on 2017/9/18.
 //  Copyright © 2017年 郭春城. All rights reserved.
 //
 
-#import "LeftViewController.h"
+#import "ZXLGViewController.h"
 
-@interface LeftViewController ()
+@interface ZXLGViewController ()
 
 @end
 
-@implementation LeftViewController
+@implementation ZXLGViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor blackColor];
-    
-    // Do any additional setup after loading the view.
+    self.leftViewPresentationStyle = LGSideMenuPresentationStyleSlideBelow;
+    self.leftViewWidth = kMainBoundsWidth / 2;
+    self.leftViewStatusBarStyle = UIStatusBarStyleLightContent;
+}
+
+//允许屏幕旋转
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+//返回当前屏幕旋转方向
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 - (void)didReceiveMemoryWarning {

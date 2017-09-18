@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIImage *image = [UIImage imageWithColor:kNavBackGround size:CGSizeMake(kMainBoundsWidth, kNaviBarHeight + kStatusBarHeight)];
+    UIImage *image = [UIImage imageWithColor:[UIColor blackColor] size:CGSizeMake(kMainBoundsWidth, kNaviBarHeight + kStatusBarHeight)];
     [[UINavigationBar appearanceWhenContainedIn:[ZXBaseNavigationController class], nil] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
     // Do any additional setup after loading the view.
 }
