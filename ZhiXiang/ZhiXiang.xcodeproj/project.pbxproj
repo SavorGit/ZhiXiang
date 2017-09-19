@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		064304FA1F70EAC5004EC8A9 /* HomeDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 064304F91F70EAC5004EC8A9 /* HomeDetailView.m */; };
 		0653CFDA1F6BA0300054A818 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653CFD91F6BA0300054A818 /* main.m */; };
 		0653CFDD1F6BA0300054A818 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653CFDC1F6BA0300054A818 /* AppDelegate.m */; };
 		0653CFE51F6BA0300054A818 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0653CFE41F6BA0300054A818 /* Assets.xcassets */; };
@@ -68,6 +69,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		064304F81F70EAC5004EC8A9 /* HomeDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeDetailView.h; sourceTree = "<group>"; };
+		064304F91F70EAC5004EC8A9 /* HomeDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeDetailView.m; sourceTree = "<group>"; };
 		0653CFD51F6BA0300054A818 /* ZhiXiang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhiXiang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0653CFD91F6BA0300054A818 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0653CFDB1F6BA0300054A818 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -183,6 +186,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		064304F71F70E777004EC8A9 /* HomeDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				064304F81F70EAC5004EC8A9 /* HomeDetailView.h */,
+				064304F91F70EAC5004EC8A9 /* HomeDetailView.m */,
+			);
+			path = HomeDetailView;
+			sourceTree = "<group>";
+		};
 		0653CFCC1F6BA0300054A818 = {
 			isa = PBXGroup;
 			children = (
@@ -444,6 +456,7 @@
 		96D3577B1F6FC08C00BF35EB /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				064304F71F70E777004EC8A9 /* HomeDetailView */,
 				069C37501F6FD18C00FE2BB0 /* ZXKeyWordsView */,
 				96D3577C1F6FC08C00BF35EB /* RD_MJRefreshFooter.h */,
 				96D3577D1F6FC08C00BF35EB /* RD_MJRefreshFooter.m */,
@@ -712,6 +725,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				064304FA1F70EAC5004EC8A9 /* HomeDetailView.m in Sources */,
 				0653D03D1F6BAC5E0054A818 /* ZXTools.m in Sources */,
 				0653D01A1F6BA8810054A818 /* ZXBaseNavigationController.m in Sources */,
 				0653D0211F6BA9180054A818 /* UIView+Additional.m in Sources */,

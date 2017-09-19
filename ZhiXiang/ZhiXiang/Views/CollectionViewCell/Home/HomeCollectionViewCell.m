@@ -11,6 +11,8 @@
 @interface HomeCollectionViewCell ()
 
 @property (nonatomic, strong) UIView * baseView;
+@property (nonatomic, strong) UIView * topView;
+@property (nonatomic, strong) UIView * bottoView;
 
 @end
 
@@ -36,11 +38,21 @@
     self.baseView.layer.cornerRadius = 10.f;
     self.baseView.layer.masksToBounds = YES;
     
-    int R = (arc4random() % 256) ;
-    int G = (arc4random() % 256) ;
-    int B = (arc4random() % 256) ;
+    self.topView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.baseView addSubview:self.topView];
+    [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.mas_equalTo(0);
+        make.height.equalTo(self.baseView.mas_height).multipliedBy(.5f);
+    }];
+    self.topView.backgroundColor = [UIColor blueColor];
     
-    self.baseView.backgroundColor = [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1];
+    self.bottoView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.baseView addSubview:self.bottoView];
+    [self.bottoView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.left.right.mas_equalTo(0);
+        make.top.equalTo(self.topView.mas_bottom).offset(0);
+    }];
+    self.bottoView.backgroundColor = [UIColor redColor];
 }
 
 @end

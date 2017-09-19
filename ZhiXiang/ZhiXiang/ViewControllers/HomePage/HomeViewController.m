@@ -10,6 +10,7 @@
 #import "TYCyclePagerView.h"
 #import "HomeCollectionViewCell.h"
 #import "ZXKeyWordsView.h"
+#import "HomeDetailView.h"
 
 @interface HomeViewController () <TYCyclePagerViewDataSource, TYCyclePagerViewDelegate>
 
@@ -45,11 +46,11 @@
     }];
     self.currentIndex = 0;
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSArray * keyWords = @[@"iPhone X", @"孙宏斌", @"美联储", @"蒂芙尼珠宝", @"北海道肉蟹", @"贵族学校", @"百年普洱", @"小米", @"特朗普", @"蒂芙尼哈哈", @"法拉利的遗憾", @"品茶道人生"];
-        ZXKeyWordsView * keyWordView = [[ZXKeyWordsView alloc] initWithKeyWordArray:keyWords];
-        [keyWordView showWithAnimation:YES];
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        NSArray * keyWords = @[@"iPhone X", @"孙宏斌", @"美联储", @"蒂芙尼珠宝", @"北海道肉蟹", @"贵族学校", @"百年普洱", @"小米", @"特朗普", @"蒂芙尼哈哈", @"法拉利的遗憾", @"品茶道人生"];
+//        ZXKeyWordsView * keyWordView = [[ZXKeyWordsView alloc] initWithKeyWordArray:keyWords];
+//        [keyWordView showWithAnimation:YES];
+//    });
 }
 
 #pragma mark - TYCyclePagerViewDataSource
@@ -75,6 +76,21 @@
 {
     if (index == self.currentIndex) {
         NSLog(@"点击了%ld", index);
+        
+//        CGRect frame = self.navigationController.navigationBar.frame;
+//        frame.origin.y = -200;
+//        [UIView animateWithDuration:HomeDetailViewAnimationDuration animations:^{
+//            self.navigationController.navigationBar.frame = frame;
+//        } completion:^(BOOL finished) {
+//            
+//        }];
+        
+        CGRect detailViewFrame = [cell convertRect:cell.bounds toView:[UIApplication sharedApplication].keyWindow];
+        HomeDetailView * detailView = [[HomeDetailView alloc] initWithFrame:detailViewFrame];
+        [[UIApplication sharedApplication].keyWindow addSubview:detailView];
+        [detailView becomeScreenToRead];
+        
+        
     }else{
 //        self.pagerView.userInteractionEnabled = NO;
 //        [self.pagerView scrollToItemAtIndex:index animate:YES];
