@@ -9,6 +9,7 @@
 #import "LeftViewController.h"
 #import "LeftTableViewCell.h"
 #import "MyCollectionViewController.h"
+#import "ZXAllArticleViewController.h"
 #import "UIViewController+LGSideMenuController.h"
 
 @interface LeftViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate>
@@ -175,6 +176,10 @@
         [self hideLeftViewAnimated:nil];
         MyCollectionViewController *mcVC = [[MyCollectionViewController alloc] init];
          [(UINavigationController *)self.sideMenuController.rootViewController pushViewController:mcVC  animated:NO];
+    }else if (indexPath.row == 1){
+        [self hideLeftViewAnimated:nil];
+        ZXAllArticleViewController *arVC = [[ZXAllArticleViewController alloc] init];
+        [(UINavigationController *)self.sideMenuController.rootViewController pushViewController:arVC  animated:NO];
     }
 }
 

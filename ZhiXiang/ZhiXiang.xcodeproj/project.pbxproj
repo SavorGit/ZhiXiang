@@ -46,6 +46,7 @@
 		96D357A41F70B81C00BF35EB /* NoNetWorkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357A01F70B81C00BF35EB /* NoNetWorkView.m */; };
 		96D357A51F70B81C00BF35EB /* NoNetWorkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96D357A11F70B81C00BF35EB /* NoNetWorkView.xib */; };
 		96D357A81F70BA6100BF35EB /* RDLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357A71F70BA6100BF35EB /* RDLoadingView.m */; };
+		96D357AE1F70C8EB00BF35EB /* ZXAllArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357AD1F70C8EB00BF35EB /* ZXAllArticleViewController.m */; };
 		AF1D023FFA7FF8408D32CBC9 /* libPods-ZhiXiang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27456E740AED9D909E7AAB2D /* libPods-ZhiXiang.a */; };
 /* End PBXBuildFile section */
 
@@ -151,6 +152,8 @@
 		96D357A11F70B81C00BF35EB /* NoNetWorkView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoNetWorkView.xib; sourceTree = "<group>"; };
 		96D357A61F70BA6100BF35EB /* RDLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDLoadingView.h; sourceTree = "<group>"; };
 		96D357A71F70BA6100BF35EB /* RDLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDLoadingView.m; sourceTree = "<group>"; };
+		96D357AC1F70C8EB00BF35EB /* ZXAllArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXAllArticleViewController.h; sourceTree = "<group>"; };
+		96D357AD1F70C8EB00BF35EB /* ZXAllArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXAllArticleViewController.m; sourceTree = "<group>"; };
 		C2D321DBE16B956F50EB6893 /* Pods-ZhiXiang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiXiang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiXiang/Pods-ZhiXiang.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -251,6 +254,7 @@
 		0653D00B1F6BA2E50054A818 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				96D357AB1F70C8AB00BF35EB /* AllArticle */,
 				96D357741F6FBD9700BF35EB /* MyCollection */,
 				0653D0111F6BA8110054A818 /* Base */,
 				0653D0101F6BA7FB0054A818 /* HomePage */,
@@ -494,6 +498,15 @@
 			path = NoDataView;
 			sourceTree = "<group>";
 		};
+		96D357AB1F70C8AB00BF35EB /* AllArticle */ = {
+			isa = PBXGroup;
+			children = (
+				96D357AC1F70C8EB00BF35EB /* ZXAllArticleViewController.h */,
+				96D357AD1F70C8EB00BF35EB /* ZXAllArticleViewController.m */,
+			);
+			path = AllArticle;
+			sourceTree = "<group>";
+		};
 		BE940CDEEBF75CC16C2F528F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -704,6 +717,7 @@
 				0653D0211F6BA9180054A818 /* UIView+Additional.m in Sources */,
 				069C37271F6F6A3400FE2BB0 /* HomeCollectionViewCell.m in Sources */,
 				96D357771F6FBDC000BF35EB /* MyCollectionViewController.m in Sources */,
+				96D357AE1F70C8EB00BF35EB /* ZXAllArticleViewController.m in Sources */,
 				0653CFDD1F6BA0300054A818 /* AppDelegate.m in Sources */,
 				0653D02D1F6BABB70054A818 /* NetworkConfiguration.m in Sources */,
 				96D357911F6FC27D00BF35EB /* JastorRuntimeHelper.m in Sources */,
