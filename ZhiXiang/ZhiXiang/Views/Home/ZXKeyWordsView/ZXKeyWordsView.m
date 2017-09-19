@@ -16,6 +16,7 @@ static CGFloat keyWordViewAnimationDuration = 2.0;
 
 @interface ZXKeyWordsView ()
 
+@property (nonatomic, strong) UIScrollView * scrollView;
 @property (nonatomic, strong) NSMutableArray * keyWords;
 @property (nonatomic, assign) NSInteger lineNum;
 
@@ -39,6 +40,22 @@ static CGFloat keyWordViewAnimationDuration = 2.0;
     self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.6f];
     self.lineNum = 0;
     
+    self.scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+    self.scrollView.bounces = NO;
+    self.scrollView.showsVerticalScrollIndicator = NO;
+    self.scrollView.showsHorizontalScrollIndicator = NO;
+    [self addSubview:self.scrollView];
+    
+    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, [self scaleHeightWith:105], [UIScreen mainScreen].bounds.size.width, 20)];
+    label.font = kPingFangRegular(17);
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = @"今日关键词";
+    label.textColor = UIColorFromRGB(0xeeeeee);
+    [self.scrollView addSubview:label];
+}
+
+- (void)createKeyWordViews
+{
     NSMutableArray * lineKeyWords = [NSMutableArray new]; //存储一行的关键字
     CGFloat totalWidth = minMarginDistance + minMarginDistance; //记录当前行的宽度
     for (NSInteger i = 0; i < self.keyWords.count; i++) {
@@ -66,24 +83,51 @@ static CGFloat keyWordViewAnimationDuration = 2.0;
                 //计算出当前除了两边距离的所需宽度
                 totalWidth = totalWidth - minMarginDistance - minMarginDistance;
                 [self createLineWithKeyWords:[NSArray arrayWithArray:lineKeyWords] totalWidth:totalWidth];
+                [self createButtonWithIKnewIt];
                 totalWidth = minMarginDistance + minMarginDistance;
             }
         }
         
     }
-    
 }
 
+//创建我知道了的按钮
+- (void)createButtonWithIKnewIt
+{
+    CGFloat topDistance = self.lineNum * 47 + [self scaleHeightWith:290] - 47;
+    
+    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(([UIScreen mainScreen].bounds.size.width - 80) / 2,topDistance + 10, 80, 30);
+    [button setTitleColor:UIColorFromRGB(0xeeeeee) forState:UIControlStateNormal];
+    button.titleLabel.font = kPingFangLight(16);
+    [button setTitle:@"我知道了" forState:UIControlStateNormal];
+    button.layer.cornerRadius = 5;
+    button.layer.masksToBounds = YES;
+    button.layer.borderColor = UIColorFromRGB(0xeeeeee).CGColor;
+    button.layer.borderWidth = .5;
+    [button addTarget:self action:@selector(IKnewItButtonDidBeClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.scrollView addSubview:button];
+    [self keyWordView:button AnimationAfterDelay:self.lineNum * .7];
+}
+
+- (void)IKnewItButtonDidBeClicked
+{
+    [self hiddenWithAnimation:YES];
+}
+
+//创建某一行的关键词
 - (void)createLineWithKeyWords:(NSArray *)array totalWidth:(CGFloat)totalWidth
 {
     self.lineNum++;
     
     CGFloat delay = (self.lineNum - 1) * .7;
     
+    CGFloat topDistance = [self scaleHeightWith:200] - 47;
+    
     if (array.count == 1) {
         
-        UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(0, self.lineNum * 50 + 150 + 15, [UIScreen mainScreen].bounds.size.width, 20)];
-        [self addSubview:lineView];
+        UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(0, self.lineNum * 47 + topDistance, [UIScreen mainScreen].bounds.size.width, 20)];
+        [self.scrollView addSubview:lineView];
         
         UILabel * label = [self labelWithKeyWord:[array firstObject]];
         [lineView addSubview:label];
@@ -94,8 +138,8 @@ static CGFloat keyWordViewAnimationDuration = 2.0;
     }else{
         CGFloat margin = ([UIScreen mainScreen].bounds.size.width - totalWidth) / 2;
         UILabel * lastLabel;
-        UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(0, self.lineNum * 50 + 150 + 15, [UIScreen mainScreen].bounds.size.width, 20)];
-        [self addSubview:lineView];
+        UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(0, self.lineNum * 47 + topDistance, [UIScreen mainScreen].bounds.size.width, 20)];
+        [self.scrollView addSubview:lineView];
         for (NSInteger i = 0; i < array.count; i++) {
             NSString * keyWord = [array objectAtIndex:i];
             
@@ -124,7 +168,14 @@ static CGFloat keyWordViewAnimationDuration = 2.0;
     view.layer.transform = CATransform3DRotate(CATransform3DIdentity, -M_PI_2, 1, 0, 0);
     view.alpha = 0.4;
     
-    [UIView animateWithDuration:keyWordViewAnimationDuration delay:delay usingSpringWithDamping:0.6 initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseIn animations:^{
+    CGFloat totalHeight = frame.origin.y + frame.size.height + [self scaleHeightWith:150];
+    if (totalHeight > self.scrollView.contentSize.height) {
+        CGSize contentSize = self.scrollView.contentSize;
+        contentSize.height = totalHeight;
+        self.scrollView.contentSize = contentSize;
+    }
+    
+    [UIView animateWithDuration:keyWordViewAnimationDuration delay:delay usingSpringWithDamping:0.4 initialSpringVelocity:5 options:UIViewAnimationOptionCurveEaseIn animations:^{
         view.layer.transform = CATransform3DRotate(CATransform3DIdentity, 0, 1, 0, 0);
         view.frame = frame;
         view.alpha = 1;
@@ -136,10 +187,10 @@ static CGFloat keyWordViewAnimationDuration = 2.0;
 - (UILabel *)labelWithKeyWord:(NSString *)keyWord
 {
     UILabel * label = [[UILabel alloc] initWithFrame:CGRectZero];
-    label.font = [UIFont systemFontOfSize:fontSize];
+    label.font = kPingFangRegular(fontSize);
     label.textAlignment = NSTextAlignmentCenter;
     label.text = keyWord;
-    label.textColor = [UIColor whiteColor];
+    label.textColor = UIColorFromRGB(0xe7e3d1);
     return label;
 }
 
@@ -147,10 +198,53 @@ static CGFloat keyWordViewAnimationDuration = 2.0;
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, fontSize, 0)];
     label.text = title;
-    label.font = [UIFont systemFontOfSize:fontSize];
+    label.font = kPingFangRegular(fontSize);
     [label sizeToFit];
     CGFloat width = label.frame.size.width;
     return width;
+}
+
+- (CGFloat)scaleHeightWith:(CGFloat)height;
+{
+    CGFloat scale = [UIScreen mainScreen].bounds.size.height / 667.f;
+    return height * scale;
+}
+
+- (void)showWithAnimation:(BOOL)animation
+{
+    [[UIApplication sharedApplication].keyWindow addSubview:self];
+    if (animation) {
+        CGRect frame = [UIScreen mainScreen].bounds;
+        frame.origin.y = -frame.size.height;
+        self.frame = frame;
+        
+        [UIView animateWithDuration:.5f animations:^{
+            self.frame = [UIScreen mainScreen].bounds;
+        } completion:^(BOOL finished) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self createKeyWordViews];
+            });
+        }];
+    }else{
+        [self createKeyWordViews];
+    }
+}
+
+- (void)hiddenWithAnimation:(BOOL)animation
+{
+    if (animation) {
+        CGRect frame = [UIScreen mainScreen].bounds;
+        frame.origin.y = -frame.size.height;
+        
+        [UIView animateWithDuration:.5f animations:^{
+            self.frame = frame;
+        } completion:^(BOOL finished) {
+            [self removeFromSuperview];
+        }];
+        
+    }else{
+        [self removeFromSuperview];
+    }
 }
 
 /*

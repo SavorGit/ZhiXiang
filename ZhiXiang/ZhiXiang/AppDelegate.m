@@ -52,7 +52,7 @@
     
     [UIView animateWithDuration:2.f animations:^{
         
-        imageView.transform = CGAffineTransformMakeScale(1.1, 1.1);
+        imageView.transform = CGAffineTransformMakeScale(1.05, 1.05);
         
     } completion:^(BOOL finished) {
         
