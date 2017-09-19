@@ -47,4 +47,6 @@
 
 + (void)showTextHUDwithTitle:(NSString *)title delay:(CGFloat)delay;
 
++ (BOOL) isBlankString:(NSString *)string;
+
 @end

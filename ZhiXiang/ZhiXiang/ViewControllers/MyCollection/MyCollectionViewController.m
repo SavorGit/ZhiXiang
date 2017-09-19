@@ -10,8 +10,10 @@
 #import "MyCollectionRequest.h"
 #import "RD_MJRefreshHeader.h"
 #import "RD_MJRefreshFooter.h"
+#import "MJRefreshFooter.h"
 #import "MyCollectionModel.h"
 #import "ImageTextTableViewCell.h"
+#import "ZXTools.h"
 
 
 @interface MyCollectionViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -53,7 +55,7 @@
         [self.tableView reloadData];
         [self.tableView.mj_header beginRefreshing];
     }else{
-//        [self showLoadingView];
+        [self showLoadingView];
         [self refreshData];
     }
 }
@@ -70,23 +72,23 @@
     [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
         [self.tableView.mj_header endRefreshing];
-//        [self hiddenLoadingView];
+        [self hiddenLoadingView];
         
         NSDictionary *dic = (NSDictionary *)response;
         NSDictionary * dataDict = [dic objectForKey:@"result"];
         
-//        if (nil == dataDict || ![dataDict isKindOfClass:[NSDictionary class]] || dataDict.count == 0) {
-//            if (self.dataSource.count == 0) {
-//                [self showNoNetWorkView:NoNetWorkViewStyle_Load_Fail];
-//            }else{
-//                [self showTopFreshLabelWithTitle:RDLocalizedString(@"RDString_NetFailedWithData")];
-//            }
-//            return;
-//        }
+        if (nil == dataDict || ![dataDict isKindOfClass:[NSDictionary class]] || dataDict.count == 0) {
+            if (self.dataSource.count == 0) {
+                [self showNoNetWorkView:NoNetWorkViewStyle_Load_Fail];
+            }else{
+                [self showTopFreshLabelWithTitle:@"数据出错了，更新失败"];
+            }
+            return;
+        }
         
         NSArray *resultArr = [dataDict objectForKey:@"list"];
         
-//        [SAVORXAPI saveFileOnPath:self.cachePath withArray:resultArr];
+        [ZXTools saveFileOnPath:self.cachePath withArray:resultArr];
         [self.dataSource removeAllObjects];
         for (int i = 0; i < resultArr.count; i ++) {
             MyCollectionModel *welthModel = [[MyCollectionModel alloc] initWithDictionary:resultArr[i]];
@@ -103,34 +105,34 @@
             [self.tableView.mj_footer resetNoMoreData];
         }
         
-//        [self showTopFreshLabelWithTitle:RDLocalizedString(@"RDString_SuccessWithUpdate")];
+        [self showTopFreshLabelWithTitle:@"更新成功"];
         
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
-//        [self hiddenLoadingView];
-//        if (self.dataSource.count == 0) {
-//            [self showNoNetWorkView:NoNetWorkViewStyle_Load_Fail];
-//        }
-//        if (_tableView) {
-//            [self.tableView.mj_header endRefreshing];
-//            [self showTopFreshLabelWithTitle:RDLocalizedString(@"RDString_NetFailedWithData")];
-//        }
+        [self hiddenLoadingView];
+        if (self.dataSource.count == 0) {
+            [self showNoNetWorkView:NoNetWorkViewStyle_Load_Fail];
+        }
+        if (_tableView) {
+            [self.tableView.mj_header endRefreshing];
+            [self showTopFreshLabelWithTitle:@"数据出错了，更新失败"];
+        }
         
     } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
         
-//        [self hiddenLoadingView];
-//        if (self.dataSource.count == 0) {
-//            [self showNoNetWorkView:NoNetWorkViewStyle_No_NetWork];
-//        }
-//        if (_tableView) {
-//            
-//            [self.tableView.mj_header endRefreshing];
-//            if (error.code == -1001) {
-//                [self showTopFreshLabelWithTitle:RDLocalizedString(@"RDString_NetFailedWithTimeOut")];
-//            }else{
-//                [self showTopFreshLabelWithTitle:RDLocalizedString(@"RDString_NetFailedWithBadNet")];
-//            }
-//        }
+        [self hiddenLoadingView];
+        if (self.dataSource.count == 0) {
+            [self showNoNetWorkView:NoNetWorkViewStyle_No_NetWork];
+        }
+        if (_tableView) {
+            
+            [self.tableView.mj_header endRefreshing];
+            if (error.code == -1001) {
+                [self showTopFreshLabelWithTitle:@"数据加载超时"];
+            }else{
+                [self showTopFreshLabelWithTitle:@"无法连接到网络，请检查网络设置"];
+            }
+        }
     }];
 }
 
@@ -171,16 +173,16 @@
         
     } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
         
-//        [self.tableView.mj_footer endRefrenshWithNoNetWork];
+        [self.tableView.mj_footer endRefrenshWithNoNetWork];
         
     }];
 }
 
 -(void)retryToGetData{
-//    [self hideNoNetWorkView];
-//    if (self.dataSource.count == 0)  {
-//        [self showLoadingView];
-//    }
+    [self hideNoNetWorkView];
+    if (self.dataSource.count == 0)  {
+        [self showLoadingView];
+    }
     [self refreshData];
 }
 
@@ -261,7 +263,7 @@
         NSArray * cells = self.tableView.visibleCells;
         for (UITableViewCell * cell in cells) {
             NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
-            MyCollectionModel * model = [self.dataSource objectAtIndex:indexPath.section];
+//            MyCollectionModel * model = [self.dataSource objectAtIndex:indexPath.section];
 //            [RDLogStatisticsAPI RDItemLogAction:RDLOGACTION_SHOW type:RDLOGTYPE_CONTENT model:model categoryID:[NSString stringWithFormat:@"%ld", self.categoryID]];
         }
     }
