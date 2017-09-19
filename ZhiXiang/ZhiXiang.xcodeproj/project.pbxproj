@@ -54,6 +54,7 @@
 		96D357C01F711B8F00BF35EB /* SpecialImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357BA1F711B8F00BF35EB /* SpecialImageCell.m */; };
 		96D357C11F711B8F00BF35EB /* SpecialTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357BC1F711B8F00BF35EB /* SpecialTextCell.m */; };
 		96D357C21F711B8F00BF35EB /* SpecialTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357BE1F711B8F00BF35EB /* SpecialTitleCell.m */; };
+		96D357C51F711E5900BF35EB /* SpecialHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357C41F711E5900BF35EB /* SpecialHeaderView.m */; };
 		AF1D023FFA7FF8408D32CBC9 /* libPods-ZhiXiang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27456E740AED9D909E7AAB2D /* libPods-ZhiXiang.a */; };
 /* End PBXBuildFile section */
 
@@ -175,6 +176,8 @@
 		96D357BC1F711B8F00BF35EB /* SpecialTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialTextCell.m; sourceTree = "<group>"; };
 		96D357BD1F711B8F00BF35EB /* SpecialTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialTitleCell.h; sourceTree = "<group>"; };
 		96D357BE1F711B8F00BF35EB /* SpecialTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialTitleCell.m; sourceTree = "<group>"; };
+		96D357C31F711E5900BF35EB /* SpecialHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialHeaderView.h; sourceTree = "<group>"; };
+		96D357C41F711E5900BF35EB /* SpecialHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialHeaderView.m; sourceTree = "<group>"; };
 		C2D321DBE16B956F50EB6893 /* Pods-ZhiXiang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiXiang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiXiang/Pods-ZhiXiang.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -217,6 +220,8 @@
 				96D357BC1F711B8F00BF35EB /* SpecialTextCell.m */,
 				96D357BD1F711B8F00BF35EB /* SpecialTitleCell.h */,
 				96D357BE1F711B8F00BF35EB /* SpecialTitleCell.m */,
+				96D357C31F711E5900BF35EB /* SpecialHeaderView.h */,
+				96D357C41F711E5900BF35EB /* SpecialHeaderView.m */,
 			);
 			path = HomeDetailView;
 			sourceTree = "<group>";
@@ -796,6 +801,7 @@
 				96D357941F6FC2AF00BF35EB /* MyCollectionModel.m in Sources */,
 				0653D0371F6BABE50054A818 /* GCCGetInfo.m in Sources */,
 				0653CFDA1F6BA0300054A818 /* main.m in Sources */,
+				96D357C51F711E5900BF35EB /* SpecialHeaderView.m in Sources */,
 				0653D0431F6BAD8A0054A818 /* ConverUtil.m in Sources */,
 				0653D0391F6BABE50054A818 /* Helper.m in Sources */,
 				96D357731F6FAE6F00BF35EB /* LeftTableViewCell.m in Sources */,

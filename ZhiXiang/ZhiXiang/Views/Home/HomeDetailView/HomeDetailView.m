@@ -12,6 +12,7 @@
 #import "SpecialImageCell.h"
 #import "SpecialTitleCell.h"
 #import "SpecialArtCell.h"
+#import "SpecialHeaderView.h"
 #import "ZXTools.h"
 
 CGFloat HomeDetailViewAnimationDuration = .4f;
@@ -27,6 +28,7 @@ CGFloat HomeDetailViewAnimationDuration = .4f;
 
 @property (nonatomic, strong) HomeViewModel * topModel; //数据源
 @property (nonatomic, strong) NSMutableArray * dataSource; //数据源
+@property (nonatomic, assign) CGFloat HeaderHeight;
 
 @end
 
@@ -65,6 +67,39 @@ CGFloat HomeDetailViewAnimationDuration = .4f;
     }
 }
 
+-(void)setUpTableHeaderView{
+    
+    SpecialHeaderView *topView = [[SpecialHeaderView alloc] initWithFrame:CGRectZero];
+    topView.backgroundColor = UIColorFromRGB(0xf6f2ed);
+    
+    // 计算图片高度
+    CGFloat imgHeight =kMainBoundsWidth *802.f/1242.f;//113
+    CGFloat totalHeight = imgHeight + 25 + 40;// 25为下方留白 40为控件间隔
+    // 计算描述文字内容的高度
+    CGFloat descHeight = [ZXTools getAttrHeightByWidth:kMainBoundsWidth - 30 title:self.topModel.desc font:kPingFangLight(15)];
+    totalHeight = totalHeight + descHeight;
+    // 计算标题的高度
+    CGFloat titleHeight = [ZXTools getHeightByWidth:kMainBoundsWidth - 30 title:self.topModel.title font:kPingFangMedium(22)];
+    if (titleHeight > 31) {
+        totalHeight = totalHeight + 62;
+    }else{
+        totalHeight = totalHeight + 31;
+    }
+    _HeaderHeight = totalHeight;
+    
+//    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, totalHeight)];
+    self.headerView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, totalHeight);
+    self.headerView.backgroundColor = [UIColor clearColor];
+    [self.headerView addSubview:topView];
+    [topView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.mas_equalTo(0);
+        make.height.mas_equalTo(totalHeight);
+    }];
+    [topView configModelData:self.topModel];
+    
+    self.tableView.tableHeaderView = self.headerView;
+    
+}
 - (void)createViews
 {
     self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height / 2)];
@@ -88,7 +123,8 @@ CGFloat HomeDetailViewAnimationDuration = .4f;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"HomeDetailCell"];
     [self addSubview:self.tableView];
-    self.tableView.tableHeaderView = self.headerView;
+//    self.tableView.tableHeaderView = self.headerView;
+    [self setUpTableHeaderView];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -262,11 +298,12 @@ CGFloat HomeDetailViewAnimationDuration = .4f;
     CGFloat width = kMainBoundsWidth;
     CGFloat height = kMainBoundsHeight;
     [UIView animateWithDuration:HomeDetailViewAnimationDuration delay:0.f options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.headerView.frame = CGRectMake(0, 0, width, 200);
+        self.headerView.frame = CGRectMake(0, 0, width, _HeaderHeight);
         self.frame = CGRectMake(0, 0, width, height);
         self.tableView.frame = self.bounds;
     } completion:^(BOOL finished) {
         self.tap.enabled = YES;
+//        [self.tableView reloadData];
     }];
 }
 
