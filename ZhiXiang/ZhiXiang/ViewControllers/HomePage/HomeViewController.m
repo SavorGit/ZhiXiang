@@ -11,11 +11,14 @@
 #import "HomeCollectionViewCell.h"
 #import "ZXKeyWordsView.h"
 #import "HomeDetailView.h"
+#import "HomeViewRequest.h"
 
 @interface HomeViewController () <TYCyclePagerViewDataSource, TYCyclePagerViewDelegate>
 
 @property (nonatomic, strong) TYCyclePagerView *pagerView;
 @property (nonatomic, assign) NSInteger currentIndex;
+
+@property (nonatomic, strong) NSDictionary * detailDataDic; //数据源
 
 @end
 
@@ -26,6 +29,7 @@
     
     self.title = @"每日知享";
     [self setupViews];
+    [self dataRequest];
     // Do any additional setup after loading the view.
 }
 
@@ -45,6 +49,7 @@
         make.right.mas_equalTo(0);
     }];
     self.currentIndex = 0;
+    _detailDataDic = [[NSDictionary alloc] init];
     
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        NSArray * keyWords = @[@"iPhone X", @"孙宏斌", @"美联储", @"蒂芙尼珠宝", @"北海道肉蟹", @"贵族学校", @"百年普洱", @"小米", @"特朗普", @"蒂芙尼哈哈", @"法拉利的遗憾", @"品茶道人生"];
@@ -86,7 +91,7 @@
 //        }];
         
         CGRect detailViewFrame = [cell convertRect:cell.bounds toView:[UIApplication sharedApplication].keyWindow];
-        HomeDetailView * detailView = [[HomeDetailView alloc] initWithFrame:detailViewFrame];
+        HomeDetailView * detailView = [[HomeDetailView alloc] initWithFrame:detailViewFrame andData:_detailDataDic];
         [[UIApplication sharedApplication].keyWindow addSubview:detailView];
         [detailView becomeScreenToRead];
         
@@ -103,6 +108,21 @@
 - (void)pagerView:(TYCyclePagerView *)pageView didScrollFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex
 {
     self.currentIndex = toIndex;
+}
+
+- (void)dataRequest{
+    
+    HomeViewRequest * request = [[HomeViewRequest alloc] initWithId:nil];
+    [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+        
+        NSDictionary *dic = (NSDictionary *)response;
+        NSDictionary * dataDict = [dic objectForKey:@"result"];
+        _detailDataDic = dataDict;
+        
+    } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+        
+    } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

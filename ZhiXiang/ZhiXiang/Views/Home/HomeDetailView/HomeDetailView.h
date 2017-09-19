@@ -12,6 +12,8 @@ extern CGFloat HomeDetailViewAnimationDuration;
 
 @interface HomeDetailView : UIView
 
+- (instancetype)initWithFrame:(CGRect)frame andData:(NSDictionary *)dataDic;
+
 - (void)becomeScreenToRead;
 
 - (void)endScrrenToShow;
