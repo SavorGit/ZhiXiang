@@ -33,56 +33,56 @@
     _bgImageView.backgroundColor = [UIColor clearColor];
     [self addSubview:_bgImageView];
     [_bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(130);
+        make.width.mas_equalTo(140);
         make.height.equalTo(_bgImageView.mas_width).multipliedBy(802.f/1242.f);//84
-        make.top.mas_equalTo(4.5);
+        make.top.mas_equalTo(7.5);
         make.left.mas_equalTo(15);
     }];
     
     _titleLabel = [[UILabel alloc]init];
     _titleLabel.font = kPingFangMedium(16);
-    _titleLabel.textColor = UIColorFromRGB(0x434343);
+    _titleLabel.textColor = UIColorFromRGB(0x222222);
     _titleLabel.textAlignment = NSTextAlignmentLeft;
     _titleLabel.text = @"标题";
     self.titleLabel.numberOfLines = 2;
     [self addSubview:_titleLabel];
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(kMainBoundsWidth - 130 - 38);
+        make.width.mas_equalTo(kMainBoundsWidth - 140 - 38);
         make.height.mas_equalTo(25);
-        make.top.mas_equalTo(6);
-        make.left.mas_equalTo(_bgImageView.mas_right).offset(10);
+        make.top.mas_equalTo(_bgImageView.mas_top).offset(5);
+        make.left.mas_equalTo(_bgImageView.mas_right).offset(15);
     }];
     
     _sourceLabel = [[UILabel alloc]init];
     _sourceLabel.text = @"";
-    _sourceLabel.font = kPingFangLight(11);
-    _sourceLabel.textColor = UIColorFromRGB(0x8a8886);
+    _sourceLabel.font = kPingFangRegular(12);
+    _sourceLabel.textColor = UIColorFromRGB(0x999999);
     [self addSubview:_sourceLabel];
     [_sourceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(20);
         make.bottom.mas_equalTo(_bgImageView.mas_bottom).offset(-5);
-        make.left.mas_equalTo(_bgImageView.mas_right).offset(10);
+        make.left.mas_equalTo(_bgImageView.mas_right).offset(15);
         make.width.mas_lessThanOrEqualTo(100);
     }];
     
     _timeLabel = [[UILabel alloc]init];
     _timeLabel.text = @"";
-    _timeLabel.font = kPingFangLight(10);
-    _timeLabel.textColor = UIColorFromRGB(0xb2afab);
+    _timeLabel.font = kPingFangRegular(12);
+    _timeLabel.textColor = UIColorFromRGB(0x999999);
     [self addSubview:_timeLabel];
     [_timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(100, 20));
         make.bottom.mas_equalTo(_bgImageView.mas_bottom).offset(-5);
-        make.left.equalTo(_sourceLabel.mas_right).offset(10);
+        make.left.equalTo(_sourceLabel.mas_right).offset(15);
     }];
     
     _lineView = [[UIView alloc] initWithFrame:CGRectZero];
-    _lineView.backgroundColor = UIColorFromRGB(0xe0dad2);
+    _lineView.backgroundColor = UIColorFromRGB(0xe4e2de);
     [self addSubview:_lineView];
     [_lineView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(kMainBoundsWidth, 1));
+        make.size.mas_equalTo(CGSizeMake(kMainBoundsWidth - 15, 1));
         make.bottom.mas_equalTo(self.bottom).offset(-1);
-        make.left.mas_equalTo(0);
+        make.left.mas_equalTo(15);
     }];
 }
 
@@ -99,7 +99,7 @@
 
 - (void)configModelData:(MyCollectionModel *)model{
     
-    CGFloat titleHeight = [self getHeightByWidth:(kMainBoundsWidth - 130 - 38) title:model.title font:kPingFangMedium(16)];
+    CGFloat titleHeight = [self getHeightByWidth:(kMainBoundsWidth - 140 - 38) title:model.title font:kPingFangMedium(16)];
     if (titleHeight > 30) {
         [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(50);
@@ -140,13 +140,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

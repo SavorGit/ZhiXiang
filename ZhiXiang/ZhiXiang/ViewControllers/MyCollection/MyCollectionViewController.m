@@ -59,7 +59,7 @@
 }
 
 - (void)initInfo{
-     self.title = @"我的收藏";
+     self.title = @"收藏馆";
     _dataSource = [[NSMutableArray alloc] initWithCapacity:100];
 }
 
@@ -203,6 +203,10 @@
             make.right.mas_equalTo(0);
         }];
         
+        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kMainBoundsWidth, 7.5)];
+        headerView.backgroundColor = UIColorFromRGB(0xf8f6f1);
+        _tableView.tableHeaderView = headerView;
+        
         //创建tableView动画加载头视图
         
         _tableView.mj_header = [RD_MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
@@ -236,20 +240,19 @@
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.backgroundColor = UIColorFromRGB(0xf6f2ed);
+    cell.backgroundColor = UIColorFromRGB(0xf8f6f1);
     
     [cell configModelData:model];
     
     return cell;
-    
-    return cell;
+
 }
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat igTextHeight= 130 *802.f/1242.f;
-    return igTextHeight + 12;
+    CGFloat igTextHeight= 140 *802.f/1242.f;
+    return igTextHeight + 16;
 }
 
 - (void)showSelfAndCreateLog
