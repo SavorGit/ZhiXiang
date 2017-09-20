@@ -7,7 +7,7 @@
 //
 
 #import "ZXAllArticleViewController.h"
-#import "MyCollectionRequest.h"
+#import "AllArticelRequest.h"
 #import "RD_MJRefreshHeader.h"
 #import "RD_MJRefreshFooter.h"
 #import "MJRefreshFooter.h"
@@ -48,7 +48,6 @@
         NSArray * dataArr = [NSArray arrayWithContentsOfFile:self.cachePath];
         for(NSDictionary *dict in dataArr){
             MyCollectionModel *tmpModel = [[MyCollectionModel alloc] initWithDictionary:dict];
-            tmpModel.type = 1;
             [self.dataSource addObject:tmpModel];
         }
         [self.tableView reloadData];
@@ -67,7 +66,7 @@
 //下拉刷新页面数据
 - (void)refreshData
 {
-    MyCollectionRequest * request = [[MyCollectionRequest alloc] initWithCateId:self.categoryID withSortNum:nil];
+    AllArticelRequest * request = [[AllArticelRequest alloc] initWithBespeakTime:nil];
     [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
         [self.tableView.mj_header endRefreshing];
@@ -90,15 +89,16 @@
         [ZXTools saveFileOnPath:self.cachePath withArray:resultArr];
         [self.dataSource removeAllObjects];
         for (int i = 0; i < resultArr.count; i ++) {
-            MyCollectionModel *welthModel = [[MyCollectionModel alloc] initWithDictionary:resultArr[i]];
-            welthModel.type = 1;
-            [self.dataSource addObject:welthModel];
+            
+            MyCollectionModel *tmpModel = [[MyCollectionModel alloc] initWithDictionary:resultArr[i]];
+            [self.dataSource addObject:tmpModel];
         }
         
         [self.tableView reloadData];
         
         
-        if ([[dataDict objectForKey:@"nextpage"] integerValue] == 0) {
+        //每次返回20条
+        if (resultArr.count < 20) {
             [self.tableView.mj_footer endRefreshingWithNoMoreData];
         }else{
             [self.tableView.mj_footer resetNoMoreData];
@@ -138,8 +138,8 @@
 //上拉获取更多数据
 - (void)getMoreData
 {
-    MyCollectionModel *welthModel = [self.dataSource lastObject];
-    MyCollectionRequest * request = [[MyCollectionRequest alloc] initWithCateId:self.categoryID withSortNum:welthModel.sort_num];
+    MyCollectionModel *tmpModel = [self.dataSource lastObject];
+    AllArticelRequest * request = [[AllArticelRequest alloc] initWithBespeakTime:tmpModel.bespeak_time];
     [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
         NSDictionary *dic = (NSDictionary *)response;
@@ -153,7 +153,7 @@
         
         NSArray *resultArr = [dataDict objectForKey:@"list"];
         
-        if ([[dataDict objectForKey:@"nextpage"] integerValue] == 0) {
+        if (resultArr.count < 20) {
             [self.tableView.mj_footer endRefreshingWithNoMoreData];
         }else{
             [self.tableView.mj_footer endRefreshing];
@@ -161,8 +161,9 @@
         
         //如果获取的数据数量不为0，则将数据添加至数据源，刷新当前列表
         for(NSDictionary *dict in resultArr){
-            MyCollectionModel *welthModel = [[MyCollectionModel alloc] initWithDictionary:dict];
-            [self.dataSource addObject:welthModel];
+            
+            MyCollectionModel *tmpModel = [[MyCollectionModel alloc] initWithDictionary:dict];
+            [self.dataSource addObject:tmpModel];
         }
         [self.tableView reloadData];
         
@@ -242,6 +243,12 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = UIColorFromRGB(0xf8f6f1);
+    
+    if (indexPath.row == self.dataSource.count - 1) {
+        cell.lineView.hidden = YES;
+    }else{
+        cell.lineView.hidden = NO;
+    }
     
     [cell configModelData:model];
     

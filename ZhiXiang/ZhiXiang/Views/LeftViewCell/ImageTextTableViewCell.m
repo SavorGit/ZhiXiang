@@ -112,16 +112,16 @@
     self.titleLabel.text = model.title;
     
     self.sourceLabel.text = model.sourceName;
-    self.timeLabel.text = model.updateTime;
-    if ([self.imageURL isEqualToString:model.imageURL]) {
+    self.timeLabel.text = model.bespeak_time;
+    if ([self.imageURL isEqualToString:model.imgUrl]) {
         return;
     }
     self.imageURL = model.imageURL;
     
-    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.imageURL] placeholderImage:[UIImage imageNamed:@"zanwu"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.imgUrl] placeholderImage:[UIImage imageNamed:@"zanwu"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
-        if ([manager diskImageExistsForURL:[NSURL URLWithString:model.imageURL]]) {
+        if ([manager diskImageExistsForURL:[NSURL URLWithString:model.imgUrl]]) {
             NSLog(@"不加载动画");
         }else {
             
