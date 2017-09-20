@@ -56,6 +56,7 @@
 		96D357C21F711B8F00BF35EB /* SpecialTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357BE1F711B8F00BF35EB /* SpecialTitleCell.m */; };
 		96D357C51F711E5900BF35EB /* SpecialHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357C41F711E5900BF35EB /* SpecialHeaderView.m */; };
 		96D357C81F725F6C00BF35EB /* AllArticelRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357C71F725F6C00BF35EB /* AllArticelRequest.m */; };
+		96D357CE1F726C3700BF35EB /* ZXDetailArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357CD1F726C3700BF35EB /* ZXDetailArticleViewController.m */; };
 		AF1D023FFA7FF8408D32CBC9 /* libPods-ZhiXiang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27456E740AED9D909E7AAB2D /* libPods-ZhiXiang.a */; };
 /* End PBXBuildFile section */
 
@@ -181,6 +182,8 @@
 		96D357C41F711E5900BF35EB /* SpecialHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialHeaderView.m; sourceTree = "<group>"; };
 		96D357C61F725F6C00BF35EB /* AllArticelRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllArticelRequest.h; sourceTree = "<group>"; };
 		96D357C71F725F6C00BF35EB /* AllArticelRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllArticelRequest.m; sourceTree = "<group>"; };
+		96D357CC1F726C3700BF35EB /* ZXDetailArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXDetailArticleViewController.h; sourceTree = "<group>"; };
+		96D357CD1F726C3700BF35EB /* ZXDetailArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXDetailArticleViewController.m; sourceTree = "<group>"; };
 		C2D321DBE16B956F50EB6893 /* Pods-ZhiXiang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiXiang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiXiang/Pods-ZhiXiang.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -554,6 +557,8 @@
 			children = (
 				96D357AC1F70C8EB00BF35EB /* ZXAllArticleViewController.h */,
 				96D357AD1F70C8EB00BF35EB /* ZXAllArticleViewController.m */,
+				96D357CC1F726C3700BF35EB /* ZXDetailArticleViewController.h */,
+				96D357CD1F726C3700BF35EB /* ZXDetailArticleViewController.m */,
 			);
 			path = AllArticle;
 			sourceTree = "<group>";
@@ -823,6 +828,7 @@
 				96D357851F6FC16700BF35EB /* MyCollectionRequest.m in Sources */,
 				96D357BF1F711B8F00BF35EB /* SpecialArtCell.m in Sources */,
 				069C37531F6FD19900FE2BB0 /* ZXKeyWordsView.m in Sources */,
+				96D357CE1F726C3700BF35EB /* ZXDetailArticleViewController.m in Sources */,
 				0653D0441F6BAD8A0054A818 /* DesUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
