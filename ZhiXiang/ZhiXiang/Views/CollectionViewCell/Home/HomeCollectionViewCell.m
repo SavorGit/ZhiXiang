@@ -49,12 +49,12 @@
     }];
     self.topView.backgroundColor = UIColorFromRGB(0xf6f2ed);
     
-    _bgImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    _bgImageView.contentMode = UIViewContentModeScaleAspectFill;
-    _bgImageView.layer.masksToBounds = YES;
-    _bgImageView.backgroundColor = [UIColor clearColor];
-    [_topView addSubview:_bgImageView];
-    [_bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.bgImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    self.bgImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.bgImageView.layer.masksToBounds = YES;
+    self.bgImageView.backgroundColor = [UIColor clearColor];
+    [_topView addSubview:self.bgImageView];
+    [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(0);
         make.height.equalTo(self.baseView.mas_height).multipliedBy(.5f);
     }];
@@ -67,14 +67,14 @@
     }];
     self.bottoView.backgroundColor = UIColorFromRGB(0xf6f2ed);
     
-    _subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kMainBoundsWidth - 30, 0)];
-    _subTitleLabel.text = @"";
-    _subTitleLabel.font = kPingFangLight(15);
-    _subTitleLabel.textColor = UIColorFromRGB(0x575757);
-    _subTitleLabel.backgroundColor = [UIColor clearColor];
-    _subTitleLabel.numberOfLines = 0;
-    [self.bottoView addSubview:_subTitleLabel];
-    [_subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kMainBoundsWidth - 30, 0)];
+    self.subTitleLabel.text = @"";
+    self.subTitleLabel.font = kPingFangLight(15);
+    self.subTitleLabel.textColor = UIColorFromRGB(0x575757);
+    self.subTitleLabel.backgroundColor = [UIColor clearColor];
+    self.subTitleLabel.numberOfLines = 0;
+    [self.bottoView addSubview:self.subTitleLabel];
+    [self.subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(kMainBoundsWidth - 60 - 30, 20));
         make.top.equalTo(self.topView.mas_bottom).offset(15);
         make.left.mas_equalTo(15);

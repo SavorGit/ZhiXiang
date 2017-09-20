@@ -13,4 +13,6 @@
 
 - (void)configModelData:(HomeViewModel *)model;
 
+- (void)endScrShow;
+
 @end
