@@ -68,7 +68,7 @@
 //下拉刷新页面数据
 - (void)refreshData
 {
-    MyCollectionRequest * request = [[MyCollectionRequest alloc] initWithCateId:self.categoryID withSortNum:nil];
+    MyCollectionRequest * request = [[MyCollectionRequest alloc] initWithCollecTime:nil];
     [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
         [self.tableView.mj_header endRefreshing];
@@ -140,7 +140,7 @@
 - (void)getMoreData
 {
     MyCollectionModel *welthModel = [self.dataSource lastObject];
-    MyCollectionRequest * request = [[MyCollectionRequest alloc] initWithCateId:self.categoryID withSortNum:welthModel.sort_num];
+    MyCollectionRequest * request = [[MyCollectionRequest alloc] initWithCollecTime:nil];
     [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
         NSDictionary *dic = (NSDictionary *)response;

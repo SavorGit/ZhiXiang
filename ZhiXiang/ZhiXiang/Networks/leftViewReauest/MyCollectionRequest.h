@@ -10,6 +10,6 @@
 
 @interface MyCollectionRequest : BGNetworkRequest
 
-- (instancetype)initWithCateId:(NSInteger )cateId withSortNum:(NSString *)sortNum;
+- (instancetype)initWithCollecTime:(NSString *)collecTime;
 
 @end

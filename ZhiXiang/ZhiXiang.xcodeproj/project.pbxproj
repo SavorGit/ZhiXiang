@@ -55,6 +55,7 @@
 		96D357C11F711B8F00BF35EB /* SpecialTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357BC1F711B8F00BF35EB /* SpecialTextCell.m */; };
 		96D357C21F711B8F00BF35EB /* SpecialTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357BE1F711B8F00BF35EB /* SpecialTitleCell.m */; };
 		96D357C51F711E5900BF35EB /* SpecialHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357C41F711E5900BF35EB /* SpecialHeaderView.m */; };
+		96D357C81F725F6C00BF35EB /* AllArticelRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357C71F725F6C00BF35EB /* AllArticelRequest.m */; };
 		AF1D023FFA7FF8408D32CBC9 /* libPods-ZhiXiang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27456E740AED9D909E7AAB2D /* libPods-ZhiXiang.a */; };
 /* End PBXBuildFile section */
 
@@ -178,6 +179,8 @@
 		96D357BE1F711B8F00BF35EB /* SpecialTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialTitleCell.m; sourceTree = "<group>"; };
 		96D357C31F711E5900BF35EB /* SpecialHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialHeaderView.h; sourceTree = "<group>"; };
 		96D357C41F711E5900BF35EB /* SpecialHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialHeaderView.m; sourceTree = "<group>"; };
+		96D357C61F725F6C00BF35EB /* AllArticelRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllArticelRequest.h; sourceTree = "<group>"; };
+		96D357C71F725F6C00BF35EB /* AllArticelRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllArticelRequest.m; sourceTree = "<group>"; };
 		C2D321DBE16B956F50EB6893 /* Pods-ZhiXiang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiXiang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiXiang/Pods-ZhiXiang.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -506,6 +509,8 @@
 			children = (
 				96D357831F6FC16700BF35EB /* MyCollectionRequest.h */,
 				96D357841F6FC16700BF35EB /* MyCollectionRequest.m */,
+				96D357C61F725F6C00BF35EB /* AllArticelRequest.h */,
+				96D357C71F725F6C00BF35EB /* AllArticelRequest.m */,
 			);
 			path = leftViewReauest;
 			sourceTree = "<group>";
@@ -782,6 +787,7 @@
 				0653D0211F6BA9180054A818 /* UIView+Additional.m in Sources */,
 				069C37271F6F6A3400FE2BB0 /* HomeCollectionViewCell.m in Sources */,
 				96D357771F6FBDC000BF35EB /* MyCollectionViewController.m in Sources */,
+				96D357C81F725F6C00BF35EB /* AllArticelRequest.m in Sources */,
 				96D357AE1F70C8EB00BF35EB /* ZXAllArticleViewController.m in Sources */,
 				0653CFDD1F6BA0300054A818 /* AppDelegate.m in Sources */,
 				0653D02D1F6BABB70054A818 /* NetworkConfiguration.m in Sources */,

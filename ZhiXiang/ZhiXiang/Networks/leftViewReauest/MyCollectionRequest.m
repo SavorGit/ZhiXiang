@@ -11,13 +11,12 @@
 
 @implementation MyCollectionRequest
 
-- (instancetype)initWithCateId:(NSInteger )cateId withSortNum:(NSString *)sortNum;
+- (instancetype)initWithCollecTime:(NSString *)collecTime;
 {
     if (self = [super init]) {
-        self.methodName = [@"APP3/Content/getLastCategoryList?" stringByAppendingString:[Helper getURLPublic]];
+        self.methodName = [@"Dailyknowledge/Collection/getMyCollection?" stringByAppendingString:[Helper getURLPublic]];
         self.httpMethod = BGNetworkRequestHTTPPost;
-        [self setValue:[NSString stringWithFormat:@"%ld",cateId] forParamKey:@"cateid"];
-        [self setValue:sortNum forParamKey:@"sort_num"];
+        [self setValue:collecTime forParamKey:@"collecTime"];
     }
     return self;
 }
