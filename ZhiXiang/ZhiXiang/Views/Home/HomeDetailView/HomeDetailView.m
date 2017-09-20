@@ -15,7 +15,8 @@
 #import "SpecialHeaderView.h"
 #import "ZXTools.h"
 
-CGFloat HomeDetailViewAnimationDuration = .4f;
+CGFloat HomeDetailViewShowAnimationDuration = .6f;
+CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
 
 @interface HomeDetailView () <UITableViewDelegate, UITableViewDataSource>
 
@@ -89,7 +90,7 @@ CGFloat HomeDetailViewAnimationDuration = .4f;
     
 //    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, totalHeight)];
     self.headerView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, totalHeight);
-    self.headerView.backgroundColor = [UIColor clearColor];
+    self.headerView.backgroundColor = UIColorFromRGB(0xf6f2ed);
     [self.headerView addSubview:topView];
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(0);
@@ -297,7 +298,7 @@ CGFloat HomeDetailViewAnimationDuration = .4f;
 {
     CGFloat width = kMainBoundsWidth;
     CGFloat height = kMainBoundsHeight;
-    [UIView animateWithDuration:HomeDetailViewAnimationDuration delay:0.f options:UIViewAnimationOptionCurveEaseOut animations:^{
+    [UIView animateWithDuration:HomeDetailViewShowAnimationDuration delay:0.f options:UIViewAnimationOptionCurveEaseOut animations:^{
         self.headerView.frame = CGRectMake(0, 0, width, _HeaderHeight);
         self.frame = CGRectMake(0, 0, width, height);
         self.tableView.frame = self.bounds;
@@ -312,7 +313,7 @@ CGFloat HomeDetailViewAnimationDuration = .4f;
     self.tap.enabled = NO;
     CGFloat width = self.startFrame.size.width;
     CGFloat height = self.startFrame.size.height;
-    [UIView animateWithDuration:HomeDetailViewAnimationDuration delay:0.f options:UIViewAnimationOptionCurveEaseOut animations:^{
+    [UIView animateWithDuration:HomeDetailViewHiddenAnimationDuration delay:0.f options:UIViewAnimationOptionCurveEaseOut animations:^{
         self.frame = self.startFrame;
         self.headerView.frame = CGRectMake(0, 0, width, height / 2);
         self.tableView.frame = self.bounds;

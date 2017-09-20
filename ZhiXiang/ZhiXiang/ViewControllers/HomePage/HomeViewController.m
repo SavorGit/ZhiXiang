@@ -66,6 +66,7 @@
 
 - (UICollectionViewCell *)pagerView:(TYCyclePagerView *)pagerView cellForItemAtIndex:(NSInteger)index {
     HomeCollectionViewCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"HomeCollectionViewCell" forIndex:index];
+    [cell configModelData:nil];
     return cell;
 }
 
@@ -84,7 +85,7 @@
         
 //        CGRect frame = self.navigationController.navigationBar.frame;
 //        frame.origin.y = -200;
-//        [UIView animateWithDuration:HomeDetailViewAnimationDuration animations:^{
+//        [UIView animateWithDuration:HomeDetailViewShowAnimationDuration animations:^{
 //            self.navigationController.navigationBar.frame = frame;
 //        } completion:^(BOOL finished) {
 //            

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeViewModel.h"
 
 @interface HomeCollectionViewCell : UICollectionViewCell
+
+- (void)configModelData:(HomeViewModel *)model;
 
 @end

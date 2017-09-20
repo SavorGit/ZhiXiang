@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-extern CGFloat HomeDetailViewAnimationDuration;
+extern CGFloat HomeDetailViewShowAnimationDuration;
+extern CGFloat HomeDetailViewHiddenAnimationDuration;
 
 @interface HomeDetailView : UIView
 
