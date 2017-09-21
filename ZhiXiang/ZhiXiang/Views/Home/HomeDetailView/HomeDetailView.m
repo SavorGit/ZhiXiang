@@ -12,6 +12,7 @@
 #import "SpecialImageCell.h"
 #import "SpecialTitleCell.h"
 #import "SpecialArtCell.h"
+#import "HeaderTableViewCell.h"
 #import "SpecialHeaderView.h"
 #import "ZXTools.h"
 
@@ -61,9 +62,10 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
     self.topModel.imageURL = self.topModel.img_url;
     self.topModel.contentURL = [dataDict objectForKey:@"contentUrl"];
     self.topModel.shareType = 1;
+    self.topModel.contentType = 1;
+    [self.dataSource addObject:self.topModel];
     
     NSArray *resultArr = [dataDict objectForKey:@"list"];
-    [self.dataSource removeAllObjects];
     for (int i = 0; i < resultArr.count; i ++) {
         HomeViewModel *tmpModel = [[HomeViewModel alloc] initWithDictionary:resultArr[i]];
         [self.dataSource addObject:tmpModel];
@@ -138,17 +140,22 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"HomeDetailCell" forIndexPath:indexPath];
-//    
-//    cell.textLabel.text = @"测试一下这里的动画能不能正常进行";
-//    cell.backgroundColor = [UIColor redColor];
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    
-//    return cell;
-    
     
     HomeViewModel * model = [self.dataSource objectAtIndex:indexPath.row];
     // 1 文字  2 文章  3 图片  4 标题
+    if (model.contentType == 1) {
+        static NSString *cellID = @"HeaderTableCell";
+        HeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+        if (cell == nil) {
+            cell = [[HeaderTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = UIColorFromRGB(0xf6f2ed);
+        
+        [cell configModelData:model];
+        return cell;
+    }
     if (model.sgtype == 1){
         static NSString *cellID = @"SpecialTextCell";
         SpecialTextCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
@@ -230,8 +237,14 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
     }else{
         bottomBlank = [self getBottomBlankWith:model nextModel:nil];
     }
-    
-    if (model.sgtype == 3) {
+    if (model.contentType == 1) {
+        CGFloat titleHeight = [ZXTools getHeightByWidth:kMainBoundsWidth - 30 title:model.title font:kPingFangMedium(22)];
+        if (titleHeight > 31) {
+            return  62 + 36  + 25;
+        }else{
+            return  31 + 36 + 25;
+        }
+    }else if (model.sgtype == 3) {
         CGFloat imgHeight =  (kMainBoundsWidth - 15) *(802.f/1242.f);
         return  imgHeight + bottomBlank;
     }else if (model.sgtype == 2){

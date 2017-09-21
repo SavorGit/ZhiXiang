@@ -57,6 +57,7 @@
 		96D357C51F711E5900BF35EB /* SpecialHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357C41F711E5900BF35EB /* SpecialHeaderView.m */; };
 		96D357C81F725F6C00BF35EB /* AllArticelRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357C71F725F6C00BF35EB /* AllArticelRequest.m */; };
 		96D357CE1F726C3700BF35EB /* ZXDetailArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357CD1F726C3700BF35EB /* ZXDetailArticleViewController.m */; };
+		96D357D41F73517900BF35EB /* HeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357D31F73517900BF35EB /* HeaderTableViewCell.m */; };
 		AF1D023FFA7FF8408D32CBC9 /* libPods-ZhiXiang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27456E740AED9D909E7AAB2D /* libPods-ZhiXiang.a */; };
 /* End PBXBuildFile section */
 
@@ -184,6 +185,8 @@
 		96D357C71F725F6C00BF35EB /* AllArticelRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllArticelRequest.m; sourceTree = "<group>"; };
 		96D357CC1F726C3700BF35EB /* ZXDetailArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXDetailArticleViewController.h; sourceTree = "<group>"; };
 		96D357CD1F726C3700BF35EB /* ZXDetailArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXDetailArticleViewController.m; sourceTree = "<group>"; };
+		96D357D21F73517900BF35EB /* HeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderTableViewCell.h; sourceTree = "<group>"; };
+		96D357D31F73517900BF35EB /* HeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderTableViewCell.m; sourceTree = "<group>"; };
 		C2D321DBE16B956F50EB6893 /* Pods-ZhiXiang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiXiang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiXiang/Pods-ZhiXiang.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -228,6 +231,8 @@
 				96D357BE1F711B8F00BF35EB /* SpecialTitleCell.m */,
 				96D357C31F711E5900BF35EB /* SpecialHeaderView.h */,
 				96D357C41F711E5900BF35EB /* SpecialHeaderView.m */,
+				96D357D21F73517900BF35EB /* HeaderTableViewCell.h */,
+				96D357D31F73517900BF35EB /* HeaderTableViewCell.m */,
 			);
 			path = HomeDetailView;
 			sourceTree = "<group>";
@@ -790,6 +795,7 @@
 				0653D03D1F6BAC5E0054A818 /* ZXTools.m in Sources */,
 				0653D01A1F6BA8810054A818 /* ZXBaseNavigationController.m in Sources */,
 				0653D0211F6BA9180054A818 /* UIView+Additional.m in Sources */,
+				96D357D41F73517900BF35EB /* HeaderTableViewCell.m in Sources */,
 				069C37271F6F6A3400FE2BB0 /* HomeCollectionViewCell.m in Sources */,
 				96D357771F6FBDC000BF35EB /* MyCollectionViewController.m in Sources */,
 				96D357C81F725F6C00BF35EB /* AllArticelRequest.m in Sources */,

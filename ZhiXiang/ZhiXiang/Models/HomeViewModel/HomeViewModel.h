@@ -45,4 +45,6 @@
 @property (nonatomic, assign) NSInteger cid;
 @property (nonatomic, assign) NSInteger shareType;//非接口返回，用于分享类型(1代表专题组首页分享)
 
+@property (nonatomic, assign) NSInteger contentType;
+
 @end

@@ -14,6 +14,7 @@
 #import "MyCollectionModel.h"
 #import "ImageTextTableViewCell.h"
 #import "ZXTools.h"
+#import "ZXDetailArticleViewController.h"
 
 @interface ZXAllArticleViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -261,6 +262,12 @@
 {
     CGFloat igTextHeight= 140 *802.f/1242.f;
     return igTextHeight + 16;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    ZXDetailArticleViewController *daVC = [[ZXDetailArticleViewController alloc] init];
+    [self.navigationController pushViewController:daVC animated:YES];
 }
 
 - (void)showSelfAndCreateLog
