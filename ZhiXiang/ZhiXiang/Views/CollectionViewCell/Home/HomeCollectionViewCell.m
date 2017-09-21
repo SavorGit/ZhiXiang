@@ -83,9 +83,13 @@
 
 - (void)configModelData:(HomeViewModel *)model{
     
-    self.subTitleLabel.text = @"“艾尔玛”给佛罗里达州带来巨大损失。电视画面显示，佛罗里达半岛西部城市那不勒斯、坦帕附近海面掀起的巨浪最高达到5米。迈阿密的很多大树被连根拔起，一些房屋墙壁中的保温材料被风吹落，堆积在街道。而迈阿密国际机场因积水漫灌，已严重损毁。";
+    self.subTitleLabel.text = model.desc;
     [self configDescLabel];
-    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:@"http://devp.oss.littlehotspot.com/media/resource/7GbaE4cxsF.jpg"] placeholderImage:[UIImage imageNamed:@"zanwu"]];
+    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.imgUrl] placeholderImage:[UIImage imageNamed:@"zanwu"]];
+    
+//    self.subTitleLabel.text = @"“艾尔玛”给佛罗里达州带来巨大损失。电视画面显示，佛罗里达半岛西部城市那不勒斯、坦帕附近海面掀起的巨浪最高达到5米。迈阿密的很多大树被连根拔起，一些房屋墙壁中的保温材料被风吹落，堆积在街道。而迈阿密国际机场因积水漫灌，已严重损毁。";
+//    [self configDescLabel];
+//    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:@"http://devp.oss.littlehotspot.com/media/resource/7GbaE4cxsF.jpg"] placeholderImage:[UIImage imageNamed:@"zanwu"]];
     
 }
 

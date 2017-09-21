@@ -11,14 +11,12 @@
 
 @implementation HomeViewRequest
 
-- (instancetype)initWithId:(NSString *)cid;
+- (instancetype)initWithIBespeakTime:(NSString *)bespeak_time;
 {
     if (self = [super init]) {
-        self.methodName = [@"APP3/Special/specialGroupDetail?" stringByAppendingString:[Helper getURLPublic]];
+        self.methodName = [@"Dailyknowledge/Index/getList?" stringByAppendingString:[Helper getURLPublic]];
         self.httpMethod = BGNetworkRequestHTTPPost;
-        if (!isEmptyString(cid)) {
-            [self setValue:cid forParamKey:@"id"];
-        }
+        [self setValue:bespeak_time forParamKey:@"bespeak_time"];
     }
     return self;
 }

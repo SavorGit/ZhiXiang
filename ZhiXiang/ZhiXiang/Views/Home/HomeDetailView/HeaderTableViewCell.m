@@ -94,8 +94,8 @@
         }];
     }
     self.titleLabel.text = model.title;
-    _sourceLabel.text = @"小热点";
-    _timeLabel.text = @"2017-09-20";
+    _sourceLabel.text = model.sourceName;
+    _timeLabel.text = model.bespeak_time;
     
 }
 

@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeViewModel.h"
 
 extern CGFloat HomeDetailViewShowAnimationDuration;
 extern CGFloat HomeDetailViewHiddenAnimationDuration;
 
 @interface HomeDetailView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame andData:(NSDictionary *)dataDic;
+- (instancetype)initWithFrame:(CGRect)frame andData:(HomeViewModel *)model;
 
 - (void)becomeScreenToRead;
 

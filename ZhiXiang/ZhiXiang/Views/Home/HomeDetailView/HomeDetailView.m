@@ -43,13 +43,13 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
 
 @implementation HomeDetailView
 
-- (instancetype)initWithFrame:(CGRect)frame andData:(NSDictionary *)dataDic
+- (instancetype)initWithFrame:(CGRect)frame andData:(HomeViewModel *)model
 {
     if (self = [super initWithFrame:frame]) {
         
         self.clipsToBounds = YES;
         self.startFrame = frame;
-        [self dealWithData:dataDic];
+        [self dealWithData:model];
         [self createViews];
         self.layer.cornerRadius = 10.f;
         
@@ -57,22 +57,22 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
     return self;
 }
 
-- (void)dealWithData:(NSDictionary *)dataDict{
+- (void)dealWithData:(HomeViewModel *)model{
     
     _dataSource = [[NSMutableArray alloc] initWithCapacity:100];
     
+    NSDictionary *tmpDic = model.detailDic;
     self.topModel = [[HomeViewModel alloc] init];
-    self.topModel.name = [dataDict objectForKey:@"name"];
-    self.topModel.title = [dataDict objectForKey:@"title"];
-    self.topModel.img_url = [dataDict objectForKey:@"img_url"];
-    self.topModel.desc = [dataDict objectForKey:@"desc"];
+    self.topModel.sourceName = [tmpDic objectForKey:@"sourceName"];
+    self.topModel.title = [tmpDic objectForKey:@"title"];
+    self.topModel.imgUrl = [tmpDic objectForKey:@"imgUrl"];
+    self.topModel.bespeak_time = [tmpDic objectForKey:@"bespeak_time"];
+    self.topModel.desc = model.desc;
     self.topModel.imageURL = self.topModel.img_url;
-    self.topModel.contentURL = [dataDict objectForKey:@"contentUrl"];
-    self.topModel.shareType = 1;
     self.topModel.contentType = 1;
     [self.dataSource addObject:self.topModel];
     
-    NSArray *resultArr = [dataDict objectForKey:@"list"];
+    NSArray *resultArr = [tmpDic objectForKey:@"details"];
     for (int i = 0; i < resultArr.count; i ++) {
         HomeViewModel *tmpModel = [[HomeViewModel alloc] initWithDictionary:resultArr[i]];
         [self.dataSource addObject:tmpModel];
@@ -108,7 +108,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
     self.topImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, topHeight)];
     self.topImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.topImageView.layer.masksToBounds = YES;
-    [self.topImageView sd_setImageWithURL:[NSURL URLWithString:self.topModel.img_url]];
+    [self.topImageView sd_setImageWithURL:[NSURL URLWithString:self.topModel.imgUrl]];
     
     self.bottoView = [[UIView alloc] initWithFrame:CGRectMake(0, topHeight, self.bounds.size.width, self.bounds.size.height - topHeight)];
     [self addSubview:self.bottoView];
@@ -201,21 +201,6 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
         [cell configWithText:model.stext];
         return cell;
         
-    }else if (model.sgtype == 2){
-        
-        static NSString *cellID = @"SpecialArtCell";
-        SpecialArtCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-        if (cell == nil) {
-            cell = [[SpecialArtCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-        }
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = UIColorFromRGB(0xf6f2ed);
-        
-        [cell configModelData:model];
-        
-        return cell;
-        
     }else if (model.sgtype == 3){
         static NSString *cellID = @"SpecialImgCell";
         SpecialImageCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
@@ -226,21 +211,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = UIColorFromRGB(0xf6f2ed);
         
-        [cell configWithImageURL:model.img_url];
-        
-        return cell;
-        
-    }else if (model.sgtype == 4){
-        static NSString *cellID = @"SpecialTitleCell";
-        SpecialTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-        if (cell == nil) {
-            cell = [[SpecialTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-        }
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = UIColorFromRGB(0xf6f2ed);
-        
-        [cell configWithText:model.stitle];
+        [cell configWithImageURL:model.spicture];
         
         return cell;
         
@@ -305,16 +276,6 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
             }else if (nextModel.sgtype == 4){
                 return 25;
             }
-        }else if (tmpModel.sgtype == 2){
-            if (nextModel.sgtype == 1) {
-                return 20;
-            }else if (nextModel.sgtype == 2){
-                return 5;
-            }else if (nextModel.sgtype == 3){
-                return 20;
-            }else if (nextModel.sgtype == 4){
-                return 25;
-            }
         }else if (tmpModel.sgtype == 3){
             if (nextModel.sgtype == 1) {
                 return 10;
@@ -322,16 +283,6 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
                 return 20;
             }else if (nextModel.sgtype == 3){
                 return 5;
-            }else if (nextModel.sgtype == 4){
-                return 25;
-            }
-        }else if (tmpModel.sgtype == 4){
-            if (nextModel.sgtype == 1) {
-                return 15;
-            }else if (nextModel.sgtype == 2){
-                return 20;
-            }else if (nextModel.sgtype == 3){
-                return 20;
             }else if (nextModel.sgtype == 4){
                 return 25;
             }

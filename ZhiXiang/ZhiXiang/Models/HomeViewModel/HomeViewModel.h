@@ -57,4 +57,17 @@
 @property(nonatomic, strong) NSString *stext;
 @property(nonatomic, strong) NSString *spicture;
 
+
+@property(nonatomic, strong) NSString *week;
+@property(nonatomic, strong) NSString *month;
+@property(nonatomic, strong) NSString *day;
+
+@property(nonatomic, strong) NSDictionary *detailDic;
+
+//@property(nonatomic, strong) NSString *dailyid;
+//@property(nonatomic, strong) NSString *imgUrl;
+//@property(nonatomic, strong) NSString *title;
+//@property(nonatomic, strong) NSString *desc;
+//@property(nonatomic, strong) NSString *sourceName;
+
 @end

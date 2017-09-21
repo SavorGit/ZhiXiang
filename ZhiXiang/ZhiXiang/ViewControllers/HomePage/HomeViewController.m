@@ -20,6 +20,7 @@
 @property (nonatomic, assign) NSInteger currentIndex;
 
 @property (nonatomic, strong) NSDictionary * detailDataDic; //数据源
+@property (nonatomic, strong) NSMutableArray * dataSource; //数据源
 
 @end
 
@@ -28,10 +29,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setupNavigatinBar];
-    [self setupViews];
+    [self initInfor];
     [self dataRequest];
-    // Do any additional setup after loading the view.
+    [self setupNavigatinBar];
+//    [self setupViews];
+
 }
 
 - (void)setupNavigatinBar
@@ -44,6 +46,11 @@
     
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.leftBarButtonItem = leftButton;
+}
+
+- (void)initInfor{
+    _detailDataDic = [[NSDictionary alloc] init];
+    _dataSource = [[NSMutableArray alloc] initWithCapacity:100];
 }
 
 - (void)setupViews
@@ -66,7 +73,6 @@
     
     [self.pagerView reloadData];
     
-    _detailDataDic = [[NSDictionary alloc] init];
     
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        NSArray * keyWords = @[@"iPhone X", @"孙宏斌", @"美联储", @"蒂芙尼珠宝", @"北海道肉蟹", @"贵族学校", @"百年普洱", @"小米", @"特朗普", @"蒂芙尼哈哈", @"法拉利的遗憾", @"品茶道人生"];
@@ -82,8 +88,9 @@
 }
 
 - (UICollectionViewCell *)pagerView:(TYCyclePagerView *)pagerView cellForItemAtIndex:(NSInteger)index {
+    HomeViewModel *tmpModel = [self.dataSource objectAtIndex:index];
     HomeCollectionViewCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"HomeCollectionViewCell" forIndex:index];
-    [cell configModelData:nil];
+    [cell configModelData:tmpModel];
     return cell;
 }
 
@@ -99,8 +106,9 @@
 {
     if (index == self.currentIndex) {
         
+        HomeViewModel *tmpModel = [self.dataSource objectAtIndex:index];
         CGRect detailViewFrame = [cell convertRect:cell.bounds toView:[UIApplication sharedApplication].keyWindow];
-        HomeDetailView * detailView = [[HomeDetailView alloc] initWithFrame:detailViewFrame andData:_detailDataDic];
+        HomeDetailView * detailView = [[HomeDetailView alloc] initWithFrame:detailViewFrame andData:tmpModel];
         [[UIApplication sharedApplication].keyWindow addSubview:detailView];
         [detailView becomeScreenToRead];
         
@@ -121,18 +129,43 @@
 
 - (void)dataRequest{
     
-    HomeViewRequest * request = [[HomeViewRequest alloc] initWithId:nil];
+    HomeViewRequest * request = [[HomeViewRequest alloc] initWithIBespeakTime:nil];
     [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
         NSDictionary *dic = (NSDictionary *)response;
         NSDictionary * dataDict = [dic objectForKey:@"result"];
-        _detailDataDic = dataDict;
+        
+        NSArray *listArr = [dataDict objectForKey:@"list"];
+        for (int i = 0; i < listArr.count; i ++) {
+            NSDictionary *tmpDic = [listArr objectAtIndex:i];
+            HomeViewModel *tmpModel = [[HomeViewModel alloc] initWithDictionary:tmpDic];
+            tmpModel.detailDic = [tmpDic objectForKey:@"contentDetail"];
+            [self.dataSource addObject:tmpModel];
+            NSLog(@"%@",tmpDic);
+        }
+        
+         [self setupViews];
         
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
     } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
     }];
 }
+
+//- (void)dataRequest{
+//    
+//    HomeViewRequest * request = [[HomeViewRequest alloc] initWithId:nil];
+//    [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+//        
+//        NSDictionary *dic = (NSDictionary *)response;
+//        NSDictionary * dataDict = [dic objectForKey:@"result"];
+//        _detailDataDic = dataDict;
+//        
+//    } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+//        
+//    } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
+//    }];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

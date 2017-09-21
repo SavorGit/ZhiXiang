@@ -10,6 +10,6 @@
 
 @interface HomeViewRequest : BGNetworkRequest
 
-- (instancetype)initWithId:(NSString *)cid;
+- (instancetype)initWithIBespeakTime:(NSString *)bespeak_time;
 
 @end

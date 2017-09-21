@@ -113,8 +113,8 @@
     if ([self.imageURL isEqualToString:model.imageURL]) {
         return;
     }
-    self.imageURL = model.img_url;
-    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.img_url] placeholderImage:[UIImage imageNamed:@"zanwu"]];
+    self.imageURL = model.imgUrl;
+    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.imgUrl] placeholderImage:[UIImage imageNamed:@"zanwu"]];
     
     self.frame = CGRectMake(0, 0, kMainBoundsWidth - 60, self.minImageHeight);
 }
