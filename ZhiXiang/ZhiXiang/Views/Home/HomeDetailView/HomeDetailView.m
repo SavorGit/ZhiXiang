@@ -17,7 +17,7 @@
 #import "UIImageView+WebCache.h"
 #import "ZXTools.h"
 
-CGFloat HomeDetailViewShowAnimationDuration = .5f;
+CGFloat HomeDetailViewShowAnimationDuration = .4f;
 CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
 
 @interface HomeDetailView () <UITableViewDelegate, UITableViewDataSource>
@@ -51,6 +51,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
         self.startFrame = frame;
         [self dealWithData:dataDic];
         [self createViews];
+        self.layer.cornerRadius = 10.f;
         
     }
     return self;
@@ -90,7 +91,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
 }
 - (void)createViews
 {
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = UIColorFromRGB(0xf6f2ed);
     
     self.tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endScrrenToShow)];
     self.tap.numberOfTapsRequired = 1;
@@ -106,11 +107,11 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
     CGFloat topHeight = self.bounds.size.width / 750.f * 488.f;
     self.topImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, topHeight)];
     self.topImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.topImageView.layer.masksToBounds = YES;
     [self.topImageView sd_setImageWithURL:[NSURL URLWithString:self.topModel.img_url]];
-//    [self addSubview:self.topImageView];
     
     self.bottoView = [[UIView alloc] initWithFrame:CGRectMake(0, topHeight, self.bounds.size.width, self.bounds.size.height - topHeight)];
-//    [self addSubview:self.bottoView];
+    [self addSubview:self.bottoView];
     self.bottoView.backgroundColor = UIColorFromRGB(0xf6f2ed);
     
     self.subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 15, self.bottoView.frame.size.width - 30, self.bottoView.frame.size.height - 30)];
@@ -120,6 +121,35 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
     self.subTitleLabel.backgroundColor = [UIColor clearColor];
     self.subTitleLabel.numberOfLines = 0;
     [self.bottoView addSubview:self.subTitleLabel];
+    [self configSubTitleWithWidth:self.bottoView.frame.size.width - 30];
+}
+
+- (void)configSubTitleWithWidth:(CGFloat)width
+{
+    CGRect frame = self.subTitleLabel.frame;
+    frame.size.width = width;
+    self.subTitleLabel.frame = frame;
+    
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:self.subTitleLabel.text];
+    NSUInteger length = [self.subTitleLabel.text length];
+    [attrString addAttribute:NSFontAttributeName value:kPingFangLight(15) range:NSMakeRange(0, length)];//设置所有的字体
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    style.lineSpacing = 5;//行间距
+    style.headIndent = 0;//头部缩进，相当于左padding
+    style.tailIndent = 0;//相当于右padding
+    style.lineHeightMultiple = 1;//行间距是多少倍
+    style.alignment = NSTextAlignmentLeft;//对齐方式
+    style.firstLineHeadIndent = 0;//首行头缩进
+    style.paragraphSpacing = 30;//段落后面的间距
+    style.paragraphSpacingBefore = 0;//段落之前的间距
+    style.lineBreakMode = NSLineBreakByWordWrapping;// 分割模式
+    [attrString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, length)];
+    [attrString addAttribute:NSKernAttributeName value:@2 range:NSMakeRange(0, length)];//字符间距 2pt
+    self.subTitleLabel.attributedText = attrString;
+    
+    // 计算富文本的高度
+    CGFloat descHeight = [self.subTitleLabel sizeThatFits:self.subTitleLabel.bounds.size].height;
+    self.subTitleLabel.frame = CGRectMake(15, 15, width, descHeight);
 }
 
 - (void)setUpMaxStyle
@@ -132,6 +162,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"HomeDetailCell"];
     [self addSubview:self.tableView];
     [self setUpTableHeaderView];
+    self.tableView.alpha = 0.f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -322,21 +353,55 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
         [self.topView startScrShow];
         self.tableView.frame = self.bounds;
         self.topImageView.frame = CGRectMake(0, 0, kMainBoundsWidth, kMainBoundsWidth / 750.f * 488.f);
+        self.bottoView.frame = CGRectMake(0, kMainBoundsWidth / 750.f * 488.f, kMainBoundsWidth, kMainBoundsHeight - kMainBoundsWidth / 750.f * 488.f);
+//        [self configSubTitleWithWidth:self.bottoView.bounds.size.width - 30];
+        CGRect frame = self.subTitleLabel.bounds;
+        self.subTitleLabel.frame = CGRectMake((kMainBoundsWidth - frame.size.width) / 2, (kMainBoundsHeight - self.topImageView.frame.size.height) / 2, frame.size.width, frame.size.height);
     } completion:^(BOOL finished) {
         self.tap.enabled = YES;
         [self.topImageView removeFromSuperview];
+        self.layer.cornerRadius = 0.f;
+    }];
+    
+    [UIView animateWithDuration:HomeDetailViewShowAnimationDuration / 2 animations:^{
+        self.bottoView.alpha = .2f;
+        self.tableView.alpha = .2f;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:HomeDetailViewShowAnimationDuration / 2 animations:^{
+            self.bottoView.alpha = 0;
+            self.tableView.alpha = 1;
+        }];
     }];
 }
 
 - (void)endScrrenToShow
 {
     self.tap.enabled = NO;
+    
+    [self addSubview:self.topImageView];
+    self.layer.cornerRadius = 10.f;
+    
     [UIView animateWithDuration:HomeDetailViewHiddenAnimationDuration delay:0.f options:UIViewAnimationOptionCurveEaseOut animations:^{
         self.frame = self.startFrame;
          [self.topView endScrShow];
-        self.tableView.frame = self.bounds;
+        self.topImageView.frame = CGRectMake(0, 0, self.startFrame.size.width, self.startFrame.size.width / 750.f * 488.f);
+        self.tableView.frame = CGRectMake(-self.startFrame.origin.x, -self.startFrame.origin.y, kMainBoundsWidth, kMainBoundsHeight);
+        self.bottoView.frame = CGRectMake(0, self.startFrame.size.width / 750.f * 488.f, self.startFrame.size.width, self.startFrame.size.height - self.startFrame.size.width / 750.f * 488.f);
+        CGRect frame = self.subTitleLabel.bounds;
+        self.subTitleLabel.frame = CGRectMake(15, 15, frame.size.width, frame.size.height);
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
+        [self.topImageView removeFromSuperview];
+    }];
+    
+    [UIView animateWithDuration:HomeDetailViewHiddenAnimationDuration / 2 animations:^{
+        self.tableView.alpha = .2f;
+        self.bottoView.alpha = .5f;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:HomeDetailViewHiddenAnimationDuration / 2 animations:^{
+            self.tableView.alpha = 0;
+            self.bottoView.alpha = 1;
+        }];
     }];
 }
 
