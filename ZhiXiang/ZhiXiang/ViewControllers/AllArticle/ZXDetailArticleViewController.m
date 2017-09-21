@@ -18,6 +18,8 @@
 #import "MJRefreshFooter.h"
 #import "HomeViewModel.h"
 #import "UIImageView+WebCache.h"
+#import "ZXIsOrCollectionRequest.h"
+#import "Helper.h"
 
 @interface ZXDetailArticleViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -62,9 +64,6 @@
         make.height.mas_equalTo(64);
     }];
 
-//    UIBarButtonItem * shareItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_share"] style:UIBarButtonItemStyleDone target:self action:@selector(shareAction)];
-//    self.navigationItem.rightBarButtonItem = shareItem;
-
 }
 
 - (void)dataRequest{
@@ -81,7 +80,7 @@
         [self.dataSource removeAllObjects];
         
         self.topModel = [[HomeViewModel alloc] init];
-        self.topModel.is_collect = [dataDict objectForKey:@"is_collect"];
+        self.topModel.is_collect = [[dataDict objectForKey:@"is_collect"] integerValue];
         self.topModel.title = [dataDict objectForKey:@"title"];
         self.topModel.sourceName = [dataDict objectForKey:@"sourceName"];
         self.topModel.imgUrl = [dataDict objectForKey:@"imgUrl"];
@@ -110,16 +109,15 @@
         
         [self setUpTableHeaderView];
         [self.tableView reloadData];
+        
         [self.view insertSubview:self.topView aboveSubview:self.tableView ];
-        
-        
-        if ([[dataDict objectForKey:@"nextpage"] integerValue] == 0) {
-            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        if (self.topModel.is_collect == 1) {
+            self.collectBtn.selected = YES;
         }else{
-            [self.tableView.mj_footer resetNoMoreData];
+            self.collectBtn.selected = NO;
         }
         
-        [self showTopFreshLabelWithTitle:@"更新成功"];
+//        [self showTopFreshLabelWithTitle:@"更新成功"];
         
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
@@ -310,6 +308,8 @@
         _topView = [[UIImageView alloc] initWithFrame:CGRectZero];
         _topView.userInteractionEnabled = YES;
         _topView.contentMode = UIViewContentModeScaleToFill;
+        [self.topView setImage:[UIImage imageNamed:@"quanpingmc"]];
+        [self.topView setBackgroundColor:[UIColor clearColor]];
         [self.view addSubview:_topView];
         [_topView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(64);
@@ -349,6 +349,42 @@
         }];
     }
     return _topView;
+}
+
+#pragma mark -分享点击
+- (void)shareAction{
+    
+}
+
+#pragma mark -收藏点击
+- (void)collectAction{
+    
+    NSInteger isCollect;
+    if (self.collectBtn.selected == YES) {
+        isCollect = 0;
+    }else{
+        isCollect = 1;
+    }
+    ZXIsOrCollectionRequest * request = [[ZXIsOrCollectionRequest alloc] initWithDailyid:self.dailyid];
+    [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+        
+        NSDictionary *dic = (NSDictionary *)response;
+        if ([[dic objectForKey:@"code"] integerValue] == 10000) {
+            if (isCollect == 0) {
+                self.topModel.is_collect = 0;
+                [Helper showSuccessHUDInView:self.view title:@"取消成功"];
+            }else{
+                self.topModel.is_collect = 1;
+                [Helper showSuccessHUDInView:self.view title:@"收藏成功"];
+            }
+            self.collectBtn.selected = !self.collectBtn.selected;
+        }
+        
+    } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+        [Helper showTextHUDwithTitle:@"收藏失败" delay:1.f];
+    } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
+        [Helper showTextHUDwithTitle:@"收藏失败" delay:1.f];
+    }];
 }
 
 - (void)backButtonClick{

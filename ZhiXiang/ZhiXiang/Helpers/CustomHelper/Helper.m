@@ -182,6 +182,23 @@
     return [formatter stringFromDate:date];
 }
 
++ (void)showSuccessHUDInView:(UIView *)view title:(NSString *)title
+{
+    return [self showTextHUDwithTitle:title delay:1.5f];
+}
+
++ (void)showTextHUDwithTitle:(NSString *)title
+{
+    if (title && title.length > 0) {
+        UIView * tempView = [[UIApplication sharedApplication].keyWindow viewWithTag:888];
+        if (tempView) {
+            [tempView removeFromSuperview];
+        }
+        
+        [self showTextHUDwithTitle:title delay:1.5f];
+    }
+}
+
 + (void)showTextHUDwithTitle:(NSString *)title delay:(CGFloat)delay
 {
     if (title && title.length > 0) {
