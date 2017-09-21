@@ -18,8 +18,9 @@
     [super viewDidLoad];
     
     self.leftViewPresentationStyle = LGSideMenuPresentationStyleSlideBelow;
-    self.leftViewWidth = kMainBoundsWidth / 2;
+    self.leftViewWidth = kMainBoundsWidth * 0.8;
     self.leftViewStatusBarStyle = UIStatusBarStyleLightContent;
+    self.leftViewSwipeGestureEnabled = NO;
 }
 
 //允许屏幕旋转
