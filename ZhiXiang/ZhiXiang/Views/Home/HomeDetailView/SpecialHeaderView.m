@@ -13,7 +13,7 @@
 
 @property (nonatomic, copy) NSString * imageURL;
 
-@property (nonatomic, strong) UILabel *titleLabel;
+//@property (nonatomic, strong) UILabel *titleLabel;
 
 @property (nonatomic, strong) UIImageView * bgImageView;
 
@@ -53,15 +53,15 @@
 //        make.left.mas_equalTo(0);
 //    }];
     
-    _titleLabel = [[UILabel alloc] init];
-    _titleLabel.frame = CGRectMake(15, self.minImageHeight + 20, kMainBoundsWidth - 30, 31);
-    _titleLabel.backgroundColor = [UIColor clearColor];
-    _titleLabel.font = kPingFangMedium(22);
-    _titleLabel.textColor = UIColorFromRGB(0x434343);
-    _titleLabel.textAlignment = NSTextAlignmentLeft;
-    _titleLabel.numberOfLines = 2;
-    _titleLabel.text = @"标题";
-    [self addSubview:_titleLabel];
+//    _titleLabel = [[UILabel alloc] init];
+//    _titleLabel.frame = CGRectMake(15, self.minImageHeight + 20, kMainBoundsWidth - 30, 31);
+//    _titleLabel.backgroundColor = [UIColor clearColor];
+//    _titleLabel.font = kPingFangMedium(22);
+//    _titleLabel.textColor = UIColorFromRGB(0x434343);
+//    _titleLabel.textAlignment = NSTextAlignmentLeft;
+//    _titleLabel.numberOfLines = 2;
+//    _titleLabel.text = @"标题";
+//    [self addSubview:_titleLabel];
 //    [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.width.mas_equalTo(kMainBoundsWidth - 30);
 //        make.height.mas_equalTo(31);
@@ -77,37 +77,38 @@
     
 }
 
-- (CGFloat)getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont *)font
-{
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 0)];
-    label.text = title;
-    label.font = font;
-    label.numberOfLines = 0;
-    [label sizeToFit];
-    CGFloat height = label.frame.size.height;
-    return height;
-}
+//- (CGFloat)getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont *)font
+//{
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 0)];
+//    label.text = title;
+//    label.font = font;
+//    label.numberOfLines = 0;
+//    [label sizeToFit];
+//    CGFloat height = label.frame.size.height;
+//    return height;
+//}
 
 - (void)configModelData:(HomeViewModel *)model{
     
-    self.maxTitleHeight = [self getHeightByWidth:kMainBoundsWidth - 30 title:model.title font:kPingFangMedium(22)];
-    self.minTitleHeight = [self getHeightByWidth:kMainBoundsWidth - 30 - 60 title:model.title font:kPingFangMedium(22)];
-    CGFloat maxHeight = 31;
-    if (self.minTitleHeight > 31) {
-        maxHeight = 62;
-//        _titleLabel.frame = CGRectMake(15, _imageHeight/2 + 20, kMainBoundsWidth - 30, 62);
-//        [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.height.mas_equalTo(62);
-//        }];
-    }else{
-        maxHeight = 31;
-//        _titleLabel.frame = CGRectMake(15, _imageHeight/2 + 20, kMainBoundsWidth - 30, 31);
-//        [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.height.mas_equalTo(31);
-//        }];
-    }
-    _titleLabel.frame = CGRectMake(15, self.minImageHeight + 20, kMainBoundsWidth - 30, maxHeight);
-    self.titleLabel.text = model.title;
+//    self.maxTitleHeight = [self getHeightByWidth:kMainBoundsWidth - 30 title:model.title font:kPingFangMedium(22)];
+//    self.minTitleHeight = [self getHeightByWidth:kMainBoundsWidth - 30 - 60 title:model.title font:kPingFangMedium(22)];
+//    CGFloat maxHeight = 31;
+//    if (self.minTitleHeight > 31) {
+//        maxHeight = 62;
+////        _titleLabel.frame = CGRectMake(15, _imageHeight/2 + 20, kMainBoundsWidth - 30, 62);
+////        [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+////            make.height.mas_equalTo(62);
+////        }];
+//    }else{
+//        maxHeight = 31;
+////        _titleLabel.frame = CGRectMake(15, _imageHeight/2 + 20, kMainBoundsWidth - 30, 31);
+////        [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+////            make.height.mas_equalTo(31);
+////        }];
+//    }
+//    _titleLabel.frame = CGRectMake(15, self.minImageHeight + 20, kMainBoundsWidth - 30, maxHeight);
+//    self.titleLabel.text = model.title;
+    
     
     if ([self.imageURL isEqualToString:model.imageURL]) {
         return;
@@ -115,20 +116,18 @@
     self.imageURL = model.img_url;
     [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.img_url] placeholderImage:[UIImage imageNamed:@"zanwu"]];
     
-    self.frame = CGRectMake(0, 0, kMainBoundsWidth - 60, _titleLabel.frame.origin.y + _titleLabel.frame.size.height + 25);
+    self.frame = CGRectMake(0, 0, kMainBoundsWidth - 60, self.minImageHeight);
 }
 
 - (void)startScrShow
 {
-    _titleLabel.frame = CGRectMake(15, self.maxImageHeight + 20, kMainBoundsWidth - 30, self.maxTitleHeight);
-    self.frame = CGRectMake(0, 0, kMainBoundsWidth, _titleLabel.frame.origin.y + _titleLabel.frame.size.height + 25);
+    self.frame = CGRectMake(0, 0, kMainBoundsWidth, self.maxImageHeight);
     self.bgImageView.frame = CGRectMake(0, 0, kMainBoundsWidth, self.maxImageHeight);
     
 }
 
 - (void)endScrShow{
-    _titleLabel.frame = CGRectMake(15, self.minImageHeight + 20, kMainBoundsWidth - 30 - 60, self.minTitleHeight);
-    self.frame = CGRectMake(0, 0, kMainBoundsWidth - 60, _titleLabel.frame.origin.y + _titleLabel.frame.size.height + 25);
+    self.frame = CGRectMake(0, 0, kMainBoundsWidth - 60,self.minImageHeight);
     self.bgImageView.frame = CGRectMake(0, 0, kMainBoundsWidth - 60, self.minImageHeight);
 }
 
