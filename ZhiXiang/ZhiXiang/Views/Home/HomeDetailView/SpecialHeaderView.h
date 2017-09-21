@@ -13,6 +13,8 @@
 
 - (void)configModelData:(HomeViewModel *)model;
 
+- (void)startScrShow;
+
 - (void)endScrShow;
 
 @end

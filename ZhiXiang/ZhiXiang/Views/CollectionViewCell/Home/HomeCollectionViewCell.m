@@ -45,7 +45,7 @@
     [self.baseView addSubview:self.topView];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(0);
-        make.height.equalTo(self.baseView.mas_height).multipliedBy(.5f);
+        make.height.equalTo(self.topView.mas_width).multipliedBy(488.f/750.f);
     }];
     self.topView.backgroundColor = UIColorFromRGB(0xf6f2ed);
     
@@ -55,8 +55,7 @@
     self.bgImageView.backgroundColor = [UIColor clearColor];
     [_topView addSubview:self.bgImageView];
     [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.mas_equalTo(0);
-        make.height.equalTo(self.baseView.mas_height).multipliedBy(.5f);
+        make.edges.mas_equalTo(0);
     }];
     
     self.bottoView = [[UIView alloc] initWithFrame:CGRectZero];

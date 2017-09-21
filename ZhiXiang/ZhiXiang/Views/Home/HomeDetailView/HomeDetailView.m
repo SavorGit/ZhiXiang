@@ -14,25 +14,30 @@
 #import "SpecialArtCell.h"
 #import "HeaderTableViewCell.h"
 #import "SpecialHeaderView.h"
+#import "UIImageView+WebCache.h"
 #import "ZXTools.h"
 
-CGFloat HomeDetailViewShowAnimationDuration = .6f;
+CGFloat HomeDetailViewShowAnimationDuration = .5f;
 CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
 
 @interface HomeDetailView () <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) UIView * headerView;
+//minStyle
+@property (nonatomic, strong) UIImageView * topImageView;
+@property (nonatomic, strong) UIView * bottoView;
+@property (nonatomic, strong) UILabel *subTitleLabel;
+
+//maxStyle
 @property (nonatomic, strong) UITableView * tableView;
-
-@property (nonatomic, strong) UITapGestureRecognizer * tap;
-
-@property (nonatomic, assign) CGRect startFrame;
 
 @property (nonatomic, strong) HomeViewModel * topModel; //数据源
 @property (nonatomic, strong) NSMutableArray * dataSource; //数据源
-@property (nonatomic, assign) CGFloat HeaderHeight;
 
 @property (nonatomic, strong) SpecialHeaderView *topView;
+
+@property (nonatomic, strong) UITapGestureRecognizer * tap;
+@property (nonatomic, assign) CGRect startFrame;
+@property (nonatomic, assign) CGFloat HeaderHeight;
 
 @end
 
@@ -42,6 +47,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
 {
     if (self = [super initWithFrame:frame]) {
         
+        self.clipsToBounds = YES;
         self.startFrame = frame;
         [self dealWithData:dataDic];
         [self createViews];
@@ -77,50 +83,46 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
     self.topView = [[SpecialHeaderView alloc] initWithFrame:CGRectZero];
     self.topView.backgroundColor = UIColorFromRGB(0xf6f2ed);
     
-    // 计算图片高度
-//    CGFloat imgHeight =kMainBoundsWidth *802.f/1242.f;
-    CGFloat imgHeight = kMainBoundsHeight - kStatusBarHeight - kNaviBarHeight - 30 - 70;
-    CGFloat totalHeight = imgHeight/2 + 25 + 40;// 25为下方留白 40为控件间隔
-    // 计算描述文字内容的高度
-    CGFloat descHeight = [ZXTools getAttrHeightByWidth:kMainBoundsWidth - 30 title:self.topModel.desc font:kPingFangLight(15)];
-    totalHeight = totalHeight + descHeight;
-    // 计算标题的高度
-    CGFloat titleHeight = [ZXTools getHeightByWidth:kMainBoundsWidth - 30 title:self.topModel.title font:kPingFangMedium(22)];
-    if (titleHeight > 31) {
-        totalHeight = totalHeight + 62;
-    }else{
-        totalHeight = totalHeight + 31;
-    }
-    _HeaderHeight = totalHeight;
-    
-//    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, totalHeight)];
-    self.headerView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, totalHeight);
-    self.headerView.backgroundColor = UIColorFromRGB(0xf6f2ed);
-    [self.headerView addSubview:self.topView];
-    [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(totalHeight);
-    }];
     [self.topView configModelData:self.topModel];
     
-    self.tableView.tableHeaderView = self.headerView;
+    self.tableView.tableHeaderView = self.topView;
     
 }
 - (void)createViews
 {
-    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height / 2)];
-    [self addSubview:self.headerView];
-    self.headerView.backgroundColor = [UIColor blueColor];
+    self.backgroundColor = [UIColor whiteColor];
     
     self.tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endScrrenToShow)];
     self.tap.numberOfTapsRequired = 1;
     [self addGestureRecognizer:self.tap];
     self.tap.enabled = NO;
     
-    [self createTableView];
+    [self setUpMaxStyle];
+    [self setUpMinStyle];
 }
 
-- (void)createTableView
+- (void)setUpMinStyle
+{
+    CGFloat topHeight = self.bounds.size.width / 750.f * 488.f;
+    self.topImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, topHeight)];
+    self.topImageView.contentMode = UIViewContentModeScaleAspectFill;
+    [self.topImageView sd_setImageWithURL:[NSURL URLWithString:self.topModel.img_url]];
+//    [self addSubview:self.topImageView];
+    
+    self.bottoView = [[UIView alloc] initWithFrame:CGRectMake(0, topHeight, self.bounds.size.width, self.bounds.size.height - topHeight)];
+//    [self addSubview:self.bottoView];
+    self.bottoView.backgroundColor = UIColorFromRGB(0xf6f2ed);
+    
+    self.subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 15, self.bottoView.frame.size.width - 30, self.bottoView.frame.size.height - 30)];
+    self.subTitleLabel.text = self.topModel.desc;
+    self.subTitleLabel.font = kPingFangLight(15);
+    self.subTitleLabel.textColor = UIColorFromRGB(0x575757);
+    self.subTitleLabel.backgroundColor = [UIColor clearColor];
+    self.subTitleLabel.numberOfLines = 0;
+    [self.bottoView addSubview:self.subTitleLabel];
+}
+
+- (void)setUpMaxStyle
 {
     self.tableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor clearColor];
@@ -129,7 +131,6 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"HomeDetailCell"];
     [self addSubview:self.tableView];
-//    self.tableView.tableHeaderView = self.headerView;
     [self setUpTableHeaderView];
 }
 
@@ -312,32 +313,26 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
 
 - (void)becomeScreenToRead
 {
-    CGFloat width = kMainBoundsWidth;
-    CGFloat height = kMainBoundsHeight;
-//    self.tableView.center = self.center;
+    self.tableView.frame = CGRectMake(-self.startFrame.origin.x, -self.startFrame.origin.y, self.startFrame.size.width, self.startFrame.size.height);
+    
+    [self addSubview:self.topImageView];
+    
     [UIView animateWithDuration:HomeDetailViewShowAnimationDuration delay:0.f options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.headerView.frame = CGRectMake(0, 0, width, _HeaderHeight);
-        self.frame = CGRectMake(0, 0, width, height);
-        self.tableView.center = self.center;
+        self.frame = CGRectMake(0, 0, kMainBoundsWidth, kMainBoundsHeight);
+        [self.topView startScrShow];
         self.tableView.frame = self.bounds;
+        self.topImageView.frame = CGRectMake(0, 0, kMainBoundsWidth, kMainBoundsWidth / 750.f * 488.f);
     } completion:^(BOOL finished) {
         self.tap.enabled = YES;
-//        [self.tableView reloadData];
+        [self.topImageView removeFromSuperview];
     }];
-    
-//    self.tableView.frame = self.bounds;
-//    self.tableView.center = self.center;
 }
 
 - (void)endScrrenToShow
 {
-    self.tableView.contentOffset = CGPointMake(0, 0);
     self.tap.enabled = NO;
-    CGFloat width = self.startFrame.size.width;
-    CGFloat height = self.startFrame.size.height;
     [UIView animateWithDuration:HomeDetailViewHiddenAnimationDuration delay:0.f options:UIViewAnimationOptionCurveEaseOut animations:^{
         self.frame = self.startFrame;
-        self.headerView.frame = CGRectMake(0, 0, width, height / 2);
          [self.topView endScrShow];
         self.tableView.frame = self.bounds;
     } completion:^(BOOL finished) {
