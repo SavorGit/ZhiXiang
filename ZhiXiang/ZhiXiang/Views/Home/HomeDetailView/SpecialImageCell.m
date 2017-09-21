@@ -31,12 +31,14 @@
     self.bgImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     self.bgImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.bgImageView.clipsToBounds = YES;
+    self.bgImageView.layer.borderWidth = 1.0;
+    self.bgImageView.layer.borderColor = UIColorFromRGB(0xe8e8e8).CGColor;
     self.bgImageView.backgroundColor = [UIColor clearColor];
     [self.contentView addSubview:self.bgImageView];
     [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
-        make.left.mas_equalTo(15);
-        make.right.mas_equalTo(- 15);
+        make.left.mas_equalTo(20);
+        make.right.mas_equalTo(- 20);
         make.height.equalTo(self.bgImageView.mas_width).multipliedBy(802.f/1242.f);
     }];
 }

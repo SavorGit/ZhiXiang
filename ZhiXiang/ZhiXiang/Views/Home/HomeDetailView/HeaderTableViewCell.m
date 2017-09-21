@@ -31,39 +31,40 @@
     
     _titleLabel = [[UILabel alloc]init];
     _titleLabel.backgroundColor = [UIColor clearColor];
-    _titleLabel.font = kPingFangMedium(22);
-    _titleLabel.textColor = UIColorFromRGB(0x434343);
+    _titleLabel.font = kPingFangMedium(19);
+    _titleLabel.textColor = UIColorFromRGB(0x222222);
     _titleLabel.textAlignment = NSTextAlignmentLeft;
     _titleLabel.numberOfLines = 2;
     _titleLabel.text = @"标题";
     [self addSubview:_titleLabel];
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(kMainBoundsWidth - 30);
-        make.height.mas_equalTo(31);
+        make.width.mas_equalTo(kMainBoundsWidth - 40);
+        make.height.mas_equalTo(27);
         make.top.mas_equalTo(20);
         make.left.mas_equalTo(15);
     }];
     
     _sourceLabel = [[UILabel alloc]init];
+    _sourceLabel.backgroundColor = [UIColor clearColor];
     _sourceLabel.text = @"小热点";
-    _sourceLabel.font = kPingFangLight(11);
-    _sourceLabel.textColor = UIColorFromRGB(0x8a8886);
+    _sourceLabel.font = kPingFangRegular(12);
+    _sourceLabel.textColor = UIColorFromRGB(0x999999);
     [self addSubview:_sourceLabel];
     [_sourceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(20);
-        make.bottom.mas_equalTo(_titleLabel.mas_bottom).offset(16);
-        make.left.mas_equalTo(15);
+        make.top.mas_equalTo(_titleLabel.mas_bottom).offset(10);
+        make.left.mas_equalTo(20);
         make.width.mas_lessThanOrEqualTo(100);
     }];
     
     _timeLabel = [[UILabel alloc]init];
     _timeLabel.text = @"2017-09-20";
-    _timeLabel.font = kPingFangLight(10);
-    _timeLabel.textColor = UIColorFromRGB(0xb2afab);
+    _timeLabel.font = kPingFangRegular(12);
+    _timeLabel.textColor = UIColorFromRGB(0x999999);
     [self addSubview:_timeLabel];
     [_timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(100, 20));
-        make.bottom.mas_equalTo(_titleLabel.mas_bottom).offset(16);
+        make.top.mas_equalTo(_titleLabel.mas_bottom).offset(10);
         make.left.equalTo(_sourceLabel.mas_right).offset(10);
     }];
     
@@ -83,14 +84,15 @@
 - (void)configModelData:(HomeViewModel *)model{
     
     model.title = [@"超" stringByAppendingString:model.title];
-    CGFloat titleHeight = [self getHeightByWidth:kMainBoundsWidth - 30 title:model.title font:kPingFangMedium(22)];
-    if (titleHeight > 31) {
+//    model.title = @"这是测试标题使用";
+    CGFloat titleHeight = [self getHeightByWidth:kMainBoundsWidth - 40 title:model.title font:kPingFangMedium(19)];
+    if (titleHeight > 27) {
         [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(62);
+            make.height.mas_equalTo(54);
         }];
     }else{
         [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(31);
+            make.height.mas_equalTo(27);
         }];
     }
     self.titleLabel.text = model.title;

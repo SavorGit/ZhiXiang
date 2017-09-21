@@ -263,14 +263,14 @@
         bottomBlank = [self getBottomBlankWith:model nextModel:nil];
     }
     if (model.contentType == 1) {
-        CGFloat titleHeight = [ZXTools getHeightByWidth:kMainBoundsWidth - 30 title:model.title font:kPingFangMedium(22)];
-        if (titleHeight > 31) {
-            return  62 + 36  + 25;
+        CGFloat titleHeight = [ZXTools getHeightByWidth:kMainBoundsWidth - 30 title:model.title font:kPingFangMedium(19)];
+        if (titleHeight > 27) {
+            return  54 + 30  + 25;
         }else{
-            return  31 + 36 + 25;
+            return  27 + 30 + 25;
         }
     }else if (model.dailytype == 3) {
-        CGFloat imgHeight =  (kMainBoundsWidth - 15) *(802.f/1242.f);
+        CGFloat imgHeight =  (kMainBoundsWidth - 40) *(802.f/1242.f);
         return  imgHeight + bottomBlank;
     }else if (model.dailytype == 1){
         CGFloat textHeight = [ZXTools getAttrHeightByWidth:kMainBoundsWidth - 30 title:model.stext font:kPingFangLight(15)];
