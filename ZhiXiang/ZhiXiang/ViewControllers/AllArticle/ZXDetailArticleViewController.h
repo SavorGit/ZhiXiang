@@ -10,4 +10,6 @@
 
 @interface ZXDetailArticleViewController : ZXBaseViewController
 
+- (instancetype)initWithtopDailyID:(NSString *)dailyid;
+
 @end

@@ -17,7 +17,7 @@
 @property(nonatomic, strong) NSString *title;
 @property(nonatomic, strong) NSString *imageURL;
 @property(nonatomic, strong) NSString *contentURL;
-@property(nonatomic, strong) NSString *sourceName;
+//@property(nonatomic, strong) NSString *sourceName;
 @property(nonatomic, strong) NSString *logo;
 @property(nonatomic, strong) NSString *indexImageUrl;
 
@@ -38,7 +38,7 @@
 @property (nonatomic, assign) NSInteger sgtype;//用于专题组类型
 @property (nonatomic, copy) NSString * img_url;//用于专题组图片
 @property (nonatomic, copy) NSString * stitle;//用于专题组小标题
-@property (nonatomic, copy) NSString * stext;//用于专题组文字内容
+//@property (nonatomic, copy) NSString * stext;//用于专题组文字内容
 @property (nonatomic, copy) NSString * desc;//用于专题组头部描述
 
 //非接口返回
@@ -46,5 +46,15 @@
 @property (nonatomic, assign) NSInteger shareType;//非接口返回，用于分享类型(1代表专题组首页分享)
 
 @property (nonatomic, assign) NSInteger contentType;
+
+//文章详情
+@property(nonatomic, strong) NSString *dailyid;
+@property(nonatomic, strong) NSString *imgUrl;
+@property(nonatomic, strong) NSString *sourceName;
+@property(nonatomic, strong) NSString *bespeak_time;
+@property(nonatomic, strong) NSString *is_collect;
+@property(nonatomic, assign) NSInteger dailytype;
+@property(nonatomic, strong) NSString *stext;
+@property(nonatomic, strong) NSString *spicture;
 
 @end

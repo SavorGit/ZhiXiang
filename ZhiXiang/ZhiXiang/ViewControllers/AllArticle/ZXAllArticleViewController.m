@@ -266,7 +266,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    ZXDetailArticleViewController *daVC = [[ZXDetailArticleViewController alloc] init];
+    MyCollectionModel *tmpModel = self.dataSource[indexPath.row];
+    ZXDetailArticleViewController *daVC = [[ZXDetailArticleViewController alloc] initWithtopDailyID:tmpModel.dailyid];
     [self.navigationController pushViewController:daVC animated:YES];
 }
 
