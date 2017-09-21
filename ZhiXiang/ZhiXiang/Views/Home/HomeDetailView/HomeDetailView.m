@@ -18,7 +18,7 @@
 #import "ZXTools.h"
 
 CGFloat HomeDetailViewShowAnimationDuration = .4f;
-CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
+CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
 
 @interface HomeDetailView () <UITableViewDelegate, UITableViewDataSource>
 

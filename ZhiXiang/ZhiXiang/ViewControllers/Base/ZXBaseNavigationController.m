@@ -21,7 +21,7 @@
     UIImage *image = [UIImage imageWithColor:UIColorFromRGB(0x222222) size:CGSizeMake(kMainBoundsWidth, kNaviBarHeight + kStatusBarHeight)];
     [[UINavigationBar appearanceWhenContainedIn:[ZXBaseNavigationController class], nil] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
     
-     [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0x222222)];//item颜色
+     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];//item颜色
     
     //item字体大小
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName : [UIFont systemFontOfSize:16]} forState:UIControlStateNormal];

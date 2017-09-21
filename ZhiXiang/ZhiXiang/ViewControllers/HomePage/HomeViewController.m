@@ -13,6 +13,7 @@
 #import "HomeDetailView.h"
 #import "HomeViewRequest.h"
 #import "UIViewController+LGSideMenuController.h"
+#import "HomeDateView.h"
 
 @interface HomeViewController () <TYCyclePagerViewDataSource, TYCyclePagerViewDelegate>
 
@@ -20,6 +21,7 @@
 @property (nonatomic, assign) NSInteger currentIndex;
 
 @property (nonatomic, strong) NSDictionary * detailDataDic; //数据源
+@property (nonatomic, strong) HomeDateView * dateView;
 
 @end
 
@@ -38,16 +40,22 @@
 {
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0, 0, 50, 44);
-    [button setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 22)];
     [button setImage:[UIImage imageNamed:@"caidan"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(showLeftViewAnimated:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    [button mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(20);
+        make.left.mas_equalTo(0);
+        make.size.mas_equalTo(CGSizeMake(50, 44));
+    }];
     
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-    self.navigationItem.leftBarButtonItem = leftButton;
+    [self dateView];
 }
 
 - (void)setupViews
 {
+    self.view.backgroundColor = UIColorFromRGB(0x222222);
+    
     self.pagerView = [[TYCyclePagerView alloc]init];
     self.pagerView.isInfiniteLoop = NO;
     self.pagerView.dataSource = self;
@@ -57,7 +65,7 @@
     
     [self.view addSubview:self.pagerView];
     [self.pagerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(30);
+        make.top.mas_equalTo(90);
         make.left.mas_equalTo(0);
         make.bottom.mas_equalTo(-70);
         make.right.mas_equalTo(0);
@@ -73,6 +81,11 @@
 //        ZXKeyWordsView * keyWordView = [[ZXKeyWordsView alloc] initWithKeyWordArray:keyWords];
 //        [keyWordView showWithAnimation:YES];
 //    });
+}
+
+- (void)configDate
+{
+    
 }
 
 #pragma mark - TYCyclePagerViewDataSource
@@ -132,6 +145,26 @@
         
     } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
     }];
+}
+
+- (HomeDateView *)dateView
+{
+    if (!_dateView) {
+        _dateView = [[HomeDateView alloc] initWithFrame:CGRectMake(0, 0, 88, 40)];
+        [self.view addSubview:_dateView];
+        [_dateView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(25);
+            make.right.mas_equalTo(-15);
+            make.size.mas_equalTo(CGSizeMake(88, 40));
+        }];
+    }
+    return _dateView;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
 - (void)didReceiveMemoryWarning {
