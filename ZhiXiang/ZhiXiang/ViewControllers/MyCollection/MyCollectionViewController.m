@@ -14,6 +14,7 @@
 #import "MyCollectionModel.h"
 #import "ImageTextTableViewCell.h"
 #import "ZXTools.h"
+#import "ZXDetailArticleViewController.h"
 
 
 @interface MyCollectionViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -75,9 +76,9 @@
         [self hiddenLoadingView];
         
         NSDictionary *dic = (NSDictionary *)response;
-        NSDictionary * dataDict = [dic objectForKey:@"result"];
+        NSArray * dataArr = [dic objectForKey:@"result"];
         
-        if (nil == dataDict || ![dataDict isKindOfClass:[NSDictionary class]] || dataDict.count == 0) {
+        if (nil == dataArr || ![dataArr isKindOfClass:[NSArray class]] || dataArr.count == 0) {
             if (self.dataSource.count == 0) {
                 [self showNoNetWorkView:NoNetWorkViewStyle_Load_Fail];
             }else{
@@ -86,12 +87,10 @@
             return;
         }
         
-        NSArray *resultArr = [dataDict objectForKey:@"list"];
-        
-        [ZXTools saveFileOnPath:self.cachePath withArray:resultArr];
+        [ZXTools saveFileOnPath:self.cachePath withArray:dataArr];
         [self.dataSource removeAllObjects];
-        for (int i = 0; i < resultArr.count; i ++) {
-            MyCollectionModel *welthModel = [[MyCollectionModel alloc] initWithDictionary:resultArr[i]];
+        for (int i = 0; i < dataArr.count; i ++) {
+            MyCollectionModel *welthModel = [[MyCollectionModel alloc] initWithDictionary:dataArr[i]];
             welthModel.type = 1;
             [self.dataSource addObject:welthModel];
         }
@@ -99,7 +98,7 @@
         [self.tableView reloadData];
         
         
-        if ([[dataDict objectForKey:@"nextpage"] integerValue] == 0) {
+        if (dataArr.count < 20) {
             [self.tableView.mj_footer endRefreshingWithNoMoreData];
         }else{
             [self.tableView.mj_footer resetNoMoreData];
@@ -139,8 +138,8 @@
 //上拉获取更多数据
 - (void)getMoreData
 {
-    MyCollectionModel *welthModel = [self.dataSource lastObject];
-    MyCollectionRequest * request = [[MyCollectionRequest alloc] initWithCollecTime:nil];
+    MyCollectionModel *tmpModel = [self.dataSource lastObject];
+    MyCollectionRequest * request = [[MyCollectionRequest alloc] initWithCollecTime:tmpModel.collecTime];
     [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
         NSDictionary *dic = (NSDictionary *)response;
@@ -255,6 +254,13 @@
 {
     CGFloat igTextHeight= 140 *802.f/1242.f;
     return igTextHeight + 16;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    MyCollectionModel *tmpModel = self.dataSource[indexPath.row];
+    ZXDetailArticleViewController *daVC = [[ZXDetailArticleViewController alloc] initWithtopDailyID:tmpModel.dailyid];
+    [self.navigationController pushViewController:daVC animated:YES];
 }
 
 - (void)showSelfAndCreateLog

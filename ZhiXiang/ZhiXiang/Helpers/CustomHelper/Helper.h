@@ -45,6 +45,10 @@
 
 + (NSString *)transformDate:(NSDate *)date;
 
++ (void)showSuccessHUDInView:(UIView *)view title:(NSString *)title;
+
++ (void)showTextHUDwithTitle:(NSString *)title;
+
 + (void)showTextHUDwithTitle:(NSString *)title delay:(CGFloat)delay;
 
 + (BOOL) isBlankString:(NSString *)string;
