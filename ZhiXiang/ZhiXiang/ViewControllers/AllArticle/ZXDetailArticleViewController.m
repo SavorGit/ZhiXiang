@@ -25,6 +25,10 @@
 @property (nonatomic, strong) NSMutableArray * dataSource; //数据源
 @property (nonatomic, copy)   NSString * cachePath;
 
+@property (nonatomic, strong) UIImageView * topView;
+@property (nonatomic, strong) UIButton *collectBtn;
+@property (nonatomic, strong) UIButton *backButton;
+
 @property (nonatomic, strong) HomeViewModel * topModel; //数据源
 @property (nonatomic, copy)   NSString *dailyid;
 
@@ -52,6 +56,12 @@
     _dataSource = [[NSMutableArray alloc] initWithCapacity:100];
     self.cachePath = [NSString stringWithFormat:@"%@.plist",@"SpecialTopicGroup"];
     
+    [self.view addSubview:self.topView];
+    [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.mas_equalTo(0);
+        make.height.mas_equalTo(64);
+    }];
+
 //    UIBarButtonItem * shareItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_share"] style:UIBarButtonItemStyleDone target:self action:@selector(shareAction)];
 //    self.navigationItem.rightBarButtonItem = shareItem;
 
@@ -100,6 +110,7 @@
         
         [self setUpTableHeaderView];
         [self.tableView reloadData];
+        [self.view insertSubview:self.topView aboveSubview:self.tableView ];
         
         
         if ([[dataDict objectForKey:@"nextpage"] integerValue] == 0) {
@@ -154,7 +165,7 @@
         _tableView.showsVerticalScrollIndicator = NO;
         [self.view addSubview:_tableView];
         [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(0);
+            make.top.mas_equalTo(- 20);
             make.left.mas_equalTo(0);
             make.bottom.mas_equalTo(0);
             make.right.mas_equalTo(0);
@@ -290,6 +301,71 @@
         return 0.0;
     }
     return 0.0;
+}
+
+- (UIView *)topView
+{
+    if (_topView == nil) {
+        
+        _topView = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _topView.userInteractionEnabled = YES;
+        _topView.contentMode = UIViewContentModeScaleToFill;
+        [self.view addSubview:_topView];
+        [_topView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(64);
+            make.top.mas_equalTo(0);
+            make.left.mas_equalTo(0);
+            make.right.mas_equalTo(0);
+        }];
+        
+        _backButton = [[UIButton alloc] initWithFrame:CGRectMake(5,20, 40, 44)];
+        [_backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+        [_backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateSelected];
+        [_backButton addTarget:self action:@selector(backButtonClick) forControlEvents:UIControlEventTouchUpInside];
+        [_topView addSubview:_backButton];
+        
+        UIButton *shareBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+        [shareBtn setImage:[UIImage imageNamed:@"icon_share"] forState:UIControlStateNormal];
+        [shareBtn setImage:[UIImage imageNamed:@"icon_collect_yes"] forState:UIControlStateSelected];
+        shareBtn.tag = 101;
+        [shareBtn addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
+        [_topView addSubview:shareBtn];
+        [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(40, 44));
+            make.top.mas_equalTo(20);
+            make.right.mas_equalTo(- 15);
+        }];
+        
+        _collectBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+        [_collectBtn setImage:[UIImage imageNamed:@"icon_collect"] forState:UIControlStateNormal];
+        [_collectBtn setImage:[UIImage imageNamed:@"icon_collect_yes"] forState:UIControlStateSelected];
+        [_collectBtn addTarget:self action:@selector(collectAction) forControlEvents:UIControlEventTouchUpInside];
+        _collectBtn.tag = 102;
+        [_topView addSubview:_collectBtn];
+        [_collectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(40, 44));
+            make.top.mas_equalTo(20);
+            make.right.mas_equalTo(- 65);
+        }];
+    }
+    return _topView;
+}
+
+- (void)backButtonClick{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
 
 - (void)didReceiveMemoryWarning {
