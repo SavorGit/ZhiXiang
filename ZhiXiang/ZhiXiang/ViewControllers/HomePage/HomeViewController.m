@@ -12,6 +12,7 @@
 #import "ZXKeyWordsView.h"
 #import "HomeDetailView.h"
 #import "HomeViewRequest.h"
+#import "UIViewController+LGSideMenuController.h"
 
 @interface HomeViewController () <TYCyclePagerViewDataSource, TYCyclePagerViewDelegate>
 
@@ -27,10 +28,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"每日知享";
+    [self setupNavigatinBar];
     [self setupViews];
     [self dataRequest];
     // Do any additional setup after loading the view.
+}
+
+- (void)setupNavigatinBar
+{
+    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(0, 0, 50, 44);
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 22)];
+    [button setImage:[UIImage imageNamed:@"caidan"] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(showLeftViewAnimated:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.navigationItem.leftBarButtonItem = leftButton;
 }
 
 - (void)setupViews
@@ -41,6 +54,7 @@
     self.pagerView.delegate = self;
     // registerClass or registerNib
     [self.pagerView registerClass:[HomeCollectionViewCell class] forCellWithReuseIdentifier:@"HomeCollectionViewCell"];
+    
     [self.view addSubview:self.pagerView];
     [self.pagerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(30);
@@ -49,6 +63,9 @@
         make.right.mas_equalTo(0);
     }];
     self.currentIndex = 0;
+    
+    [self.pagerView reloadData];
+    
     _detailDataDic = [[NSDictionary alloc] init];
     
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -81,15 +98,6 @@
 - (void)pagerView:(TYCyclePagerView *)pageView didSelectedItemCell:(__kindof UICollectionViewCell *)cell atIndex:(NSInteger)index
 {
     if (index == self.currentIndex) {
-        NSLog(@"点击了%ld", index);
-        
-//        CGRect frame = self.navigationController.navigationBar.frame;
-//        frame.origin.y = -200;
-//        [UIView animateWithDuration:HomeDetailViewShowAnimationDuration animations:^{
-//            self.navigationController.navigationBar.frame = frame;
-//        } completion:^(BOOL finished) {
-//            
-//        }];
         
         CGRect detailViewFrame = [cell convertRect:cell.bounds toView:[UIApplication sharedApplication].keyWindow];
         HomeDetailView * detailView = [[HomeDetailView alloc] initWithFrame:detailViewFrame andData:_detailDataDic];

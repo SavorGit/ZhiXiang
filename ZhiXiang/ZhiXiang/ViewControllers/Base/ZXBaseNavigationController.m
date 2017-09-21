@@ -18,8 +18,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIImage *image = [UIImage imageWithColor:[UIColor blackColor] size:CGSizeMake(kMainBoundsWidth, kNaviBarHeight + kStatusBarHeight)];
+    UIImage *image = [UIImage imageWithColor:UIColorFromRGB(0x222222) size:CGSizeMake(kMainBoundsWidth, kNaviBarHeight + kStatusBarHeight)];
     [[UINavigationBar appearanceWhenContainedIn:[ZXBaseNavigationController class], nil] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    
+     [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0x222222)];//item颜色
+    
+    //item字体大小
+    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName : [UIFont systemFontOfSize:16]} forState:UIControlStateNormal];
+    
+    //设置标题颜色和字体
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName : [UIFont boldSystemFontOfSize:17]}];
     // Do any additional setup after loading the view.
 }
 
