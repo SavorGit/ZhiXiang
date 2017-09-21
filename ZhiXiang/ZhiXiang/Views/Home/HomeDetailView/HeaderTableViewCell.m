@@ -83,8 +83,6 @@
 
 - (void)configModelData:(HomeViewModel *)model{
     
-    model.title = [@"超" stringByAppendingString:model.title];
-//    model.title = @"这是测试标题使用";
     CGFloat titleHeight = [self getHeightByWidth:kMainBoundsWidth - 40 title:model.title font:kPingFangMedium(19)];
     if (titleHeight > 27) {
         [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {

@@ -347,11 +347,10 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
     self.tableView.frame = CGRectMake(-self.startFrame.origin.x, -self.startFrame.origin.y, self.startFrame.size.width, self.startFrame.size.height);
     
     [self addSubview:self.topImageView];
-    
     [UIView animateWithDuration:HomeDetailViewShowAnimationDuration delay:0.f options:UIViewAnimationOptionCurveEaseOut animations:^{
         self.frame = CGRectMake(0, 0, kMainBoundsWidth, kMainBoundsHeight);
-        [self.topView startScrShow];
         self.tableView.frame = self.bounds;
+        [self.topView startScrShow];
         self.topImageView.frame = CGRectMake(0, 0, kMainBoundsWidth, kMainBoundsWidth / 750.f * 488.f);
         self.bottoView.frame = CGRectMake(0, kMainBoundsWidth / 750.f * 488.f, kMainBoundsWidth, kMainBoundsHeight - kMainBoundsWidth / 750.f * 488.f);
 //        [self configSubTitleWithWidth:self.bottoView.bounds.size.width - 30];
@@ -362,6 +361,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .4f;
         [self.topImageView removeFromSuperview];
         self.layer.cornerRadius = 0.f;
     }];
+    self.tableView.tableHeaderView = self.topView;
     
     [UIView animateWithDuration:HomeDetailViewShowAnimationDuration / 2 animations:^{
         self.bottoView.alpha = .2f;

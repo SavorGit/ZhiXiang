@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		063380601F73B4AC00B07FE5 /* HomeDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0633805F1F73B4AC00B07FE5 /* HomeDateView.m */; };
 		064304FA1F70EAC5004EC8A9 /* HomeDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 064304F91F70EAC5004EC8A9 /* HomeDetailView.m */; };
 		0653CFDA1F6BA0300054A818 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653CFD91F6BA0300054A818 /* main.m */; };
 		0653CFDD1F6BA0300054A818 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653CFDC1F6BA0300054A818 /* AppDelegate.m */; };
@@ -81,6 +82,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0633805E1F73B4AC00B07FE5 /* HomeDateView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDateView.h; sourceTree = "<group>"; };
+		0633805F1F73B4AC00B07FE5 /* HomeDateView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDateView.m; sourceTree = "<group>"; };
 		064304F81F70EAC5004EC8A9 /* HomeDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeDetailView.h; sourceTree = "<group>"; };
 		064304F91F70EAC5004EC8A9 /* HomeDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeDetailView.m; sourceTree = "<group>"; };
 		0653CFD51F6BA0300054A818 /* ZhiXiang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhiXiang.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,6 +225,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0633805D1F73B48700B07FE5 /* HomeDateView */ = {
+			isa = PBXGroup;
+			children = (
+				0633805E1F73B4AC00B07FE5 /* HomeDateView.h */,
+				0633805F1F73B4AC00B07FE5 /* HomeDateView.m */,
+			);
+			path = HomeDateView;
+			sourceTree = "<group>";
+		};
 		064304F71F70E777004EC8A9 /* HomeDetailView */ = {
 			isa = PBXGroup;
 			children = (
@@ -329,7 +341,6 @@
 				96D3577B1F6FC08C00BF35EB /* Home */,
 				96D357701F6FAE3C00BF35EB /* LeftViewCell */,
 				069C37231F6F6A1500FE2BB0 /* CollectionViewCell */,
-				069C37211F6F69DA00FE2BB0 /* TableViewCell */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -452,13 +463,6 @@
 			path = TYCyclePagerView;
 			sourceTree = "<group>";
 		};
-		069C37211F6F69DA00FE2BB0 /* TableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TableViewCell;
-			sourceTree = "<group>";
-		};
 		069C37231F6F6A1500FE2BB0 /* CollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,6 +512,7 @@
 		96D3577B1F6FC08C00BF35EB /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0633805D1F73B48700B07FE5 /* HomeDateView */,
 				064304F71F70E777004EC8A9 /* HomeDetailView */,
 				069C37501F6FD18C00FE2BB0 /* ZXKeyWordsView */,
 				96D3577C1F6FC08C00BF35EB /* RD_MJRefreshFooter.h */,
@@ -844,6 +849,7 @@
 				96D357811F6FC08C00BF35EB /* RD_MJRefreshHeader.m in Sources */,
 				069C371E1F6F697C00FE2BB0 /* TYCyclePagerTransformLayout.m in Sources */,
 				96D357851F6FC16700BF35EB /* MyCollectionRequest.m in Sources */,
+				063380601F73B4AC00B07FE5 /* HomeDateView.m in Sources */,
 				96D357BF1F711B8F00BF35EB /* SpecialArtCell.m in Sources */,
 				069C37531F6FD19900FE2BB0 /* ZXKeyWordsView.m in Sources */,
 				96D357CE1F726C3700BF35EB /* ZXDetailArticleViewController.m in Sources */,
