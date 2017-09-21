@@ -66,7 +66,7 @@
     }];
     self.bottoView.backgroundColor = UIColorFromRGB(0xf6f2ed);
     
-    self.subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kMainBoundsWidth - 30, 0)];
+    self.subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kMainBoundsWidth - 60 - 30, 0)];
     self.subTitleLabel.text = @"";
     self.subTitleLabel.font = kPingFangLight(15);
     self.subTitleLabel.textColor = UIColorFromRGB(0x575757);
