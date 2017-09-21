@@ -273,7 +273,7 @@
         CGFloat imgHeight =  (kMainBoundsWidth - 40) *(802.f/1242.f);
         return  imgHeight + bottomBlank;
     }else if (model.dailytype == 1){
-        CGFloat textHeight = [ZXTools getAttrHeightByWidth:kMainBoundsWidth - 30 title:model.stext font:kPingFangLight(15)];
+        CGFloat textHeight = [ZXTools getAttrHeightByWidth:kMainBoundsWidth - 40 title:model.stext font:kPingFangLight(16)];
         return  textHeight + bottomBlank;
     }
     return 22.5 + bottomBlank;
@@ -284,15 +284,15 @@
     if (nextModel != nil) {
         if (tmpModel.dailytype == 1) {
             if (nextModel.dailytype == 1) {
-                return 20;
+                return 30;//标注40间距过大
             }else if (nextModel.dailytype == 3){
                 return 15;
             }
         }else if (tmpModel.dailytype == 3){
             if (nextModel.dailytype == 1) {
-                return 10;
+                return 30;
             }else if (nextModel.dailytype == 3){
-                return 5;
+                return 15;
             }
         }
     }else{

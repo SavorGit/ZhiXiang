@@ -42,7 +42,7 @@
     
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:text];
     NSUInteger length = [text length];
-    [attrString addAttribute:NSFontAttributeName value:kPingFangLight(15) range:NSMakeRange(0, length)];//设置所有的字体
+    [attrString addAttribute:NSFontAttributeName value:kPingFangLight(16) range:NSMakeRange(0, length)];//设置所有的字体
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.lineSpacing = 5;//行间距
     style.headIndent = 0;//头部缩进，相当于左padding
