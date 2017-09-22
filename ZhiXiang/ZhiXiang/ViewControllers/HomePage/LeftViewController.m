@@ -46,7 +46,7 @@
 - (void)initInfo{
     
     _dataSource = @[@"我的收藏",@"全部知享"];
-    _imageData = @[@"cdh_shoucang", @"cdh_yijianfankui"];
+    _imageData = @[@"wdshc", @"qbzhx"];
 }
 
 #pragma mark -- 懒加载
@@ -80,31 +80,17 @@
     
     UIImageView *iconImgView = [[UIImageView alloc] initWithFrame:CGRectZero];
     iconImgView.contentMode = UIViewContentModeScaleAspectFill;
-    iconImgView.layer.masksToBounds = YES;
+    iconImgView.image = [UIImage imageNamed:@"cd_logo"];
     iconImgView.backgroundColor = [UIColor clearColor];
     [topView addSubview:iconImgView];
     [iconImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(20);
-        make.height.mas_equalTo(20);
-        make.top.mas_equalTo(80);
-        make.left.mas_equalTo(0);
+        make.width.mas_equalTo(70);
+        make.height.mas_equalTo(77);
+        make.top.mas_equalTo(70);
+        make.centerX.mas_equalTo(topView);
     }];
     
-    UILabel *titleLabel = [[UILabel alloc]init];
-    titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.font = kPingFangMedium(17);
-    titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.textAlignment = NSTextAlignmentLeft;
-    titleLabel.text = @"每日知享";
-    [topView addSubview:titleLabel];
-    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(kMainBoundsWidth - 30);
-        make.height.mas_equalTo(20);
-        make.left.mas_equalTo(iconImgView.mas_right).offset(20);
-        make.top.mas_equalTo(80);
-    }];
-    
-    CGFloat totalHeight = 180;
+    CGFloat totalHeight = 232;
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, totalHeight)];
     [headView addSubview:topView];
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -121,17 +107,18 @@
         _footView = [[UIView alloc] initWithFrame:CGRectZero];
         _footView.backgroundColor = [UIColor clearColor];
         
-        UILabel * label = [[UILabel alloc] initWithFrame:CGRectZero];
-        label.textColor = UIColorFromRGB(0xece6de);
-        label.numberOfLines = 2;
-        label.text = @"每天10条讯息\n让您知世界，享生活";
-        [_footView addSubview:label];
-        [label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(15);
-            make.right.mas_equalTo(-10);
-            make.height.mas_equalTo(60);
-            make.bottom.mas_equalTo(- 50);
+        UIImageView *iconImgView = [[UIImageView alloc] initWithFrame:CGRectZero];
+        iconImgView.contentMode = UIViewContentModeScaleAspectFill;
+        iconImgView.image = [UIImage imageNamed:@"cd_slogan"];
+        iconImgView.backgroundColor = [UIColor clearColor];
+        [_footView addSubview:iconImgView];
+        [iconImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(192);
+            make.height.mas_equalTo(14);
+            make.bottom.mas_equalTo(- 60);
+            make.centerX.mas_equalTo(_footView);
         }];
+
     }
     
     return _footView;
@@ -167,7 +154,7 @@
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 35;
+    return 60;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

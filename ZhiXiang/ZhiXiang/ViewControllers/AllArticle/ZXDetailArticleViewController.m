@@ -319,14 +319,14 @@
         }];
         
         _backButton = [[UIButton alloc] initWithFrame:CGRectMake(5,20, 40, 44)];
-        [_backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
-        [_backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateSelected];
+        [_backButton setImage:[UIImage imageNamed:@"guanbi"] forState:UIControlStateNormal];
+        [_backButton setImage:[UIImage imageNamed:@"guanbi"] forState:UIControlStateSelected];
         [_backButton addTarget:self action:@selector(backButtonClick) forControlEvents:UIControlEventTouchUpInside];
         [_topView addSubview:_backButton];
         
         UIButton *shareBtn = [[UIButton alloc] initWithFrame:CGRectZero];
-        [shareBtn setImage:[UIImage imageNamed:@"icon_share"] forState:UIControlStateNormal];
-        [shareBtn setImage:[UIImage imageNamed:@"icon_collect_yes"] forState:UIControlStateSelected];
+        [shareBtn setImage:[UIImage imageNamed:@"fenxiang"] forState:UIControlStateNormal];
+        [shareBtn setImage:[UIImage imageNamed:@"fenxiang"] forState:UIControlStateSelected];
         shareBtn.tag = 101;
         [shareBtn addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
         [_topView addSubview:shareBtn];
@@ -337,8 +337,8 @@
         }];
         
         _collectBtn = [[UIButton alloc] initWithFrame:CGRectZero];
-        [_collectBtn setImage:[UIImage imageNamed:@"icon_collect"] forState:UIControlStateNormal];
-        [_collectBtn setImage:[UIImage imageNamed:@"icon_collect_yes"] forState:UIControlStateSelected];
+        [_collectBtn setImage:[UIImage imageNamed:@"shoucang"] forState:UIControlStateNormal];
+        [_collectBtn setImage:[UIImage imageNamed:@"yishoucang"] forState:UIControlStateSelected];
         [_collectBtn addTarget:self action:@selector(collectAction) forControlEvents:UIControlEventTouchUpInside];
         _collectBtn.tag = 102;
         [_topView addSubview:_collectBtn];

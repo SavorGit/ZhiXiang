@@ -33,16 +33,16 @@
     _leftImageView.backgroundColor = [UIColor clearColor];
     [self addSubview:_leftImageView];
     [_leftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(20);
-        make.height.mas_equalTo(20);
-        make.top.mas_equalTo(0);
-        make.left.mas_equalTo(0);
+        make.width.mas_equalTo(18);
+        make.height.mas_equalTo(18);
+        make.top.mas_equalTo(1);
+        make.left.mas_equalTo(30);
     }];
     
     _titleLabel = [[UILabel alloc]init];
     _titleLabel.backgroundColor = [UIColor clearColor];
-    _titleLabel.font = kPingFangMedium(17);
-    _titleLabel.textColor = [UIColor whiteColor];
+    _titleLabel.font = kPingFangLight(16);
+    _titleLabel.textColor = UIColorFromRGB(0xF0F0F0);
     _titleLabel.textAlignment = NSTextAlignmentLeft;
     _titleLabel.numberOfLines = 2;
     _titleLabel.text = @"标题";
