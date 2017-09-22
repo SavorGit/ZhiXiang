@@ -21,6 +21,8 @@
 @interface HomeViewController () <TYCyclePagerViewDataSource, TYCyclePagerViewDelegate>
 
 @property (nonatomic, strong) TYCyclePagerView *pagerView;
+@property (nonatomic, strong) UIView * maskView;
+
 @property (nonatomic, assign) NSInteger currentIndex;
 
 @property (nonatomic, strong) NSDictionary * detailDataDic; //数据源
@@ -76,6 +78,25 @@
 - (void)setupViews
 {
     self.view.backgroundColor = UIColorFromRGB(0x222222);
+    
+    self.maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, 25, kMainBoundsHeight - 64)];
+    self.maskView.backgroundColor =UIColorFromRGB(0x222222);
+    
+    LGSideMenuController * LGSide = self.sideMenuController;
+    
+    LGSide.willShowLeftView = ^(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view) {
+        [self.view addSubview:self.maskView];
+        [self.maskView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(80);
+            make.left.mas_equalTo(0);
+            make.bottom.mas_equalTo(-60);
+            make.width.mas_equalTo(28);
+        }];
+        self.canShowKeyWords = NO;
+    };
+    LGSide.willHideLeftView = ^(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view) {
+        [self.maskView removeFromSuperview];
+    };
     
     self.pagerView = [[TYCyclePagerView alloc]init];
     self.pagerView.isInfiniteLoop = NO;
@@ -194,6 +215,7 @@
 - (void)pagerView:(TYCyclePagerView *)pageView didSelectedItemCell:(__kindof UICollectionViewCell *)cell atIndex:(NSInteger)index
 {
     if (index < self.dataSource.count && index == self.currentIndex) {
+        self.canShowKeyWords = NO;
         HomeViewModel *tmpModel = [self.dataSource objectAtIndex:index];
         CGRect detailViewFrame = [cell convertRect:cell.bounds toView:[UIApplication sharedApplication].keyWindow];
         HomeDetailView * detailView = [[HomeDetailView alloc] initWithFrame:detailViewFrame andData:tmpModel];
@@ -308,6 +330,7 @@
         ZXKeyWordsView * keyWordView = [[ZXKeyWordsView alloc] initWithKeyWordArray:self.keyWords];
         [keyWordView showWithAnimation:YES];
         self.canShowKeyWords = NO;
+        self.keyWords = nil;
     }
 }
 
