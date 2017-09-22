@@ -174,7 +174,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
 {
     
     HomeViewModel * model = [self.dataSource objectAtIndex:indexPath.row];
-    // 1 文字  2 文章  3 图片  4 标题
+    // 1 文字  3 图片 
     if (model.contentType == 1) {
         static NSString *cellID = @"HeaderTableCell";
         HeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
@@ -188,7 +188,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
         [cell configModelData:model];
         return cell;
     }
-    if (model.sgtype == 1){
+    if (model.dailytype == 1){
         static NSString *cellID = @"SpecialTextCell";
         SpecialTextCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
         if (cell == nil) {
@@ -201,7 +201,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
         [cell configWithText:model.stext];
         return cell;
         
-    }else if (model.sgtype == 3){
+    }else if (model.dailytype == 3){
         static NSString *cellID = @"SpecialImgCell";
         SpecialImageCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
         if (cell == nil) {
@@ -241,50 +241,36 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
         bottomBlank = [self getBottomBlankWith:model nextModel:nil];
     }
     if (model.contentType == 1) {
-        CGFloat titleHeight = [ZXTools getHeightByWidth:kMainBoundsWidth - 30 title:model.title font:kPingFangMedium(22)];
-        if (titleHeight > 31) {
-            return  62 + 36  + 25;
+        CGFloat titleHeight = [ZXTools getHeightByWidth:kMainBoundsWidth - 30 title:model.title font:kPingFangMedium(19)];
+        if (titleHeight > 27) {
+            return  54 + 30  + 25;
         }else{
-            return  31 + 36 + 25;
+            return  27 + 30 + 25;
         }
-    }else if (model.sgtype == 3) {
-        CGFloat imgHeight =  (kMainBoundsWidth - 15) *(802.f/1242.f);
+    }else if (model.dailytype == 3) {
+        CGFloat imgHeight =  (kMainBoundsWidth - 40) *(802.f/1242.f);
         return  imgHeight + bottomBlank;
-    }else if (model.sgtype == 2){
-        CGFloat artHeight= 130 *802.f/1242.f + 10;
-        return  artHeight + bottomBlank;
-    }else if (model.sgtype == 1){
-        CGFloat textHeight = [ZXTools getAttrHeightByWidth:kMainBoundsWidth - 30 title:model.stext font:kPingFangLight(15)];
+    }else if (model.dailytype == 1){
+        CGFloat textHeight = [ZXTools getAttrHeightByWidth:kMainBoundsWidth - 40 title:model.stext font:kPingFangLight(16)];
         return  textHeight + bottomBlank;
-    }else if (model.sgtype == 4){
-        CGFloat titleHeight = [ZXTools getAttrHeightByWidthNoSpacing:kMainBoundsWidth - 30 title:model.stitle font:kPingFangLight(16)];
-        return  titleHeight + bottomBlank;
     }
     return 22.5 + bottomBlank;
 }
 
 - (CGFloat)getBottomBlankWith:(HomeViewModel *)tmpModel nextModel:(HomeViewModel *)nextModel{
-    // 1 文字  2 文章  3 图片  4 标题
+    // 1 文字  3 图片
     if (nextModel != nil) {
-        if (tmpModel.sgtype == 1) {
-            if (nextModel.sgtype == 1) {
-                return 20;
-            }else if (nextModel.sgtype == 2){
-                return 25;
-            }else if (nextModel.sgtype == 3){
+        if (tmpModel.dailytype == 1) {
+            if (nextModel.dailytype == 1) {
+                return 30;//标注40间距过大
+            }else if (nextModel.dailytype == 3){
                 return 15;
-            }else if (nextModel.sgtype == 4){
-                return 25;
             }
-        }else if (tmpModel.sgtype == 3){
-            if (nextModel.sgtype == 1) {
-                return 10;
-            }else if (nextModel.sgtype == 2){
-                return 20;
-            }else if (nextModel.sgtype == 3){
-                return 5;
-            }else if (nextModel.sgtype == 4){
-                return 25;
+        }else if (tmpModel.dailytype == 3){
+            if (nextModel.dailytype == 1) {
+                return 30;
+            }else if (nextModel.dailytype == 3){
+                return 15;
             }
         }
     }else{
