@@ -68,4 +68,11 @@
     }];
 }
 
+- (void)configWithModel:(HomeViewModel *)model{
+    
+    self.monthLabel.text = model.month;
+    self.weekLabel.text = model.week;
+    self.dayLabel.text = model.day;
+}
+
 @end

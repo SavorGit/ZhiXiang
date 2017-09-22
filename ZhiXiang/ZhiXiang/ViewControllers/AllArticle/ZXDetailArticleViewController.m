@@ -158,7 +158,7 @@
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.backgroundColor = [UIColor clearColor];
+        _tableView.backgroundColor = UIColorFromRGB(0xf8f6f1);
         _tableView.backgroundView = nil;
         _tableView.showsVerticalScrollIndicator = NO;
         [self.view addSubview:_tableView];
@@ -177,7 +177,7 @@
     
     float ImageHeight =  kMainBoundsWidth / 750.f * 488.f;
     UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kMainBoundsWidth, ImageHeight)];
-    topView.backgroundColor = UIColorFromRGB(0xf6f2ed);
+    topView.backgroundColor = UIColorFromRGB(0xf8f6f1);
     
     UIImageView *headerImgView = [[UIImageView alloc] initWithFrame:CGRectZero];
     headerImgView.frame = CGRectMake(0, 0, kMainBoundsWidth, ImageHeight);
@@ -208,7 +208,7 @@
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = UIColorFromRGB(0xf6f2ed);
+        cell.backgroundColor = UIColorFromRGB(0xf8f6f1);
         
         [cell configModelData:model];
         return cell;
@@ -221,7 +221,7 @@
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = UIColorFromRGB(0xf6f2ed);
+        cell.backgroundColor = UIColorFromRGB(0xf8f6f1);
         
         [cell configWithText:model.stext];
         return cell;
@@ -234,7 +234,7 @@
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = UIColorFromRGB(0xf6f2ed);
+        cell.backgroundColor = UIColorFromRGB(0xf8f6f1);
         
         [cell configWithImageURL:model.spicture];
         

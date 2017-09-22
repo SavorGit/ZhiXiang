@@ -25,6 +25,7 @@
 @property (nonatomic, strong) NSMutableArray * dataSource; //数据源
 
 @property (nonatomic, strong) HomeDateView * dateView;
+@property (nonatomic, strong) HomeViewModel *dateModel; //日期数据源
 
 
 @end
@@ -70,7 +71,6 @@
     self.pagerView.isInfiniteLoop = NO;
     self.pagerView.dataSource = self;
     self.pagerView.delegate = self;
-    // registerClass or registerNib
     [self.pagerView registerClass:[HomeCollectionViewCell class] forCellWithReuseIdentifier:@"HomeCollectionViewCell"];
     
     [self.view addSubview:self.pagerView];
@@ -90,11 +90,6 @@
 //        ZXKeyWordsView * keyWordView = [[ZXKeyWordsView alloc] initWithKeyWordArray:keyWords];
 //        [keyWordView showWithAnimation:YES];
 //    });
-}
-
-- (void)configDate
-{
-    
 }
 
 #pragma mark - TYCyclePagerViewDataSource
@@ -150,6 +145,10 @@
         
         NSDictionary *dic = (NSDictionary *)response;
         NSDictionary * dataDict = [dic objectForKey:@"result"];
+        self.dateModel = [[HomeViewModel alloc] init];
+        self.dateModel.day = [dataDict objectForKey:@"day"];
+        self.dateModel.month = [dataDict objectForKey:@"month"];
+        self.dateModel.week = [dataDict objectForKey:@"week"];
         
         NSArray *listArr = [dataDict objectForKey:@"list"];
         for (int i = 0; i < listArr.count; i ++) {
@@ -161,6 +160,7 @@
         }
         
          [self setupViews];
+         [self.dateView configWithModel:self.dateModel];
         
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         

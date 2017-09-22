@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeViewModel.h"
 
 @interface HomeDateView : UIView
+
+- (void)configWithModel:(HomeViewModel *)model;
 
 @end
