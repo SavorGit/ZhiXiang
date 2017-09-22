@@ -15,8 +15,6 @@
     NoDataView*         _noDataView;
     /**无网视图**/
     NoNetWorkView*      _noNetWorkView;
-    /**Loading视图**/
-    RDLoadingView*      _loadingView;
     
 }
 
@@ -38,36 +36,6 @@
 
 - (void)setupDatas
 {
-}
-
-#pragma mark - loading的显示方法
-- (void)showLoadingView
-{
-    if (!_loadingView) {
-        _loadingView = [[RDLoadingView alloc] init];
-    }
-    
-    if (_loadingView.superview) {
-        [_loadingView removeFromSuperview];
-    }
-    
-    [self.view addSubview:_loadingView];
-    [_loadingView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(104);
-        make.height.mas_equalTo(40);
-        make.centerX.mas_equalTo(0);
-        make.centerY.mas_equalTo(-30);
-    }];
-    [_loadingView showLoaingAnimation];
-}
-
-- (void)hiddenLoadingView
-{
-    if (_loadingView) {
-        if (_loadingView.superview) {
-            [_loadingView hiddenLoaingAnimation];
-        }
-    }
 }
 
 /**

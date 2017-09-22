@@ -8,13 +8,12 @@
 
 #import "MyCollectionViewController.h"
 #import "MyCollectionRequest.h"
-#import "RD_MJRefreshHeader.h"
 #import "RD_MJRefreshFooter.h"
-#import "MJRefreshFooter.h"
 #import "MyCollectionModel.h"
 #import "ImageTextTableViewCell.h"
 #import "ZXTools.h"
 #import "ZXDetailArticleViewController.h"
+#import "MBProgressHUD+Custom.h"
 
 
 @interface MyCollectionViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -56,7 +55,7 @@
         [self.tableView reloadData];
         [self.tableView.mj_header beginRefreshing];
     }else{
-        [self showLoadingView];
+        [MBProgressHUD showLoadingHUDWithText:@"正在加载" inView:self.view];
         [self refreshData];
     }
 }
@@ -73,7 +72,7 @@
     [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
         [self.tableView.mj_header endRefreshing];
-        [self hiddenLoadingView];
+        [MBProgressHUD hideHUDForView:self.view animated:NO];
         
         NSDictionary *dic = (NSDictionary *)response;
         NSArray * dataArr = [dic objectForKey:@"result"];
@@ -108,7 +107,7 @@
         
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
-        [self hiddenLoadingView];
+        [MBProgressHUD hideHUDForView:self.view animated:NO];
         if (self.dataSource.count == 0) {
             [self showNoNetWorkView:NoNetWorkViewStyle_Load_Fail];
         }
@@ -119,7 +118,7 @@
         
     } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
         
-        [self hiddenLoadingView];
+        [MBProgressHUD hideHUDForView:self.view animated:NO];
         if (self.dataSource.count == 0) {
             [self showNoNetWorkView:NoNetWorkViewStyle_No_NetWork];
         }
@@ -180,7 +179,7 @@
 -(void)retryToGetData{
     [self hideNoNetWorkView];
     if (self.dataSource.count == 0)  {
-        [self showLoadingView];
+        [MBProgressHUD showLoadingHUDWithText:@"正在加载" inView:self.view];
     }
     [self refreshData];
 }
@@ -210,7 +209,7 @@
         
         //创建tableView动画加载头视图
         
-        _tableView.mj_header = [RD_MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
+        _tableView.mj_header = [MJRefreshStateHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
         RD_MJRefreshFooter* footer = [RD_MJRefreshFooter footerWithRefreshingBlock:^{
             [self getMoreData];
         }];
@@ -260,7 +259,9 @@
     
     MyCollectionModel *tmpModel = self.dataSource[indexPath.row];
     ZXDetailArticleViewController *daVC = [[ZXDetailArticleViewController alloc] initWithtopDailyID:tmpModel.dailyid];
-    [self.navigationController pushViewController:daVC animated:YES];
+    [self.navigationController presentViewController:daVC animated:YES completion:^{
+        
+    }];
 }
 
 - (void)showSelfAndCreateLog

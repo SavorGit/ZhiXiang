@@ -12,10 +12,11 @@
 static CGFloat minMarginDistance = 40.0; //距离屏幕边缘的最小距离
 static CGFloat itemDistance = 44.0; //各个keyWord之间的距离
 static CGFloat fontSize = 16.0; //字体大小
-static CGFloat keyWordViewAnimationDuration = 2.0;
+static CGFloat keyWordViewAnimationDuration = .7;
 
 @interface ZXKeyWordsView ()
 
+@property (nonatomic, strong) UIToolbar * baseView;
 @property (nonatomic, strong) UIScrollView * scrollView;
 @property (nonatomic, strong) NSMutableArray * keyWords;
 @property (nonatomic, assign) NSInteger lineNum;
@@ -37,14 +38,17 @@ static CGFloat keyWordViewAnimationDuration = 2.0;
 
 - (void)createViews
 {
-    self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.6f];
     self.lineNum = 0;
+    
+    self.baseView = [[UIToolbar alloc] initWithFrame:self.bounds];
+    self.baseView.barStyle = UIBarStyleBlackTranslucent;
+    [self addSubview:self.baseView];
     
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
     self.scrollView.bounces = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.showsHorizontalScrollIndicator = NO;
-    [self addSubview:self.scrollView];
+    [self.baseView addSubview:self.scrollView];
     
     UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, [self scaleHeightWith:105], [UIScreen mainScreen].bounds.size.width, 20)];
     label.font = kPingFangRegular(17);
@@ -218,7 +222,7 @@ static CGFloat keyWordViewAnimationDuration = 2.0;
         frame.origin.y = -frame.size.height;
         self.frame = frame;
         
-        [UIView animateWithDuration:.5f animations:^{
+        [UIView animateWithDuration:.3f animations:^{
             self.frame = [UIScreen mainScreen].bounds;
         } completion:^(BOOL finished) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -236,7 +240,7 @@ static CGFloat keyWordViewAnimationDuration = 2.0;
         CGRect frame = [UIScreen mainScreen].bounds;
         frame.origin.y = -frame.size.height;
         
-        [UIView animateWithDuration:.5f animations:^{
+        [UIView animateWithDuration:.4f animations:^{
             self.frame = frame;
         } completion:^(BOOL finished) {
             [self removeFromSuperview];

@@ -10,7 +10,6 @@
 
 #import "NoDataView.h"
 #import "NoNetWorkView.h"
-#import "RDLoadingView.h"
 
 @interface ZXBaseViewController : UIViewController
 
@@ -55,10 +54,6 @@
  *  @param view 显示无网络视图的父视图
  */
 -(void)showNoNetWorkViewInView:(UIView *)view;
-
-#pragma mark - loading的显示方法
-- (void)showLoadingView;
-- (void)hiddenLoadingView;
 
 //页面顶部下弹状态栏显示
 - (void)showTopFreshLabelWithTitle:(NSString *)title;

@@ -13,7 +13,6 @@
 #import "SpecialImageCell.h"
 #import "ZXTools.h"
 #import "HomeDetailRequest.h"
-#import "RD_MJRefreshHeader.h"
 #import "RD_MJRefreshFooter.h"
 #import "MJRefreshFooter.h"
 #import "HomeViewModel.h"
@@ -72,7 +71,6 @@
     [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
         [self.tableView.mj_header endRefreshing];
-        [self hiddenLoadingView];
         
         NSDictionary *dic = (NSDictionary *)response;
         NSDictionary * dataDict = [dic objectForKey:@"result"];
@@ -121,7 +119,6 @@
         
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
-        [self hiddenLoadingView];
         if (self.dataSource.count == 0) {
             [self showNoNetWorkView:NoNetWorkViewStyle_Load_Fail];
         }
@@ -132,7 +129,6 @@
         
     } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
         
-        [self hiddenLoadingView];
         if (self.dataSource.count == 0) {
             [self showNoNetWorkView:NoNetWorkViewStyle_No_NetWork];
         }
@@ -389,7 +385,9 @@
 
 - (void)backButtonClick{
     
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
     
 }
 - (void)viewWillAppear:(BOOL)animated {

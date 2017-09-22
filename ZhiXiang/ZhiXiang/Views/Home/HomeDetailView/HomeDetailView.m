@@ -35,9 +35,12 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
 
 @property (nonatomic, strong) SpecialHeaderView *topView;
 
-@property (nonatomic, strong) UITapGestureRecognizer * tap;
 @property (nonatomic, assign) CGRect startFrame;
 @property (nonatomic, assign) CGFloat HeaderHeight;
+
+@property (nonatomic, strong) UIImageView * blackView;
+@property (nonatomic, strong) UIButton *collectBtn;
+@property (nonatomic, strong) UIButton *backButton;
 
 @end
 
@@ -92,11 +95,6 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
 - (void)createViews
 {
     self.backgroundColor = UIColorFromRGB(0xf6f2ed);
-    
-    self.tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endScrrenToShow)];
-    self.tap.numberOfTapsRequired = 1;
-    [self addGestureRecognizer:self.tap];
-    self.tap.enabled = NO;
     
     [self setUpMaxStyle];
     [self setUpMinStyle];
@@ -294,9 +292,14 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
         CGRect frame = self.subTitleLabel.bounds;
         self.subTitleLabel.frame = CGRectMake((kMainBoundsWidth - frame.size.width) / 2, (kMainBoundsHeight - self.topImageView.frame.size.height) / 2, frame.size.width, frame.size.height);
     } completion:^(BOOL finished) {
-        self.tap.enabled = YES;
         [self.topImageView removeFromSuperview];
         self.layer.cornerRadius = 0.f;
+        
+        [self addSubview:self.blackView];
+        self.blackView.alpha = .2f;
+        [UIView animateWithDuration:.2f animations:^{
+            self.blackView.alpha = 1.f;
+        }];
     }];
     self.tableView.tableHeaderView = self.topView;
     
@@ -313,8 +316,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
 
 - (void)endScrrenToShow
 {
-    self.tap.enabled = NO;
-    
+    [self.blackView removeFromSuperview];
     [self addSubview:self.topImageView];
     self.layer.cornerRadius = 10.f;
     
@@ -340,6 +342,53 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
             self.bottoView.alpha = 1;
         }];
     }];
+}
+
+- (UIImageView *)blackView
+{
+    if (_blackView == nil) {
+        
+        _blackView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kMainBoundsWidth, 64)];
+        _blackView.userInteractionEnabled = YES;
+        _blackView.contentMode = UIViewContentModeScaleToFill;
+        [_blackView setImage:[UIImage imageNamed:@"quanpingmc"]];
+        
+        _backButton = [[UIButton alloc] initWithFrame:CGRectMake(5,20, 40, 44)];
+        [_backButton setImage:[UIImage imageNamed:@"guanbi"] forState:UIControlStateNormal];
+        [_backButton setImage:[UIImage imageNamed:@"guanbi"] forState:UIControlStateSelected];
+        [_backButton addTarget:self action:@selector(backButtonClick) forControlEvents:UIControlEventTouchUpInside];
+        [_blackView addSubview:_backButton];
+        
+        UIButton *shareBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+        [shareBtn setImage:[UIImage imageNamed:@"fenxiang"] forState:UIControlStateNormal];
+        [shareBtn setImage:[UIImage imageNamed:@"fenxiang"] forState:UIControlStateSelected];
+        shareBtn.tag = 101;
+        [shareBtn addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
+        [_blackView addSubview:shareBtn];
+        [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(40, 44));
+            make.top.mas_equalTo(20);
+            make.right.mas_equalTo(- 15);
+        }];
+        
+        _collectBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+        [_collectBtn setImage:[UIImage imageNamed:@"shoucang"] forState:UIControlStateNormal];
+        [_collectBtn setImage:[UIImage imageNamed:@"yishoucang"] forState:UIControlStateSelected];
+        [_collectBtn addTarget:self action:@selector(collectAction) forControlEvents:UIControlEventTouchUpInside];
+        _collectBtn.tag = 102;
+        [_blackView addSubview:_collectBtn];
+        [_collectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(40, 44));
+            make.top.mas_equalTo(20);
+            make.right.mas_equalTo(- 65);
+        }];
+    }
+    return _blackView;
+}
+
+- (void)backButtonClick
+{
+    [self endScrrenToShow];
 }
 
 @end

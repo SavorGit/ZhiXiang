@@ -10,4 +10,8 @@
 
 @interface HomeViewController : ZXBaseViewController
 
+@property (nonatomic, assign) BOOL canShowKeyWords;
+
+- (void)showKeyWord;
+
 @end

@@ -10,4 +10,5 @@ pod 'UMengUShare/Social/ReducedWeChat'
 pod 'UMengUShare/Social/ReducedQQ'
 pod 'UMengUShare/Social/ReducedSina'
 pod 'SDWebImage', '~> 3.8.2'
+pod 'DGActivityIndicatorView'
 end

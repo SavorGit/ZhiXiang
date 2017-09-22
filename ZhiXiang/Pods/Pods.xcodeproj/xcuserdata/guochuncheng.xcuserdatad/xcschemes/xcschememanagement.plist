@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>DGActivityIndicatorView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>LGSideMenuController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -46,87 +51,6 @@
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>04CF549EBEEE7BC87AEAE35397184D94</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>53480ED0BE09FF49E34B1702D485CAAB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>586F2DFA9BDCC6675C2546793A69E5CC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>61B2FB453CCFD177EC77780954E76A99</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>70BC44266C6FFE30D2C57129458E070B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7462F4E2DE19FD9E6DF6D1D33C26389F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>928353533005A4198EBDA5B700D37B64</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9363EADD2A2533DF8031407E86B2727C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>93FE0580BC284301AACA923AD891ED77</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9DC8D9E02903E93BD0B2FEC9D846EA20</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9E033EDB5EC0819481B0546434FA577B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A6A0BE2151C735C11B6FF13F664DB846</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B14D1374F2F7B0B2A5E8E2B263368F7E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CE96F07B28CDA12C949586FB9BAA53BB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D058B89EB3B3DF45457A2DCD3971AFFE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D9E5A919EBEFA0DD0A5C4FCBF6D93397</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
+	<dict/>
 </dict>
 </plist>

@@ -28,7 +28,7 @@
     [super viewDidLoad];
     
     self.navigationController.delegate = self;
-    self.view.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = UIColorFromRGB(0x222222);
     [self initInfo];
     [self.tableView reloadData];
     [self setUpTableHeaderView];

@@ -9,11 +9,14 @@
 #import "HomeViewController.h"
 #import "TYCyclePagerView.h"
 #import "HomeCollectionViewCell.h"
+#import "HomeStatusCollectionViewCell.h"
 #import "ZXKeyWordsView.h"
 #import "HomeDetailView.h"
 #import "HomeViewRequest.h"
 #import "UIViewController+LGSideMenuController.h"
 #import "HomeDateView.h"
+#import "MBProgressHUD+Custom.h"
+#import "HomeKeyWordRequest.h"
 
 @interface HomeViewController () <TYCyclePagerViewDataSource, TYCyclePagerViewDelegate>
 
@@ -23,10 +26,15 @@
 @property (nonatomic, strong) NSDictionary * detailDataDic; //数据源
 
 @property (nonatomic, strong) NSMutableArray * dataSource; //数据源
+@property (nonatomic, strong) NSArray * keyWords;
 
 @property (nonatomic, strong) HomeDateView * dateView;
-@property (nonatomic, strong) HomeViewModel *dateModel; //日期数据源
 
+@property (nonatomic, strong) HomeStatusCollectionViewCell * statusCell;
+
+@property (nonatomic, assign) BOOL isNoMoreData;
+
+@property (nonatomic, assign) BOOL isRequest;
 
 @end
 
@@ -36,10 +44,9 @@
     [super viewDidLoad];
     
     [self initInfor];
-    [self dataRequest];
     [self setupNavigatinBar];
-//    [self setupViews];
-
+    [self setupViews];
+    [self dataRequest];
 }
 
 - (void)setupNavigatinBar
@@ -47,20 +54,23 @@
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0, 0, 50, 44);
     [button setImage:[UIImage imageNamed:@"caidan"] forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(showLeftViewAnimated:) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(leftButtonDidClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(20);
         make.left.mas_equalTo(0);
         make.size.mas_equalTo(CGSizeMake(50, 44));
     }];
-    
-    [self dateView];
+}
+
+- (void)leftButtonDidClicked
+{
+    [self showLeftViewAnimated:nil];
 }
 
 - (void)initInfor{
     _detailDataDic = [[NSDictionary alloc] init];
-    _dataSource = [[NSMutableArray alloc] initWithCapacity:100];
+    _dataSource = [[NSMutableArray alloc] init];
 }
 
 - (void)setupViews
@@ -72,6 +82,7 @@
     self.pagerView.dataSource = self;
     self.pagerView.delegate = self;
     [self.pagerView registerClass:[HomeCollectionViewCell class] forCellWithReuseIdentifier:@"HomeCollectionViewCell"];
+    [self.pagerView registerClass:[HomeStatusCollectionViewCell class] forCellWithReuseIdentifier:@"HomeStatusCollectionViewCell"];
     
     [self.view addSubview:self.pagerView];
     [self.pagerView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -83,26 +94,93 @@
     self.currentIndex = 0;
     
     [self.pagerView reloadData];
-    
-    
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        NSArray * keyWords = @[@"iPhone X", @"孙宏斌", @"美联储", @"蒂芙尼珠宝", @"北海道肉蟹", @"贵族学校", @"百年普洱", @"小米", @"特朗普", @"蒂芙尼哈哈", @"法拉利的遗憾", @"品茶道人生"];
-//        ZXKeyWordsView * keyWordView = [[ZXKeyWordsView alloc] initWithKeyWordArray:keyWords];
-//        [keyWordView showWithAnimation:YES];
-//    });
 }
 
 #pragma mark - TYCyclePagerViewDataSource
 
 - (NSInteger)numberOfItemsInPagerView:(TYCyclePagerView *)pageView {
-    return self.dataSource.count;
+    return self.dataSource.count + 1;
 }
 
 - (UICollectionViewCell *)pagerView:(TYCyclePagerView *)pagerView cellForItemAtIndex:(NSInteger)index {
-    HomeViewModel *tmpModel = [self.dataSource objectAtIndex:index];
-    HomeCollectionViewCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"HomeCollectionViewCell" forIndex:index];
-    [cell configModelData:tmpModel];
-    return cell;
+    
+    if (index < self.dataSource.count) {
+        HomeViewModel *tmpModel = [self.dataSource objectAtIndex:index];
+        HomeCollectionViewCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"HomeCollectionViewCell" forIndex:index];
+        [cell configModelData:tmpModel];
+        return cell;
+    }else{
+        HomeStatusCollectionViewCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"HomeStatusCollectionViewCell" forIndex:index];
+        self.statusCell = cell;
+        if (self.isRequest) {
+            [self.statusCell showLoading];
+        }
+        
+        return cell;
+    }
+}
+
+- (void)startLoadMoreData
+{
+    if (self.isRequest || self.isNoMoreData) {
+        return;
+    }
+    
+    self.isRequest = YES;
+    if (self.statusCell) {
+        [self.statusCell showLoading];
+    }
+    
+    HomeViewModel *tmpModel = [self.dataSource lastObject];
+    NSDictionary * dict = tmpModel.detailDic;
+    HomeViewRequest * request = [[HomeViewRequest alloc] initWithIBespeakTime:[dict objectForKey:@"bespeak_time"]];
+    [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+        
+        NSDictionary *dic = (NSDictionary *)response;
+        NSDictionary * dataDict = [dic objectForKey:@"result"];
+        
+        NSArray *listArr = [dataDict objectForKey:@"list"];
+        
+        if (!listArr || listArr.count == 0) {
+            if (self.statusCell) {
+                [self.statusCell showNoMoreData];
+            }
+            self.isNoMoreData = YES;
+            self.isRequest = NO;
+            return;
+        }
+        
+        for (int i = 0; i < listArr.count; i ++) {
+            NSDictionary *tmpDic = [listArr objectAtIndex:i];
+            HomeViewModel *tmpModel = [[HomeViewModel alloc] initWithDictionary:tmpDic];
+            tmpModel.detailDic = [tmpDic objectForKey:@"contentDetail"];
+            tmpModel.day = [dataDict objectForKey:@"day"];
+            tmpModel.month = [dataDict objectForKey:@"month"];
+            tmpModel.week = [dataDict objectForKey:@"week"];
+            [self.dataSource addObject:tmpModel];
+            NSLog(@"%@",tmpDic);
+        }
+        
+        [self.pagerView reloadData];
+        self.isRequest = NO;
+        
+    } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+        
+        if (self.statusCell) {
+            [self.statusCell showNoNetWork];
+        }
+        self.isRequest = NO;
+        [MBProgressHUD showTextHUDWithText:@"加载失败" inView:self.view];
+        
+    } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
+        
+        if (self.statusCell) {
+            [self.statusCell showNoNetWork];
+        }
+        self.isRequest = NO;
+        [MBProgressHUD showTextHUDWithText:@"加载失败" inView:self.view];
+        
+    }];
 }
 
 - (TYCyclePagerViewLayout *)layoutForPagerView:(TYCyclePagerView *)pageView {
@@ -115,57 +193,122 @@
 
 - (void)pagerView:(TYCyclePagerView *)pageView didSelectedItemCell:(__kindof UICollectionViewCell *)cell atIndex:(NSInteger)index
 {
-    if (index == self.currentIndex) {
-        
+    if (index < self.dataSource.count && index == self.currentIndex) {
         HomeViewModel *tmpModel = [self.dataSource objectAtIndex:index];
         CGRect detailViewFrame = [cell convertRect:cell.bounds toView:[UIApplication sharedApplication].keyWindow];
         HomeDetailView * detailView = [[HomeDetailView alloc] initWithFrame:detailViewFrame andData:tmpModel];
         [[UIApplication sharedApplication].keyWindow addSubview:detailView];
         [detailView becomeScreenToRead];
-        
-        
-    }else{
-//        self.pagerView.userInteractionEnabled = NO;
-//        [self.pagerView scrollToItemAtIndex:index animate:YES];
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.3f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            self.pagerView.userInteractionEnabled = YES;
-//        });
     }
 }
 
 - (void)pagerView:(TYCyclePagerView *)pageView didScrollFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex
 {
     self.currentIndex = toIndex;
+    if (toIndex >= self.dataSource.count - 4) {
+        [self startLoadMoreData];
+    }
+    if (toIndex < self.dataSource.count) {
+        HomeViewModel * model = [self.dataSource objectAtIndex:toIndex];
+        if (model) {
+            [self.dateView configWithModel:model];
+        }
+    }
 }
 
 - (void)dataRequest{
+    
+    if (self.isRequest) {
+        return;
+    }
+    
+    self.isRequest = YES;
+    if (self.statusCell) {
+        [self.statusCell showLoading];
+    }
     
     HomeViewRequest * request = [[HomeViewRequest alloc] initWithIBespeakTime:nil];
     [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
         NSDictionary *dic = (NSDictionary *)response;
         NSDictionary * dataDict = [dic objectForKey:@"result"];
-        self.dateModel = [[HomeViewModel alloc] init];
-        self.dateModel.day = [dataDict objectForKey:@"day"];
-        self.dateModel.month = [dataDict objectForKey:@"month"];
-        self.dateModel.week = [dataDict objectForKey:@"week"];
         
         NSArray *listArr = [dataDict objectForKey:@"list"];
+        
+        if (!listArr || listArr.count == 0) {
+            if (self.statusCell) {
+                [self.statusCell showNoMoreData];
+            }
+            self.isNoMoreData = YES;
+            self.isRequest = NO;
+            return;
+        }
+        
         for (int i = 0; i < listArr.count; i ++) {
             NSDictionary *tmpDic = [listArr objectAtIndex:i];
             HomeViewModel *tmpModel = [[HomeViewModel alloc] initWithDictionary:tmpDic];
             tmpModel.detailDic = [tmpDic objectForKey:@"contentDetail"];
             [self.dataSource addObject:tmpModel];
+            tmpModel.day = [dataDict objectForKey:@"day"];
+            tmpModel.month = [dataDict objectForKey:@"month"];
+            tmpModel.week = [dataDict objectForKey:@"week"];
+            
+            if (i == 0) {
+                [self.dateView configWithModel:tmpModel];
+            }
+            
             NSLog(@"%@",tmpDic);
         }
         
-         [self setupViews];
-         [self.dateView configWithModel:self.dateModel];
+        [self.pagerView reloadData];
+        self.isRequest = NO;
         
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
+        if (self.statusCell) {
+            [self.statusCell showNoNetWork];
+        }
+        self.isRequest = NO;
+        [MBProgressHUD showTextHUDWithText:@"加载失败" inView:self.view];
+        
     } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
+        
+        if (self.statusCell) {
+            [self.statusCell showNoNetWork];
+        }
+        self.isRequest = NO;
+        [MBProgressHUD showTextHUDWithText:@"加载失败" inView:self.view];
     }];
+    
+    HomeKeyWordRequest * keyWordRequest = [[HomeKeyWordRequest alloc] init];
+    [keyWordRequest sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+
+        NSArray * list = [response objectForKey:@"result"];
+        if (list && [list isKindOfClass:[NSArray class]]) {
+
+            self.keyWords = [NSArray arrayWithArray:list];
+            [self showKeyWord];
+
+        }
+
+    } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+
+    } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
+
+    }];
+}
+
+- (void)showKeyWord
+{
+    if (!self.canShowKeyWords) {
+        return;
+    }
+    
+    if (self.keyWords && self.keyWords.count > 0) {
+        ZXKeyWordsView * keyWordView = [[ZXKeyWordsView alloc] initWithKeyWordArray:self.keyWords];
+        [keyWordView showWithAnimation:YES];
+        self.canShowKeyWords = NO;
+    }
 }
 
 - (HomeDateView *)dateView
