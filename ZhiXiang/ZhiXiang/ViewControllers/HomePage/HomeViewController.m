@@ -224,7 +224,7 @@
         self.canShowKeyWords = NO;
         HomeViewModel *tmpModel = [self.dataSource objectAtIndex:index];
         CGRect detailViewFrame = [cell convertRect:cell.bounds toView:[UIApplication sharedApplication].keyWindow];
-        HomeDetailView * detailView = [[HomeDetailView alloc] initWithFrame:detailViewFrame andData:tmpModel];
+        HomeDetailView * detailView = [[HomeDetailView alloc] initWithFrame:detailViewFrame andData:tmpModel andVC:self];
         [[UIApplication sharedApplication].keyWindow addSubview:detailView];
         [detailView becomeScreenToRead];
     }

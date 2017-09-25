@@ -20,6 +20,6 @@
 /**
  *  分享至平台3.0改版调用
  */
-- (void)sharedToPlatform:(UMSocialPlatformType)platformType andController:(UIViewController *)VC withModel:(MyCollectionModel *)model andUmKeyString:(NSString *)keyString;
+- (void)sharedToPlatform:(UMSocialPlatformType)platformType andController:(UIViewController *)VC  andView:(UIView *)view withModel:(MyCollectionModel *)model andUmKeyString:(NSString *)keyString;
 
 @end

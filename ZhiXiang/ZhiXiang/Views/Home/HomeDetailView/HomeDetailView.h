@@ -14,7 +14,7 @@ extern CGFloat HomeDetailViewHiddenAnimationDuration;
 
 @interface HomeDetailView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame andData:(HomeViewModel *)model;
+- (instancetype)initWithFrame:(CGRect)frame andData:(HomeViewModel *)model andVC:(UIViewController *)VC;
 
 - (void)becomeScreenToRead;
 

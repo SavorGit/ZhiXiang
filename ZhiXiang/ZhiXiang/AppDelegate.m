@@ -12,6 +12,7 @@
 #import "ZXBaseNavigationController.h"
 #import "ZXTools.h"
 #import "ZXLGViewController.h"
+#import "UMCustomSocialManager.h"
 
 @interface AppDelegate ()
 
@@ -68,6 +69,35 @@
         }];
         
     }];
+}
+
+//通过其它应用打开APP时调用
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (result == FALSE) {
+        if (options) {
+            NSString * path = [[url description] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//            [OpenFileTool screenFileWithPath:path];
+        }
+        return YES;
+    }
+    return result;
+}
+
+
+//iOS老版系统通过其他应用调取打开
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (result == FALSE) {
+        if (url) {
+            NSString * path = [[url description] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//            [OpenFileTool screenFileWithPath:path];
+        }
+        return YES;
+    }
+    return result;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

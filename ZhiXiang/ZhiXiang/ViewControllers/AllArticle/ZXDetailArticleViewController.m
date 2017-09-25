@@ -349,15 +349,18 @@
 
 #pragma mark -分享点击
 - (void)shareAction{
+    
     if ([[UMSocialManager defaultManager] isSupport:UMSocialPlatformType_WechatSession] && [[UMSocialManager defaultManager] isSupport:UMSocialPlatformType_WechatTimeLine]) {
+        
         ShareBoardView *shareView = [[ShareBoardView alloc] initWithFrame:CGRectZero Model:nil andVC:self];
         shareView.backgroundColor = [UIColor clearColor];
         NSLog(@"---用户安装有微信---");
     }else{
-        
+        [MBProgressHUD showTextHUDWithText:@"请先安装微信" inView:self.view];
     }
-    ShareBoardView *shareView = [[ShareBoardView alloc] initWithFrame:CGRectZero Model:nil andVC:self];
-    shareView.backgroundColor = [UIColor clearColor];
+    
+//    ShareBoardView *shareView = [[ShareBoardView alloc] initWithFrame:CGRectZero Model:nil andVC:self];
+//    shareView.backgroundColor = [UIColor clearColor];
 }
 
 #pragma mark -收藏点击
