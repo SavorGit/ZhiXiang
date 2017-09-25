@@ -39,10 +39,10 @@
     self.maxImageHeight =  kMainBoundsWidth / 750.f * 488.f;
     self.minImageHeight = (kMainBoundsWidth - 60) / 750.f * 488.f;
     _bgImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    _bgImageView.backgroundColor = UIColorFromRGB(0xf6f2ed);
     _bgImageView.frame = CGRectMake(0, 0, kMainBoundsWidth, self.minImageHeight);
     _bgImageView.contentMode = UIViewContentModeScaleAspectFill;
     _bgImageView.layer.masksToBounds = YES;
-    _bgImageView.backgroundColor = [UIColor clearColor];
     [self addSubview:_bgImageView];
     
 //    [_bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -110,7 +110,7 @@
 //    self.titleLabel.text = model.title;
     
     
-    if ([self.imageURL isEqualToString:model.imageURL]) {
+    if ([self.imageURL isEqualToString:model.imgUrl]) {
         return;
     }
     self.imageURL = model.imgUrl;

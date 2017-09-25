@@ -11,11 +11,13 @@
 #import "SpecialTextCell.h"
 #import "SpecialImageCell.h"
 #import "SpecialTitleCell.h"
-#import "SpecialArtCell.h"
 #import "HeaderTableViewCell.h"
 #import "SpecialHeaderView.h"
 #import "UIImageView+WebCache.h"
 #import "ZXTools.h"
+#import "IsCollectionRequest.h"
+#import "ZXIsOrCollectionRequest.h"
+#import "MBProgressHUD+Custom.h"
 
 CGFloat HomeDetailViewShowAnimationDuration = .4f;
 CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
@@ -41,6 +43,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
 @property (nonatomic, strong) UIImageView * blackView;
 @property (nonatomic, strong) UIButton *collectBtn;
 @property (nonatomic, strong) UIButton *backButton;
+@property (nonatomic, assign) BOOL isCheckCollectting;
 
 @end
 
@@ -71,8 +74,8 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     self.topModel.imgUrl = [tmpDic objectForKey:@"imgUrl"];
     self.topModel.bespeak_time = [tmpDic objectForKey:@"bespeak_time"];
     self.topModel.desc = model.desc;
-    self.topModel.imageURL = self.topModel.img_url;
     self.topModel.contentType = 1;
+    self.topModel.dailyid = model.dailyid;
     [self.dataSource addObject:self.topModel];
     
     NSArray *resultArr = [tmpDic objectForKey:@"details"];
@@ -98,12 +101,84 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     
     [self setUpMaxStyle];
     [self setUpMinStyle];
+    [self checkIsCollection];
+}
+
+- (void)checkIsCollection
+{
+    self.isCheckCollectting = YES;
+    IsCollectionRequest * request = [[IsCollectionRequest alloc] initWithDailyid:self.topModel.dailyid];
+    [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+        
+        NSDictionary * dataDict = [response objectForKey:@"result"];
+        BOOL isCollected = [[dataDict objectForKey:@"state"] boolValue];
+        
+        if (isCollected) {
+            self.collectBtn.selected = YES;
+        }else{
+            self.collectBtn.selected = NO;
+        }
+        
+        self.isCheckCollectting = NO;
+        [self.collectBtn addTarget:self action:@selector(collectAction) forControlEvents:UIControlEventTouchUpInside];
+        
+    } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+        
+        self.isCheckCollectting = NO;
+        [self.collectBtn addTarget:self action:@selector(retryToGetIsCollection) forControlEvents:UIControlEventTouchUpInside];
+        
+    } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
+        
+        self.isCheckCollectting = NO;
+        [self.collectBtn addTarget:self action:@selector(retryToGetIsCollection) forControlEvents:UIControlEventTouchUpInside];
+        
+    }];
+    
+}
+
+- (void)collectAction
+{
+    if (self.isCheckCollectting) {
+        [MBProgressHUD showTextHUDWithText:@"正在获取收藏状态" inView:self];
+        return;
+    }
+    
+    MBProgressHUD * hud = [MBProgressHUD showLoadingHUDWithText:@"正在加载" inView:self];
+    ZXIsOrCollectionRequest * request = [[ZXIsOrCollectionRequest alloc] initWithDailyid:self.topModel.dailyid];
+    [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+        
+        [hud hideAnimated:NO];
+        self.collectBtn.selected = !self.collectBtn.isSelected;
+        if (self.collectBtn.isSelected) {
+            [MBProgressHUD showSuccessWithText:@"收藏成功" inView:self];
+        }else{
+            [MBProgressHUD showSuccessWithText:@"取消成功" inView:self];
+        }
+        
+    } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+        
+        [hud hideAnimated:NO];
+        [MBProgressHUD showTextHUDWithText:@"操作失败" inView:self];
+        
+    } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
+        
+        [hud hideAnimated:NO];
+        [MBProgressHUD showTextHUDWithText:@"操作失败" inView:self];
+        
+    }];
+}
+
+- (void)retryToGetIsCollection
+{
+    [MBProgressHUD showTextHUDWithText:@"正在获取收藏状态" inView:self];
+    [self checkIsCollection];
 }
 
 - (void)setUpMinStyle
 {
     CGFloat topHeight = self.bounds.size.width / 750.f * 488.f;
     self.topImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, topHeight)];
+    self.topImageView.backgroundColor = UIColorFromRGB(0xf6f2ed);
     self.topImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.topImageView.layer.masksToBounds = YES;
     [self.topImageView sd_setImageWithURL:[NSURL URLWithString:self.topModel.imgUrl]];

@@ -53,7 +53,6 @@
 		96D357AE1F70C8EB00BF35EB /* ZXAllArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357AD1F70C8EB00BF35EB /* ZXAllArticleViewController.m */; };
 		96D357B21F7115E500BF35EB /* HomeViewRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357B11F7115E500BF35EB /* HomeViewRequest.m */; };
 		96D357B61F71199000BF35EB /* HomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357B51F71199000BF35EB /* HomeViewModel.m */; };
-		96D357BF1F711B8F00BF35EB /* SpecialArtCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357B81F711B8F00BF35EB /* SpecialArtCell.m */; };
 		96D357C01F711B8F00BF35EB /* SpecialImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357BA1F711B8F00BF35EB /* SpecialImageCell.m */; };
 		96D357C11F711B8F00BF35EB /* SpecialTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357BC1F711B8F00BF35EB /* SpecialTextCell.m */; };
 		96D357C21F711B8F00BF35EB /* SpecialTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357BE1F711B8F00BF35EB /* SpecialTitleCell.m */; };
@@ -182,8 +181,6 @@
 		96D357B11F7115E500BF35EB /* HomeViewRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewRequest.m; sourceTree = "<group>"; };
 		96D357B41F71199000BF35EB /* HomeViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewModel.h; sourceTree = "<group>"; };
 		96D357B51F71199000BF35EB /* HomeViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewModel.m; sourceTree = "<group>"; };
-		96D357B71F711B8F00BF35EB /* SpecialArtCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialArtCell.h; sourceTree = "<group>"; };
-		96D357B81F711B8F00BF35EB /* SpecialArtCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialArtCell.m; sourceTree = "<group>"; };
 		96D357B91F711B8F00BF35EB /* SpecialImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialImageCell.h; sourceTree = "<group>"; };
 		96D357BA1F711B8F00BF35EB /* SpecialImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialImageCell.m; sourceTree = "<group>"; };
 		96D357BB1F711B8F00BF35EB /* SpecialTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialTextCell.h; sourceTree = "<group>"; };
@@ -245,8 +242,6 @@
 			children = (
 				064304F81F70EAC5004EC8A9 /* HomeDetailView.h */,
 				064304F91F70EAC5004EC8A9 /* HomeDetailView.m */,
-				96D357B71F711B8F00BF35EB /* SpecialArtCell.h */,
-				96D357B81F711B8F00BF35EB /* SpecialArtCell.m */,
 				96D357B91F711B8F00BF35EB /* SpecialImageCell.h */,
 				96D357BA1F711B8F00BF35EB /* SpecialImageCell.m */,
 				96D357BB1F711B8F00BF35EB /* SpecialTextCell.h */,
@@ -877,7 +872,6 @@
 				069C371E1F6F697C00FE2BB0 /* TYCyclePagerTransformLayout.m in Sources */,
 				96D357851F6FC16700BF35EB /* MyCollectionRequest.m in Sources */,
 				063380601F73B4AC00B07FE5 /* HomeDateView.m in Sources */,
-				96D357BF1F711B8F00BF35EB /* SpecialArtCell.m in Sources */,
 				069C37531F6FD19900FE2BB0 /* ZXKeyWordsView.m in Sources */,
 				96D357CE1F726C3700BF35EB /* ZXDetailArticleViewController.m in Sources */,
 				0653D0441F6BAD8A0054A818 /* DesUtil.m in Sources */,

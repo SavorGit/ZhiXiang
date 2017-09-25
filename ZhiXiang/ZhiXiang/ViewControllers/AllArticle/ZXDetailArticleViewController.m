@@ -82,7 +82,6 @@
         self.topModel.title = [dataDict objectForKey:@"title"];
         self.topModel.sourceName = [dataDict objectForKey:@"sourceName"];
         self.topModel.imgUrl = [dataDict objectForKey:@"imgUrl"];
-        self.topModel.imageURL = self.topModel.imgUrl;
         self.topModel.bespeak_time = [dataDict objectForKey:@"bespeak_time"];
         self.topModel.contentType = 1;
         [self.dataSource addObject:self.topModel];
@@ -101,7 +100,6 @@
         [ZXTools saveFileOnPath:self.cachePath withArray:resultArr];
         for (int i = 0; i < resultArr.count; i ++) {
             HomeViewModel *tmpModel = [[HomeViewModel alloc] initWithDictionary:resultArr[i]];
-            tmpModel.type = 1;
             [self.dataSource addObject:tmpModel];
         }
         

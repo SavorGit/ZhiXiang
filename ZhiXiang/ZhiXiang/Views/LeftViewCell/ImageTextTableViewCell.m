@@ -116,7 +116,7 @@
     if ([self.imageURL isEqualToString:model.imgUrl]) {
         return;
     }
-    self.imageURL = model.imageURL;
+    self.imageURL = model.imgUrl;
     
     [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.imgUrl] placeholderImage:[UIImage imageNamed:@"zanwu"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         

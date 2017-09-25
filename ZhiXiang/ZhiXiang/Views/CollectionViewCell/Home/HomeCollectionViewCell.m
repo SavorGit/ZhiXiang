@@ -52,7 +52,7 @@
     self.bgImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     self.bgImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.bgImageView.layer.masksToBounds = YES;
-    self.bgImageView.backgroundColor = [UIColor clearColor];
+    self.bgImageView.backgroundColor = UIColorFromRGB(0xf6f2ed);
     [_topView addSubview:self.bgImageView];
     [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
