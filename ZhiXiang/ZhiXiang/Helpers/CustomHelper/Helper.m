@@ -182,64 +182,6 @@
     return [formatter stringFromDate:date];
 }
 
-+ (void)showSuccessHUDInView:(UIView *)view title:(NSString *)title
-{
-    return [self showTextHUDwithTitle:title delay:1.5f];
-}
-
-+ (void)showTextHUDwithTitle:(NSString *)title
-{
-    if (title && title.length > 0) {
-        UIView * tempView = [[UIApplication sharedApplication].keyWindow viewWithTag:888];
-        if (tempView) {
-            [tempView removeFromSuperview];
-        }
-        
-        [self showTextHUDwithTitle:title delay:1.5f];
-    }
-}
-
-+ (void)showTextHUDwithTitle:(NSString *)title delay:(CGFloat)delay
-{
-    if (title && title.length > 0) {
-        UIView * tempView = [[UIApplication sharedApplication].keyWindow viewWithTag:888];
-        if (tempView) {
-            [tempView removeFromSuperview];
-        }
-        
-        CGRect rect = [title boundingRectWithSize:CGSizeMake(kMainBoundsWidth - 60, 200) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]} context:nil];
-        
-        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, rect.size.width + 30, rect.size.height + 20)];
-        view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.75f];
-        view.center = CGPointMake(kMainBoundsWidth / 2, kMainBoundsHeight / 2);
-        view.layer.cornerRadius = 5.f;
-        view.clipsToBounds = YES;
-        view.tag = 888;
-        
-        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width + 10, rect.size.height + 10)];
-        label.numberOfLines = 0;
-        label.textColor = [UIColor whiteColor];
-        label.text = title;
-        label.backgroundColor = [UIColor clearColor];
-        label.center = CGPointMake(view.frame.size.width / 2, view.frame.size.height / 2);
-        label.textAlignment = NSTextAlignmentCenter;
-        label.font = [UIFont systemFontOfSize:17];
-        [view addSubview:label];
-        [[UIApplication sharedApplication].keyWindow addSubview:view];
-        [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(rect.size.width + 30);
-            make.height.mas_equalTo(rect.size.height + 20);
-            make.center.mas_equalTo([UIApplication sharedApplication].keyWindow);
-        }];
-        
-        [UIView animateWithDuration:0.5f delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            view.alpha = 0.f;
-        } completion:^(BOOL finished) {
-            [view removeFromSuperview];
-        }];
-    }
-}
-
 + (BOOL) isBlankString:(NSString *)string {
     if (![string isKindOfClass:[NSString class]]) {
         return YES;

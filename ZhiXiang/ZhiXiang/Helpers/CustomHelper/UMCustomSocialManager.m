@@ -11,6 +11,7 @@
 #import "GCCKeyChain.h"
 #import "SDImageCache.h"
 #import "Helper.h"
+#import "MBProgressHUD+Custom.h"
 
 @interface UMCustomSocialManager ()
 
@@ -63,9 +64,9 @@
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:VC completion:^(id result, NSError *error) {
         
         if (error) {
-            [Helper showTextHUDwithTitle:@"分享失败" delay:1.5f];
+            [MBProgressHUD showTextHUDWithText:@"分享失败" inView:VC.view];
         }else{
-            [Helper showTextHUDwithTitle:@"分享成功" delay:1.5f];
+            [MBProgressHUD showTextHUDWithText:@"分享失败" inView:VC.view];
         }
         
     }];

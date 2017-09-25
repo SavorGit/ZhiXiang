@@ -24,7 +24,10 @@
     
     // Set the text mode to show only text.
     hud.mode = MBProgressHUDModeText;
+    hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+    hud.bezelView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.8f];
     hud.label.text = text;
+    hud.label.textColor = [UIColor whiteColor];
     // Move to bottm center.
     hud.offset = CGPointMake(0.f, 0.f);
     
@@ -46,7 +49,7 @@
     // Optional label text.
     hud.label.text = text;
     
-    [hud hideAnimated:YES afterDelay:3.f];
+    [hud hideAnimated:YES afterDelay:1.f];
     
     return hud;
 }
