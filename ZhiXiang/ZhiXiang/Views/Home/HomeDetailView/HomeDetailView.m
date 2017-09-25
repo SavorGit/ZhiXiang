@@ -113,15 +113,11 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
         NSDictionary * dataDict = [response objectForKey:@"result"];
         BOOL isCollected = [[dataDict objectForKey:@"state"] boolValue];
         
-        if (isCollected) {
-            self.collectBtn.selected = YES;
-        }else{
-            self.collectBtn.selected = NO;
-        }
+        self.collectBtn.selected = isCollected;
         
         self.isCheckCollectting = NO;
         [self.collectBtn addTarget:self action:@selector(collectAction) forControlEvents:UIControlEventTouchUpInside];
-        
+        [self autoCollectButton];
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
         self.isCheckCollectting = NO;
@@ -154,7 +150,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
         }else{
             [MBProgressHUD showSuccessWithText:@"取消成功" inView:self];
         }
-        
+        [self autoCollectButton];
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
         [hud hideAnimated:NO];
@@ -166,6 +162,17 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
         [MBProgressHUD showTextHUDWithText:@"操作失败" inView:self];
         
     }];
+}
+
+- (void)autoCollectButton
+{
+    if (self.collectBtn.isSelected) {
+        [self.collectBtn setImage:[UIImage imageNamed:@"yishoucang"] forState:UIControlStateNormal];
+        [self.collectBtn setImage:[UIImage imageNamed:@"yishoucang"] forState:UIControlStateHighlighted];
+    }else{
+        [self.collectBtn setImage:[UIImage imageNamed:@"shoucang"] forState:UIControlStateNormal];
+        [self.collectBtn setImage:[UIImage imageNamed:@"shoucang"] forState:UIControlStateHighlighted];
+    }
 }
 
 - (void)retryToGetIsCollection
@@ -446,12 +453,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
             make.right.mas_equalTo(- 15);
         }];
         
-        _collectBtn = [[UIButton alloc] initWithFrame:CGRectZero];
-        [_collectBtn setImage:[UIImage imageNamed:@"shoucang"] forState:UIControlStateNormal];
-        [_collectBtn setImage:[UIImage imageNamed:@"yishoucang"] forState:UIControlStateSelected];
-        [_collectBtn addTarget:self action:@selector(collectAction) forControlEvents:UIControlEventTouchUpInside];
-        _collectBtn.tag = 102;
-        [_blackView addSubview:_collectBtn];
+        [_blackView addSubview:self.collectBtn];
         [_collectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(40, 44));
             make.top.mas_equalTo(20);
@@ -459,6 +461,17 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
         }];
     }
     return _blackView;
+}
+
+-(UIButton *)collectBtn
+{
+    if (!_collectBtn) {
+        _collectBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+        [_collectBtn setImage:[UIImage imageNamed:@"shoucang"] forState:UIControlStateNormal];
+        [_collectBtn addTarget:self action:@selector(collectAction) forControlEvents:UIControlEventTouchUpInside];
+        [_collectBtn setAdjustsImageWhenHighlighted:NO];
+    }
+    return _collectBtn;
 }
 
 - (void)backButtonClick

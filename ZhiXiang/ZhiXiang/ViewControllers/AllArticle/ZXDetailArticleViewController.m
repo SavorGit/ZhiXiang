@@ -18,7 +18,7 @@
 #import "HomeViewModel.h"
 #import "UIImageView+WebCache.h"
 #import "ZXIsOrCollectionRequest.h"
-#import "Helper.h"
+#import "MBProgressHUD+Custom.h"
 
 @interface ZXDetailArticleViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -366,18 +366,18 @@
         if ([[dic objectForKey:@"code"] integerValue] == 10000) {
             if (isCollect == 0) {
                 self.topModel.is_collect = 0;
-                [Helper showSuccessHUDInView:self.view title:@"取消成功"];
+                [MBProgressHUD showSuccessWithText:@"取消成功" inView:self.view];
             }else{
                 self.topModel.is_collect = 1;
-                [Helper showSuccessHUDInView:self.view title:@"收藏成功"];
+                [MBProgressHUD showSuccessWithText:@"收藏成功" inView:self.view];
             }
             self.collectBtn.selected = !self.collectBtn.selected;
         }
         
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
-        [Helper showTextHUDwithTitle:@"收藏失败" delay:1.f];
+        [MBProgressHUD showTextHUDWithText:@"收藏失败" inView:self.view];
     } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
-        [Helper showTextHUDwithTitle:@"收藏失败" delay:1.f];
+        [MBProgressHUD showTextHUDWithText:@"收藏失败" inView:self.view];
     }];
 }
 
@@ -386,8 +386,18 @@
     [self dismissViewControllerAnimated:YES completion:^{
         
     }];
-    
 }
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
