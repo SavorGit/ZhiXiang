@@ -18,7 +18,7 @@
 #import "MBProgressHUD+Custom.h"
 #import "HomeKeyWordRequest.h"
 
-@interface HomeViewController () <TYCyclePagerViewDataSource, TYCyclePagerViewDelegate>
+@interface HomeViewController () <TYCyclePagerViewDataSource, TYCyclePagerViewDelegate, HomeStatusCellDelegate>
 
 @property (nonatomic, strong) TYCyclePagerView *pagerView;
 @property (nonatomic, strong) UIView * maskView;
@@ -133,12 +133,18 @@
     }else{
         HomeStatusCollectionViewCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"HomeStatusCollectionViewCell" forIndex:index];
         self.statusCell = cell;
+        self.statusCell.delegate = self;
         if (self.isRequest) {
             [self.statusCell showLoading];
         }
         
         return cell;
     }
+}
+
+- (void)HomeStatusDidBeRetryLoadData
+{
+    [self dataRequest];
 }
 
 - (void)startLoadMoreData
