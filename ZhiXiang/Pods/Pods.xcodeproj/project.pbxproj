@@ -1875,6 +1875,13 @@
 			path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/SystemConfiguration.framework;
 			sourceTree = DEVELOPER_DIR;
 		};
+		0EDD2713DDBB073CA65AF643C45269B8 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = UMSocialCore.framework;
+			path = UShareSDK/UMSocialSDK/UMSocialCore.framework;
+			sourceTree = "<group>";
+		};
 		0FF21663C6D72C19DFE5FA6C4D17A608 = {
 			isa = PBXFileReference;
 			includeInIndex = 1;
@@ -1896,6 +1903,14 @@
 			lastKnownFileType = sourcecode.c.objc;
 			name = MJRefreshBackNormalFooter.m;
 			path = MJRefresh/Custom/Footer/Back/MJRefreshBackNormalFooter.m;
+			sourceTree = "<group>";
+		};
+		10C4CA9174F1282F48ED233CF4CAF504 = {
+			isa = PBXFileReference;
+			includeInIndex = 1;
+			lastKnownFileType = sourcecode.c.h;
+			name = UMSocialWechatHandler.h;
+			path = UShareSDK/SocialLibraries/WeChat/UMSocialWechatHandler.h;
 			sourceTree = "<group>";
 		};
 		11536C57C5550521A10D306A9CFE16AC = {
@@ -2004,6 +2019,14 @@
 			lastKnownFileType = sourcecode.c.objc;
 			name = DGActivityIndicatorCookieTerminatorAnimation.m;
 			path = DGActivityIndicatorView/Animations/DGActivityIndicatorCookieTerminatorAnimation.m;
+			sourceTree = "<group>";
+		};
+		1E8A027E3F01F311E1A98E4827CF6825 = {
+			isa = PBXFileReference;
+			includeInIndex = 1;
+			lastKnownFileType = archive.ar;
+			name = libSocialWeChat.a;
+			path = UShareSDK/SocialLibraries/WeChat/libSocialWeChat.a;
 			sourceTree = "<group>";
 		};
 		1F3410770BDF5D618626DAE572F7BDD2 = {
@@ -2319,14 +2342,6 @@
 			lastKnownFileType = sourcecode.c.h;
 			name = DGActivityIndicatorTriplePulseAnimation.h;
 			path = DGActivityIndicatorView/Animations/DGActivityIndicatorTriplePulseAnimation.h;
-			sourceTree = "<group>";
-		};
-		42E934E5F03F8A719F22F4D8E5C09FDD = {
-			isa = PBXFileReference;
-			includeInIndex = 1;
-			lastKnownFileType = archive.ar;
-			name = libUMSocialLog.a;
-			path = UShareSDK/UMSocialSDKPlugin/libUMSocialLog.a;
 			sourceTree = "<group>";
 		};
 		42FE27BFE2ABB2DEC2FCCC67C445BF0F = {
@@ -2670,6 +2685,14 @@
 			path = "UIKit+AFNetworking/AFNetworkActivityIndicatorManager.h";
 			sourceTree = "<group>";
 		};
+		62D80D83CC24A022A1F97BA468E9EEAB = {
+			isa = PBXFileReference;
+			includeInIndex = 1;
+			lastKnownFileType = "wrapper.plug-in";
+			name = UMSocialSDKResources.bundle;
+			path = UShareSDK/UMSocialUI/UMSocialSDKResources.bundle;
+			sourceTree = "<group>";
+		};
 		636337CD424C1A6FD1149E7814EFE50B = {
 			isa = PBXFileReference;
 			includeInIndex = 1;
@@ -2818,13 +2841,6 @@
 			path = "DGActivityIndicatorView-dummy.m";
 			sourceTree = "<group>";
 		};
-		71C06B66C579B04610708F46CCB1F1BD = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
-			name = UMSocialCore.framework;
-			path = UShareSDK/UMSocialSDK/UMSocialCore.framework;
-			sourceTree = "<group>";
-		};
 		73BF62797B4CB2A1C4729D00DA72BB71 = {
 			isa = PBXFileReference;
 			includeInIndex = 1;
@@ -2968,6 +2984,13 @@
 			path = Masonry/MASViewAttribute.h;
 			sourceTree = "<group>";
 		};
+		7E019FC4EEEA360C6673A2BA5D04FE96 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = UMSocialNetwork.framework;
+			path = UShareSDK/UMSocialSDK/UMSocialNetwork.framework;
+			sourceTree = "<group>";
+		};
 		7E888CBA961D54D6577CB8D9E5E0FD7B = {
 			isa = PBXFileReference;
 			includeInIndex = 1;
@@ -3016,6 +3039,13 @@
 			path = SDWebImage/SDWebImageManager.h;
 			sourceTree = "<group>";
 		};
+		854985CA37EFE2876B8F6F7E1DC41552 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = UShareUI.framework;
+			path = UShareSDK/UMSocialUI/UShareUI.framework;
+			sourceTree = "<group>";
+		};
 		854C85B95496D2BF55F86007A6E62581 = {
 			isa = PBXFileReference;
 			includeInIndex = 1;
@@ -3037,14 +3067,6 @@
 			lastKnownFileType = sourcecode.c.objc;
 			name = AFAutoPurgingImageCache.m;
 			path = "UIKit+AFNetworking/AFAutoPurgingImageCache.m";
-			sourceTree = "<group>";
-		};
-		8682421139AD408A043111B97D51200F = {
-			isa = PBXFileReference;
-			includeInIndex = 1;
-			lastKnownFileType = archive.ar;
-			name = libSocialWeChat.a;
-			path = UShareSDK/SocialLibraries/WeChat/libSocialWeChat.a;
 			sourceTree = "<group>";
 		};
 		87DC6F24F6E6F90D82DE2699BC2846CC = {
@@ -3102,14 +3124,6 @@
 			path = DGActivityIndicatorView/Animations/DGActivityIndicatorBallGridPulseAnimation.m;
 			sourceTree = "<group>";
 		};
-		8C24D8443BE3FAE0FC7B20E36A7DC8C0 = {
-			isa = PBXFileReference;
-			includeInIndex = 1;
-			lastKnownFileType = "wrapper.plug-in";
-			name = UMSocialSDKResources.bundle;
-			path = UShareSDK/UMSocialUI/UMSocialSDKResources.bundle;
-			sourceTree = "<group>";
-		};
 		8C84C3479ECE2B7025652582A0DBC241 = {
 			isa = PBXFileReference;
 			includeInIndex = 1;
@@ -3142,27 +3156,12 @@
 			path = AFNetworking/AFURLSessionManager.h;
 			sourceTree = "<group>";
 		};
-		90A6D82D82B7325C173D96C1E6B61F90 = {
-			isa = PBXFileReference;
-			includeInIndex = 1;
-			lastKnownFileType = archive.ar;
-			name = libSocialQQ.a;
-			path = UShareSDK/SocialLibraries/QQ/libSocialQQ.a;
-			sourceTree = "<group>";
-		};
 		914DB333CEE44E79562A18B9FE53DBFD = {
 			isa = PBXFileReference;
 			includeInIndex = 1;
 			lastKnownFileType = sourcecode.c.h;
 			name = BGNetworkCache.h;
 			path = BGNetwork/BGNetworkCache.h;
-			sourceTree = "<group>";
-		};
-		915E361AEE8BF21B307F98EEDD2A3A36 = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
-			name = UMSocialNetwork.framework;
-			path = UShareSDK/UMSocialSDK/UMSocialNetwork.framework;
 			sourceTree = "<group>";
 		};
 		925DD4245A7229182C1CB3771F1D4BBE = {
@@ -3270,14 +3269,6 @@
 			path = DGActivityIndicatorView/Animations/DGActivityIndicatorTwoDotsAnimation.h;
 			sourceTree = "<group>";
 		};
-		9B8F7E5F2C8BB55A65F267F8BBEC2CE5 = {
-			isa = PBXFileReference;
-			includeInIndex = 1;
-			lastKnownFileType = archive.ar;
-			name = libSocialSina.a;
-			path = UShareSDK/SocialLibraries/Sina/libSocialSina.a;
-			sourceTree = "<group>";
-		};
 		9BB4CFC72C2722145EF9E3BA787B6D8D = {
 			isa = PBXFileReference;
 			includeInIndex = 1;
@@ -3300,14 +3291,6 @@
 			lastKnownFileType = sourcecode.c.h;
 			name = BGAFHTTPClient.h;
 			path = BGNetwork/BGAFHTTPClient.h;
-			sourceTree = "<group>";
-		};
-		9F02D429C87FCDEFFEC91ED44C9AE3B0 = {
-			isa = PBXFileReference;
-			includeInIndex = 1;
-			lastKnownFileType = sourcecode.c.h;
-			name = UMSocialQQHandler.h;
-			path = UShareSDK/SocialLibraries/QQ/UMSocialQQHandler.h;
 			sourceTree = "<group>";
 		};
 		A017DD967EB4ED451DE87D4876E9B617 = {
@@ -3575,14 +3558,6 @@
 			path = Masonry/MASLayoutConstraint.m;
 			sourceTree = "<group>";
 		};
-		BD1F901F504AEA8973639145F3D28FD7 = {
-			isa = PBXFileReference;
-			includeInIndex = 1;
-			lastKnownFileType = sourcecode.c.h;
-			name = UMSocialWechatHandler.h;
-			path = UShareSDK/SocialLibraries/WeChat/UMSocialWechatHandler.h;
-			sourceTree = "<group>";
-		};
 		BF0C1CD526002087B3360166D3381000 = {
 			isa = PBXFileReference;
 			includeInIndex = 1;
@@ -3597,13 +3572,6 @@
 			lastKnownFileType = sourcecode.c.objc;
 			name = "UIImage+MultiFormat.m";
 			path = "SDWebImage/UIImage+MultiFormat.m";
-			sourceTree = "<group>";
-		};
-		C1683B3230126266E2ABD1E4C3DB2348 = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
-			name = UShareUI.framework;
-			path = UShareSDK/UMSocialUI/UShareUI.framework;
 			sourceTree = "<group>";
 		};
 		C26F2A51E6CB0A35EB8C0438B92C5BF5 = {
@@ -3973,6 +3941,14 @@
 			path = MJRefresh/Base/MJRefreshComponent.m;
 			sourceTree = "<group>";
 		};
+		F0C3578E58134860E8A866572C84D774 = {
+			isa = PBXFileReference;
+			includeInIndex = 1;
+			lastKnownFileType = archive.ar;
+			name = libUMSocialLog.a;
+			path = UShareSDK/UMSocialSDKPlugin/libUMSocialLog.a;
+			sourceTree = "<group>";
+		};
 		F26089FCAC749FCEAC1DF92F99BBE9A5 = {
 			isa = PBXFileReference;
 			includeInIndex = 1;
@@ -3986,6 +3962,14 @@
 			lastKnownFileType = sourcecode.c.h;
 			name = MJRefreshFooter.h;
 			path = MJRefresh/Base/MJRefreshFooter.h;
+			sourceTree = "<group>";
+		};
+		F36A58B21F3D6D471F28FD569068A023 = {
+			isa = PBXFileReference;
+			includeInIndex = 1;
+			lastKnownFileType = "wrapper.plug-in";
+			name = UMSocialSDKPromptResources.bundle;
+			path = UShareSDK/UMSocialSDK/UMSocialSDKPromptResources.bundle;
 			sourceTree = "<group>";
 		};
 		F39F784F3C5EF0FCF6F1D9C9D54FB23D = {
@@ -4017,14 +4001,6 @@
 			lastKnownFileType = sourcecode.c.objc;
 			name = DGActivityIndicatorBallClipRotateMultipleAnimation.m;
 			path = DGActivityIndicatorView/Animations/DGActivityIndicatorBallClipRotateMultipleAnimation.m;
-			sourceTree = "<group>";
-		};
-		F7647F16432726F4403F1322CB447E37 = {
-			isa = PBXFileReference;
-			includeInIndex = 1;
-			lastKnownFileType = sourcecode.c.h;
-			name = UMSocialSinaHandler.h;
-			path = UShareSDK/SocialLibraries/Sina/UMSocialSinaHandler.h;
 			sourceTree = "<group>";
 		};
 		F874B3C45D285DC0F2DB839A2AC5A9B1 = {
@@ -4080,14 +4056,6 @@
 			lastKnownFileType = sourcecode.c.h;
 			name = "UIImage+GIF.h";
 			path = "SDWebImage/UIImage+GIF.h";
-			sourceTree = "<group>";
-		};
-		FF6CF8AD7840ED90C0E8672576FE58B0 = {
-			isa = PBXFileReference;
-			includeInIndex = 1;
-			lastKnownFileType = "wrapper.plug-in";
-			name = UMSocialSDKPromptResources.bundle;
-			path = UShareSDK/UMSocialSDK/UMSocialSDKPromptResources.bundle;
 			sourceTree = "<group>";
 		};
 /* End PBXFileReference section */
@@ -4177,14 +4145,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		010416A9AE129FB2EC2A982AC6D6C985 = {
+		036B951D4302BF240E7495F523686DA1 = {
 			isa = PBXGroup;
 			children = (
-				1BC77F480716DF051154F788E67055AE,
-				51C568EB56BAD53E9964C9BAAEF908FA,
-				91E1DCC766AE306554112A88D69E0DFA,
+				27F60ED38EA283C02C4D0B9ECB1A032E,
 			);
-			name = Social;
+			name = Network;
 			sourceTree = "<group>";
 		};
 		04AA04D6503FD70DE05135F8985052AF = {
@@ -4196,31 +4162,6 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/AFNetworking";
-			sourceTree = "<group>";
-		};
-		057B30C92A4793C853F5563434A39D23 = {
-			isa = PBXGroup;
-			children = (
-				ED2AEE453138AAF17CDCB0BCAF224808,
-				0D02AA3047A8A94D00A6113669FB3714,
-			);
-			name = Core;
-			sourceTree = "<group>";
-		};
-		05C10574233911D70FB5B38B9188D7AC = {
-			isa = PBXGroup;
-			children = (
-				C1683B3230126266E2ABD1E4C3DB2348,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		0D02AA3047A8A94D00A6113669FB3714 = {
-			isa = PBXGroup;
-			children = (
-				FF6CF8AD7840ED90C0E8672576FE58B0,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		0FCA4735B3150F975853BD222B13D86E = {
@@ -4250,21 +4191,25 @@
 			name = UIKit;
 			sourceTree = "<group>";
 		};
-		11B440C61E42CA176049A1586DC1C8F0 = {
+		124BDCC99A758C2A64B64B22458F2E73 = {
 			isa = PBXGroup;
 			children = (
-				8C24D8443BE3FAE0FC7B20E36A7DC8C0,
+				10C4CA9174F1282F48ED233CF4CAF504,
+				BE779A4724EA6DBC5DEB551BD27B7FEF,
 			);
-			name = Resources;
+			name = ReducedWeChat;
 			sourceTree = "<group>";
 		};
-		1BC77F480716DF051154F788E67055AE = {
+		200A52EAFC4C3789AEA32262FE2E93BA = {
 			isa = PBXGroup;
 			children = (
-				9F02D429C87FCDEFFEC91ED44C9AE3B0,
-				4D0BB29779B1E4F2761C48565743363E,
+				E8BF03F110ABB690C95DFF97579736C3,
+				036B951D4302BF240E7495F523686DA1,
+				ED4B2BF6B7EA92AFE76FF9531F0E3452,
+				7D8A928549E4187DEA30347AC357F23F,
 			);
-			name = ReducedQQ;
+			name = UMengUShare;
+			path = UMengUShare;
 			sourceTree = "<group>";
 		};
 		21044D3ECFC12F0B1B79D775FCE7463F = {
@@ -4282,10 +4227,10 @@
 			path = "Target Support Files/Pods-ZhiXiang";
 			sourceTree = "<group>";
 		};
-		21CFB653DAC094C2D23C249ABA81CF6D = {
+		27F60ED38EA283C02C4D0B9ECB1A032E = {
 			isa = PBXGroup;
 			children = (
-				8682421139AD408A043111B97D51200F,
+				7E019FC4EEEA360C6673A2BA5D04FE96,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -4393,14 +4338,6 @@
 			path = AFNetworking;
 			sourceTree = "<group>";
 		};
-		4D0BB29779B1E4F2761C48565743363E = {
-			isa = PBXGroup;
-			children = (
-				90A6D82D82B7325C173D96C1E6B61F90,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		4E5964A2546B3A2CE4B9814ED49CBD19 = {
 			isa = PBXGroup;
 			children = (
@@ -4410,15 +4347,6 @@
 				507A03E88EBF9D6591CF8C98C741EAF8,
 			);
 			name = Serialization;
-			sourceTree = "<group>";
-		};
-		51C568EB56BAD53E9964C9BAAEF908FA = {
-			isa = PBXGroup;
-			children = (
-				F7647F16432726F4403F1322CB447E37,
-				DEAA1357BA7C31B2B82632C4EB452474,
-			);
-			name = ReducedSina;
 			sourceTree = "<group>";
 		};
 		53FE4DA9FC5A49631BE00B7576AD679C = {
@@ -4549,6 +4477,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7D8A928549E4187DEA30347AC357F23F = {
+			isa = PBXGroup;
+			children = (
+				8CCF25FCF3469CE3D1F402203C282C76,
+				EDAD405EEE6737D76E073A7C4EFE7E55,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
@@ -4569,6 +4506,14 @@
 			);
 			name = MBProgressHUD;
 			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		8CCF25FCF3469CE3D1F402203C282C76 = {
+			isa = PBXGroup;
+			children = (
+				854985CA37EFE2876B8F6F7E1DC41552,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		8E33BA321398CFB5E1BAE36B2978EB6A = {
@@ -4594,15 +4539,6 @@
 			path = LGSideMenuController;
 			sourceTree = "<group>";
 		};
-		91E1DCC766AE306554112A88D69E0DFA = {
-			isa = PBXGroup;
-			children = (
-				BD1F901F504AEA8973639145F3D28FD7,
-				21CFB653DAC094C2D23C249ABA81CF6D,
-			);
-			name = ReducedWeChat;
-			sourceTree = "<group>";
-		};
 		9354865661F039A7F38F931839C92EE3 = {
 			isa = PBXGroup;
 			children = (
@@ -4617,6 +4553,15 @@
 				2A0C98137DC608635C475F8191FDD79A,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		9662A41A57F0CE5657469956DB7183EA = {
+			isa = PBXGroup;
+			children = (
+				F0C3578E58134860E8A866572C84D774,
+				0EDD2713DDBB073CA65AF643C45269B8,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		A165D4B5204CF08C093AB34BE9012C9E = {
@@ -4696,29 +4641,12 @@
 			path = "../Target Support Files/LGSideMenuController";
 			sourceTree = "<group>";
 		};
-		BEA5DC3F68D73F15D2E67792EF7A3C83 = {
+		BE779A4724EA6DBC5DEB551BD27B7FEF = {
 			isa = PBXGroup;
 			children = (
-				915E361AEE8BF21B307F98EEDD2A3A36,
+				1E8A027E3F01F311E1A98E4827CF6825,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C0F4E4EC61D3C2AACBB2640DEB7B54FB = {
-			isa = PBXGroup;
-			children = (
-				05C10574233911D70FB5B38B9188D7AC,
-				11B440C61E42CA176049A1586DC1C8F0,
-			);
-			name = UI;
-			sourceTree = "<group>";
-		};
-		C6C05A70EB5E034543AC6D9F81366793 = {
-			isa = PBXGroup;
-			children = (
-				BEA5DC3F68D73F15D2E67792EF7A3C83,
-			);
-			name = Network;
 			sourceTree = "<group>";
 		};
 		D9F1877BA922BB236118533AC8D34BC5 = {
@@ -4747,24 +4675,13 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		DEAA1357BA7C31B2B82632C4EB452474 = {
+		E8BF03F110ABB690C95DFF97579736C3 = {
 			isa = PBXGroup;
 			children = (
-				9B8F7E5F2C8BB55A65F267F8BBEC2CE5,
+				9662A41A57F0CE5657469956DB7183EA,
+				EF2E8AEBA3D5E48BD435790EE303AEBE,
 			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E6406CA2E4E7E665A5CE901318DC517B = {
-			isa = PBXGroup;
-			children = (
-				057B30C92A4793C853F5563434A39D23,
-				C6C05A70EB5E034543AC6D9F81366793,
-				010416A9AE129FB2EC2A982AC6D6C985,
-				C0F4E4EC61D3C2AACBB2640DEB7B54FB,
-			);
-			name = UMengUShare;
-			path = UMengUShare;
+			name = Core;
 			sourceTree = "<group>";
 		};
 		E96AB466FD886934085D3C928C428028 = {
@@ -4778,13 +4695,28 @@
 			path = "../Target Support Files/SDWebImage";
 			sourceTree = "<group>";
 		};
-		ED2AEE453138AAF17CDCB0BCAF224808 = {
+		ED4B2BF6B7EA92AFE76FF9531F0E3452 = {
 			isa = PBXGroup;
 			children = (
-				42E934E5F03F8A719F22F4D8E5C09FDD,
-				71C06B66C579B04610708F46CCB1F1BD,
+				124BDCC99A758C2A64B64B22458F2E73,
 			);
-			name = Frameworks;
+			name = Social;
+			sourceTree = "<group>";
+		};
+		EDAD405EEE6737D76E073A7C4EFE7E55 = {
+			isa = PBXGroup;
+			children = (
+				62D80D83CC24A022A1F97BA468E9EEAB,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		EF2E8AEBA3D5E48BD435790EE303AEBE = {
+			isa = PBXGroup;
+			children = (
+				F36A58B21F3D6D471F28FD569068A023,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		EFBCDDB1EE15B843594F0F3D3675C2E1 = {
@@ -4854,7 +4786,7 @@
 				85B8CD88B80C694234FCC24F2DB2BD6B,
 				30D65B9BA08D65F1C0D2361B343CE573,
 				738D3CF36175B40DF1014D71C1086046,
-				E6406CA2E4E7E665A5CE901318DC517B,
+				200A52EAFC4C3789AEA32262FE2E93BA,
 			);
 			name = Pods;
 			sourceTree = "<group>";
