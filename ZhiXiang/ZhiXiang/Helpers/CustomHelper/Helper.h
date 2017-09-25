@@ -53,4 +53,6 @@
 
 + (BOOL) isBlankString:(NSString *)string;
 
++ (NSString *)addURLParamsShareWith:(NSString *)url;
+
 @end

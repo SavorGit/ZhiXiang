@@ -11,6 +11,6 @@
 
 @interface ShareBoardView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame Model:(MyCollectionModel *)model;
+- (instancetype)initWithFrame:(CGRect)frame Model:(MyCollectionModel *)model andVC:(UIViewController *)VC ;
 
 @end

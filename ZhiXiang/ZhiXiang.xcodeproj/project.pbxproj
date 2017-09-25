@@ -39,6 +39,7 @@
 		06F2632A1F74DFEB001FB3F5 /* HomeStatusCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F263291F74DFEB001FB3F5 /* HomeStatusCollectionViewCell.m */; };
 		06F263721F7507A0001FB3F5 /* HomeKeyWordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F263711F7507A0001FB3F5 /* HomeKeyWordRequest.m */; };
 		969802081F78CE17008510DB /* ShareBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 969802071F78CE17008510DB /* ShareBoardView.m */; };
+		9698020B1F78D515008510DB /* UMCustomSocialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9698020A1F78D515008510DB /* UMCustomSocialManager.m */; };
 		96D357731F6FAE6F00BF35EB /* LeftTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357721F6FAE6F00BF35EB /* LeftTableViewCell.m */; };
 		96D357771F6FBDC000BF35EB /* MyCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357761F6FBDC000BF35EB /* MyCollectionViewController.m */; };
 		96D357801F6FC08C00BF35EB /* RD_MJRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D3577D1F6FC08C00BF35EB /* RD_MJRefreshFooter.m */; };
@@ -155,6 +156,8 @@
 		5BD8DB7D842D638A790B92D6 /* Pods-ZhiXiang.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiXiang.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiXiang/Pods-ZhiXiang.release.xcconfig"; sourceTree = "<group>"; };
 		969802061F78CE17008510DB /* ShareBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareBoardView.h; sourceTree = "<group>"; };
 		969802071F78CE17008510DB /* ShareBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareBoardView.m; sourceTree = "<group>"; };
+		969802091F78D515008510DB /* UMCustomSocialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMCustomSocialManager.h; sourceTree = "<group>"; };
+		9698020A1F78D515008510DB /* UMCustomSocialManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMCustomSocialManager.m; sourceTree = "<group>"; };
 		96D357711F6FAE6F00BF35EB /* LeftTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftTableViewCell.h; sourceTree = "<group>"; };
 		96D357721F6FAE6F00BF35EB /* LeftTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftTableViewCell.m; sourceTree = "<group>"; };
 		96D357751F6FBDC000BF35EB /* MyCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectionViewController.h; sourceTree = "<group>"; };
@@ -434,6 +437,8 @@
 		0653D02E1F6BABE50054A818 /* CustomHelper */ = {
 			isa = PBXGroup;
 			children = (
+				969802091F78D515008510DB /* UMCustomSocialManager.h */,
+				9698020A1F78D515008510DB /* UMCustomSocialManager.m */,
 				0653D02F1F6BABE50054A818 /* GCCGetInfo.h */,
 				0653D0301F6BABE50054A818 /* GCCGetInfo.m */,
 				0653D0311F6BABE50054A818 /* GCCKeyChain.h */,
@@ -843,6 +848,7 @@
 				064304FA1F70EAC5004EC8A9 /* HomeDetailView.m in Sources */,
 				0653D03D1F6BAC5E0054A818 /* ZXTools.m in Sources */,
 				0653D01A1F6BA8810054A818 /* ZXBaseNavigationController.m in Sources */,
+				9698020B1F78D515008510DB /* UMCustomSocialManager.m in Sources */,
 				0653D0211F6BA9180054A818 /* UIView+Additional.m in Sources */,
 				96D357D41F73517900BF35EB /* HeaderTableViewCell.m in Sources */,
 				069C37271F6F6A3400FE2BB0 /* HomeCollectionViewCell.m in Sources */,
