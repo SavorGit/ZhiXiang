@@ -15,6 +15,7 @@
 
 @property(nonatomic ,strong) MyCollectionModel *model;
 @property(nonatomic ,weak) UIViewController *VC;
+@property(nonatomic ,strong) UIImageView *bgView;
 
 @end
 
@@ -37,6 +38,10 @@
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(guidPress)];
         tap.numberOfTapsRequired = 1;
         [self addGestureRecognizer:tap];
+        
+        UIToolbar *toolBarView = [[UIToolbar alloc] initWithFrame:self.bounds];
+        toolBarView.barStyle = UIBarStyleBlackTranslucent;
+        [self addSubview:toolBarView];
         
         [self showViewWithAnimationDuration:.3f];
         
@@ -77,20 +82,20 @@
 
 - (void)creatSubViews{
     
-    UIImageView *bgView = [[UIImageView alloc] init];
+    self.bgView = [[UIImageView alloc] init];
     float bgVideoHeight = [Helper autoHeightWith:120];
-    bgView.frame = CGRectZero;
-    bgView.backgroundColor = [UIColor clearColor];
-    bgView.userInteractionEnabled = YES;
-    [self addSubview:bgView];
-    [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.bgView.frame = CGRectZero;
+    self.bgView.backgroundColor = [UIColor clearColor];
+    self.bgView.userInteractionEnabled = YES;
+    [self addSubview:self.bgView];
+    [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(kMainBoundsWidth,bgVideoHeight));
         make.center.mas_equalTo(self);
     }];
     
     UIView *leftLine = [[UIView alloc] initWithFrame:CGRectMake(60, 14.5, ([UIScreen mainScreen].bounds.size.width - 60 )/2 - 60, 1)];
     leftLine.backgroundColor = UIColorFromRGB(0xbbbbbb);
-    [bgView addSubview:leftLine];
+    [self.bgView addSubview:leftLine];
     
     UILabel *shareTLab = [[UILabel alloc] initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - 60)/2, 0, 60, 30)];
     shareTLab.text = @"分享到";
@@ -98,19 +103,23 @@
     shareTLab.textColor = UIColorFromRGB(0xbbbbbb);
     shareTLab.backgroundColor = [UIColor clearColor];
     shareTLab.textAlignment = NSTextAlignmentCenter;
-    [bgView addSubview:shareTLab];
+    [self.bgView addSubview:shareTLab];
     UIView *rightLine = [[UIView alloc] initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - 60)/2 + 60, 14.5, ([UIScreen mainScreen].bounds.size.width - 60)/2 - 60, 1)];
     rightLine.backgroundColor = UIColorFromRGB(0xbbbbbb);
-    [bgView addSubview:rightLine];
+    [self.bgView addSubview:rightLine];
     
+    [self creatContentViews];
+}
+
+- (void)creatContentViews{
     UIButton *shareWXBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     shareWXBtn.backgroundColor = [UIColor clearColor];
     [shareWXBtn setImage:[UIImage imageNamed:@"weixin"] forState:UIControlStateNormal];
     [shareWXBtn addTarget:self action:@selector(shareWxBtn) forControlEvents:UIControlEventTouchUpInside];
-    [bgView addSubview:shareWXBtn];
+    [self.bgView addSubview:shareWXBtn];
     [shareWXBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(38, 38));
-        make.top.mas_equalTo(shareTLab.mas_bottom).offset(10);
+        make.top.mas_equalTo(40);
         make.centerX.mas_equalTo(self.centerX).offset(- (19 + 45));
     }];
     
@@ -120,7 +129,7 @@
     shareWLab.textColor = UIColorFromRGB(0xffffff);
     shareWLab.backgroundColor = [UIColor clearColor];
     shareWLab.textAlignment = NSTextAlignmentCenter;
-    [bgView addSubview:shareWLab];
+    [self.bgView addSubview:shareWLab];
     [shareWLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(40, 20));
         make.top.mas_equalTo(shareWXBtn.mas_bottom).offset(5);
@@ -132,10 +141,10 @@
     shareFRBtn.backgroundColor = [UIColor clearColor];
     [shareFRBtn setImage:[UIImage imageNamed:@"pyq"] forState:UIControlStateNormal];
     [shareFRBtn addTarget:self action:@selector(shareFRBtn) forControlEvents:UIControlEventTouchUpInside];
-    [bgView addSubview:shareFRBtn];
+    [self.bgView addSubview:shareFRBtn];
     [shareFRBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(38, 38));
-        make.top.mas_equalTo(shareTLab.mas_bottom).offset(10);
+        make.top.mas_equalTo(40);
         make.centerX.mas_equalTo(self.centerX).offset(19 + 45);
     }];
     
@@ -145,14 +154,12 @@
     shareFLab.textColor = UIColorFromRGB(0xffffff);
     shareFLab.backgroundColor = [UIColor clearColor];
     shareFLab.textAlignment = NSTextAlignmentCenter;
-    [bgView addSubview:shareFLab];
+    [self.bgView addSubview:shareFLab];
     [shareFLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(40, 20));
         make.top.mas_equalTo(shareWXBtn.mas_bottom).offset(5);
         make.left.mas_equalTo(shareFRBtn.mas_left).offset(0);
     }];
-
-    
 }
 
 - (void)shareWxBtn{
