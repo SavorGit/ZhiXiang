@@ -29,6 +29,7 @@
 		0653D0441F6BAD8A0054A818 /* DesUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653D0421F6BAD8A0054A818 /* DesUtil.m */; };
 		0653D0471F6BB5920054A818 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653D0461F6BB5920054A818 /* LeftViewController.m */; };
 		068692D41F78A14600AE2EA1 /* IsCollectionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 068692D31F78A14600AE2EA1 /* IsCollectionRequest.m */; };
+		068692D71F78ED7D00AE2EA1 /* HomePageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 068692D61F78ED7D00AE2EA1 /* HomePageControl.m */; };
 		069C371E1F6F697C00FE2BB0 /* TYCyclePagerTransformLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C37191F6F697C00FE2BB0 /* TYCyclePagerTransformLayout.m */; };
 		069C371F1F6F697C00FE2BB0 /* TYCyclePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C371B1F6F697C00FE2BB0 /* TYCyclePagerView.m */; };
 		069C37201F6F697C00FE2BB0 /* TYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C371D1F6F697C00FE2BB0 /* TYPageControl.m */; };
@@ -134,6 +135,8 @@
 		0653D0461F6BB5920054A818 /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
 		068692D21F78A14600AE2EA1 /* IsCollectionRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IsCollectionRequest.h; sourceTree = "<group>"; };
 		068692D31F78A14600AE2EA1 /* IsCollectionRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IsCollectionRequest.m; sourceTree = "<group>"; };
+		068692D51F78ED7D00AE2EA1 /* HomePageControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageControl.h; sourceTree = "<group>"; };
+		068692D61F78ED7D00AE2EA1 /* HomePageControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageControl.m; sourceTree = "<group>"; };
 		069C37181F6F697C00FE2BB0 /* TYCyclePagerTransformLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYCyclePagerTransformLayout.h; sourceTree = "<group>"; };
 		069C37191F6F697C00FE2BB0 /* TYCyclePagerTransformLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYCyclePagerTransformLayout.m; sourceTree = "<group>"; };
 		069C371A1F6F697C00FE2BB0 /* TYCyclePagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYCyclePagerView.h; sourceTree = "<group>"; };
@@ -258,6 +261,8 @@
 				96D357C41F711E5900BF35EB /* SpecialHeaderView.m */,
 				96D357D21F73517900BF35EB /* HeaderTableViewCell.h */,
 				96D357D31F73517900BF35EB /* HeaderTableViewCell.m */,
+				068692D51F78ED7D00AE2EA1 /* HomePageControl.h */,
+				068692D61F78ED7D00AE2EA1 /* HomePageControl.m */,
 			);
 			path = HomeDetailView;
 			sourceTree = "<group>";
@@ -872,6 +877,7 @@
 				96D357A41F70B81C00BF35EB /* NoNetWorkView.m in Sources */,
 				96D357801F6FC08C00BF35EB /* RD_MJRefreshFooter.m in Sources */,
 				96D357C11F711B8F00BF35EB /* SpecialTextCell.m in Sources */,
+				068692D71F78ED7D00AE2EA1 /* HomePageControl.m in Sources */,
 				068692D41F78A14600AE2EA1 /* IsCollectionRequest.m in Sources */,
 				0653D0471F6BB5920054A818 /* LeftViewController.m in Sources */,
 				0653D0381F6BABE50054A818 /* GCCKeyChain.m in Sources */,
