@@ -18,6 +18,8 @@
 #import "IsCollectionRequest.h"
 #import "ZXIsOrCollectionRequest.h"
 #import "MBProgressHUD+Custom.h"
+#import "UMCustomSocialManager.h"
+#import "ShareBoardView.h"
 
 CGFloat HomeDetailViewShowAnimationDuration = .4f;
 CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
@@ -45,14 +47,17 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
 @property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, assign) BOOL isCheckCollectting;
 
+@property (nonatomic, weak) UIViewController * VC;
+
 @end
 
 @implementation HomeDetailView
 
-- (instancetype)initWithFrame:(CGRect)frame andData:(HomeViewModel *)model
+- (instancetype)initWithFrame:(CGRect)frame andData:(HomeViewModel *)model andVC:(UIViewController *)VC
 {
     if (self = [super initWithFrame:frame]) {
         
+        self.VC = VC;
         self.clipsToBounds = YES;
         self.startFrame = frame;
         [self dealWithData:model];
@@ -461,6 +466,18 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
         }];
     }
     return _blackView;
+}
+
+- (void)shareAction{
+    
+    if ([[UMSocialManager defaultManager] isSupport:UMSocialPlatformType_WechatSession] && [[UMSocialManager defaultManager] isSupport:UMSocialPlatformType_WechatTimeLine]) {
+        
+        ShareBoardView *shareView = [[ShareBoardView alloc] initWithFrame:CGRectZero Model:nil andVC:self.VC];
+        shareView.backgroundColor = [UIColor clearColor];
+        NSLog(@"---用户安装有微信---");
+    }else{
+        [MBProgressHUD showTextHUDWithText:@"请安装微信后使用" inView:self];
+    }
 }
 
 -(UIButton *)collectBtn

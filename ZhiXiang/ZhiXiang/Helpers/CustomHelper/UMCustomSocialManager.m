@@ -45,7 +45,7 @@
 /**
  *  每日知享1.0改版调用
  */
-- (void)sharedToPlatform:(UMSocialPlatformType)platformType andController:(UIViewController *)VC withModel:(MyCollectionModel *)model andUmKeyString:(NSString *)keyString;
+- (void)sharedToPlatform:(UMSocialPlatformType)platformType andController:(UIViewController *)VC  andView:(UIView *)view  withModel:(MyCollectionModel *)model andUmKeyString:(NSString *)keyString;
 {
     self.model = model;
     NSString * url = [[Helper addURLParamsShareWith:self.model.contentURL] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -64,9 +64,9 @@
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:VC completion:^(id result, NSError *error) {
         
         if (error) {
-            [MBProgressHUD showTextHUDWithText:@"分享失败" inView:VC.view];
+            [MBProgressHUD showTextHUDWithText:@"分享失败" inView:view];
         }else{
-            [MBProgressHUD showTextHUDWithText:@"分享失败" inView:VC.view];
+            [MBProgressHUD showTextHUDWithText:@"分享成功" inView:view];
         }
         
     }];

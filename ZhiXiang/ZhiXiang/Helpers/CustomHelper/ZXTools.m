@@ -11,12 +11,19 @@
 #import "NetworkConfiguration.h"
 #import "GCCKeyChain.h"
 #import "Helper.h"
+#import "UMCustomSocialManager.h"
 
 @implementation ZXTools
 
 + (void)configApplication
 {
     [[BGNetworkManager sharedManager] setNetworkConfiguration:[NetworkConfiguration configuration]];
+    
+    //友盟分享
+    [[UMSocialManager defaultManager] setUmSocialAppkey:UmengAppkey];
+    //设置微信的appKey和appSecret
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wx59643f058e9b544c" appSecret:@"ad5cf8b259673427421a1181614c33c7" redirectURL:@"http://itunes.apple.com/cn/app/id1144051586"];
+    
     
     NSString* identifierNumber = [[UIDevice currentDevice].identifierForVendor UUIDString];
     if (![GCCKeyChain load:keychainID]) {

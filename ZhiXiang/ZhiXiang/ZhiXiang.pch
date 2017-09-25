@@ -31,6 +31,9 @@
 
 #define kVersionCode 2017090701
 
+//-------------------友盟-------------------------
+#define UmengAppkey @"59c8b6b68630f54b64000081"
+
 #define keychainID @"ZhiXiangKeychainID"
 
 #define DocumentPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
