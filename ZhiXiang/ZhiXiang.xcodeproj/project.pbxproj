@@ -28,6 +28,7 @@
 		0653D0431F6BAD8A0054A818 /* ConverUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653D0401F6BAD8A0054A818 /* ConverUtil.m */; };
 		0653D0441F6BAD8A0054A818 /* DesUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653D0421F6BAD8A0054A818 /* DesUtil.m */; };
 		0653D0471F6BB5920054A818 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653D0461F6BB5920054A818 /* LeftViewController.m */; };
+		068692D41F78A14600AE2EA1 /* IsCollectionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 068692D31F78A14600AE2EA1 /* IsCollectionRequest.m */; };
 		069C371E1F6F697C00FE2BB0 /* TYCyclePagerTransformLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C37191F6F697C00FE2BB0 /* TYCyclePagerTransformLayout.m */; };
 		069C371F1F6F697C00FE2BB0 /* TYCyclePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C371B1F6F697C00FE2BB0 /* TYCyclePagerView.m */; };
 		069C37201F6F697C00FE2BB0 /* TYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C371D1F6F697C00FE2BB0 /* TYPageControl.m */; };
@@ -130,6 +131,8 @@
 		0653D0421F6BAD8A0054A818 /* DesUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DesUtil.m; sourceTree = "<group>"; };
 		0653D0451F6BB5910054A818 /* LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftViewController.h; sourceTree = "<group>"; };
 		0653D0461F6BB5920054A818 /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
+		068692D21F78A14600AE2EA1 /* IsCollectionRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IsCollectionRequest.h; sourceTree = "<group>"; };
+		068692D31F78A14600AE2EA1 /* IsCollectionRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IsCollectionRequest.m; sourceTree = "<group>"; };
 		069C37181F6F697C00FE2BB0 /* TYCyclePagerTransformLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYCyclePagerTransformLayout.h; sourceTree = "<group>"; };
 		069C37191F6F697C00FE2BB0 /* TYCyclePagerTransformLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYCyclePagerTransformLayout.m; sourceTree = "<group>"; };
 		069C371A1F6F697C00FE2BB0 /* TYCyclePagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYCyclePagerView.h; sourceTree = "<group>"; };
@@ -373,6 +376,7 @@
 		0653D00F1F6BA4120054A818 /* Networks */ = {
 			isa = PBXGroup;
 			children = (
+				068692D11F78A13400AE2EA1 /* Collection */,
 				96D357AF1F7115AA00BF35EB /* HomeViewRequest */,
 				96D357821F6FC16700BF35EB /* leftViewReauest */,
 				0653D02B1F6BABB70054A818 /* NetworkConfiguration.h */,
@@ -452,6 +456,15 @@
 				0653D0421F6BAD8A0054A818 /* DesUtil.m */,
 			);
 			path = DesUtil;
+			sourceTree = "<group>";
+		};
+		068692D11F78A13400AE2EA1 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				068692D21F78A14600AE2EA1 /* IsCollectionRequest.h */,
+				068692D31F78A14600AE2EA1 /* IsCollectionRequest.m */,
+			);
+			path = Collection;
 			sourceTree = "<group>";
 		};
 		069C37171F6F697C00FE2BB0 /* TYCyclePagerView */ = {
@@ -844,6 +857,7 @@
 				96D357A41F70B81C00BF35EB /* NoNetWorkView.m in Sources */,
 				96D357801F6FC08C00BF35EB /* RD_MJRefreshFooter.m in Sources */,
 				96D357C11F711B8F00BF35EB /* SpecialTextCell.m in Sources */,
+				068692D41F78A14600AE2EA1 /* IsCollectionRequest.m in Sources */,
 				0653D0471F6BB5920054A818 /* LeftViewController.m in Sources */,
 				0653D0381F6BABE50054A818 /* GCCKeyChain.m in Sources */,
 				96D357C01F711B8F00BF35EB /* SpecialImageCell.m in Sources */,
