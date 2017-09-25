@@ -198,4 +198,13 @@
     return NO;
 }
 
++ (NSString *)addURLParamsShareWith:(NSString *)url
+{
+    if ([url containsString:@"?"]) {
+        return [url stringByAppendingString:@"&app=inner"];
+    }else{
+        return [url stringByAppendingString:@"?app=inner"];
+    }
+}
+
 @end

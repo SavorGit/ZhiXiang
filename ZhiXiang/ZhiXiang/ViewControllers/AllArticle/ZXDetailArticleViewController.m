@@ -19,6 +19,7 @@
 #import "UIImageView+WebCache.h"
 #import "ZXIsOrCollectionRequest.h"
 #import "MBProgressHUD+Custom.h"
+#import "ShareBoardView.h"
 
 @interface ZXDetailArticleViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -347,7 +348,8 @@
 
 #pragma mark -分享点击
 - (void)shareAction{
-    
+    ShareBoardView *shareView = [[ShareBoardView alloc] initWithFrame:CGRectZero Model:nil andVC:self];
+    shareView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
 }
 
 #pragma mark -收藏点击
