@@ -43,12 +43,14 @@
     
     self.window.rootViewController = menu;
     
-    [self.window makeKeyAndVisible];
-    
     UIImageView * imageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     imageView.contentMode = UIViewContentModeScaleAspectFill;
     [imageView setImage:[UIImage imageNamed:@"launchImage375x667"]];
+    
+    [self.window makeKeyAndVisible];
+    
     [self.window addSubview:imageView];
+    [self.window bringSubviewToFront:imageView];
     
     [UIView animateWithDuration:2.f animations:^{
         

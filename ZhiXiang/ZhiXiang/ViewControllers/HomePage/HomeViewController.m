@@ -158,56 +158,63 @@
         [self.statusCell showLoading];
     }
     
-    HomeViewModel *tmpModel = [self.dataSource lastObject];
-    NSDictionary * dict = tmpModel.detailDic;
-    HomeViewRequest * request = [[HomeViewRequest alloc] initWithIBespeakTime:[dict objectForKey:@"bespeak_time"]];
-    [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
-        
-        NSDictionary *dic = (NSDictionary *)response;
-        NSDictionary * dataDict = [dic objectForKey:@"result"];
-        
-        NSArray *listArr = [dataDict objectForKey:@"list"];
-        
-        if (!listArr || listArr.count == 0) {
-            if (self.statusCell) {
-                [self.statusCell showNoMoreData];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        HomeViewModel *tmpModel = [self.dataSource lastObject];
+        NSDictionary * dict = tmpModel.detailDic;
+        HomeViewRequest * request = [[HomeViewRequest alloc] initWithIBespeakTime:[dict objectForKey:@"bespeak_time"]];
+        [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+            
+            NSDictionary *dic = (NSDictionary *)response;
+            NSDictionary * dataDict = [dic objectForKey:@"result"];
+            
+            NSArray *listArr = [dataDict objectForKey:@"list"];
+            
+            if (!listArr || listArr.count == 0) {
+                if (self.statusCell) {
+                    [self.statusCell showNoMoreData];
+                }
+                self.isNoMoreData = YES;
+                self.isRequest = NO;
+                return;
             }
-            self.isNoMoreData = YES;
+            
+            for (int i = 0; i < listArr.count; i ++) {
+                NSDictionary *tmpDic = [listArr objectAtIndex:i];
+                HomeViewModel *tmpModel = [[HomeViewModel alloc] initWithDictionary:tmpDic];
+                tmpModel.detailDic = [tmpDic objectForKey:@"contentDetail"];
+                tmpModel.day = [dataDict objectForKey:@"day"];
+                tmpModel.month = [dataDict objectForKey:@"month"];
+                tmpModel.week = [dataDict objectForKey:@"week"];
+                [self.dataSource addObject:tmpModel];
+                
+                if (i == 0) {
+                    [self.dateView configWithModel:tmpModel];
+                }
+                
+                NSLog(@"%@",tmpDic);
+            }
+            
+            [self.pagerView reloadData];
             self.isRequest = NO;
-            return;
-        }
-        
-        for (int i = 0; i < listArr.count; i ++) {
-            NSDictionary *tmpDic = [listArr objectAtIndex:i];
-            HomeViewModel *tmpModel = [[HomeViewModel alloc] initWithDictionary:tmpDic];
-            tmpModel.detailDic = [tmpDic objectForKey:@"contentDetail"];
-            tmpModel.day = [dataDict objectForKey:@"day"];
-            tmpModel.month = [dataDict objectForKey:@"month"];
-            tmpModel.week = [dataDict objectForKey:@"week"];
-            [self.dataSource addObject:tmpModel];
-            NSLog(@"%@",tmpDic);
-        }
-        
-        [self.pagerView reloadData];
-        self.isRequest = NO;
-        
-    } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
-        
-        if (self.statusCell) {
-            [self.statusCell showNoNetWork];
-        }
-        self.isRequest = NO;
-        [MBProgressHUD showTextHUDWithText:@"加载失败" inView:self.view];
-        
-    } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
-        
-        if (self.statusCell) {
-            [self.statusCell showNoNetWork];
-        }
-        self.isRequest = NO;
-        [MBProgressHUD showTextHUDWithText:@"加载失败" inView:self.view];
-        
-    }];
+            
+        } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+            
+            if (self.statusCell) {
+                [self.statusCell showNoNetWork];
+            }
+            self.isRequest = NO;
+            [MBProgressHUD showTextHUDWithText:@"加载失败" inView:self.view];
+            
+        } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
+            
+            if (self.statusCell) {
+                [self.statusCell showNoNetWork];
+            }
+            self.isRequest = NO;
+            [MBProgressHUD showTextHUDWithText:@"加载失败" inView:self.view];
+            
+        }];
+    });
 }
 
 - (TYCyclePagerViewLayout *)layoutForPagerView:(TYCyclePagerView *)pageView {
@@ -233,7 +240,7 @@
 - (void)pagerView:(TYCyclePagerView *)pageView didScrollFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex
 {
     self.currentIndex = toIndex;
-    if (toIndex >= self.dataSource.count - 4) {
+    if (toIndex == self.dataSource.count) {
         [self startLoadMoreData];
     }
     if (toIndex < self.dataSource.count) {
