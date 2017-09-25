@@ -48,7 +48,7 @@ static CGFloat keyWordViewAnimationDuration = .7;
     self.scrollView.bounces = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.showsHorizontalScrollIndicator = NO;
-    [self.baseView addSubview:self.scrollView];
+    [self addSubview:self.scrollView];
     
     UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, [self scaleHeightWith:105], [UIScreen mainScreen].bounds.size.width, 20)];
     label.font = kPingFangRegular(17);
