@@ -114,7 +114,7 @@
         }else{
             self.collectBtn.selected = NO;
         }
-        
+        [self autoCollectButton];
 //        [self showTopFreshLabelWithTitle:@"更新成功"];
         
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
@@ -336,6 +336,7 @@
         [_collectBtn setImage:[UIImage imageNamed:@"shoucang"] forState:UIControlStateNormal];
         [_collectBtn setImage:[UIImage imageNamed:@"yishoucang"] forState:UIControlStateSelected];
         [_collectBtn addTarget:self action:@selector(collectAction) forControlEvents:UIControlEventTouchUpInside];
+        [_collectBtn setAdjustsImageWhenHighlighted:NO];
         _collectBtn.tag = 102;
         [_topView addSubview:_collectBtn];
         [_collectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -363,35 +364,42 @@
 //    shareView.backgroundColor = [UIColor clearColor];
 }
 
-#pragma mark -收藏点击
-- (void)collectAction{
-    
-    NSInteger isCollect;
-    if (self.collectBtn.selected == YES) {
-        isCollect = 0;
-    }else{
-        isCollect = 1;
-    }
+- (void)collectAction
+{
+    MBProgressHUD * hud = [MBProgressHUD showLoadingHUDWithText:@"正在加载" inView:self.view];
     ZXIsOrCollectionRequest * request = [[ZXIsOrCollectionRequest alloc] initWithDailyid:self.dailyid];
     [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
-        NSDictionary *dic = (NSDictionary *)response;
-        if ([[dic objectForKey:@"code"] integerValue] == 10000) {
-            if (isCollect == 0) {
-                self.topModel.is_collect = 0;
-                [MBProgressHUD showSuccessWithText:@"取消成功" inView:self.view];
-            }else{
-                self.topModel.is_collect = 1;
-                [MBProgressHUD showSuccessWithText:@"收藏成功" inView:self.view];
-            }
-            self.collectBtn.selected = !self.collectBtn.selected;
+        [hud hideAnimated:NO];
+        self.collectBtn.selected = !self.collectBtn.isSelected;
+        if (self.collectBtn.isSelected) {
+            [MBProgressHUD showSuccessWithText:@"收藏成功" inView:self.view];
+        }else{
+            [MBProgressHUD showSuccessWithText:@"取消成功" inView:self.view];
         }
-        
+        [self autoCollectButton];
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
-        [MBProgressHUD showTextHUDWithText:@"收藏失败" inView:self.view];
+        
+        [hud hideAnimated:NO];
+        [MBProgressHUD showTextHUDWithText:@"操作失败" inView:self.view];
+        
     } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
-        [MBProgressHUD showTextHUDWithText:@"收藏失败" inView:self.view];
+        
+        [hud hideAnimated:NO];
+        [MBProgressHUD showTextHUDWithText:@"操作失败" inView:self.view];
+        
     }];
+}
+
+- (void)autoCollectButton
+{
+    if (self.collectBtn.isSelected) {
+        [self.collectBtn setImage:[UIImage imageNamed:@"yishoucang"] forState:UIControlStateNormal];
+        [self.collectBtn setImage:[UIImage imageNamed:@"yishoucang"] forState:UIControlStateHighlighted];
+    }else{
+        [self.collectBtn setImage:[UIImage imageNamed:@"shoucang"] forState:UIControlStateNormal];
+        [self.collectBtn setImage:[UIImage imageNamed:@"shoucang"] forState:UIControlStateHighlighted];
+    }
 }
 
 - (void)backButtonClick{
