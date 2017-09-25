@@ -12,6 +12,6 @@
 
 - (instancetype)initWithKeyWordArray:(NSArray *)words;
 
-- (void)showWithAnimation:(BOOL)animation;
+- (void)showWithAnimation:(BOOL)animation inView:(UIView *)view;
 
 @end

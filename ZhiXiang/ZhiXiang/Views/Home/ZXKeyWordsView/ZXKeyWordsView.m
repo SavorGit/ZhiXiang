@@ -214,16 +214,16 @@ static CGFloat keyWordViewAnimationDuration = .7;
     return height * scale;
 }
 
-- (void)showWithAnimation:(BOOL)animation
+- (void)showWithAnimation:(BOOL)animation inView:(UIView *)view
 {
-    [[UIApplication sharedApplication].keyWindow addSubview:self];
+    [view addSubview:self];
     if (animation) {
-        CGRect frame = [UIScreen mainScreen].bounds;
+        CGRect frame = view.bounds;
         frame.origin.y = -frame.size.height;
         self.frame = frame;
         
         [UIView animateWithDuration:.3f animations:^{
-            self.frame = [UIScreen mainScreen].bounds;
+            self.frame = view.bounds;
         } completion:^(BOOL finished) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self createKeyWordViews];
