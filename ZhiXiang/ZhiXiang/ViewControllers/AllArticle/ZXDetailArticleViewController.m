@@ -20,6 +20,7 @@
 #import "ZXIsOrCollectionRequest.h"
 #import "Helper.h"
 #import "ShareBoardView.h"
+#import "UMCustomSocialManager.h"
 
 @interface ZXDetailArticleViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -348,8 +349,15 @@
 
 #pragma mark -分享点击
 - (void)shareAction{
+    if ([[UMSocialManager defaultManager] isSupport:UMSocialPlatformType_WechatSession] && [[UMSocialManager defaultManager] isSupport:UMSocialPlatformType_WechatTimeLine]) {
+        ShareBoardView *shareView = [[ShareBoardView alloc] initWithFrame:CGRectZero Model:nil andVC:self];
+        shareView.backgroundColor = [UIColor clearColor];
+        NSLog(@"---用户安装有微信---");
+    }else{
+        
+    }
     ShareBoardView *shareView = [[ShareBoardView alloc] initWithFrame:CGRectZero Model:nil andVC:self];
-    shareView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
+    shareView.backgroundColor = [UIColor clearColor];
 }
 
 #pragma mark -收藏点击
