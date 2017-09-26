@@ -9,7 +9,6 @@
 #import "ShareBoardView.h"
 #import "Helper.h"
 #import "UIView+Additional.h"
-#import "UMCustomSocialManager.h"
 
 @interface ShareBoardView()
 

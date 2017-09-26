@@ -11,12 +11,11 @@
 #import "RD_MJRefreshFooter.h"
 #import "MyCollectionModel.h"
 #import "ImageTextTableViewCell.h"
-#import "ZXTools.h"
 #import "ZXDetailArticleViewController.h"
 #import "MBProgressHUD+Custom.h"
 
 
-@interface MyCollectionViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface MyCollectionViewController ()<UITableViewDelegate,UITableViewDataSource, ZXDetailArticleViewControllerDelegate>
 
 @property (nonatomic, strong) UITableView * tableView; //表格展示视图
 @property (nonatomic, strong) NSMutableArray * dataSource; //数据源
@@ -43,21 +42,8 @@
     [self.view setBackgroundColor:UIColorFromRGB(0xf8f6f1)];
     [self initInfo];
     
-    if ([[NSFileManager defaultManager] fileExistsAtPath:self.cachePath]) {
-        
-        //如果本地缓存的有数据，则先从本地读取缓存的数据
-        NSArray * dataArr = [NSArray arrayWithContentsOfFile:self.cachePath];
-        for(NSDictionary *dict in dataArr){
-            MyCollectionModel *tmpModel = [[MyCollectionModel alloc] initWithDictionary:dict];
-            tmpModel.type = 1;
-            [self.dataSource addObject:tmpModel];
-        }
-        [self.tableView reloadData];
-        [self.tableView.mj_header beginRefreshing];
-    }else{
-        [MBProgressHUD showLoadingHUDWithText:@"正在加载" inView:self.view];
-        [self refreshData];
-    }
+    [MBProgressHUD showLoadingHUDWithText:@"正在加载" inView:self.view];
+    [self refreshData];
 }
 
 - (void)initInfo{
@@ -78,15 +64,10 @@
         NSArray * dataArr = [dic objectForKey:@"result"];
         
         if (nil == dataArr || ![dataArr isKindOfClass:[NSArray class]] || dataArr.count == 0) {
-            if (self.dataSource.count == 0) {
-                [self showNoDataViewInView:self.view noDataType:kNoDataType_Favorite];
-            }else{
-                [self showTopFreshLabelWithTitle:@"数据出错了，更新失败"];
-            }
+            [self showNoDataViewInView:self.view noDataType:kNoDataType_Favorite];
             return;
         }
         
-        [ZXTools saveFileOnPath:self.cachePath withArray:dataArr];
         [self.dataSource removeAllObjects];
         for (int i = 0; i < dataArr.count; i ++) {
             MyCollectionModel *welthModel = [[MyCollectionModel alloc] initWithDictionary:dataArr[i]];
@@ -258,9 +239,15 @@
     
     MyCollectionModel *tmpModel = self.dataSource[indexPath.row];
     ZXDetailArticleViewController *daVC = [[ZXDetailArticleViewController alloc] initWithtopDailyID:tmpModel.dailyid];
+    daVC.delegate = self;
     [self.navigationController presentViewController:daVC animated:YES completion:^{
         
     }];
+}
+
+- (void)ZXDetailarticleWillDismiss
+{
+    [self refreshData];
 }
 
 - (void)showSelfAndCreateLog

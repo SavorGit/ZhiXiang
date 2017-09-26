@@ -16,7 +16,7 @@ extern CGFloat HomeDetailViewHiddenAnimationDuration;
 
 - (instancetype)initWithFrame:(CGRect)frame andData:(HomeViewModel *)model andVC:(UIViewController *)VC;
 
-- (void)becomeScreenToRead;
+- (void)becomeScreenToReadCompelete:(void(^)())compelete;
 
 - (void)endScrrenToShow;
 

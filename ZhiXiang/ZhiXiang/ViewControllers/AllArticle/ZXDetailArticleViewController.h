@@ -8,7 +8,15 @@
 
 #import "ZXBaseViewController.h"
 
+@protocol ZXDetailArticleViewControllerDelegate <NSObject>
+
+- (void)ZXDetailarticleWillDismiss;
+
+@end
+
 @interface ZXDetailArticleViewController : ZXBaseViewController
+
+@property (nonatomic, assign) id<ZXDetailArticleViewControllerDelegate> delegate;
 
 - (instancetype)initWithtopDailyID:(NSString *)dailyid;
 

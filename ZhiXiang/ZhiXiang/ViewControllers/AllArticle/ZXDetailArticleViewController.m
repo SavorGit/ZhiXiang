@@ -13,14 +13,11 @@
 #import "SpecialImageCell.h"
 #import "ZXTools.h"
 #import "HomeDetailRequest.h"
-#import "RD_MJRefreshFooter.h"
-#import "MJRefreshFooter.h"
 #import "HomeViewModel.h"
 #import "UIImageView+WebCache.h"
 #import "ZXIsOrCollectionRequest.h"
 #import "MBProgressHUD+Custom.h"
 #import "ShareBoardView.h"
-#import "UMCustomSocialManager.h"
 
 @interface ZXDetailArticleViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -34,6 +31,8 @@
 
 @property (nonatomic, strong) HomeViewModel * topModel; //数据源
 @property (nonatomic, copy)   NSString *dailyid;
+
+@property (nonatomic, assign) BOOL startCollected;
 
 @end
 
@@ -61,8 +60,10 @@
     
     [self.view addSubview:self.topView];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(64);
+        make.height.mas_equalTo(44 + kStatusBarHeight);
+        make.top.mas_equalTo(0);
+        make.left.mas_equalTo(0);
+        make.right.mas_equalTo(0);
     }];
 
 }
@@ -71,8 +72,6 @@
     
     HomeDetailRequest * request = [[HomeDetailRequest alloc] initWithDailyid:self.dailyid];
     [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
-        
-        [self.tableView.mj_header endRefreshing];
         
         NSDictionary *dic = (NSDictionary *)response;
         NSDictionary * dataDict = [dic objectForKey:@"result"];
@@ -100,7 +99,6 @@
         
         NSArray *resultArr = [dataDict objectForKey:@"details"];
         
-        [ZXTools saveFileOnPath:self.cachePath withArray:resultArr];
         for (int i = 0; i < resultArr.count; i ++) {
             HomeViewModel *tmpModel = [[HomeViewModel alloc] initWithDictionary:resultArr[i]];
             [self.dataSource addObject:tmpModel];
@@ -110,11 +108,10 @@
         [self.tableView reloadData];
         
         [self.view insertSubview:self.topView aboveSubview:self.tableView ];
-        if (self.topModel.is_collect == 1) {
-            self.collectBtn.selected = YES;
-        }else{
-            self.collectBtn.selected = NO;
-        }
+        
+        self.collectBtn.selected = self.topModel.is_collect;
+        self.startCollected = self.collectBtn.isSelected;
+        
         [self autoCollectButton];
 //        [self showTopFreshLabelWithTitle:@"更新成功"];
         
@@ -124,7 +121,6 @@
             [self showNoNetWorkView:NoNetWorkViewStyle_Load_Fail];
         }
         if (_tableView) {
-            [self.tableView.mj_header endRefreshing];
             [self showTopFreshLabelWithTitle:@"数据出错了，更新失败"];
         }
         
@@ -135,7 +131,6 @@
         }
         if (_tableView) {
             
-            [self.tableView.mj_header endRefreshing];
             if (error.code == -1001) {
                 [self showTopFreshLabelWithTitle:@"数据加载超时"];
             }else{
@@ -154,6 +149,11 @@
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
+        
+        if (@available(iOS 11.0, *)) {
+            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
+        
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = UIColorFromRGB(0xf8f6f1);
         _tableView.backgroundView = nil;
@@ -307,15 +307,8 @@
         _topView.contentMode = UIViewContentModeScaleToFill;
         [self.topView setImage:[UIImage imageNamed:@"quanpingmc"]];
         [self.topView setBackgroundColor:[UIColor clearColor]];
-        [self.view addSubview:_topView];
-        [_topView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(64);
-            make.top.mas_equalTo(0);
-            make.left.mas_equalTo(0);
-            make.right.mas_equalTo(0);
-        }];
         
-        _backButton = [[UIButton alloc] initWithFrame:CGRectMake(5,20, 40, 44)];
+        _backButton = [[UIButton alloc] initWithFrame:CGRectMake(5,kStatusBarHeight, 40, 44)];
         [_backButton setImage:[UIImage imageNamed:@"guanbi"] forState:UIControlStateNormal];
         [_backButton setImage:[UIImage imageNamed:@"guanbi"] forState:UIControlStateSelected];
         [_backButton addTarget:self action:@selector(backButtonClick) forControlEvents:UIControlEventTouchUpInside];
@@ -329,7 +322,7 @@
         [_topView addSubview:shareBtn];
         [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(40, 44));
-            make.top.mas_equalTo(20);
+            make.top.mas_equalTo(kStatusBarHeight);
             make.right.mas_equalTo(- 15);
         }];
         
@@ -342,7 +335,7 @@
         [_topView addSubview:_collectBtn];
         [_collectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(40, 44));
-            make.top.mas_equalTo(20);
+            make.top.mas_equalTo(kStatusBarHeight);
             make.right.mas_equalTo(- 65);
         }];
     }
@@ -379,6 +372,7 @@
             [MBProgressHUD showSuccessWithText:@"取消成功" inView:self.view];
         }
         [self autoCollectButton];
+        
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
         [hud hideAnimated:NO];
@@ -404,6 +398,12 @@
 }
 
 - (void)backButtonClick{
+    
+    if (self.startCollected != self.collectBtn.isSelected) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(ZXDetailarticleWillDismiss)]) {
+            [self.delegate ZXDetailarticleWillDismiss];
+        }
+    }
     
     [self dismissViewControllerAnimated:YES completion:^{
         

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "HomeViewModel.h"
+#import "UMCustomSocialManager.h"
 
 @interface ShareBoardView : UIView
 

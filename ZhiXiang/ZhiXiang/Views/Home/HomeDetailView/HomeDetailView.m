@@ -228,14 +228,21 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     style.firstLineHeadIndent = 0;//首行头缩进
     style.paragraphSpacing = 30;//段落后面的间距
     style.paragraphSpacingBefore = 0;//段落之前的间距
-    style.lineBreakMode = NSLineBreakByWordWrapping;// 分割模式
+    style.lineBreakMode = NSLineBreakByWordWrapping | NSLineBreakByTruncatingTail;// 分割模式
     [attrString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, length)];
     [attrString addAttribute:NSKernAttributeName value:@2 range:NSMakeRange(0, length)];//字符间距 2pt
     self.subTitleLabel.attributedText = attrString;
     
     // 计算富文本的高度
     CGFloat descHeight = [self.subTitleLabel sizeThatFits:self.subTitleLabel.bounds.size].height;
-    self.subTitleLabel.frame = CGRectMake(15, 15, width, descHeight);
+    
+    CGFloat bottomHight = self.bottoView.bounds.size.height;
+    
+    if (descHeight >= bottomHight - 30) {
+        self.subTitleLabel.frame = CGRectMake(15, 15, width, bottomHight - 30);
+    }else{
+        self.subTitleLabel.frame = CGRectMake(15, 15, width, descHeight);
+    }
 }
 
 - (void)setUpMaxStyle
@@ -370,7 +377,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     return 0.0;
 }
 
-- (void)becomeScreenToRead
+- (void)becomeScreenToReadCompelete:(void (^)())compelete
 {
     self.tableView.frame = CGRectMake(-self.startFrame.origin.x, -self.startFrame.origin.y, self.startFrame.size.width, self.startFrame.size.height);
     
@@ -403,6 +410,9 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
         [UIView animateWithDuration:HomeDetailViewShowAnimationDuration / 2 animations:^{
             self.bottoView.alpha = 0;
             self.tableView.alpha = 1;
+            if (compelete) {
+                compelete();
+            }
         }];
     }];
 }
