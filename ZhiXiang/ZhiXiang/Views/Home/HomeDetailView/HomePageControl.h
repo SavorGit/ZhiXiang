@@ -10,4 +10,8 @@
 
 @interface HomePageControl : UIView
 
+- (instancetype)initWithTotalNumber:(NSInteger)totalNumber;
+
+- (void)setCurrentIndex:(NSInteger)currentIndex;
+
 @end

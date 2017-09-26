@@ -17,6 +17,7 @@
 #import "HomeDateView.h"
 #import "MBProgressHUD+Custom.h"
 #import "HomeKeyWordRequest.h"
+#import "HomePageControl.h"
 
 @interface HomeViewController () <TYCyclePagerViewDataSource, TYCyclePagerViewDelegate, HomeStatusCellDelegate>
 
@@ -37,6 +38,10 @@
 @property (nonatomic, assign) BOOL isNoMoreData;
 
 @property (nonatomic, assign) BOOL isRequest;
+
+@property (nonatomic, strong) ZXKeyWordsView * keyWordView;
+
+@property (nonatomic, strong) HomePageControl * pageControl;
 
 @end
 
@@ -96,6 +101,7 @@
     };
     LGSide.willHideLeftView = ^(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view) {
         [self.maskView removeFromSuperview];
+        self.canShowKeyWords = YES;
     };
     
     self.pagerView = [[TYCyclePagerView alloc]init];
@@ -228,7 +234,6 @@
 - (void)pagerView:(TYCyclePagerView *)pageView didSelectedItemCell:(__kindof UICollectionViewCell *)cell atIndex:(NSInteger)index
 {
     if (index < self.dataSource.count && index == self.currentIndex) {
-        self.canShowKeyWords = NO;
         HomeViewModel *tmpModel = [self.dataSource objectAtIndex:index];
         CGRect detailViewFrame = [cell convertRect:cell.bounds toView:[UIApplication sharedApplication].keyWindow];
         HomeDetailView * detailView = [[HomeDetailView alloc] initWithFrame:detailViewFrame andData:tmpModel andVC:self];
@@ -249,6 +254,8 @@
             [self.dateView configWithModel:model];
         }
     }
+    
+    [self.pageControl setCurrentIndex:toIndex % 10 + 1];
 }
 
 - (void)dataRequest{
@@ -297,6 +304,7 @@
         
         [self.pagerView reloadData];
         self.isRequest = NO;
+        [self.pageControl setCurrentIndex:1];
         
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
@@ -340,8 +348,8 @@
     }
     
     if (self.keyWords && self.keyWords.count > 0) {
-        ZXKeyWordsView * keyWordView = [[ZXKeyWordsView alloc] initWithKeyWordArray:self.keyWords];
-        [keyWordView showWithAnimation:YES];
+        self.keyWordView = [[ZXKeyWordsView alloc] initWithKeyWordArray:self.keyWords];
+        [self.keyWordView showWithAnimation:NO inView:self.sideMenuController.view];
         self.canShowKeyWords = NO;
         self.keyWords = nil;
     }
@@ -359,6 +367,20 @@
         }];
     }
     return _dateView;
+}
+
+- (HomePageControl *)pageControl
+{
+    if (!_pageControl) {
+        _pageControl = [[HomePageControl alloc] initWithTotalNumber:10];
+        [self.view addSubview:_pageControl];
+        [_pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(35);
+            make.left.right.mas_equalTo(0);
+            make.bottom.mas_equalTo(-18);
+        }];
+    }
+    return _pageControl;
 }
 
 - (void)viewWillAppear:(BOOL)animated

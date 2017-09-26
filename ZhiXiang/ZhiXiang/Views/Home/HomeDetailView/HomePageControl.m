@@ -7,15 +7,51 @@
 //
 
 #import "HomePageControl.h"
+#import "UIView+LayerCurve.h"
+
+@interface HomePageControl ()
+
+@property (nonatomic, assign) NSInteger totalNumber;
+@property (nonatomic, strong) UILabel * currentLabel;
+@property (nonatomic, strong) UILabel * totalLabel;
+
+@end
 
 @implementation HomePageControl
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (instancetype)initWithTotalNumber:(NSInteger)totalNumber
+{
+    if (self = [super initWithFrame:CGRectMake(0, 0, kMainBoundsWidth, 33)]) {
+        self.totalNumber = totalNumber;
+        [self createViews];
+    }
+    return self;
 }
-*/
+
+- (void)createViews
+{
+    self.currentLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 1, self.bounds.size.width / 2 - 4, 20)];
+    self.currentLabel.font = kACaslonProItalic(20);
+    self.currentLabel.textAlignment = NSTextAlignmentRight;
+    self.currentLabel.textColor = UIColorFromRGB(0x9a9a9a);
+    self.currentLabel.text = @"1";
+    [self addSubview:self.currentLabel];
+    
+    self.totalLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.bounds.size.width / 2 + 4, 20, self.bounds.size.width / 2 - 4, 13)];
+    self.totalLabel.font = kACaslonProRegular(13);
+    self.totalLabel.textAlignment = NSTextAlignmentLeft;
+    self.totalLabel.textColor = UIColorFromRGB(0x666666);
+    self.totalLabel.text = [NSString stringWithFormat:@"%ld", self.totalNumber];
+    [self addSubview:self.totalLabel];
+    
+    CGPoint startPoint = CGPointMake(self.bounds.size.width / 2 + 7, 4);
+    CGPoint endPoint = CGPointMake(self.bounds.size.width / 2 - 7, self.bounds.size.height - 4);
+    [self layerSolidLinePoints:@[[NSValue valueWithCGPoint:startPoint], [NSValue valueWithCGPoint:endPoint]] Color:UIColorFromRGB(0x666666) Width:1.f];
+}
+
+- (void)setCurrentIndex:(NSInteger)currentIndex
+{
+    self.currentLabel.text = [NSString stringWithFormat:@"%ld", currentIndex];
+}
 
 @end

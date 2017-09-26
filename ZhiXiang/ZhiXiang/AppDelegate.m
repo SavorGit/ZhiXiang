@@ -62,15 +62,21 @@
         menu.rootViewStatusBarStyle = UIStatusBarStyleLightContent;
         [menu setNeedsStatusBarAppearanceUpdate];
         
+        home.canShowKeyWords = YES;
+        [home showKeyWord];
+        
         [UIView animateWithDuration:.5f animations:^{
             imageView.alpha = 0;
         } completion:^(BOOL finished) {
             [imageView removeFromSuperview];
-            home.canShowKeyWords = YES;
-            [home showKeyWord];
         }];
         
     }];
+    
+    for (NSString * fontName in [UIFont familyNames]) {
+        NSLog(@"%@", fontName);
+    }
+    
 }
 
 //通过其它应用打开APP时调用

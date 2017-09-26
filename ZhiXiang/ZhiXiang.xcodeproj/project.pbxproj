@@ -30,6 +30,9 @@
 		0653D0471F6BB5920054A818 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653D0461F6BB5920054A818 /* LeftViewController.m */; };
 		068692D41F78A14600AE2EA1 /* IsCollectionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 068692D31F78A14600AE2EA1 /* IsCollectionRequest.m */; };
 		068692D71F78ED7D00AE2EA1 /* HomePageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 068692D61F78ED7D00AE2EA1 /* HomePageControl.m */; };
+		068692DD1F78FBE100AE2EA1 /* ACaslonPro-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 068692DA1F78F8A400AE2EA1 /* ACaslonPro-Italic.otf */; };
+		068692DE1F78FBE100AE2EA1 /* ACaslonPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 068692D91F78F8A400AE2EA1 /* ACaslonPro-Regular.otf */; };
+		068692E91F7901B200AE2EA1 /* UIView+LayerCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 068692E81F7901B200AE2EA1 /* UIView+LayerCurve.m */; };
 		069C371E1F6F697C00FE2BB0 /* TYCyclePagerTransformLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C37191F6F697C00FE2BB0 /* TYCyclePagerTransformLayout.m */; };
 		069C371F1F6F697C00FE2BB0 /* TYCyclePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C371B1F6F697C00FE2BB0 /* TYCyclePagerView.m */; };
 		069C37201F6F697C00FE2BB0 /* TYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C371D1F6F697C00FE2BB0 /* TYPageControl.m */; };
@@ -137,6 +140,10 @@
 		068692D31F78A14600AE2EA1 /* IsCollectionRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IsCollectionRequest.m; sourceTree = "<group>"; };
 		068692D51F78ED7D00AE2EA1 /* HomePageControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageControl.h; sourceTree = "<group>"; };
 		068692D61F78ED7D00AE2EA1 /* HomePageControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageControl.m; sourceTree = "<group>"; };
+		068692D91F78F8A400AE2EA1 /* ACaslonPro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ACaslonPro-Regular.otf"; sourceTree = "<group>"; };
+		068692DA1F78F8A400AE2EA1 /* ACaslonPro-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ACaslonPro-Italic.otf"; sourceTree = "<group>"; };
+		068692E71F7901B200AE2EA1 /* UIView+LayerCurve.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+LayerCurve.h"; sourceTree = "<group>"; };
+		068692E81F7901B200AE2EA1 /* UIView+LayerCurve.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+LayerCurve.m"; sourceTree = "<group>"; };
 		069C37181F6F697C00FE2BB0 /* TYCyclePagerTransformLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYCyclePagerTransformLayout.h; sourceTree = "<group>"; };
 		069C37191F6F697C00FE2BB0 /* TYCyclePagerTransformLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYCyclePagerTransformLayout.m; sourceTree = "<group>"; };
 		069C371A1F6F697C00FE2BB0 /* TYCyclePagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYCyclePagerView.h; sourceTree = "<group>"; };
@@ -292,6 +299,7 @@
 		0653CFD71F6BA0300054A818 /* ZhiXiang */ = {
 			isa = PBXGroup;
 			children = (
+				068692D81F78F88B00AE2EA1 /* Fonts */,
 				0653CFDB1F6BA0300054A818 /* AppDelegate.h */,
 				0653CFDC1F6BA0300054A818 /* AppDelegate.m */,
 				0653D0231F6BA9820054A818 /* Macro */,
@@ -371,6 +379,7 @@
 		0653D00E1F6BA3080054A818 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				068692E61F79018D00AE2EA1 /* GCCLayerCurve */,
 				06F263211F74DD9A001FB3F5 /* MBProgressHUD+Custom */,
 				069C37171F6F697C00FE2BB0 /* TYCyclePagerView */,
 				0653D03E1F6BAD8A0054A818 /* DesUtil */,
@@ -474,6 +483,24 @@
 				068692D31F78A14600AE2EA1 /* IsCollectionRequest.m */,
 			);
 			path = Collection;
+			sourceTree = "<group>";
+		};
+		068692D81F78F88B00AE2EA1 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				068692DA1F78F8A400AE2EA1 /* ACaslonPro-Italic.otf */,
+				068692D91F78F8A400AE2EA1 /* ACaslonPro-Regular.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		068692E61F79018D00AE2EA1 /* GCCLayerCurve */ = {
+			isa = PBXGroup;
+			children = (
+				068692E71F7901B200AE2EA1 /* UIView+LayerCurve.h */,
+				068692E81F7901B200AE2EA1 /* UIView+LayerCurve.m */,
+			);
+			path = GCCLayerCurve;
 			sourceTree = "<group>";
 		};
 		069C37171F6F697C00FE2BB0 /* TYCyclePagerView */ = {
@@ -774,6 +801,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				068692DD1F78FBE100AE2EA1 /* ACaslonPro-Italic.otf in Resources */,
+				068692DE1F78FBE100AE2EA1 /* ACaslonPro-Regular.otf in Resources */,
 				96D357A51F70B81C00BF35EB /* NoNetWorkView.xib in Resources */,
 				96D357A31F70B81C00BF35EB /* NoDataView.xib in Resources */,
 				0653CFE81F6BA0300054A818 /* LaunchScreen.storyboard in Resources */,
@@ -869,6 +898,7 @@
 				96D357A21F70B81C00BF35EB /* NoDataView.m in Sources */,
 				06F263271F74DE00001FB3F5 /* MBProgressHUD+Custom.m in Sources */,
 				96D357D71F735D8C00BF35EB /* HomeDetailRequest.m in Sources */,
+				068692E91F7901B200AE2EA1 /* UIView+LayerCurve.m in Sources */,
 				96D357B61F71199000BF35EB /* HomeViewModel.m in Sources */,
 				96D357B21F7115E500BF35EB /* HomeViewRequest.m in Sources */,
 				96D3579A1F6FD00000BF35EB /* ImageTextTableViewCell.m in Sources */,
