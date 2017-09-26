@@ -66,7 +66,7 @@
     }];
     self.bottoView.backgroundColor = UIColorFromRGB(0xf6f2ed);
     
-    self.subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width - 30, 0)];
+    self.subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width - 30, self.bounds.size.height - self.bounds.size.width * 488.f/750.f - 30)];
     self.subTitleLabel.text = @"";
     self.subTitleLabel.font = kPingFangLight(15);
     self.subTitleLabel.textColor = UIColorFromRGB(0x575757);
@@ -74,7 +74,7 @@
     self.subTitleLabel.numberOfLines = 0;
     [self.bottoView addSubview:self.subTitleLabel];
     [self.subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(self.bounds.size.width - 30, 20));
+        make.size.mas_equalTo(self.bounds.size);
         make.top.equalTo(self.topView.mas_bottom).offset(15);
         make.left.mas_equalTo(15);
     }];
@@ -125,7 +125,7 @@
         }];
     }else{
         [self.subTitleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(self.bounds.size.width - 30, descHeight));
+            make.size.mas_equalTo(CGSizeMake(self.bounds.size.width - 30, descHeight + 10.f));
         }];
     }
 }

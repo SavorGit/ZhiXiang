@@ -212,10 +212,6 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
 
 - (void)configSubTitleWithWidth:(CGFloat)width
 {
-    CGRect frame = self.subTitleLabel.frame;
-    frame.size.width = width;
-    self.subTitleLabel.frame = frame;
-    
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:self.subTitleLabel.text];
     NSUInteger length = [self.subTitleLabel.text length];
     [attrString addAttribute:NSFontAttributeName value:kPingFangLight(15) range:NSMakeRange(0, length)];//设置所有的字体
@@ -241,7 +237,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     if (descHeight >= bottomHight - 30) {
         self.subTitleLabel.frame = CGRectMake(15, 15, width, bottomHight - 30);
     }else{
-        self.subTitleLabel.frame = CGRectMake(15, 15, width, descHeight);
+        self.subTitleLabel.frame = CGRectMake(15, 15, width, descHeight + 10.f);
     }
 }
 
