@@ -245,6 +245,11 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"HomeDetailCell"];
+    
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+    
     [self addSubview:self.tableView];
     [self setUpTableHeaderView];
     self.tableView.alpha = 0.f;
@@ -435,12 +440,12 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
 {
     if (_blackView == nil) {
         
-        _blackView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kMainBoundsWidth, 64)];
+        _blackView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kMainBoundsWidth, 44 + kStatusBarHeight)];
         _blackView.userInteractionEnabled = YES;
         _blackView.contentMode = UIViewContentModeScaleToFill;
         [_blackView setImage:[UIImage imageNamed:@"quanpingmc"]];
         
-        _backButton = [[UIButton alloc] initWithFrame:CGRectMake(5,20, 40, 44)];
+        _backButton = [[UIButton alloc] initWithFrame:CGRectMake(5,kStatusBarHeight, 40, 44)];
         [_backButton setImage:[UIImage imageNamed:@"guanbi"] forState:UIControlStateNormal];
         [_backButton setImage:[UIImage imageNamed:@"guanbi"] forState:UIControlStateSelected];
         [_backButton addTarget:self action:@selector(backButtonClick) forControlEvents:UIControlEventTouchUpInside];
@@ -454,14 +459,14 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
         [_blackView addSubview:shareBtn];
         [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(40, 44));
-            make.top.mas_equalTo(20);
+            make.top.mas_equalTo(kStatusBarHeight);
             make.right.mas_equalTo(- 15);
         }];
         
         [_blackView addSubview:self.collectBtn];
         [_collectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(40, 44));
-            make.top.mas_equalTo(20);
+            make.top.mas_equalTo(kStatusBarHeight);
             make.right.mas_equalTo(- 65);
         }];
     }
@@ -470,11 +475,10 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
 
 - (void)shareAction{
     
-    if ([[UMSocialManager defaultManager] isSupport:UMSocialPlatformType_WechatSession] && [[UMSocialManager defaultManager] isSupport:UMSocialPlatformType_WechatTimeLine]) {
+    if ([[UMSocialManager defaultManager] isInstall:UMSocialPlatformType_WechatSession] && [[UMSocialManager defaultManager] isInstall:UMSocialPlatformType_WechatTimeLine]) {
         
         ShareBoardView *shareView = [[ShareBoardView alloc] initWithFrame:CGRectZero Model:nil andVC:self.VC];
         shareView.backgroundColor = [UIColor clearColor];
-        NSLog(@"---用户安装有微信---");
     }else{
         [MBProgressHUD showTextHUDWithText:@"请安装微信后使用" inView:self];
     }

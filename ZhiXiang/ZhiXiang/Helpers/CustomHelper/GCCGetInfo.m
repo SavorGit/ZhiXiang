@@ -69,69 +69,97 @@
     uname(&systemInfo);
     NSString *deviceString = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
     
-    //iPhone
-    if ([deviceString isEqualToString:@"iPhone1,1"])    return @"iPhone 1G";
-    if ([deviceString isEqualToString:@"iPhone1,2"])    return @"iPhone 3G";
-    if ([deviceString isEqualToString:@"iPhone2,1"])    return @"iPhone 3GS";
-    if ([deviceString isEqualToString:@"iPhone3,1"])    return @"iPhone 4";
-    if ([deviceString isEqualToString:@"iPhone3,2"])    return @"Verizon iPhone 4";
-    if ([deviceString isEqualToString:@"iPhone4,1"])    return @"iPhone 4S";
-    if ([deviceString isEqualToString:@"iPhone5,1"])    return @"iPhone 5";
-    if ([deviceString isEqualToString:@"iPhone5,2"])    return @"iPhone 5";
-    if ([deviceString isEqualToString:@"iPhone5,3"])    return @"iPhone 5C";
-    if ([deviceString isEqualToString:@"iPhone5,4"])    return @"iPhone 5C";
-    if ([deviceString isEqualToString:@"iPhone6,1"])    return @"iPhone 5S";
-    if ([deviceString isEqualToString:@"iPhone6,2"])    return @"iPhone 5S";
-    if ([deviceString isEqualToString:@"iPhone7,1"])    return @"iPhone 6 Plus";
-    if ([deviceString isEqualToString:@"iPhone7,2"])    return @"iPhone 6";
-    if ([deviceString isEqualToString:@"iPhone8,1"])    return @"iPhone 6s";
-    if ([deviceString isEqualToString:@"iPhone8,2"])    return @"iPhone 6s Plus";
-    if ([deviceString isEqualToString:@"iPhone9,1"]
-        ||[deviceString isEqualToString:@"iPhone9,3"])      return @"iPhone 7";
-    if ([deviceString isEqualToString:@"iPhone9,2"]
-        ||[deviceString isEqualToString:@"iPhone9,4"])      return @"iPhone 7 Plus";
+    NSDictionary * deviceDict = @{
+                                  //iPhone
+                                  @"iPhone1,1":@"iPhone 1G",
+                                  @"iPhone1,2":@"iPhone 3G",
+                                  @"iPhone2,1":@"iPhone 3GS",
+                                  @"iPhone3,1":@"iPhone 4",
+                                  @"iPhone3,2":@"Verizon iPhone 4",
+                                  @"iPhone4,1":@"iPhone 4S",
+                                  @"iPhone5,1":@"iPhone 5",
+                                  @"iPhone5,2":@"iPhone 5",
+                                  @"iPhone5,3":@"iPhone 5C",
+                                  @"iPhone5,4":@"iPhone 5C",
+                                  @"iPhone6,1":@"iPhone 5S",
+                                  @"iPhone6,2":@"iPhone 5S",
+                                  @"iPhone7,1":@"iPhone 6 Plus",
+                                  @"iPhone7,2":@"iPhone 6",
+                                  @"iPhone8,1":@"iPhone 6s",
+                                  @"iPhone8,2":@"iPhone 6s Plus",
+                                  @"iPhone9,1":@"iPhone 7",
+                                  @"iPhone9,3":@"iPhone 7",
+                                  @"iPhone9,2":@"iPhone 7 Plus",
+                                  @"iPhone9,4":@"iPhone 7 Plus",
+                                  @"iPhone10,1":@"iPhone 8",
+                                  @"iPhone10,4":@"iPhone 8",
+                                  @"iPhone10,2":@"iPhone 8 Plus",
+                                  @"iPhone10,5":@"iPhone 8 Plus",
+                                  @"iPhone10,3":@"iPhone X",
+                                  @"iPhone10,6":@"iPhone X",
+                                  
+                                  //iPod
+                                  @"iPod1,1":@"iPod Touch 1",
+                                  @"iPod2,1":@"iPod Touch 2",
+                                  @"iPod3,1":@"iPod Touch 3",
+                                  @"iPod4,1":@"iPod Touch 4",
+                                  @"iPod5,1":@"iPod Touch 5",
+                                  @"iPod7,1":@"iPod Touch 6",
+                                  
+                                  //iPad
+                                  @"iPad1,1":@"iPad",
+                                  @"iPad2,1":@"iPad 2 (WiFi)",
+                                  @"iPad2,2":@"iPad 2 (GSM)",
+                                  @"iPad2,3":@"iPad 2 (CDMA)",
+                                  @"iPad2,4":@"iPad 2 (32nm)",
+                                  @"iPad2,5":@"iPad mini (WiFi)",
+                                  @"iPad2,6":@"iPad mini (GSM)",
+                                  @"iPad2,7":@"iPad mini (CDMA)",
+                                  
+                                  @"iPad3,1":@"iPad 3(WiFi)",
+                                  @"iPad3,2":@"iPad 3(CDMA)",
+                                  @"iPad3,3":@"iPad 3(4G)",
+                                  @"iPad3,4":@"iPad 4 (WiFi)",
+                                  @"iPad3,5":@"iPad 4 (4G)",
+                                  @"iPad3,6":@"iPad 4 (CDMA)",
+                                  
+                                  @"iPad4,1":@"iPad Air",
+                                  @"iPad4,2":@"iPad Air",
+                                  @"iPad4,3":@"iPad Air",
+                                  @"iPad5,3":@"iPad Air 2",
+                                  @"iPad5,4":@"iPad Air 2",
+                                  
+                                  @"iPad4,4":@"iPad mini 2",
+                                  @"iPad4,5":@"iPad mini 2",
+                                  @"iPad4,6":@"iPad mini 2",
+                                  @"iPad4,7":@"iPad mini 3",
+                                  @"iPad4,8":@"iPad mini 3",
+                                  @"iPad4,9":@"iPad mini 3",
+                                  @"iPad5,1":@"iPad mini 4",
+                                  @"iPad5,2":@"iPad mini 4",
+                                  
+                                  @"iPad6,3":@"iPad Pro (9.7-inch)",
+                                  @"iPad6,4":@"iPad Pro (9.7-inch)",
+                                  @"iPad6,7":@"iPad Pro (12.9-inch)",
+                                  @"iPad6,8":@"iPad Pro (12.9-inch)",
+                                  @"iPad6,11":@"iPad 5",
+                                  @"iPad6,12":@"iPad 5",
+                                  @"iPad7,1" :@"iPad Pro 2 (12.9-inch)",
+                                  @"iPad7,2" :@"iPad Pro 2 (12.9-inch)",
+                                  @"iPad7,3" :@"iPad Pro (10.5-inch)",
+                                  @"iPad7,4" :@"iPad Pro (10.5-inch)",
+                                  
+                                  //模拟器
+                                  @"i386"   :@"Simulator",
+                                  @"x86_64": @"Simulator"
+                                };
     
-    //iPod
-    if ([deviceString isEqualToString:@"iPod1,1"])      return @"iPod Touch 1G";
-    if ([deviceString isEqualToString:@"iPod2,1"])      return @"iPod Touch 2G";
-    if ([deviceString isEqualToString:@"iPod3,1"])      return @"iPod Touch 3G";
-    if ([deviceString isEqualToString:@"iPod4,1"])      return @"iPod Touch 4G";
-    if ([deviceString isEqualToString:@"iPod5,1"])      return @"iPod Touch 5G";
+    NSString * deviceName = [deviceDict objectForKey:deviceString];
+    if (isEmptyString(deviceName)) {
+        return deviceString;
+    }
     
-    //iPad
-    if ([deviceString isEqualToString:@"iPad1,1"])      return @"iPad";
-    if ([deviceString isEqualToString:@"iPad2,1"])      return @"iPad 2 (WiFi)";
-    if ([deviceString isEqualToString:@"iPad2,2"])      return @"iPad 2 (GSM)";
-    if ([deviceString isEqualToString:@"iPad2,3"])      return @"iPad 2 (CDMA)";
-    if ([deviceString isEqualToString:@"iPad2,4"])      return @"iPad 2 (32nm)";
-    if ([deviceString isEqualToString:@"iPad2,5"])      return @"iPad mini (WiFi)";
-    if ([deviceString isEqualToString:@"iPad2,6"])      return @"iPad mini (GSM)";
-    if ([deviceString isEqualToString:@"iPad2,7"])      return @"iPad mini (CDMA)";
-    
-    if ([deviceString isEqualToString:@"iPad3,1"])      return @"iPad 3(WiFi)";
-    if ([deviceString isEqualToString:@"iPad3,2"])      return @"iPad 3(CDMA)";
-    if ([deviceString isEqualToString:@"iPad3,3"])      return @"iPad 3(4G)";
-    if ([deviceString isEqualToString:@"iPad3,4"])      return @"iPad 4 (WiFi)";
-    if ([deviceString isEqualToString:@"iPad3,5"])      return @"iPad 4 (4G)";
-    if ([deviceString isEqualToString:@"iPad3,6"])      return @"iPad 4 (CDMA)";
-    
-    if ([deviceString isEqualToString:@"iPad4,1"])      return @"iPad Air";
-    if ([deviceString isEqualToString:@"iPad4,2"])      return @"iPad Air";
-    if ([deviceString isEqualToString:@"iPad4,3"])      return @"iPad Air";
-    if ([deviceString isEqualToString:@"iPad5,3"])      return @"iPad Air 2";
-    if ([deviceString isEqualToString:@"iPad5,4"])      return @"iPad Air 2";
-    if ([deviceString isEqualToString:@"i386"])         return @"Simulator";
-    if ([deviceString isEqualToString:@"x86_64"])       return @"Simulator";
-    
-    if ([deviceString isEqualToString:@"iPad4,4"]
-        ||[deviceString isEqualToString:@"iPad4,5"]
-        ||[deviceString isEqualToString:@"iPad4,6"])      return @"iPad mini 2";
-    
-    if ([deviceString isEqualToString:@"iPad4,7"]
-        ||[deviceString isEqualToString:@"iPad4,8"]
-        ||[deviceString isEqualToString:@"iPad4,9"])      return @"iPad mini 3";
-    
-    return deviceString;
+    return deviceName;
 }
 
 @end

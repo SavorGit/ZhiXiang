@@ -31,6 +31,8 @@
 #define isNull(x)             (!x || [x isKindOfClass:[NSNull class]])
 #define isEmptyString(x)      (isNull(x) || [x isEqual:@""] || [x isEqual:@"(null)"])
 
+#define isiPhone_X [UIScreen mainScreen].bounds.size.height == 812
+
 //-------------------字体大小-------------------------
 #define FontSizeDefault 14.0f
 #define FontSizeSmall 12.0f

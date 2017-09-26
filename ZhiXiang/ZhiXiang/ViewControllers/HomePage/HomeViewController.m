@@ -64,7 +64,7 @@
     [button addTarget:self action:@selector(leftButtonDidClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(20);
+        make.top.mas_equalTo(kStatusBarHeight);
         make.left.mas_equalTo(0);
         make.size.mas_equalTo(CGSizeMake(50, 44));
     }];
@@ -92,7 +92,7 @@
     LGSide.willShowLeftView = ^(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view) {
         [self.view addSubview:self.maskView];
         [self.maskView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(80);
+            make.top.mas_equalTo(kStatusBarHeight + 60);
             make.left.mas_equalTo(0);
             make.bottom.mas_equalTo(-60);
             make.width.mas_equalTo(28);
@@ -112,10 +112,16 @@
     [self.pagerView registerClass:[HomeStatusCollectionViewCell class] forCellWithReuseIdentifier:@"HomeStatusCollectionViewCell"];
     
     [self.view addSubview:self.pagerView];
+    
+    CGFloat bottomDistance = 90;
+    if (isiPhone_X) {
+        bottomDistance += 34;
+    }
+    
     [self.pagerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(90);
+        make.top.mas_equalTo(kStatusBarHeight + 70);
         make.left.mas_equalTo(0);
-        make.bottom.mas_equalTo(-70);
+        make.bottom.mas_equalTo(-bottomDistance);
         make.right.mas_equalTo(0);
     }];
     self.currentIndex = 0;
@@ -197,7 +203,6 @@
                     [self.dateView configWithModel:tmpModel];
                 }
                 
-                NSLog(@"%@",tmpDic);
             }
             
             [self.pagerView reloadData];
@@ -225,7 +230,12 @@
 
 - (TYCyclePagerViewLayout *)layoutForPagerView:(TYCyclePagerView *)pageView {
     TYCyclePagerViewLayout *layout = [[TYCyclePagerViewLayout alloc]init];
-    layout.itemSize = CGSizeMake(kMainBoundsWidth - 60, kMainBoundsHeight - kStatusBarHeight - kNaviBarHeight - 30 - 70);
+    
+    if (isiPhone_X) {
+        layout.itemSize = CGSizeMake(kMainBoundsWidth - 60, kMainBoundsHeight - kStatusBarHeight - 70 - 90 - 34);
+    }else{
+        layout.itemSize = CGSizeMake(kMainBoundsWidth - 60, kMainBoundsHeight - kStatusBarHeight - 70 - 90);
+    }
     layout.itemSpacing = 15;
     layout.itemHorizontalCenter = YES;
     return layout;
@@ -299,7 +309,6 @@
                 [self.dateView configWithModel:tmpModel];
             }
             
-            NSLog(@"%@",tmpDic);
         }
         
         [self.pagerView reloadData];
@@ -361,7 +370,7 @@
         _dateView = [[HomeDateView alloc] initWithFrame:CGRectMake(0, 0, 88, 40)];
         [self.view addSubview:_dateView];
         [_dateView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(25);
+            make.top.mas_equalTo(kStatusBarHeight + 5);
             make.right.mas_equalTo(-15);
             make.size.mas_equalTo(CGSizeMake(88, 40));
         }];
@@ -374,10 +383,15 @@
     if (!_pageControl) {
         _pageControl = [[HomePageControl alloc] initWithTotalNumber:10];
         [self.view addSubview:_pageControl];
+        
+        CGFloat bottomDistance = 18;
+        if (isiPhone_X) {
+            bottomDistance += 34;
+        }
         [_pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(35);
             make.left.right.mas_equalTo(0);
-            make.bottom.mas_equalTo(-18);
+            make.bottom.mas_equalTo(-bottomDistance);
         }];
     }
     return _pageControl;

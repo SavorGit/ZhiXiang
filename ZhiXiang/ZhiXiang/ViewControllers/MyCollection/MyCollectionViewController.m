@@ -40,7 +40,7 @@
     
     [super viewDidLoad];
     
-    [self.view setBackgroundColor:VCBackgroundColor];
+    [self.view setBackgroundColor:UIColorFromRGB(0xf8f6f1)];
     [self initInfo];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:self.cachePath]) {
@@ -79,7 +79,7 @@
         
         if (nil == dataArr || ![dataArr isKindOfClass:[NSArray class]] || dataArr.count == 0) {
             if (self.dataSource.count == 0) {
-                [self showNoNetWorkView:NoNetWorkViewStyle_Load_Fail];
+                [self showNoDataViewInView:self.view noDataType:kNoDataType_Favorite];
             }else{
                 [self showTopFreshLabelWithTitle:@"数据出错了，更新失败"];
             }
@@ -192,7 +192,7 @@
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.backgroundColor = UIColorFromRGB(0xece6de);
+        _tableView.backgroundColor = [UIColor clearColor];
         _tableView.backgroundView = nil;
         _tableView.showsVerticalScrollIndicator = NO;
         [self.view addSubview:_tableView];
@@ -204,7 +204,6 @@
         }];
         
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kMainBoundsWidth, 7.5)];
-        headerView.backgroundColor = UIColorFromRGB(0xf8f6f1);
         _tableView.tableHeaderView = headerView;
         
         //创建tableView动画加载头视图
