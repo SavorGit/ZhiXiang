@@ -13,7 +13,7 @@
 
 @interface ShareBoardView()
 
-@property(nonatomic ,strong) MyCollectionModel *model;
+@property(nonatomic ,strong) HomeViewModel *model;
 @property(nonatomic ,weak) UIViewController *VC;
 @property(nonatomic ,strong) UIImageView *bgView;
 
@@ -22,7 +22,7 @@
 @implementation ShareBoardView
 
 
-- (instancetype)initWithFrame:(CGRect)frame Model:(MyCollectionModel *)model andVC:(UIViewController *)VC{
+- (instancetype)initWithFrame:(CGRect)frame Model:(HomeViewModel *)model andVC:(UIViewController *)VC{
    self = [super initWithFrame:frame];
     if (self) {
         

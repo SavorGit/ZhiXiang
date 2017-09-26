@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MyCollectionModel.h"
+#import "HomeViewModel.h"
 
 @interface ShareBoardView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame Model:(MyCollectionModel *)model andVC:(UIViewController *)VC ;
+- (instancetype)initWithFrame:(CGRect)frame Model:(HomeViewModel *)model andVC:(UIViewController *)VC ;
 
 @end

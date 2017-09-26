@@ -26,6 +26,7 @@
 @property(nonatomic, assign) NSInteger dailytype;
 @property(nonatomic, strong) NSString *stext;
 @property(nonatomic, strong) NSString *spicture;
+@property(nonatomic, strong) NSString *share_url;
 
 
 @property(nonatomic, strong) NSString *week;

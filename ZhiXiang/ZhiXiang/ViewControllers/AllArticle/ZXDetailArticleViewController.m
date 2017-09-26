@@ -85,6 +85,7 @@
         self.topModel.sourceName = [dataDict objectForKey:@"sourceName"];
         self.topModel.imgUrl = [dataDict objectForKey:@"imgUrl"];
         self.topModel.bespeak_time = [dataDict objectForKey:@"bespeak_time"];
+        self.topModel.share_url = [dataDict objectForKey:@"share_url"];
         self.topModel.contentType = 1;
         [self.dataSource addObject:self.topModel];
         
@@ -353,7 +354,7 @@
     
     if ([[UMSocialManager defaultManager] isSupport:UMSocialPlatformType_WechatSession] && [[UMSocialManager defaultManager] isSupport:UMSocialPlatformType_WechatTimeLine]) {
         
-        ShareBoardView *shareView = [[ShareBoardView alloc] initWithFrame:CGRectZero Model:nil andVC:self];
+        ShareBoardView *shareView = [[ShareBoardView alloc] initWithFrame:CGRectZero Model:self.topModel andVC:self];
         shareView.backgroundColor = [UIColor clearColor];
         NSLog(@"---用户安装有微信---");
     }else{

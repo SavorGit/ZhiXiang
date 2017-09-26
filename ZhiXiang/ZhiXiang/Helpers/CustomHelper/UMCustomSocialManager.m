@@ -15,7 +15,7 @@
 
 @interface UMCustomSocialManager ()
 
-@property (nonatomic, strong) MyCollectionModel * model;
+@property (nonatomic, strong) HomeViewModel * model;
 @property (nonatomic, strong) UIViewController * controller;
 @property (nonatomic, copy) NSString * info;
 
@@ -45,19 +45,19 @@
 /**
  *  每日知享1.0改版调用
  */
-- (void)sharedToPlatform:(UMSocialPlatformType)platformType andController:(UIViewController *)VC  andView:(UIView *)view  withModel:(MyCollectionModel *)model andUmKeyString:(NSString *)keyString;
+- (void)sharedToPlatform:(UMSocialPlatformType)platformType andController:(UIViewController *)VC  andView:(UIView *)view  withModel:(HomeViewModel *)model andUmKeyString:(NSString *)keyString;
 {
     self.model = model;
-    NSString * url = [[Helper addURLParamsShareWith:self.model.contentURL] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString * url = [[Helper addURLParamsShareWith:self.model.share_url] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
 //    UIImage * image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:self.model.imageURL];
     UIImage * image = [UIImage imageNamed:@"shareDefalut"];
-    self.info = @"热点聚焦 , 投你所好";
+    self.info = @"每日知享";
     
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     //创建网页分享类型
-    UMShareWebpageObject * object = [UMShareWebpageObject shareObjectWithTitle:[NSString stringWithFormat:@"%@ - %@", @"小热点", self.model.title] descr:self.info thumImage:image];
+    UMShareWebpageObject * object = [UMShareWebpageObject shareObjectWithTitle:[NSString stringWithFormat:@"%@ - %@", @"每日知享", self.model.title] descr:self.info thumImage:image];
     [object setWebpageUrl:url];
     messageObject.shareObject = object;
     
