@@ -66,7 +66,7 @@
     }];
     self.bottoView.backgroundColor = UIColorFromRGB(0xf6f2ed);
     
-    self.subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kMainBoundsWidth - 60 - 30, 0)];
+    self.subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width - 30, 0)];
     self.subTitleLabel.text = @"";
     self.subTitleLabel.font = kPingFangLight(15);
     self.subTitleLabel.textColor = UIColorFromRGB(0x575757);
@@ -74,7 +74,7 @@
     self.subTitleLabel.numberOfLines = 0;
     [self.bottoView addSubview:self.subTitleLabel];
     [self.subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(kMainBoundsWidth - 60 - 30, 20));
+        make.size.mas_equalTo(CGSizeMake(self.bounds.size.width - 30, 20));
         make.top.equalTo(self.topView.mas_bottom).offset(15);
         make.left.mas_equalTo(15);
     }];
@@ -107,16 +107,27 @@
     style.firstLineHeadIndent = 0;//首行头缩进
     style.paragraphSpacing = 30;//段落后面的间距
     style.paragraphSpacingBefore = 0;//段落之前的间距
-    style.lineBreakMode = NSLineBreakByWordWrapping;// 分割模式
+    style.lineBreakMode = NSLineBreakByWordWrapping | NSLineBreakByTruncatingTail;// 分割模式
     [attrString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, length)];
     [attrString addAttribute:NSKernAttributeName value:@2 range:NSMakeRange(0, length)];//字符间距 2pt
     self.subTitleLabel.attributedText = attrString;
     
     // 计算富文本的高度
     CGFloat descHeight = [self.subTitleLabel sizeThatFits:self.subTitleLabel.bounds.size].height;
-    [self.subTitleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(kMainBoundsWidth - 60 - 30, descHeight));
-    }];
+    
+    CGFloat topHeight = self.bounds.size.width * (488.f / 750.f);
+    
+    CGFloat bottomHight = self.bounds.size.height - topHeight;
+    
+    if (descHeight >= bottomHight - 30) {
+        [self.subTitleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(self.bounds.size.width - 30, bottomHight - 30));
+        }];
+    }else{
+        [self.subTitleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(self.bounds.size.width - 30, descHeight));
+        }];
+    }
 }
 
 @end
