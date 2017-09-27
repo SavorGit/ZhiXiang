@@ -11,6 +11,7 @@
 #import "MyCollectionViewController.h"
 #import "ZXAllArticleViewController.h"
 #import "UIViewController+LGSideMenuController.h"
+#import "ZXTools.h"
 
 @interface LeftViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate>
 
@@ -160,14 +161,24 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.row == 0) {
+        [ZXTools postUMHandleWithContentId:@"news_share_menu_collect" key:nil value:nil];
         [self hideLeftViewAnimated:nil];
         MyCollectionViewController *mcVC = [[MyCollectionViewController alloc] init];
          [(UINavigationController *)self.sideMenuController.rootViewController pushViewController:mcVC  animated:NO];
     }else if (indexPath.row == 1){
+        [ZXTools postUMHandleWithContentId:@"news_share_menu_all" key:nil value:nil];
         [self hideLeftViewAnimated:nil];
         ZXAllArticleViewController *arVC = [[ZXAllArticleViewController alloc] init];
         [(UINavigationController *)self.sideMenuController.rootViewController pushViewController:arVC  animated:NO];
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [ZXTools postUMHandleWithContentId:@"news_share_menu" key:nil value:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [ZXTools postUMHandleWithContentId:@"news_share_menu_finish" key:nil value:nil];
 }
 
 - (void)didReceiveMemoryWarning {

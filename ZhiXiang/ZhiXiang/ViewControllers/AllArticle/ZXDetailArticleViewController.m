@@ -18,6 +18,7 @@
 #import "ZXIsOrCollectionRequest.h"
 #import "MBProgressHUD+Custom.h"
 #import "ShareBoardView.h"
+#import "Helper.h"
 
 @interface ZXDetailArticleViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -350,6 +351,7 @@
 #pragma mark -分享点击
 - (void)shareAction{
     
+    [ZXTools postUMHandleWithContentId:@"news_share_detail_share" key:nil value:nil];
     if ([[UMSocialManager defaultManager] isSupport:UMSocialPlatformType_WechatSession] && [[UMSocialManager defaultManager] isSupport:UMSocialPlatformType_WechatTimeLine]) {
         
         ShareBoardView *shareView = [[ShareBoardView alloc] initWithFrame:CGRectZero Model:self.topModel andVC:self];
@@ -358,9 +360,6 @@
     }else{
         [MBProgressHUD showTextHUDWithText:@"请先安装微信" inView:self.view];
     }
-    
-//    ShareBoardView *shareView = [[ShareBoardView alloc] initWithFrame:CGRectZero Model:nil andVC:self];
-//    shareView.backgroundColor = [UIColor clearColor];
 }
 
 - (void)collectAction
@@ -426,15 +425,24 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
     
+    [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
     [self.navigationController setNavigationBarHidden:NO animated:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    
+    [ZXTools postUMHandleWithContentId:@"news_share_detail_open" key:nil value:nil];
+    [ZXTools postUMHandleWithContentId:@"news_share_detail_start" key:@"news_share_detail_start" value:[Helper getCurrentTimeWithFormat:@"YYYYMMddHHmmss"]];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [ZXTools postUMHandleWithContentId:@"news_share_detail_end" key:@"news_share_detail_end" value:[Helper getCurrentTimeWithFormat:@"YYYYMMddHHmmss"]];
 }
 
 - (void)didReceiveMemoryWarning {
