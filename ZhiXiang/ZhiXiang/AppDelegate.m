@@ -62,6 +62,7 @@
     
     [self.window addSubview:imageView];
     [self.window bringSubviewToFront:imageView];
+    [ZXTools postUMHandleWithContentId:@"news_share_start" key:@"news_share_start" value:@"success"];
     
     [UIView animateWithDuration:2.f animations:^{
         

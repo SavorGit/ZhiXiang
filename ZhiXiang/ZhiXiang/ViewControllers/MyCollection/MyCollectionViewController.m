@@ -13,6 +13,7 @@
 #import "ImageTextTableViewCell.h"
 #import "ZXDetailArticleViewController.h"
 #import "MBProgressHUD+Custom.h"
+#import "ZXTools.h"
 
 
 @interface MyCollectionViewController ()<UITableViewDelegate,UITableViewDataSource, ZXDetailArticleViewControllerDelegate>
@@ -238,6 +239,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     MyCollectionModel *tmpModel = self.dataSource[indexPath.row];
+    [ZXTools postUMHandleWithContentId:@"news_share_menu_collect_click_item" key:@"news_share_menu_collect_click_item" value:tmpModel.dailyid];
     ZXDetailArticleViewController *daVC = [[ZXDetailArticleViewController alloc] initWithtopDailyID:tmpModel.dailyid];
     daVC.delegate = self;
     [self.navigationController presentViewController:daVC animated:YES completion:^{
@@ -266,6 +268,11 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [ZXTools postUMHandleWithContentId:@"news_share_menu_collect_open" key:nil value:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [ZXTools postUMHandleWithContentId:@"news_share_menu_collect_finish" key:nil value:nil];
 }
 
 - (void)didReceiveMemoryWarning {

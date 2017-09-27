@@ -30,4 +30,21 @@
 // 计算特定富文本的行高,默认字符间距（传入宽度，文字内容，字号）
 + (CGFloat)getAttrHeightByWidthNoSpacing:(CGFloat)width title:(NSString *)title font:(UIFont *)font;
 
+/**
+ *  友盟上传事件
+ *
+ *  @param eventId   事件ID
+ *  @param key       事件参数对应的key
+ *  @param value       事件参数对应的value
+ */
++ (void)postUMHandleWithContentId:(NSString *)eventId key:(NSString *)key value:(NSString *)value;
+
+/**
+ *  友盟上传事件
+ *
+ *  @param eventId   事件ID
+ *  @param parmDic   事件参数对应的字典
+ */
++ (void)postUMHandleWithContentId:(NSString *)eventId withParmDic:(NSDictionary *)parmDic;
+
 @end

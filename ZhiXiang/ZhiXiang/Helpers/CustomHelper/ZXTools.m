@@ -254,4 +254,19 @@
 //    }];
 }
 
++ (void)postUMHandleWithContentId:(NSString *)eventId key:(NSString *)key value:(NSString *)value
+{
+    if (key.length > 0 && value.length > 0) {
+        [MobClick event:eventId attributes:@{key : value}];
+    }else{
+        [MobClick event:eventId];
+    }
+}
+
++ (void)postUMHandleWithContentId:(NSString *)eventId withParmDic:(NSDictionary *)parmDic{
+    if (parmDic != nil) {
+        [MobClick event:eventId attributes:parmDic];
+    }
+}
+
 @end

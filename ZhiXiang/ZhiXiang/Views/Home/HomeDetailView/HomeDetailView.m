@@ -374,9 +374,9 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     if (model.contentType == 1) {
         CGFloat titleHeight = [ZXTools getHeightByWidth:kMainBoundsWidth - 30 title:model.title font:kPingFangMedium(19)];
         if (titleHeight > 27) {
-            return  54 + 30  + 25;
+            return  20 + 54 + 30  + 25;
         }else{
-            return  27 + 30 + 25;
+            return  20 + 27 + 30 + 25;
         }
     }else if (model.dailytype == 3) {
         CGFloat imgHeight =  (kMainBoundsWidth - 40) *(802.f/1242.f);

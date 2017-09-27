@@ -9,6 +9,7 @@
 #import "ShareBoardView.h"
 #import "Helper.h"
 #import "UIView+Additional.h"
+#import "ZXTools.h"
 
 @interface ShareBoardView()
 
@@ -24,6 +25,8 @@
 - (instancetype)initWithFrame:(CGRect)frame Model:(HomeViewModel *)model andVC:(UIViewController *)VC{
    self = [super initWithFrame:frame];
     if (self) {
+        
+        [ZXTools postUMHandleWithContentId:@"news_share_detail_toshare" key:nil value:nil];
         
         self.model = model;
         self.VC = VC;
@@ -163,13 +166,13 @@
 
 - (void)shareWxBtn{
     
-    [[UMCustomSocialManager defaultManager] sharedToPlatform:UMSocialPlatformType_WechatSession andController:self.VC andView:self withModel:self.model andUmKeyString:@"shortcut_share_weixin"];
+    [[UMCustomSocialManager defaultManager] sharedToPlatform:UMSocialPlatformType_WechatSession andController:self.VC andView:self withModel:self.model andUmKeyString:@"news_share_detail_toshare_weixin"];
 }
 
 - (void)shareFRBtn{
     
     [[UMCustomSocialManager defaultManager] sharedToPlatform:UMSocialPlatformType_WechatTimeLine andController:self.VC
-    andView:self  withModel:self.model andUmKeyString:@"shortcut_share_weixin_friends"];
+    andView:self  withModel:self.model andUmKeyString:@"news_share_detail_toshare_friends"];
     
 }
 

@@ -266,6 +266,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     MyCollectionModel *tmpModel = self.dataSource[indexPath.row];
+    [ZXTools postUMHandleWithContentId:@"news_share_menu_all_click_item" key:@"news_share_menu_all_click_item" value:tmpModel.dailyid];
     ZXDetailArticleViewController *daVC = [[ZXDetailArticleViewController alloc] initWithtopDailyID:tmpModel.dailyid];
     [self.navigationController presentViewController:daVC animated:YES completion:^{
         
@@ -288,8 +289,12 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [ZXTools postUMHandleWithContentId:@"news_share_menu_all_open" key:nil value:nil];
 }
 
+- (void)viewDidDisappear:(BOOL)animated{
+    [ZXTools postUMHandleWithContentId:@"news_share_menu_all_finish" key:nil value:nil];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

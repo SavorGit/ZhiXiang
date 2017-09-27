@@ -8,6 +8,7 @@
 
 #import "ZXKeyWordsView.h"
 #import "Masonry.h"
+#import "ZXTools.h"
 
 static CGFloat minMarginDistance = 40.0; //距离屏幕边缘的最小距离
 static CGFloat itemDistance = 44.0; //各个keyWord之间的距离
@@ -116,6 +117,7 @@ static CGFloat keyWordViewAnimationDuration = .7;
 
 - (void)IKnewItButtonDidBeClicked
 {
+    [ZXTools postUMHandleWithContentId:@"news_share_key_words_hide" key:nil value:nil];
     [self hiddenWithAnimation:YES];
 }
 

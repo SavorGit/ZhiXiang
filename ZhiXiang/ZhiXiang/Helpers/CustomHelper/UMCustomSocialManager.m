@@ -12,6 +12,7 @@
 #import "SDImageCache.h"
 #import "Helper.h"
 #import "MBProgressHUD+Custom.h"
+#import "ZXTools.h"
 
 @interface UMCustomSocialManager ()
 
@@ -63,9 +64,12 @@
     
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:VC completion:^(id result, NSError *error) {
         
+        [ZXTools postUMHandleWithContentId:@"news_share_detail_toshare_finish" key:nil value:nil];
         if (error) {
+            [ZXTools postUMHandleWithContentId:keyString key:keyString value:@"fail"];
             [MBProgressHUD showTextHUDWithText:@"分享失败" inView:view];
         }else{
+            [ZXTools postUMHandleWithContentId:keyString key:keyString value:@"success"];
             [MBProgressHUD showTextHUDWithText:@"分享成功" inView:view];
         }
         
