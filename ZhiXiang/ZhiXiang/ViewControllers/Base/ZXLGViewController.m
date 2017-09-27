@@ -18,7 +18,10 @@
     [super viewDidLoad];
     
     self.leftViewPresentationStyle = LGSideMenuPresentationStyleSlideBelow;
-    self.leftViewWidth = kMainBoundsWidth * 0.8 - 30;
+    
+    CGFloat width = kMainBoundsHeight > kMainBoundsWidth ? kMainBoundsWidth : kMainBoundsHeight;
+    
+    self.leftViewWidth = width * 0.8 - 30;
     self.leftViewStatusBarStyle = UIStatusBarStyleLightContent;
     self.leftViewSwipeGestureEnabled = NO;
     self.rootViewLayerShadowRadius = 0.f;

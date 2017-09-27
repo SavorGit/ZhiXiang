@@ -18,6 +18,7 @@
 #import "MBProgressHUD+Custom.h"
 #import "HomeKeyWordRequest.h"
 #import "HomePageControl.h"
+#import "ZXTools.h"
 
 @interface HomeViewController () <TYCyclePagerViewDataSource, TYCyclePagerViewDelegate, HomeStatusCellDelegate>
 
@@ -31,6 +32,7 @@
 @property (nonatomic, strong) NSMutableArray * dataSource; //数据源
 @property (nonatomic, strong) NSArray * keyWords;
 
+@property (nonatomic, strong) UIButton * leftButton;
 @property (nonatomic, strong) HomeDateView * dateView;
 
 @property (nonatomic, strong) HomeStatusCollectionViewCell * statusCell;
@@ -58,12 +60,12 @@
 
 - (void)setupNavigatinBar
 {
-    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, 50, 44);
-    [button setImage:[UIImage imageNamed:@"caidan"] forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(leftButtonDidClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:button];
-    [button mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.leftButton.frame = CGRectMake(0, 0, 50, 44);
+    [self.leftButton setImage:[UIImage imageNamed:@"caidan"] forState:UIControlStateNormal];
+    [self.leftButton addTarget:self action:@selector(leftButtonDidClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.leftButton];
+    [self.leftButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(kStatusBarHeight);
         make.left.mas_equalTo(0);
         make.size.mas_equalTo(CGSizeMake(50, 44));
@@ -97,10 +99,16 @@
             make.bottom.mas_equalTo(-60);
             make.width.mas_equalTo(28);
         }];
+        
+        self.leftButton.hidden = YES;
+        
         self.canShowKeyWords = NO;
     };
     LGSide.willHideLeftView = ^(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view) {
         [self.maskView removeFromSuperview];
+        
+        self.leftButton.hidden = NO;
+        
         self.canShowKeyWords = YES;
     };
     
@@ -156,7 +164,11 @@
 
 - (void)HomeStatusDidBeRetryLoadData
 {
-    [self dataRequest];
+    if (self.dataSource.count > 0) {
+        [self startLoadMoreData];
+    }else{
+        [self dataRequest];
+    }
 }
 
 - (void)startLoadMoreData
@@ -355,8 +367,18 @@
 
 - (void)showKeyWord
 {
+    
     if (!self.canShowKeyWords) {
         return;
+    }
+    
+    NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString * date = [userDefaults objectForKey:@"keyWordDate"];
+    if (!isEmptyString(date)) {
+        NSString * keyWordDate = [ZXTools getCurrentTimeWithFormat:@"yyyy-MM-dd"];
+        if ([keyWordDate isEqualToString:date]) {
+            return;
+        }
     }
     
     if (self.keyWords && self.keyWords.count > 0) {
@@ -364,6 +386,7 @@
         [self.keyWordView showWithAnimation:NO inView:self.sideMenuController.view];
         self.canShowKeyWords = NO;
         self.keyWords = nil;
+        [userDefaults setObject:[ZXTools getCurrentTimeWithFormat:@"yyyy-MM-dd"] forKey:@"keyWordDate"];
     }
 }
 

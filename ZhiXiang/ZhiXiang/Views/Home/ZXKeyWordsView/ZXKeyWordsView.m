@@ -185,6 +185,10 @@ static CGFloat keyWordViewAnimationDuration = .7;
         view.alpha = 1;
     } completion:^(BOOL finished) {
         
+        if ([view isKindOfClass:[UIButton class]]) {
+            [self performSelector:@selector(autoClose) withObject:nil afterDelay:2.f];
+        }
+        
     }];
 }
 
@@ -234,8 +238,14 @@ static CGFloat keyWordViewAnimationDuration = .7;
     }
 }
 
+- (void)autoClose
+{
+    [self hiddenWithAnimation:YES];
+}
+
 - (void)hiddenWithAnimation:(BOOL)animation
 {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(autoClose) object:nil];
     if (animation) {
         CGRect frame = [UIScreen mainScreen].bounds;
         frame.origin.y = -frame.size.height;

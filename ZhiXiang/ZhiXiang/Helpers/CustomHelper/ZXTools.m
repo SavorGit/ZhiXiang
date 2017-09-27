@@ -39,6 +39,14 @@
 //    [self checkUpdate];
 }
 
++ (NSString *)getCurrentTimeWithFormat:(NSString *)format
+{
+    NSDate * date = [NSDate date];
+    NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:format];
+    return [formatter stringFromDate:date];
+}
+
 + (void)saveFileOnPath:(NSString *)path withArray:(NSArray *)array
 {
     NSFileManager * manager = [NSFileManager defaultManager];

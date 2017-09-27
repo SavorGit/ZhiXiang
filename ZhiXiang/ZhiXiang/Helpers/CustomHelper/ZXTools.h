@@ -12,6 +12,8 @@
 
 + (void)configApplication;
 
++ (NSString *)getCurrentTimeWithFormat:(NSString *)format;
+
 + (void)saveFileOnPath:(NSString *)path withArray:(NSArray *)array;
 
 + (void)saveFileOnPath:(NSString *)path withDictionary:(NSDictionary *)dict;

@@ -8,14 +8,18 @@
 
 #import "HomeCollectionViewCell.h"
 #import "UIImageView+WebCache.h"
+#import "ZXTools.h"
 
 @interface HomeCollectionViewCell ()
 
+@property (nonatomic, copy) NSString * imageURL;
 @property (nonatomic, strong) UIView * baseView;
 @property (nonatomic, strong) UIView * topView;
 @property (nonatomic, strong) UIView * bottoView;
 @property (nonatomic, strong) UIImageView * bgImageView;
 @property (nonatomic, strong) UILabel *subTitleLabel;
+@property (nonatomic, strong) UILabel * fromLabel;
+@property (nonatomic, strong) UILabel * titleLabel;
 
 @end
 
@@ -66,7 +70,20 @@
     }];
     self.bottoView.backgroundColor = UIColorFromRGB(0xf6f2ed);
     
-    self.subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width - 30, self.bounds.size.height - self.bounds.size.width * 488.f/750.f - 30)];
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    self.titleLabel.text = @"";
+    self.titleLabel.textColor = UIColorFromRGB(0x222222);
+    self.titleLabel.font = kPingFangMedium(19);
+    self.titleLabel.numberOfLines = 2;
+    [self.bottoView addSubview:self.titleLabel];
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(25);
+        make.left.mas_equalTo(15);
+        make.right.mas_equalTo(-15);
+        make.height.mas_equalTo(20);
+    }];
+    
+    self.subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width - 30, self.bounds.size.height - self.bounds.size.width * 488.f/750.f)];
     self.subTitleLabel.text = @"";
     self.subTitleLabel.font = kPingFangLight(15);
     self.subTitleLabel.textColor = UIColorFromRGB(0x575757);
@@ -74,23 +91,38 @@
     self.subTitleLabel.numberOfLines = 0;
     [self.bottoView addSubview:self.subTitleLabel];
     [self.subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(self.bounds.size);
-        make.top.equalTo(self.topView.mas_bottom).offset(15);
+        make.size.mas_equalTo(self.subTitleLabel.bounds.size);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(15);
         make.left.mas_equalTo(15);
     }];
     
+    self.fromLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    self.fromLabel.text = @"";
+    self.fromLabel.textAlignment = NSTextAlignmentRight;
+    self.fromLabel.textColor = UIColorFromRGB(0x999999);
+    self.fromLabel.font = kPingFangRegular(12);
+    [self.contentView addSubview:self.fromLabel];
+    [self.fromLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(15);
+        make.bottom.mas_equalTo(-13);
+        make.right.mas_equalTo(-15);
+        make.height.mas_equalTo(15);
+    }];
 }
 
 - (void)configModelData:(HomeViewModel *)model{
     
+    if (isEmptyString(model.sourceName)) {
+        self.fromLabel.text = @"";
+    }else{
+        self.fromLabel.text = [@"选自: " stringByAppendingString:model.sourceName];
+    }
+    
+    self.titleLabel.text = model.title;
     self.subTitleLabel.text = model.desc;
     [self configDescLabel];
+    
     [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.imgUrl] placeholderImage:[UIImage imageNamed:@"zanwu"]];
-    
-//    self.subTitleLabel.text = @"“艾尔玛”给佛罗里达州带来巨大损失。电视画面显示，佛罗里达半岛西部城市那不勒斯、坦帕附近海面掀起的巨浪最高达到5米。迈阿密的很多大树被连根拔起，一些房屋墙壁中的保温材料被风吹落，堆积在街道。而迈阿密国际机场因积水漫灌，已严重损毁。";
-//    [self configDescLabel];
-//    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:@"http://devp.oss.littlehotspot.com/media/resource/7GbaE4cxsF.jpg"] placeholderImage:[UIImage imageNamed:@"zanwu"]];
-    
 }
 
 - (void)configDescLabel{
@@ -115,13 +147,25 @@
     // 计算富文本的高度
     CGFloat descHeight = [self.subTitleLabel sizeThatFits:self.subTitleLabel.bounds.size].height;
     
-    CGFloat topHeight = self.bounds.size.width * (488.f / 750.f);
+    CGFloat bottomHeight = self.bounds.size.height - self.bounds.size.width * (488.f / 750.f);
     
-    CGFloat bottomHight = self.bounds.size.height - topHeight;
+    CGFloat titleHeight = [ZXTools getHeightByWidth:self.bounds.size.width - 30 title:self.titleLabel.text font:kPingFangMedium(19)];
+    CGFloat subTitleHeight;
+    if (titleHeight > 32) {
+        [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(54);
+        }];
+        subTitleHeight = bottomHeight - 25 - 15 - 54 - 15 - 15 - 10;
+    }else{
+        [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(20);
+        }];
+        subTitleHeight = bottomHeight - 25 - 15 - 20 - 15 - 15 - 10;
+    }
     
-    if (descHeight >= bottomHight - 30) {
+    if (descHeight >= subTitleHeight) {
         [self.subTitleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(self.bounds.size.width - 30, bottomHight - 30));
+            make.size.mas_equalTo(CGSizeMake(self.bounds.size.width - 30, subTitleHeight));
         }];
     }else{
         [self.subTitleLabel mas_updateConstraints:^(MASConstraintMaker *make) {

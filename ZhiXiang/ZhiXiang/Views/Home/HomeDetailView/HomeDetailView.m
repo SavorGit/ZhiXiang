@@ -29,7 +29,10 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
 //minStyle
 @property (nonatomic, strong) UIImageView * topImageView;
 @property (nonatomic, strong) UIView * bottoView;
+@property (nonatomic, strong) UIView * baseView;
 @property (nonatomic, strong) UILabel *subTitleLabel;
+@property (nonatomic, strong) UILabel *fromLabel;
+@property (nonatomic, strong) UILabel * titleLabel;
 
 //maxStyle
 @property (nonatomic, strong) UITableView * tableView;
@@ -200,18 +203,44 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     [self addSubview:self.bottoView];
     self.bottoView.backgroundColor = UIColorFromRGB(0xf6f2ed);
     
-    self.subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 15, self.bottoView.frame.size.width - 30, self.bottoView.frame.size.height - 30)];
+    self.baseView = [[UIView alloc] initWithFrame:self.bottoView.bounds];
+    [self.bottoView addSubview:self.baseView];
+    
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 25, self.bottoView.frame.size.width - 30, 20)];
+    self.titleLabel.text = self.topModel.title;
+    self.titleLabel.textColor = UIColorFromRGB(0x222222);
+    self.titleLabel.font = kPingFangMedium(19);
+    self.titleLabel.numberOfLines = 2;
+    [self.baseView addSubview:self.titleLabel];
+    
+    self.subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 25 + 20 + 15, self.bottoView.frame.size.width - 30, self.bottoView.frame.size.height - 60)];
     self.subTitleLabel.text = self.topModel.desc;
     self.subTitleLabel.font = kPingFangLight(15);
     self.subTitleLabel.textColor = UIColorFromRGB(0x575757);
     self.subTitleLabel.backgroundColor = [UIColor clearColor];
     self.subTitleLabel.numberOfLines = 0;
-    [self.bottoView addSubview:self.subTitleLabel];
+    [self.baseView addSubview:self.subTitleLabel];
     [self configSubTitleWithWidth:self.bottoView.frame.size.width - 30];
+    
+    if (!isEmptyString(self.topModel.sourceName)) {
+        self.fromLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, self.bottoView.frame.size.height - 30, self.bottoView.frame.size.width - 30, 15)];
+        self.fromLabel.text = [@"选自: " stringByAppendingString:self.topModel.sourceName];
+        self.fromLabel.textAlignment = NSTextAlignmentRight;
+        self.fromLabel.textColor = UIColorFromRGB(0x999999);
+        self.fromLabel.font = kPingFangRegular(12);
+        [self.baseView addSubview:self.fromLabel];
+    }
 }
 
 - (void)configSubTitleWithWidth:(CGFloat)width
 {
+    CGFloat titleHeight = [ZXTools getHeightByWidth:self.bounds.size.width - 30 title:self.titleLabel.text font:kPingFangMedium(19)];
+    if (titleHeight > 32) {
+        self.titleLabel.frame = CGRectMake(15, 25, self.bottoView.frame.size.width - 30, 54);
+    }else{
+        self.titleLabel.frame = CGRectMake(15, 25, self.bottoView.frame.size.width - 30, 20);
+    }
+    
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:self.subTitleLabel.text];
     NSUInteger length = [self.subTitleLabel.text length];
     [attrString addAttribute:NSFontAttributeName value:kPingFangLight(15) range:NSMakeRange(0, length)];//设置所有的字体
@@ -234,10 +263,18 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     
     CGFloat bottomHight = self.bottoView.bounds.size.height;
     
-    if (descHeight >= bottomHight - 30) {
-        self.subTitleLabel.frame = CGRectMake(15, 15, width, bottomHight - 30);
+    CGFloat subTitleHeight;
+    if (titleHeight > 32) {
+        subTitleHeight = bottomHight - 25 - 15 - 54 - 15 - 15 - 10;
     }else{
-        self.subTitleLabel.frame = CGRectMake(15, 15, width, descHeight + 10.f);
+        subTitleHeight = bottomHight - 25 - 15 - 20 - 15 - 15 - 10;
+    }
+    
+    CGFloat startY = self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + 15;
+    if (descHeight >= subTitleHeight) {
+        self.subTitleLabel.frame = CGRectMake(15, startY, width, subTitleHeight);
+    }else{
+        self.subTitleLabel.frame = CGRectMake(15, startY, width, descHeight + 10.f);
     }
 }
 
@@ -383,10 +420,12 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
         self.tableView.frame = self.bounds;
         [self.topView startScrShow];
         self.topImageView.frame = CGRectMake(0, 0, kMainBoundsWidth, kMainBoundsWidth / 750.f * 488.f);
+        
         self.bottoView.frame = CGRectMake(0, kMainBoundsWidth / 750.f * 488.f, kMainBoundsWidth, kMainBoundsHeight - kMainBoundsWidth / 750.f * 488.f);
-//        [self configSubTitleWithWidth:self.bottoView.bounds.size.width - 30];
-        CGRect frame = self.subTitleLabel.bounds;
-        self.subTitleLabel.frame = CGRectMake((kMainBoundsWidth - frame.size.width) / 2, (kMainBoundsHeight - self.topImageView.frame.size.height) / 2, frame.size.width, frame.size.height);
+        
+        CGRect frame = self.baseView.bounds;
+        self.baseView.frame = CGRectMake((kMainBoundsWidth - frame.size.width) / 2, (kMainBoundsHeight - self.topImageView.frame.size.height) / 2, frame.size.width, frame.size.height);
+        
     } completion:^(BOOL finished) {
         [self.topImageView removeFromSuperview];
         self.layer.cornerRadius = 0.f;
@@ -424,9 +463,9 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
          [self.topView endScrShow];
         self.topImageView.frame = CGRectMake(0, 0, self.startFrame.size.width, self.startFrame.size.width / 750.f * 488.f);
         self.tableView.frame = CGRectMake(-self.startFrame.origin.x, -self.startFrame.origin.y, kMainBoundsWidth, kMainBoundsHeight);
-        self.bottoView.frame = CGRectMake(0, self.startFrame.size.width / 750.f * 488.f, self.startFrame.size.width, self.startFrame.size.height - self.startFrame.size.width / 750.f * 488.f);
-        CGRect frame = self.subTitleLabel.bounds;
-        self.subTitleLabel.frame = CGRectMake(15, 15, frame.size.width, frame.size.height);
+        self.bottoView.frame = CGRectMake(0, self.topImageView.frame.size.height, self.startFrame.size.width, self.startFrame.size.height - self.topImageView.frame.size.height);
+        
+        self.baseView.frame = self.bottoView.bounds;
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
         [self.topImageView removeFromSuperview];
