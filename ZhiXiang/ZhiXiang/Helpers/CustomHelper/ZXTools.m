@@ -12,6 +12,7 @@
 #import "GCCKeyChain.h"
 #import "Helper.h"
 #import "UMCustomSocialManager.h"
+#import <UMMobClick/MobClick.h>
 
 @implementation ZXTools
 
@@ -23,6 +24,12 @@
     [[UMSocialManager defaultManager] setUmSocialAppkey:UmengAppkey];
     //设置微信的appKey和appSecret
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wx59643f058e9b544c" appSecret:@"ad5cf8b259673427421a1181614c33c7" redirectURL:@"http://itunes.apple.com/cn/app/id1144051586"];
+    
+    //友盟统计
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [MobClick setAppVersion:version];
+    UMConfigInstance.appKey = UmengAppkey;
+    [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK！
     
     NSString* identifierNumber = [[UIDevice currentDevice].identifierForVendor UUIDString];
     if (![GCCKeyChain load:keychainID]) {
