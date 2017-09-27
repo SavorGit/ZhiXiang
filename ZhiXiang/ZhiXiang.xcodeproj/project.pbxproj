@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		063380601F73B4AC00B07FE5 /* HomeDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0633805F1F73B4AC00B07FE5 /* HomeDateView.m */; };
+		0633AE8F1F7BA13500EA7A75 /* CheckUpdateRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0633AE8E1F7BA13500EA7A75 /* CheckUpdateRequest.m */; };
+		0633AE971F7BA1B900EA7A75 /* RDAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0633AE921F7BA18500EA7A75 /* RDAlertAction.m */; };
+		0633AE981F7BA1B900EA7A75 /* RDAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0633AE941F7BA18500EA7A75 /* RDAlertView.m */; };
+		0633AE991F7BA1B900EA7A75 /* RDTextAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0633AE961F7BA18500EA7A75 /* RDTextAlertView.m */; };
 		064304FA1F70EAC5004EC8A9 /* HomeDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 064304F91F70EAC5004EC8A9 /* HomeDetailView.m */; };
 		0653CFDA1F6BA0300054A818 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653CFD91F6BA0300054A818 /* main.m */; };
 		0653CFDD1F6BA0300054A818 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653CFDC1F6BA0300054A818 /* AppDelegate.m */; };
@@ -91,6 +95,14 @@
 /* Begin PBXFileReference section */
 		0633805E1F73B4AC00B07FE5 /* HomeDateView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDateView.h; sourceTree = "<group>"; };
 		0633805F1F73B4AC00B07FE5 /* HomeDateView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDateView.m; sourceTree = "<group>"; };
+		0633AE8D1F7BA13500EA7A75 /* CheckUpdateRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckUpdateRequest.h; sourceTree = "<group>"; };
+		0633AE8E1F7BA13500EA7A75 /* CheckUpdateRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheckUpdateRequest.m; sourceTree = "<group>"; };
+		0633AE911F7BA18500EA7A75 /* RDAlertAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDAlertAction.h; sourceTree = "<group>"; };
+		0633AE921F7BA18500EA7A75 /* RDAlertAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDAlertAction.m; sourceTree = "<group>"; };
+		0633AE931F7BA18500EA7A75 /* RDAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDAlertView.h; sourceTree = "<group>"; };
+		0633AE941F7BA18500EA7A75 /* RDAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDAlertView.m; sourceTree = "<group>"; };
+		0633AE951F7BA18500EA7A75 /* RDTextAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDTextAlertView.h; sourceTree = "<group>"; };
+		0633AE961F7BA18500EA7A75 /* RDTextAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDTextAlertView.m; sourceTree = "<group>"; };
 		064304F81F70EAC5004EC8A9 /* HomeDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeDetailView.h; sourceTree = "<group>"; };
 		064304F91F70EAC5004EC8A9 /* HomeDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeDetailView.m; sourceTree = "<group>"; };
 		0653CFD51F6BA0300054A818 /* ZhiXiang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhiXiang.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -253,6 +265,19 @@
 			path = HomeDateView;
 			sourceTree = "<group>";
 		};
+		0633AE901F7BA18500EA7A75 /* RDAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				0633AE911F7BA18500EA7A75 /* RDAlertAction.h */,
+				0633AE921F7BA18500EA7A75 /* RDAlertAction.m */,
+				0633AE931F7BA18500EA7A75 /* RDAlertView.h */,
+				0633AE941F7BA18500EA7A75 /* RDAlertView.m */,
+				0633AE951F7BA18500EA7A75 /* RDTextAlertView.h */,
+				0633AE961F7BA18500EA7A75 /* RDTextAlertView.m */,
+			);
+			path = RDAlertView;
+			sourceTree = "<group>";
+		};
 		064304F71F70E777004EC8A9 /* HomeDetailView */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,6 +382,7 @@
 		0653D00C1F6BA2F30054A818 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0633AE901F7BA18500EA7A75 /* RDAlertView */,
 				969802051F78CE17008510DB /* ShareView */,
 				96D3579B1F70B81C00BF35EB /* NoDataView */,
 				96D3577B1F6FC08C00BF35EB /* Home */,
@@ -399,6 +425,8 @@
 				0653D02C1F6BABB70054A818 /* NetworkConfiguration.m */,
 				96D357D81F73967A00BF35EB /* ZXIsOrCollectionRequest.h */,
 				96D357D91F73967A00BF35EB /* ZXIsOrCollectionRequest.m */,
+				0633AE8D1F7BA13500EA7A75 /* CheckUpdateRequest.h */,
+				0633AE8E1F7BA13500EA7A75 /* CheckUpdateRequest.m */,
 			);
 			path = Networks;
 			sourceTree = "<group>";
@@ -879,6 +907,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0633AE971F7BA1B900EA7A75 /* RDAlertAction.m in Sources */,
+				0633AE981F7BA1B900EA7A75 /* RDAlertView.m in Sources */,
+				0633AE991F7BA1B900EA7A75 /* RDTextAlertView.m in Sources */,
 				064304FA1F70EAC5004EC8A9 /* HomeDetailView.m in Sources */,
 				0653D03D1F6BAC5E0054A818 /* ZXTools.m in Sources */,
 				0653D01A1F6BA8810054A818 /* ZXBaseNavigationController.m in Sources */,
@@ -886,6 +917,7 @@
 				0653D0211F6BA9180054A818 /* UIView+Additional.m in Sources */,
 				96D357D41F73517900BF35EB /* HeaderTableViewCell.m in Sources */,
 				069C37271F6F6A3400FE2BB0 /* HomeCollectionViewCell.m in Sources */,
+				0633AE8F1F7BA13500EA7A75 /* CheckUpdateRequest.m in Sources */,
 				96D357771F6FBDC000BF35EB /* MyCollectionViewController.m in Sources */,
 				96D357C81F725F6C00BF35EB /* AllArticelRequest.m in Sources */,
 				96D357AE1F70C8EB00BF35EB /* ZXAllArticleViewController.m in Sources */,
