@@ -41,7 +41,7 @@
         make.width.mas_equalTo(kMainBoundsWidth - 40);
         make.height.mas_equalTo(27);
         make.top.mas_equalTo(20);
-        make.left.mas_equalTo(15);
+        make.left.mas_equalTo(20);
     }];
     
     _sourceLabel = [[UILabel alloc]init];
