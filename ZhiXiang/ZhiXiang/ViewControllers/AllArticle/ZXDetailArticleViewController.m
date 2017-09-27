@@ -109,7 +109,12 @@
         
         [self.view insertSubview:self.topView aboveSubview:self.tableView ];
         
-        self.collectBtn.selected = self.topModel.is_collect;
+        if (self.topModel.is_collect == 1) {
+            self.collectBtn.selected = YES;
+        }else{
+            self.collectBtn.selected = NO;
+        }
+        
         self.startCollected = self.collectBtn.isSelected;
         
         [self autoCollectButton];
