@@ -94,7 +94,11 @@
         }];
     }
     self.titleLabel.text = model.title;
-    _sourceLabel.text = model.sourceName;
+    if (isEmptyString(model.sourceName )) {
+        _sourceLabel.text = @"";
+    }else{
+        _sourceLabel.text = [@"选自：" stringByAppendingString:model.sourceName];
+    }
     _timeLabel.text = model.bespeak_time;
     
 }
