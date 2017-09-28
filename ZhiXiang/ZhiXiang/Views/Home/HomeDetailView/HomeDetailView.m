@@ -191,7 +191,6 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
 
 - (void)retryToGetIsCollection
 {
-    NSLog(@"%ld", [AFNetworkReachabilityManager sharedManager].networkReachabilityStatus);
     if ([AFNetworkReachabilityManager sharedManager].networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
         [MBProgressHUD showTextHUDWithText:@"暂无网络，请稍后重试" inView:self];
         return;
