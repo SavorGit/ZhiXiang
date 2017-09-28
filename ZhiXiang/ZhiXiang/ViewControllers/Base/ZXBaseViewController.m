@@ -27,6 +27,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self setNavBackArrowWithWidth:40];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -207,6 +210,22 @@
         [self.view addSubview:_TopFreshLabel];
     }
     return _TopFreshLabel;
+}
+
+- (void)setNavBackArrowWithWidth:(CGFloat)width {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.exclusiveTouch = YES;
+    [button setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
+    button.frame = CGRectMake(0, 0, width, 44);
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, -25, 0, 0)];
+    [button addTarget:self action:@selector(navBackButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    button.backgroundColor = [UIColor clearColor];
+    UIBarButtonItem* backItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.navigationItem.leftBarButtonItem = backItem;
+}
+
+- (void)navBackButtonClicked:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
