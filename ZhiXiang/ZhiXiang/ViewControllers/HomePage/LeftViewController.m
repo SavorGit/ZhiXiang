@@ -117,7 +117,7 @@
             make.width.mas_equalTo(192);
             make.height.mas_equalTo(14);
             make.bottom.mas_equalTo(- 60);
-            make.centerX.mas_equalTo(_footView);
+            make.left.mas_equalTo(30);
         }];
 
     }

@@ -171,6 +171,10 @@
             make.bottom.mas_equalTo(0);
             make.right.mas_equalTo(0);
         }];
+        
+        UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kMainBoundsWidth, 20)];
+        footView.backgroundColor = UIColorFromRGB(0xf8f6f1);
+        _tableView.tableFooterView= footView;
     }
     
     return _tableView;
@@ -289,7 +293,7 @@
             if (nextModel.dailytype == 1) {
                 return 30;//标注40间距过大
             }else if (nextModel.dailytype == 3){
-                return 15;
+                return 30;
             }
         }else if (tmpModel.dailytype == 3){
             if (nextModel.dailytype == 1) {

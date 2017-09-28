@@ -395,7 +395,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
             if (nextModel.dailytype == 1) {
                 return 30;//标注40间距过大
             }else if (nextModel.dailytype == 3){
-                return 15;
+                return 30;
             }
         }else if (tmpModel.dailytype == 3){
             if (nextModel.dailytype == 1) {
