@@ -168,7 +168,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
         
         [hud hideAnimated:NO];
-        [MBProgressHUD showTextHUDWithText:@"操作失败" inView:self];
+        [MBProgressHUD showTextHUDWithText:@"暂无网络，请稍后重试" inView:self];
         
     }];
 }
