@@ -294,6 +294,10 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     [self addSubview:self.tableView];
     [self setUpTableHeaderView];
     self.tableView.alpha = 0.f;
+    
+    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kMainBoundsWidth, 30)];
+    footView.backgroundColor = UIColorFromRGB(0xf8f6f1);
+    _tableView.tableFooterView= footView;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -314,7 +318,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = UIColorFromRGB(0xf6f2ed);
+        cell.backgroundColor = UIColorFromRGB(0xf8f6f1);
         
         [cell configModelData:model];
         return cell;
@@ -327,7 +331,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = UIColorFromRGB(0xf6f2ed);
+        cell.backgroundColor = UIColorFromRGB(0xf8f6f1);
         
         [cell configWithText:model.stext];
         return cell;
