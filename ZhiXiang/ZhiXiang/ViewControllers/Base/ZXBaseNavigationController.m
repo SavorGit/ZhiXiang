@@ -21,12 +21,6 @@
     UIImage *image = [UIImage imageWithColor:UIColorFromRGB(0x222222) size:CGSizeMake(kMainBoundsWidth, kNaviBarHeight + kStatusBarHeight)];
     [[UINavigationBar appearanceWhenContainedIn:[ZXBaseNavigationController class], nil] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
     
-    //利用偏移量隐藏返回文字
-    UIBarButtonItem *buttonItem = [UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil];
-    UIOffset offset;
-    offset.horizontal = -500;
-    [buttonItem setBackButtonTitlePositionAdjustment:offset forBarMetrics:UIBarMetricsDefault];
-    
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];//item颜色
     //item字体大小
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName : [UIFont systemFontOfSize:16]} forState:UIControlStateNormal];

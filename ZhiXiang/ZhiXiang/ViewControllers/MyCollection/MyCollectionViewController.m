@@ -48,7 +48,7 @@
 }
 
 - (void)initInfo{
-     self.title = @"收藏馆";
+     self.title = @"我的收藏";
     _dataSource = [[NSMutableArray alloc] initWithCapacity:100];
 }
 
@@ -85,7 +85,7 @@
             [self.tableView.mj_footer resetNoMoreData];
         }
         
-        [self showTopFreshLabelWithTitle:@"更新成功"];
+//        [self showTopFreshLabelWithTitle:@"更新成功"];
         
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         

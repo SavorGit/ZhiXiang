@@ -59,7 +59,7 @@
 }
 
 - (void)initInfo{
-    self.title = @"知享库";
+    self.title = @"全部知享";
     _dataSource = [[NSMutableArray alloc] initWithCapacity:100];
 }
 
@@ -104,7 +104,7 @@
             [self.tableView.mj_footer resetNoMoreData];
         }
         
-        [self showTopFreshLabelWithTitle:@"更新成功"];
+//        [self showTopFreshLabelWithTitle:@"更新成功"];
         
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
