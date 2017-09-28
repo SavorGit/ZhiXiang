@@ -71,8 +71,12 @@
 
 - (void)dataRequest{
     
+    [MBProgressHUD showLoadingHUDWithText:@"正在加载" inView:self.view];
+    
     HomeDetailRequest * request = [[HomeDetailRequest alloc] initWithDailyid:self.dailyid];
     [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+        
+        [self hideNoNetWorkView];
         
         NSDictionary *dic = (NSDictionary *)response;
         NSDictionary * dataDict = [dic objectForKey:@"result"];
@@ -119,33 +123,43 @@
         self.startCollected = self.collectBtn.isSelected;
         
         [self autoCollectButton];
-//        [self showTopFreshLabelWithTitle:@"更新成功"];
         
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
+        [self hideNoNetWorkView];
         if (self.dataSource.count == 0) {
             [self showNoNetWorkView:NoNetWorkViewStyle_Load_Fail];
         }
         if (_tableView) {
-            [self showTopFreshLabelWithTitle:@"数据出错了，更新失败"];
+            [MBProgressHUD showTextHUDWithText:@"数据出错了，更新失败" inView:self.view];
         }
+        [self.view insertSubview:self.topView aboveSubview:self.tableView ];
         
     } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
         
+        [self hideNoNetWorkView];
         if (self.dataSource.count == 0) {
             [self showNoNetWorkView:NoNetWorkViewStyle_No_NetWork];
         }
         if (_tableView) {
-            
             if (error.code == -1001) {
-                [self showTopFreshLabelWithTitle:@"数据加载超时"];
+                [MBProgressHUD showTextHUDWithText:@"数据加载超时" inView:self.view];
             }else{
-                [self showTopFreshLabelWithTitle:@"无法连接到网络，请检查网络设置"];
+                [MBProgressHUD showTextHUDWithText:@"暂无网络，请稍后重试" inView:self.view];
             }
         }
+        [self.view bringSubviewToFront:self.topView];
+        
     }];
 }
 
+-(void)retryToGetData{
+    [self hideNoNetWorkView];
+    if (self.dataSource.count == 0)  {
+        [MBProgressHUD showLoadingHUDWithText:@"正在加载" inView:self.view];
+    }
+    [self dataRequest];
+}
 
 #pragma mark -- 懒加载
 - (UITableView *)tableView
