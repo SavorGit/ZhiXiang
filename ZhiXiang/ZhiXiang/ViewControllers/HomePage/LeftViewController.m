@@ -118,7 +118,7 @@
             make.height.mas_equalTo(14);
             make.bottom.mas_equalTo(- 60);
             make.left.mas_equalTo(30);
-        }];
+        }]; 
 
     }
     

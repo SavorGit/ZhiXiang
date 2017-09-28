@@ -84,7 +84,7 @@
 - (void)showNoMoreData
 {
     self.tap.enabled = NO;
-    self.statusLabel.text = @"没有更多数据了";
+    self.statusLabel.text = @"您已看完全部内容";
     
     [self.loadingView stopAnimating];
     self.statusLabel.hidden = NO;
