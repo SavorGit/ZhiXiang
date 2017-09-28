@@ -45,6 +45,9 @@
 
 @property (nonatomic, strong) HomePageControl * pageControl;
 
+@property (nonatomic, assign) BOOL isHiddenDateAndPage;
+@property (nonatomic, assign) BOOL isUserClickCell;
+
 @end
 
 @implementation HomeViewController
@@ -161,6 +164,7 @@
 
 - (void)HomeStatusDidBeRetryLoadData
 {
+    self.isUserClickCell = YES;
     if (self.dataSource.count > 0) {
         [self startLoadMoreData];
     }else{
@@ -170,9 +174,11 @@
 
 - (void)startLoadMoreData
 {
-    if (self.isRequest || self.isNoMoreData) {
+    if (self.isRequest || self.isNoMoreData || self.dataSource.count == 0) {
         return;
     }
+    
+    [self hiddenDateAndPage];
     
     self.isRequest = YES;
     if (self.statusCell) {
@@ -216,22 +222,30 @@
             
             [self.pagerView reloadData];
             self.isRequest = NO;
+            [self showDateAndPage];
+            self.isUserClickCell = NO;
             
         } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
             
             if (self.statusCell) {
                 [self.statusCell showNoNetWork];
             }
+            
+            if (self.isUserClickCell) {
+                [MBProgressHUD showTextHUDWithText:@"加载失败" inView:self.view];
+            }
             self.isRequest = NO;
-            [MBProgressHUD showTextHUDWithText:@"加载失败" inView:self.view];
             
         } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
             
             if (self.statusCell) {
                 [self.statusCell showNoNetWork];
             }
+            
+            if (self.isUserClickCell) {
+                [MBProgressHUD showTextHUDWithText:@"加载失败" inView:self.view];
+            }
             self.isRequest = NO;
-            [MBProgressHUD showTextHUDWithText:@"加载失败" inView:self.view];
             
         }];
     });
@@ -274,6 +288,7 @@
         [self startLoadMoreData];
     }
     if (toIndex < self.dataSource.count) {
+        [self showDateAndPage];
         HomeViewModel * model = [self.dataSource objectAtIndex:toIndex];
         if (model) {
             [self.dateView configWithModel:model];
@@ -294,6 +309,7 @@
         [self.statusCell showLoading];
     }
     
+    [self hiddenDateAndPage];
     HomeViewRequest * request = [[HomeViewRequest alloc] initWithIBespeakTime:nil];
     [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
@@ -328,23 +344,32 @@
         
         [self.pagerView reloadData];
         self.isRequest = NO;
-        [self.pageControl setCurrentIndex:1];
+        [self showDateAndPage];
+        self.isUserClickCell = NO;
         
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
         if (self.statusCell) {
             [self.statusCell showNoNetWork];
         }
+        
+        if (self.isUserClickCell) {
+            [MBProgressHUD showTextHUDWithText:@"加载失败" inView:self.view];
+        }
         self.isRequest = NO;
-        [MBProgressHUD showTextHUDWithText:@"加载失败" inView:self.view];
+        [self hiddenDateAndPage];
         
     } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
         
         if (self.statusCell) {
             [self.statusCell showNoNetWork];
         }
+        
+        if (self.isUserClickCell) {
+            [MBProgressHUD showTextHUDWithText:@"加载失败" inView:self.view];
+        }
         self.isRequest = NO;
-        [MBProgressHUD showTextHUDWithText:@"加载失败" inView:self.view];
+        [self hiddenDateAndPage];
     }];
     
     HomeKeyWordRequest * keyWordRequest = [[HomeKeyWordRequest alloc] init];
@@ -424,13 +449,34 @@
     return _pageControl;
 }
 
+- (void)hiddenDateAndPage
+{
+    if (!self.isHiddenDateAndPage) {
+        self.isHiddenDateAndPage = YES;
+        
+        self.pageControl.hidden = YES;
+        self.dateView.hidden = YES;
+    }
+}
+
+- (void)showDateAndPage
+{
+    
+    if (self.isHiddenDateAndPage) {
+        self.isHiddenDateAndPage = NO;
+        
+        self.pageControl.hidden = NO;
+        self.dateView.hidden = NO;
+    }
+    
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     [ZXTools postUMHandleWithContentId:@"news_share_home_start" key:nil value:nil];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

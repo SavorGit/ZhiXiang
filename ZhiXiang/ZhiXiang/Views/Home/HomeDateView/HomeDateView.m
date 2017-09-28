@@ -70,24 +70,10 @@
 
 - (void)configWithModel:(HomeViewModel *)model{
     
-    if ([model.month isEqualToString:self.monthLabel.text] &&
-        [model.week isEqualToString:self.weekLabel.text] &&
-        [model.day isEqualToString:self.dayLabel.text]) {
-        return;
-    }
+    self.monthLabel.text = model.month;
+    self.weekLabel.text = model.week;
+    self.dayLabel.text = model.day;
     
-    [UIView animateWithDuration:.2f animations:^{
-        self.alpha = .1f;
-    } completion:^(BOOL finished) {
-        self.monthLabel.text = model.month;
-        self.weekLabel.text = model.week;
-        self.dayLabel.text = model.day;
-        [UIView animateWithDuration:.2f animations:^{
-            self.alpha = 1.f;
-        } completion:^(BOOL finished) {
-            
-        }];
-    }];
 }
 
 @end

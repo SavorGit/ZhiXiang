@@ -143,12 +143,12 @@
     [attrString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, length)];
     [attrString addAttribute:NSKernAttributeName value:@2 range:NSMakeRange(0, length)];//字符间距 2pt
     self.subTitleLabel.attributedText = attrString;
-    
+
     // 计算富文本的高度
     CGFloat descHeight = [self.subTitleLabel sizeThatFits:self.subTitleLabel.bounds.size].height;
-    
+
     CGFloat bottomHeight = self.bounds.size.height - self.bounds.size.width * (488.f / 750.f);
-    
+
     CGFloat titleHeight = [ZXTools getHeightByWidth:self.bounds.size.width - 30 title:self.titleLabel.text font:kPingFangMedium(19)];
     CGFloat subTitleHeight;
     if (titleHeight > 32) {
@@ -162,7 +162,7 @@
         }];
         subTitleHeight = bottomHeight - 25 - 15 - 20 - 15 - 15 - 10;
     }
-    
+
     if (descHeight >= subTitleHeight) {
         [self.subTitleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(self.bounds.size.width - 30, subTitleHeight));
