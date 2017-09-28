@@ -125,18 +125,23 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
         self.collectBtn.selected = isCollected;
         
         self.isCheckCollectting = NO;
+        [self.collectBtn removeTarget:self action:@selector(retryToGetIsCollection) forControlEvents:UIControlEventTouchUpInside];
         [self.collectBtn addTarget:self action:@selector(collectAction) forControlEvents:UIControlEventTouchUpInside];
         [self autoCollectButton];
+        
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
         self.isCheckCollectting = NO;
         [self.collectBtn addTarget:self action:@selector(retryToGetIsCollection) forControlEvents:UIControlEventTouchUpInside];
+        [MBProgressHUD hideHUDForView:self animated:NO];
+        [MBProgressHUD showTextHUDWithText:@"获取收藏状态失败" inView:self];
         
     } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
         
         self.isCheckCollectting = NO;
         [self.collectBtn addTarget:self action:@selector(retryToGetIsCollection) forControlEvents:UIControlEventTouchUpInside];
-        
+        [MBProgressHUD hideHUDForView:self animated:NO];
+        [MBProgressHUD showTextHUDWithText:@"获取收藏状态失败" inView:self];
     }];
     
 }
@@ -168,7 +173,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
         
         [hud hideAnimated:NO];
-        [MBProgressHUD showTextHUDWithText:@"暂无网络，请稍后重试" inView:self];
+        [MBProgressHUD showTextHUDWithText:@"操作失败" inView:self];
         
     }];
 }
@@ -186,6 +191,12 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
 
 - (void)retryToGetIsCollection
 {
+    NSLog(@"%ld", [AFNetworkReachabilityManager sharedManager].networkReachabilityStatus);
+    if ([AFNetworkReachabilityManager sharedManager].networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
+        [MBProgressHUD showTextHUDWithText:@"暂无网络，请稍后重试" inView:self];
+        return;
+    }
+    
     [MBProgressHUD showTextHUDWithText:@"正在获取收藏状态" inView:self];
     [self checkIsCollection];
 }
@@ -535,7 +546,6 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     if (!_collectBtn) {
         _collectBtn = [[UIButton alloc] initWithFrame:CGRectZero];
         [_collectBtn setImage:[UIImage imageNamed:@"shoucang"] forState:UIControlStateNormal];
-        [_collectBtn addTarget:self action:@selector(collectAction) forControlEvents:UIControlEventTouchUpInside];
         [_collectBtn setAdjustsImageWhenHighlighted:NO];
     }
     return _collectBtn;

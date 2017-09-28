@@ -38,6 +38,8 @@
         [GCCKeyChain save:keychainID data:identifierNumber];
     }
     
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    
     [self checkUpdate];
 }
 

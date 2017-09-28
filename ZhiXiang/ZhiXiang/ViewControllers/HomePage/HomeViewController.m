@@ -101,14 +101,10 @@
             make.width.mas_equalTo(28);
         }];
         
-        self.leftButton.hidden = YES;
-        
         self.canShowKeyWords = NO;
     };
     LGSide.willHideLeftView = ^(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view) {
         [self.maskView removeFromSuperview];
-        
-        self.leftButton.hidden = NO;
         
         self.canShowKeyWords = YES;
     };
