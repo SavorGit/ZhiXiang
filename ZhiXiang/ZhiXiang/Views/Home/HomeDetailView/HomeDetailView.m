@@ -216,16 +216,24 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     self.baseView = [[UIView alloc] initWithFrame:self.bottoView.bounds];
     [self.bottoView addSubview:self.baseView];
     
-    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 25, self.bottoView.frame.size.width - 30, 20)];
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 25, self.bottoView.frame.size.width - 30, 22)];
     self.titleLabel.text = self.topModel.title;
     self.titleLabel.textColor = UIColorFromRGB(0x222222);
-    self.titleLabel.font = kPingFangMedium(19);
+    if (isiPhone_Plus) {
+        self.titleLabel.font = kPingFangMedium(21);
+    }else{
+        self.titleLabel.font = kPingFangMedium(19);
+    }
     self.titleLabel.numberOfLines = 2;
     [self.baseView addSubview:self.titleLabel];
     
-    self.subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 25 + 20 + 15, self.bottoView.frame.size.width - 30, self.bottoView.frame.size.height - 60)];
+    self.subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 25 + 22 + 15, self.bottoView.frame.size.width - 30, self.bottoView.frame.size.height - 60)];
     self.subTitleLabel.text = self.topModel.desc;
-    self.subTitleLabel.font = kPingFangLight(15);
+    if (isiPhone_Plus) {
+        self.subTitleLabel.font = kPingFangLight(18);
+    }else{
+        self.subTitleLabel.font = kPingFangLight(15);
+    }
     self.subTitleLabel.textColor = UIColorFromRGB(0x575757);
     self.subTitleLabel.backgroundColor = [UIColor clearColor];
     self.subTitleLabel.numberOfLines = 0;
@@ -244,16 +252,13 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
 
 - (void)configSubTitleWithWidth:(CGFloat)width
 {
-    CGFloat titleHeight = [ZXTools getHeightByWidth:self.bounds.size.width - 30 title:self.titleLabel.text font:kPingFangMedium(19)];
-    if (titleHeight > 32) {
-        self.titleLabel.frame = CGRectMake(15, 25, self.bottoView.frame.size.width - 30, 54);
-    }else{
-        self.titleLabel.frame = CGRectMake(15, 25, self.bottoView.frame.size.width - 30, 20);
-    }
-    
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:self.subTitleLabel.text];
     NSUInteger length = [self.subTitleLabel.text length];
-    [attrString addAttribute:NSFontAttributeName value:kPingFangLight(15) range:NSMakeRange(0, length)];//设置所有的字体
+    if (isiPhone_Plus) {
+        [attrString addAttribute:NSFontAttributeName value:kPingFangLight(18) range:NSMakeRange(0, length)];//设置所有的字体
+    }else{
+        [attrString addAttribute:NSFontAttributeName value:kPingFangLight(15) range:NSMakeRange(0, length)];//设置所有的字体
+    }
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.lineSpacing = 5;//行间距
     style.headIndent = 0;//头部缩进，相当于左padding
@@ -273,11 +278,28 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     
     CGFloat bottomHight = self.bottoView.bounds.size.height;
     
+    CGFloat titleHeight;
     CGFloat subTitleHeight;
-    if (titleHeight > 32) {
-        subTitleHeight = bottomHight - 25 - 15 - 54 - 15 - 15 - 10;
+    if (isiPhone_Plus) {
+        titleHeight = [ZXTools getHeightByWidth:self.bounds.size.width - 30 title:self.titleLabel.text font:kPingFangMedium(21)];
+        
+        if (titleHeight > 32) {
+            self.titleLabel.frame = CGRectMake(15, 25, self.bottoView.frame.size.width - 30, 60);
+            subTitleHeight = bottomHight - 25 - 15 - 60 - 15 - 15 - 10;
+        }else{
+            self.titleLabel.frame = CGRectMake(15, 25, self.bottoView.frame.size.width - 30, 22);
+            subTitleHeight = bottomHight - 25 - 15 - 22 - 15 - 15 - 10;
+        }
     }else{
-        subTitleHeight = bottomHight - 25 - 15 - 20 - 15 - 15 - 10;
+        titleHeight = [ZXTools getHeightByWidth:self.bounds.size.width - 30 title:self.titleLabel.text font:kPingFangMedium(19)];
+        
+        if (titleHeight > 32) {
+            self.titleLabel.frame = CGRectMake(15, 25, self.bottoView.frame.size.width - 30, 54);
+            subTitleHeight = bottomHight - 25 - 15 - 54 - 15 - 15 - 10;
+        }else{
+            self.titleLabel.frame = CGRectMake(15, 25, self.bottoView.frame.size.width - 30, 20);
+            subTitleHeight = bottomHight - 25 - 15 - 20 - 15 - 15 - 10;
+        }
     }
     
     CGFloat startY = self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + 15;

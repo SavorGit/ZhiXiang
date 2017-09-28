@@ -73,19 +73,27 @@
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.titleLabel.text = @"";
     self.titleLabel.textColor = UIColorFromRGB(0x222222);
-    self.titleLabel.font = kPingFangMedium(19);
+    if (isiPhone_Plus) {
+        self.titleLabel.font = kPingFangMedium(21);
+    }else{
+        self.titleLabel.font = kPingFangMedium(19);
+    }
     self.titleLabel.numberOfLines = 2;
     [self.bottoView addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(25);
         make.left.mas_equalTo(15);
         make.right.mas_equalTo(-15);
-        make.height.mas_equalTo(20);
+        make.height.mas_equalTo(22);
     }];
     
     self.subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width - 30, self.bounds.size.height - self.bounds.size.width * 488.f/750.f)];
     self.subTitleLabel.text = @"";
-    self.subTitleLabel.font = kPingFangLight(15);
+    if (isiPhone_Plus) {
+        self.subTitleLabel.font = kPingFangLight(18);
+    }else{
+        self.subTitleLabel.font = kPingFangLight(15);
+    }
     self.subTitleLabel.textColor = UIColorFromRGB(0x575757);
     self.subTitleLabel.backgroundColor = [UIColor clearColor];
     self.subTitleLabel.numberOfLines = 0;
@@ -129,7 +137,11 @@
     
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:self.subTitleLabel.text];
     NSUInteger length = [self.subTitleLabel.text length];
-    [attrString addAttribute:NSFontAttributeName value:kPingFangLight(15) range:NSMakeRange(0, length)];//设置所有的字体
+    if (isiPhone_Plus) {
+        [attrString addAttribute:NSFontAttributeName value:kPingFangLight(18) range:NSMakeRange(0, length)];//设置所有的字体
+    }else{
+        [attrString addAttribute:NSFontAttributeName value:kPingFangLight(15) range:NSMakeRange(0, length)];//设置所有的字体
+    }
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.lineSpacing = 5;//行间距
     style.headIndent = 0;//头部缩进，相当于左padding
@@ -149,18 +161,35 @@
 
     CGFloat bottomHeight = self.bounds.size.height - self.bounds.size.width * (488.f / 750.f);
 
-    CGFloat titleHeight = [ZXTools getHeightByWidth:self.bounds.size.width - 30 title:self.titleLabel.text font:kPingFangMedium(19)];
+    CGFloat titleHeight;
     CGFloat subTitleHeight;
-    if (titleHeight > 32) {
-        [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(54);
-        }];
-        subTitleHeight = bottomHeight - 25 - 15 - 54 - 15 - 15 - 10;
+    if (isiPhone_Plus) {
+        titleHeight = [ZXTools getHeightByWidth:self.bounds.size.width - 30 title:self.titleLabel.text font:kPingFangMedium(21)];
+        if (titleHeight > 32) {
+            [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(60);
+            }];
+            subTitleHeight = bottomHeight - 25 - 15 - 60 - 15 - 15 - 10;
+        }else{
+            [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(20);
+            }];
+            subTitleHeight = bottomHeight - 25 - 15 - 22 - 15 - 15 - 10;
+        }
     }else{
-        [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(20);
-        }];
-        subTitleHeight = bottomHeight - 25 - 15 - 20 - 15 - 15 - 10;
+        titleHeight = [ZXTools getHeightByWidth:self.bounds.size.width - 30 title:self.titleLabel.text font:kPingFangMedium(19)];
+        
+        if (titleHeight > 32) {
+            [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(54);
+            }];
+            subTitleHeight = bottomHeight - 25 - 15 - 54 - 15 - 15 - 10;
+        }else{
+            [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(20);
+            }];
+            subTitleHeight = bottomHeight - 25 - 15 - 20 - 15 - 15 - 10;
+        }
     }
 
     if (descHeight >= subTitleHeight) {
