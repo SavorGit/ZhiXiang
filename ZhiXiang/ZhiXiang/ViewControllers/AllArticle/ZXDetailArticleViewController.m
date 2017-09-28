@@ -172,7 +172,7 @@
             make.right.mas_equalTo(0);
         }];
         
-        UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kMainBoundsWidth, 20)];
+        UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kMainBoundsWidth, 30)];
         footView.backgroundColor = UIColorFromRGB(0xf8f6f1);
         _tableView.tableFooterView= footView;
     }
