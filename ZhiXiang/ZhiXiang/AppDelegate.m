@@ -16,6 +16,8 @@
 
 @interface AppDelegate ()
 
+@property (nonatomic, assign) NSTimeInterval lastTime;
+
 @end
 
 @implementation AppDelegate
@@ -26,6 +28,8 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    self.lastTime = [[NSDate date] timeIntervalSince1970];
     
     [ZXTools configApplication];
     
@@ -121,6 +125,9 @@
 
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
+    
+    self.lastTime = [[NSDate date] timeIntervalSince1970];
+    
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
@@ -132,6 +139,16 @@
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    
+    NSTimeInterval lastTime = self.lastTime;
+    self.lastTime = [[NSDate date] timeIntervalSince1970];
+    NSTimeInterval diatanceTime = self.lastTime - lastTime;
+    
+    //设置应用进入后台后的假重启时间
+    if (diatanceTime > 30.f) {
+        [self createHomeViewController];
+    }
+    
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
