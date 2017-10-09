@@ -21,6 +21,15 @@
 #import "ZXTools.h"
 
 @interface HomeViewController () <TYCyclePagerViewDataSource, TYCyclePagerViewDelegate, HomeStatusCellDelegate>
+{
+    NSTimer *_timer;
+    NSTimer *_timerTwo;
+    NSTimer *_timerThree;
+    
+    int aa;
+    __block UIBackgroundTaskIdentifier _backIden;
+    __block UIBackgroundTaskIdentifier _backIdenTwo;
+}
 
 @property (nonatomic, strong) TYCyclePagerView *pagerView;
 @property (nonatomic, strong) UIView * maskView;
@@ -47,6 +56,7 @@
 
 @property (nonatomic, assign) BOOL isHiddenDateAndPage;
 @property (nonatomic, assign) BOOL isUserClickCell;
+@property (nonatomic, copy) NSDate *startDate;
 
 @end
 
@@ -84,6 +94,11 @@
 - (void)initInfor{
     _detailDataDic = [[NSDictionary alloc] init];
     _dataSource = [[NSMutableArray alloc] init];
+    // 监听app退到后台
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillDidBackground) name:UIApplicationWillResignActiveNotification object:nil];
+    // 监听app进入前台，进入活跃状态
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appBecomeActivePlayground) name:UIApplicationDidBecomeActiveNotification object:nil];
+    
 }
 
 - (void)setupViews
@@ -396,7 +411,6 @@
     if (!self.canShowKeyWords) {
         return;
     }
-    
     NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
     NSString * date = [userDefaults objectForKey:@"keyWordDate"];
     if (!isEmptyString(date)) {
@@ -453,7 +467,6 @@
 {
     if (!self.isHiddenDateAndPage) {
         self.isHiddenDateAndPage = YES;
-        
         self.pageControl.hidden = YES;
         self.dateView.hidden = YES;
     }
@@ -461,14 +474,12 @@
 
 - (void)showDateAndPage
 {
-    
     if (self.isHiddenDateAndPage) {
         self.isHiddenDateAndPage = NO;
         
         self.pageControl.hidden = NO;
         self.dateView.hidden = NO;
     }
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -476,6 +487,114 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     [ZXTools postUMHandleWithContentId:@"news_share_home_start" key:nil value:nil];
+}
+
+- (void)appWillDidBackground{
+
+    self.startDate = [NSDate date];
+    
+  [self beginTask];
+    aa =0;
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(go:) userInfo:nil repeats:YES];
+    
+}
+
+-(void)go:(NSTimer *)tim
+{
+    NSLog(@"已经运行时间---%d ",aa);
+    aa++;
+    if (aa == 600) {
+        NSLog(@"---第一次任务结束---");
+        [_timer invalidate];
+        [[UIApplication sharedApplication] endBackgroundTask:_backIden];
+        _backIden = UIBackgroundTaskInvalid;
+    }
+}
+
+-(void)beginTask
+{
+    NSLog(@"begin=============");
+    _backIden = [[UIApplication sharedApplication] beginBackgroundTaskWithName:@"taskOne" expirationHandler:^{
+        
+        _backIdenTwo = [[UIApplication sharedApplication] beginBackgroundTaskWithName:@"taskTwo" expirationHandler:^{
+            
+            [[UIApplication sharedApplication] endBackgroundTask:_backIdenTwo];
+            _backIdenTwo = UIBackgroundTaskInvalid;
+            [self endBack];
+        }];
+        [_timer invalidate];
+        
+        _timerThree = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(goTwo:) userInfo:nil repeats:YES];
+        NSLog(@"---第一次任务被迫结束---");
+        
+        //申请失败
+        if(_backIdenTwo == UIBackgroundTaskInvalid){
+            NSLog(@"Fail to start background task!");
+            return;
+        }
+    }];
+    
+    //开启定时器 不断向系统请求后台任务执行的时间
+    _timerTwo= [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(applyForMoreTime) userInfo:nil repeats:YES];
+    [_timerTwo fire];
+    
+}
+
+-(void)applyForMoreTime {
+    //如果系统给的剩余时间小于60秒 就终止当前的后台任务，再重新初始化一个后台任务，重新让系统分配时间，这样一直循环下去，保持APP在后台一直处于active状态。
+    if ([UIApplication sharedApplication].backgroundTimeRemaining < 160) {
+        
+        [[UIApplication sharedApplication] endBackgroundTask:_backIden];
+        _backIden = UIBackgroundTaskInvalid;
+        
+        _backIdenTwo = [[UIApplication sharedApplication] beginBackgroundTaskWithName:@"taskTwo" expirationHandler:^{
+            
+            [[UIApplication sharedApplication] endBackgroundTask:_backIdenTwo];
+            _backIdenTwo = UIBackgroundTaskInvalid;
+            [self endBack];
+        }];
+        [_timerTwo invalidate];
+        [_timer invalidate];
+        
+        _timerThree = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(goTwo:) userInfo:nil repeats:YES];
+    }
+}
+
+-(void)goTwo:(NSTimer *)tim
+{
+    NSLog(@"第二次任务运行时间---%d ",aa);
+    aa++;
+    if (aa == 600) {
+        [_timerThree invalidate];
+        [[UIApplication sharedApplication] endBackgroundTask:_backIdenTwo];
+        _backIdenTwo = UIBackgroundTaskInvalid;
+    }
+    
+}
+-(void)endBack
+{
+    NSLog(@"end=============");
+    [[UIApplication sharedApplication] endBackgroundTask:_backIdenTwo];
+    _backIdenTwo = UIBackgroundTaskInvalid;
+//     exit(0);
+    
+}
+
+- (void)appBecomeActivePlayground{
+
+    NSDate *date = [NSDate date];
+    NSTimeInterval time = [date timeIntervalSinceDate:self.startDate];
+   int seconds = ((int)time)%(3600*24)%3600%60;
+    NSString *minutesStr = [NSString stringWithFormat:@"应用进入活跃状态,距离退出后台时间为%i秒",seconds];
+
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:minutesStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
+    [alert show];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
