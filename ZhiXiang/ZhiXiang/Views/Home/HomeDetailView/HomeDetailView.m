@@ -81,7 +81,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     self.topModel.title = [tmpDic objectForKey:@"title"];
     self.topModel.imgUrl = [tmpDic objectForKey:@"imgUrl"];
     self.topModel.bespeak_time = [tmpDic objectForKey:@"bespeak_time"];
-    self.topModel.share_url = [tmpDic objectForKey:@"share_url"];
+    self.topModel.share_url = model.share_url;
     self.topModel.desc = model.desc;
     self.topModel.contentType = 1;
     self.topModel.dailyid = model.dailyid;
@@ -560,7 +560,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     
     if ([[UMSocialManager defaultManager] isInstall:UMSocialPlatformType_WechatSession] && [[UMSocialManager defaultManager] isInstall:UMSocialPlatformType_WechatTimeLine]) {
         
-        ShareBoardView *shareView = [[ShareBoardView alloc] initWithFrame:CGRectZero Model:nil andVC:self.VC];
+        ShareBoardView *shareView = [[ShareBoardView alloc] initWithFrame:CGRectZero Model:self.topModel andVC:self.VC];
         shareView.backgroundColor = [UIColor clearColor];
     }else{
         [MBProgressHUD showTextHUDWithText:@"请安装微信后使用" inView:self];

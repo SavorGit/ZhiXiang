@@ -25,7 +25,7 @@
     //友盟分享
     [[UMSocialManager defaultManager] setUmSocialAppkey:UmengAppkey];
     //设置微信的appKey和appSecret
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxa5ea2522d1a6785e" appSecret:@"b45b77981f464f0a0b88b6c09ff74673" redirectURL:@"http://itunes.apple.com/cn/app/id1144051586"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxa5ea2522d1a6785e" appSecret:@"b45b77981f464f0a0b88b6c09ff74673" redirectURL:@"http://itunes.apple.com/cn/app/id1284095616"];
     
     //友盟统计
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];

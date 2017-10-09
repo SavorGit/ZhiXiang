@@ -90,6 +90,7 @@
         self.topModel.imgUrl = [dataDict objectForKey:@"imgUrl"];
         self.topModel.bespeak_time = [dataDict objectForKey:@"bespeak_time"];
         self.topModel.share_url = [dataDict objectForKey:@"share_url"];
+        self.topModel.desc = [dataDict objectForKey:@"desc"];
         self.topModel.contentType = 1;
         [self.dataSource addObject:self.topModel];
         
