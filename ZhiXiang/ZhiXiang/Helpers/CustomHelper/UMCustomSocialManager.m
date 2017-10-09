@@ -58,7 +58,7 @@
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     //创建网页分享类型
-    UMShareWebpageObject * object = [UMShareWebpageObject shareObjectWithTitle:[NSString stringWithFormat:@"%@ - %@", @"每日知享", self.model.title] descr:@"每日知享测试描述部分"thumImage:image];
+    UMShareWebpageObject * object = [UMShareWebpageObject shareObjectWithTitle:[NSString stringWithFormat:@"%@ - %@", self.info, self.model.title] descr:self.model.desc thumImage:image];
     [object setWebpageUrl:url];
     messageObject.shareObject = object;
     
