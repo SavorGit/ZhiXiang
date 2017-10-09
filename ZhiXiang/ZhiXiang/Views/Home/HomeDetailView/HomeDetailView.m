@@ -559,7 +559,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     
     if ([[UMSocialManager defaultManager] isInstall:UMSocialPlatformType_WechatSession] && [[UMSocialManager defaultManager] isInstall:UMSocialPlatformType_WechatTimeLine]) {
         
-        ShareBoardView *shareView = [[ShareBoardView alloc] initWithFrame:CGRectZero Model:nil andVC:self.VC];
+        ShareBoardView *shareView = [[ShareBoardView alloc] initWithFrame:CGRectZero Model:self.topModel andVC:self.VC];
         shareView.backgroundColor = [UIColor clearColor];
     }else{
         [MBProgressHUD showTextHUDWithText:@"请安装微信后使用" inView:self];
