@@ -230,9 +230,9 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     self.subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 25 + 22 + 15, self.bottoView.frame.size.width - 30, self.bottoView.frame.size.height - 60)];
     self.subTitleLabel.text = self.topModel.desc;
     if (isiPhone_Plus) {
-        self.subTitleLabel.font = kPingFangLight(18);
+        self.subTitleLabel.font = kPingFangRegular(18);
     }else{
-        self.subTitleLabel.font = kPingFangLight(15);
+        self.subTitleLabel.font = kPingFangRegular(15);
     }
     self.subTitleLabel.textColor = UIColorFromRGB(0x575757);
     self.subTitleLabel.backgroundColor = [UIColor clearColor];
@@ -255,9 +255,9 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:self.subTitleLabel.text];
     NSUInteger length = [self.subTitleLabel.text length];
     if (isiPhone_Plus) {
-        [attrString addAttribute:NSFontAttributeName value:kPingFangLight(18) range:NSMakeRange(0, length)];//设置所有的字体
+        [attrString addAttribute:NSFontAttributeName value:kPingFangRegular(18) range:NSMakeRange(0, length)];//设置所有的字体
     }else{
-        [attrString addAttribute:NSFontAttributeName value:kPingFangLight(15) range:NSMakeRange(0, length)];//设置所有的字体
+        [attrString addAttribute:NSFontAttributeName value:kPingFangRegular(15) range:NSMakeRange(0, length)];//设置所有的字体
     }
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.lineSpacing = 5;//行间距
@@ -418,7 +418,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
         CGFloat imgHeight =  (kMainBoundsWidth - 40) *(802.f/1242.f);
         return  imgHeight + bottomBlank;
     }else if (model.dailytype == 1){
-        CGFloat textHeight = [ZXTools getAttrHeightByWidth:kMainBoundsWidth - 40 title:model.stext font:kPingFangLight(16)];
+        CGFloat textHeight = [ZXTools getAttrHeightByWidth:kMainBoundsWidth - 40 title:model.stext font:kPingFangRegular(16)];
         return  textHeight + bottomBlank;
     }
     return 22.5 + bottomBlank;
@@ -474,12 +474,13 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     }];
     self.tableView.tableHeaderView = self.topView;
     
+    self.bottoView.alpha = .0f;
     [UIView animateWithDuration:HomeDetailViewShowAnimationDuration / 2 animations:^{
-        self.bottoView.alpha = .2f;
-        self.tableView.alpha = .2f;
+//        self.bottoView.alpha = .0f;
+        self.tableView.alpha = .4f;
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:HomeDetailViewShowAnimationDuration / 2 animations:^{
-            self.bottoView.alpha = 0;
+//            self.bottoView.alpha = 0;
             self.tableView.alpha = 1;
             if (compelete) {
                 compelete();

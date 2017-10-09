@@ -34,7 +34,7 @@
 {
     self.layer.cornerRadius = 10.f;
     self.layer.masksToBounds = YES;
-    self.contentView.backgroundColor = [UIColor whiteColor];
+    self.contentView.backgroundColor = UIColorFromRGB(0xf8f6f1);
     
     self.bgImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     [self.bgImageView setImage:[UIImage imageNamed:@"liebiaotuzhanwei"]];
@@ -56,7 +56,7 @@
     
     self.statusLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.statusLabel.text = @"";
-    self.statusLabel.font = kPingFangRegular(13);
+    self.statusLabel.font = kPingFangRegular(15);
     self.statusLabel.textColor = UIColorFromRGB(0x111111);
     self.statusLabel.textAlignment = NSTextAlignmentCenter;
     self.statusLabel.backgroundColor = [UIColor clearColor];

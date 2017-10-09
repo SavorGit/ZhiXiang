@@ -51,12 +51,12 @@
         make.top.left.right.mas_equalTo(0);
         make.height.equalTo(self.topView.mas_width).multipliedBy(488.f/750.f);
     }];
-    self.topView.backgroundColor = UIColorFromRGB(0xf6f2ed);
+    self.topView.backgroundColor = UIColorFromRGB(0xf8f6f1);
     
     self.bgImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     self.bgImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.bgImageView.layer.masksToBounds = YES;
-    self.bgImageView.backgroundColor = UIColorFromRGB(0xf6f2ed);
+    self.bgImageView.backgroundColor = UIColorFromRGB(0xf8f6f1);
     [_topView addSubview:self.bgImageView];
     [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
@@ -68,7 +68,7 @@
         make.bottom.left.right.mas_equalTo(0);
         make.top.equalTo(self.topView.mas_bottom).offset(0);
     }];
-    self.bottoView.backgroundColor = UIColorFromRGB(0xf6f2ed);
+    self.bottoView.backgroundColor = UIColorFromRGB(0xf8f6f1);
     
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.titleLabel.text = @"";
@@ -90,9 +90,9 @@
     self.subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width - 30, self.bounds.size.height - self.bounds.size.width * 488.f/750.f)];
     self.subTitleLabel.text = @"";
     if (isiPhone_Plus) {
-        self.subTitleLabel.font = kPingFangLight(18);
+        self.subTitleLabel.font = kPingFangRegular(18);
     }else{
-        self.subTitleLabel.font = kPingFangLight(15);
+        self.subTitleLabel.font = kPingFangRegular(15);
     }
     self.subTitleLabel.textColor = UIColorFromRGB(0x575757);
     self.subTitleLabel.backgroundColor = [UIColor clearColor];
@@ -138,9 +138,9 @@
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:self.subTitleLabel.text];
     NSUInteger length = [self.subTitleLabel.text length];
     if (isiPhone_Plus) {
-        [attrString addAttribute:NSFontAttributeName value:kPingFangLight(18) range:NSMakeRange(0, length)];//设置所有的字体
+        [attrString addAttribute:NSFontAttributeName value:kPingFangRegular(18) range:NSMakeRange(0, length)];//设置所有的字体
     }else{
-        [attrString addAttribute:NSFontAttributeName value:kPingFangLight(15) range:NSMakeRange(0, length)];//设置所有的字体
+        [attrString addAttribute:NSFontAttributeName value:kPingFangRegular(15) range:NSMakeRange(0, length)];//设置所有的字体
     }
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.lineSpacing = 5;//行间距

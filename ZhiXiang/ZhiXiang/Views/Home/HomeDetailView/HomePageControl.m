@@ -30,22 +30,22 @@
 
 - (void)createViews
 {
-    self.currentLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 1, self.bounds.size.width / 2 - 4, 20)];
+    self.currentLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 4, self.bounds.size.width / 2 - 3.5, 20)];
     self.currentLabel.font = kACaslonProItalic(20);
     self.currentLabel.textAlignment = NSTextAlignmentRight;
     self.currentLabel.textColor = UIColorFromRGB(0x9a9a9a);
     self.currentLabel.text = @"1";
     [self addSubview:self.currentLabel];
     
-    self.totalLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.bounds.size.width / 2 + 4, 20, self.bounds.size.width / 2 - 4, 13)];
+    self.totalLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.bounds.size.width / 2 + 2, 19, self.bounds.size.width / 2 - 1, 13)];
     self.totalLabel.font = kACaslonProRegular(13);
     self.totalLabel.textAlignment = NSTextAlignmentLeft;
     self.totalLabel.textColor = UIColorFromRGB(0x666666);
     self.totalLabel.text = [NSString stringWithFormat:@"%ld", self.totalNumber];
     [self addSubview:self.totalLabel];
     
-    CGPoint startPoint = CGPointMake(self.bounds.size.width / 2 + 7, 4);
-    CGPoint endPoint = CGPointMake(self.bounds.size.width / 2 - 7, self.bounds.size.height - 4);
+    CGPoint startPoint = CGPointMake(self.bounds.size.width / 2 + 7, 5);
+    CGPoint endPoint = CGPointMake(self.bounds.size.width / 2 - 7, self.bounds.size.height - 5);
     [self layerSolidLinePoints:@[[NSValue valueWithCGPoint:startPoint], [NSValue valueWithCGPoint:endPoint]] Color:UIColorFromRGB(0x666666) Width:1.f];
 }
 

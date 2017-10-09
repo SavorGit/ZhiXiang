@@ -132,7 +132,7 @@
     
     [self.view addSubview:self.pagerView];
     
-    CGFloat bottomDistance = 90;
+    CGFloat bottomDistance = 77;
     if (isiPhone_X) {
         bottomDistance += 34;
     }
@@ -266,11 +266,11 @@
     TYCyclePagerViewLayout *layout = [[TYCyclePagerViewLayout alloc]init];
     
     if (isiPhone_X) {
-        layout.itemSize = CGSizeMake(kMainBoundsWidth - 60, kMainBoundsHeight - kStatusBarHeight - 70 - 90 - 34);
+        layout.itemSize = CGSizeMake(kMainBoundsWidth - 60, kMainBoundsHeight - kStatusBarHeight - 70 - 77 - 34);
     }else{
-        layout.itemSize = CGSizeMake(kMainBoundsWidth - 60, kMainBoundsHeight - kStatusBarHeight - 70 - 90);
+        layout.itemSize = CGSizeMake(kMainBoundsWidth - 60, kMainBoundsHeight - kStatusBarHeight - 70 - 77);
     }
-    layout.itemSpacing = 15;
+    layout.itemSpacing = 18;
     layout.itemHorizontalCenter = YES;
     return layout;
 }
@@ -446,7 +446,7 @@
         _pageControl = [[HomePageControl alloc] initWithTotalNumber:10];
         [self.view addSubview:_pageControl];
         
-        CGFloat bottomDistance = 18;
+        CGFloat bottomDistance = 11;
         if (isiPhone_X) {
             bottomDistance += 34;
         }
