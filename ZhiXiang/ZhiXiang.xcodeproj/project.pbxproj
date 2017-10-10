@@ -43,6 +43,7 @@
 		069C37271F6F6A3400FE2BB0 /* HomeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C37261F6F6A3400FE2BB0 /* HomeCollectionViewCell.m */; };
 		069C372A1F6F99B800FE2BB0 /* ZXLGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C37291F6F99B800FE2BB0 /* ZXLGViewController.m */; };
 		069C37531F6FD19900FE2BB0 /* ZXKeyWordsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C37521F6FD19900FE2BB0 /* ZXKeyWordsView.m */; };
+		06B7A8011F8CB4C700240D71 /* HomePageLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B7A8001F8CB4C700240D71 /* HomePageLabel.m */; };
 		06F263271F74DE00001FB3F5 /* MBProgressHUD+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F263261F74DE00001FB3F5 /* MBProgressHUD+Custom.m */; };
 		06F2632A1F74DFEB001FB3F5 /* HomeStatusCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F263291F74DFEB001FB3F5 /* HomeStatusCollectionViewCell.m */; };
 		06F263721F7507A0001FB3F5 /* HomeKeyWordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F263711F7507A0001FB3F5 /* HomeKeyWordRequest.m */; };
@@ -168,6 +169,8 @@
 		069C37291F6F99B800FE2BB0 /* ZXLGViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXLGViewController.m; sourceTree = "<group>"; };
 		069C37511F6FD19900FE2BB0 /* ZXKeyWordsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXKeyWordsView.h; sourceTree = "<group>"; };
 		069C37521F6FD19900FE2BB0 /* ZXKeyWordsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXKeyWordsView.m; sourceTree = "<group>"; };
+		06B7A7FF1F8CB4C700240D71 /* HomePageLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageLabel.h; sourceTree = "<group>"; };
+		06B7A8001F8CB4C700240D71 /* HomePageLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageLabel.m; sourceTree = "<group>"; };
 		06F263251F74DE00001FB3F5 /* MBProgressHUD+Custom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Custom.h"; sourceTree = "<group>"; };
 		06F263261F74DE00001FB3F5 /* MBProgressHUD+Custom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Custom.m"; sourceTree = "<group>"; };
 		06F263281F74DFEB001FB3F5 /* HomeStatusCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeStatusCollectionViewCell.h; sourceTree = "<group>"; };
@@ -295,6 +298,8 @@
 				96D357D31F73517900BF35EB /* HeaderTableViewCell.m */,
 				068692D51F78ED7D00AE2EA1 /* HomePageControl.h */,
 				068692D61F78ED7D00AE2EA1 /* HomePageControl.m */,
+				06B7A7FF1F8CB4C700240D71 /* HomePageLabel.h */,
+				06B7A8001F8CB4C700240D71 /* HomePageLabel.m */,
 			);
 			path = HomeDetailView;
 			sourceTree = "<group>";
@@ -963,6 +968,7 @@
 				069C37531F6FD19900FE2BB0 /* ZXKeyWordsView.m in Sources */,
 				96D357CE1F726C3700BF35EB /* ZXDetailArticleViewController.m in Sources */,
 				0653D0441F6BAD8A0054A818 /* DesUtil.m in Sources */,
+				06B7A8011F8CB4C700240D71 /* HomePageLabel.m in Sources */,
 				06F2632A1F74DFEB001FB3F5 /* HomeStatusCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1135,7 +1141,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hottopics.zhixiang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "40776f7d-1c39-404a-86c8-b71e0201d5b6";
+				PROVISIONING_PROFILE = "cb339051-f0fd-4e1f-9583-cd1272580310";
 				PROVISIONING_PROFILE_SPECIFIER = "ZhiXiangAd-Hoc";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

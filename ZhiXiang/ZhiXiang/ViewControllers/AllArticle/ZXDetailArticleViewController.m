@@ -56,7 +56,7 @@
 
 - (void)initInfo{
     
-    _dataSource = [[NSMutableArray alloc] initWithCapacity:100];
+    _dataSource = [[NSMutableArray alloc] init];
     self.cachePath = [NSString stringWithFormat:@"%@.plist",@"SpecialTopicGroup"];
     
     [self.view addSubview:self.topView];
@@ -285,7 +285,7 @@
         bottomBlank = [self getBottomBlankWith:model nextModel:nil];
     }
     if (model.contentType == 1) {
-        CGFloat titleHeight = [ZXTools getHeightByWidth:kMainBoundsWidth - 30 title:model.title font:kPingFangMedium(19)];
+        CGFloat titleHeight = [ZXTools getHeightByWidth:kMainBoundsWidth - 40 title:model.title font:kPingFangMedium(19)];
         if (titleHeight > 27) {
             return  20 + 54 + 30  + 25;
         }else{

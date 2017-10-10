@@ -143,7 +143,7 @@
     NSTimeInterval diatanceTime = self.lastTime - lastTime;
     
     //设置应用进入后台后的假重启时间
-    if (diatanceTime > 30.f) {
+    if (diatanceTime > 600.f) {
         [self createHomeViewController];
     }
     

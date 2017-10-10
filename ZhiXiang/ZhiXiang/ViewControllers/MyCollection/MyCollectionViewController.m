@@ -49,7 +49,7 @@
 
 - (void)initInfo{
      self.title = @"我的收藏";
-    _dataSource = [[NSMutableArray alloc] initWithCapacity:100];
+    _dataSource = [[NSMutableArray alloc] init];
 }
 
 //下拉刷新页面数据

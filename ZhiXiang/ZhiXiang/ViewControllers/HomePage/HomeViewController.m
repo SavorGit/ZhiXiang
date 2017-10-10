@@ -185,11 +185,11 @@
 
 - (void)startLoadMoreData
 {
+    [self hiddenDateAndPage];
+    
     if (self.isRequest || self.isNoMoreData || self.dataSource.count == 0) {
         return;
     }
-    
-    [self hiddenDateAndPage];
     
     self.isRequest = YES;
     if (self.statusCell) {

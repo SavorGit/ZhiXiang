@@ -63,9 +63,6 @@
     [self.artTextLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(lab_h);
     }];
-    
-    NSLog(@"%f",lab_h);
-    
 }
 
 - (void)awakeFromNib {

@@ -13,7 +13,8 @@
 static CGFloat minMarginDistance = 40.0; //距离屏幕边缘的最小距离
 static CGFloat itemDistance = 44.0; //各个keyWord之间的距离
 static CGFloat fontSize = 16.0; //字体大小
-static CGFloat keyWordViewAnimationDuration = .7;
+static CGFloat keyWordViewAnimationDuration = 1.f;
+static CGFloat keyWordViewLineViewHeight = 55.f;
 
 @interface ZXKeyWordsView ()
 
@@ -99,20 +100,20 @@ static CGFloat keyWordViewAnimationDuration = .7;
 //创建我知道了的按钮
 - (void)createButtonWithIKnewIt
 {
-    CGFloat topDistance = self.lineNum * 47 + [self scaleHeightWith:290] - 47;
+    CGFloat topDistance = self.lineNum * keyWordViewLineViewHeight + [self scaleHeightWith:290] - keyWordViewLineViewHeight;
     
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(([UIScreen mainScreen].bounds.size.width - 80) / 2,topDistance + 10, 80, 30);
+    button.frame = CGRectMake(([UIScreen mainScreen].bounds.size.width - 80) / 2,topDistance + 10, 80, 32);
     [button setTitleColor:UIColorFromRGB(0xeeeeee) forState:UIControlStateNormal];
     button.titleLabel.font = kPingFangLight(16);
     [button setTitle:@"我知道了" forState:UIControlStateNormal];
-    button.layer.cornerRadius = 5;
+    button.layer.cornerRadius = 2.5;
     button.layer.masksToBounds = YES;
     button.layer.borderColor = UIColorFromRGB(0xeeeeee).CGColor;
-    button.layer.borderWidth = .5;
+    button.layer.borderWidth = 0.8;
     [button addTarget:self action:@selector(IKnewItButtonDidBeClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:button];
-    [self keyWordView:button AnimationAfterDelay:self.lineNum * .7];
+    [self keyWordView:button AnimationAfterDelay:self.lineNum * keyWordViewAnimationDuration];
 }
 
 - (void)IKnewItButtonDidBeClicked
@@ -126,13 +127,13 @@ static CGFloat keyWordViewAnimationDuration = .7;
 {
     self.lineNum++;
     
-    CGFloat delay = (self.lineNum - 1) * .7;
+    CGFloat delay = (self.lineNum - 1) * keyWordViewAnimationDuration;
     
-    CGFloat topDistance = [self scaleHeightWith:200] - 47;
+    CGFloat topDistance = [self scaleHeightWith:220] - keyWordViewLineViewHeight;
     
     if (array.count == 1) {
         
-        UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(0, self.lineNum * 47 + topDistance, [UIScreen mainScreen].bounds.size.width, 20)];
+        UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(0, self.lineNum * keyWordViewLineViewHeight + topDistance, [UIScreen mainScreen].bounds.size.width, 20)];
         [self.scrollView addSubview:lineView];
         
         UILabel * label = [self labelWithKeyWord:[array firstObject]];
@@ -144,7 +145,7 @@ static CGFloat keyWordViewAnimationDuration = .7;
     }else{
         CGFloat margin = ([UIScreen mainScreen].bounds.size.width - totalWidth) / 2;
         UILabel * lastLabel;
-        UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(0, self.lineNum * 47 + topDistance, [UIScreen mainScreen].bounds.size.width, 20)];
+        UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(0, self.lineNum * keyWordViewLineViewHeight + topDistance, [UIScreen mainScreen].bounds.size.width, 20)];
         [self.scrollView addSubview:lineView];
         for (NSInteger i = 0; i < array.count; i++) {
             NSString * keyWord = [array objectAtIndex:i];
@@ -169,6 +170,17 @@ static CGFloat keyWordViewAnimationDuration = .7;
 
 - (void)keyWordView:(UIView *)view AnimationAfterDelay:(CGFloat)delay
 {
+    if ([view isKindOfClass:[UIButton class]]) {
+        
+        view.alpha = 0;
+        [UIView animateWithDuration:keyWordViewAnimationDuration delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            view.alpha = 1.0f;
+        } completion:^(BOOL finished) {
+            
+        }];
+        return;
+    }
+    
     CGRect frame = view.frame;
     frame.origin.y -= 15;
     view.layer.transform = CATransform3DRotate(CATransform3DIdentity, -M_PI_2, 1, 0, 0);
@@ -186,10 +198,6 @@ static CGFloat keyWordViewAnimationDuration = .7;
         view.frame = frame;
         view.alpha = 1;
     } completion:^(BOOL finished) {
-        
-        if ([view isKindOfClass:[UIButton class]]) {
-            [self performSelector:@selector(autoClose) withObject:nil afterDelay:2.f];
-        }
         
     }];
 }
@@ -240,14 +248,8 @@ static CGFloat keyWordViewAnimationDuration = .7;
     }
 }
 
-- (void)autoClose
-{
-    [self hiddenWithAnimation:YES];
-}
-
 - (void)hiddenWithAnimation:(BOOL)animation
 {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(autoClose) object:nil];
     if (animation) {
         CGRect frame = [UIScreen mainScreen].bounds;
         frame.origin.y = -frame.size.height;

@@ -7,12 +7,13 @@
 //
 
 #import "HomePageControl.h"
+#import "HomePageLabel.h"
 #import "UIView+LayerCurve.h"
 
 @interface HomePageControl ()
 
 @property (nonatomic, assign) NSInteger totalNumber;
-@property (nonatomic, strong) UILabel * currentLabel;
+@property (nonatomic, strong) HomePageLabel * currentLabel;
 @property (nonatomic, strong) UILabel * totalLabel;
 
 @end
@@ -30,7 +31,7 @@
 
 - (void)createViews
 {
-    self.currentLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 4, self.bounds.size.width / 2 - 3.5, 20)];
+    self.currentLabel = [[HomePageLabel alloc] initWithFrame:CGRectMake(0, 4, self.bounds.size.width / 2 - 1.5, 20)];
     self.currentLabel.font = kACaslonProItalic(20);
     self.currentLabel.textAlignment = NSTextAlignmentRight;
     self.currentLabel.textColor = UIColorFromRGB(0x9a9a9a);

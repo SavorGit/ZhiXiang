@@ -60,7 +60,7 @@
 
 - (void)initInfo{
     self.title = @"全部知享";
-    _dataSource = [[NSMutableArray alloc] initWithCapacity:100];
+    _dataSource = [[NSMutableArray alloc] init];
 }
 
 //下拉刷新页面数据

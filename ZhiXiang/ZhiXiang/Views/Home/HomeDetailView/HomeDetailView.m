@@ -73,7 +73,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
 
 - (void)dealWithData:(HomeViewModel *)model{
     
-    _dataSource = [[NSMutableArray alloc] initWithCapacity:100];
+    _dataSource = [[NSMutableArray alloc] init];
     
     NSDictionary *tmpDic = model.detailDic;
     self.topModel = [[HomeViewModel alloc] init];
@@ -408,7 +408,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
         bottomBlank = [self getBottomBlankWith:model nextModel:nil];
     }
     if (model.contentType == 1) {
-        CGFloat titleHeight = [ZXTools getHeightByWidth:kMainBoundsWidth - 30 title:model.title font:kPingFangMedium(19)];
+        CGFloat titleHeight = [ZXTools getHeightByWidth:kMainBoundsWidth - 40 title:model.title font:kPingFangMedium(19)];
         if (titleHeight > 27) {
             return  20 + 54 + 30  + 25;
         }else{
