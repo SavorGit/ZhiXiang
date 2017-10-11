@@ -29,7 +29,7 @@
 #define NSLog(...) NSLog(__VA_ARGS__)
 #endif
 
-#define kVersionCode 2017090701
+#define kVersionCode 2017101001
 
 //-------------------友盟-------------------------
 #define UmengAppkey @"59c8b6b68630f54b64000081"

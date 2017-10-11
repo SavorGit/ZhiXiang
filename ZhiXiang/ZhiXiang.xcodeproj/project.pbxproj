@@ -1141,8 +1141,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hottopics.zhixiang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cb339051-f0fd-4e1f-9583-cd1272580310";
-				PROVISIONING_PROFILE_SPECIFIER = "ZhiXiangAd-Hoc";
+				PROVISIONING_PROFILE = "e548d858-57a0-4137-a642-e769635ad001";
+				PROVISIONING_PROFILE_SPECIFIER = ZhiXiangDistribution;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

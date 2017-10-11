@@ -54,7 +54,7 @@
     style.alignment = NSTextAlignmentLeft;//对齐方式
     style.lineBreakMode = NSLineBreakByWordWrapping;// 分割模式
     [attrString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, length)];
-//    [attrString addAttribute:NSKernAttributeName value:@2 range:NSMakeRange(0, length)];//字符间距 2pt
+    [attrString addAttribute:NSKernAttributeName value:@1 range:NSMakeRange(0, length)];//字符间距 2pt
     self.artTitleLabel.attributedText = attrString;
     
     // 计算富文本的高度
