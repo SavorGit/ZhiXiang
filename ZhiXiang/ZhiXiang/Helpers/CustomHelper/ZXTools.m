@@ -33,9 +33,24 @@
     UMConfigInstance.appKey = UmengAppkey;
     [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK！
     
+    //仿造设备唯一标识
     NSString* identifierNumber = [[UIDevice currentDevice].identifierForVendor UUIDString];
     if (![GCCKeyChain load:keychainID]) {
         [GCCKeyChain save:keychainID data:identifierNumber];
+    }
+    
+    //配置用户信息
+    if ([[NSFileManager defaultManager] fileExistsAtPath:UserInfoPath]) {
+        NSDictionary * userInfo = [NSDictionary dictionaryWithContentsOfFile:UserInfoPath];
+        if (userInfo && [userInfo isKindOfClass:[NSDictionary class]]) {
+            
+            [[UserManager shareManager] configWithDictionary:userInfo];
+            
+        }else {
+            
+            [UserManager shareManager].isLogin = NO;
+            
+        }
     }
     
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];

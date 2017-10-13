@@ -12,6 +12,8 @@
 #import "ZXAllArticleViewController.h"
 #import "UIViewController+LGSideMenuController.h"
 #import "ZXTools.h"
+#import "UIImageView+WebCache.h"
+#import <UMSocialCore/UMSocialCore.h>
 
 @interface LeftViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate>
 
@@ -20,6 +22,8 @@
 @property (nonatomic, strong) NSArray * imageData; //数据源
 
 @property (nonatomic, strong) UIView * footView;
+
+@property (nonatomic, strong) UIImageView * iconImageView;
 
 @end
 
@@ -40,8 +44,17 @@
         make.bottom.mas_equalTo(0);
         make.right.mas_equalTo(0);
     }];
-
     
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(6.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:(UINavigationController *)self.sideMenuController.rootViewController completion:^(id result, NSError *error) {
+            if ([result isKindOfClass:[UMSocialUserInfoResponse class]]) {
+                
+                UMSocialUserInfoResponse * response = (UMSocialUserInfoResponse *)result;
+                
+                [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:response.iconurl]];
+            }
+        }];
+    });
 }
 
 - (void)initInfo{
@@ -79,17 +92,19 @@
     UIView *topView = [[UIView alloc] initWithFrame:CGRectZero];
     topView.backgroundColor = [UIColor clearColor];
     
-    UIImageView *iconImgView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    iconImgView.contentMode = UIViewContentModeScaleAspectFill;
-    iconImgView.image = [UIImage imageNamed:@"cd_logo"];
-    iconImgView.backgroundColor = [UIColor clearColor];
-    [topView addSubview:iconImgView];
-    [iconImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.iconImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    self.iconImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.iconImageView.image = [UIImage imageNamed:@"cd_logo"];
+    self.iconImageView.backgroundColor = [UIColor clearColor];
+    [topView addSubview:self.iconImageView];
+    [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(70);
-        make.height.mas_equalTo(77);
+        make.height.mas_equalTo(70);
         make.top.mas_equalTo(70);
         make.centerX.mas_equalTo(topView);
     }];
+    self.iconImageView.layer.cornerRadius = 35;
+    self.iconImageView.clipsToBounds = YES;
     
     CGFloat totalHeight = 232;
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, totalHeight)];
@@ -108,7 +123,7 @@
         _footView = [[UIView alloc] initWithFrame:CGRectZero];
         _footView.backgroundColor = [UIColor clearColor];
         
-        UIImageView *iconImgView = [[UIImageView alloc] initWithFrame:CGRectZero];
+        UIImageView * iconImgView = [[UIImageView alloc] initWithFrame:CGRectZero];
         iconImgView.contentMode = UIViewContentModeScaleAspectFill;
         iconImgView.image = [UIImage imageNamed:@"cd_slogan"];
         iconImgView.backgroundColor = [UIColor clearColor];

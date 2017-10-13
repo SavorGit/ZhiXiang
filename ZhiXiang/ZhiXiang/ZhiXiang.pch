@@ -9,12 +9,13 @@
 #ifndef ZhiXiang_pch
 #define ZhiXiang_pch
 
-#define TEST_DEV_TYPE 1 //测试环境切换宏，1代表线上环境，0代表测试环境
+#define TEST_DEV_TYPE 0 //测试环境切换宏，1代表线上环境，0代表测试环境
 
 #import "ColorMacro.h"
 #import "LayoutMacro.h"
 #import "SystemMacro.h"
 #import "Masonry.h"
+#import "UserManager.h"
 
 #if TEST_DEV_TYPE
 #define AliyunBucketName @"redian-produce"
@@ -38,6 +39,7 @@
 
 #define DocumentPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 #define FileCachePath [NSString stringWithFormat:@"%@/FileCache", DocumentPath]
+#define UserInfoPath [NSString stringWithFormat:@"%@/userInfo.plist", DocumentPath]
 
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
