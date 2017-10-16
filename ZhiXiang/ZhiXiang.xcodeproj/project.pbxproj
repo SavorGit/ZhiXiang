@@ -45,6 +45,7 @@
 		069C372A1F6F99B800FE2BB0 /* ZXLGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C37291F6F99B800FE2BB0 /* ZXLGViewController.m */; };
 		069C37531F6FD19900FE2BB0 /* ZXKeyWordsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C37521F6FD19900FE2BB0 /* ZXKeyWordsView.m */; };
 		06B7A8011F8CB4C700240D71 /* HomePageLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B7A8001F8CB4C700240D71 /* HomePageLabel.m */; };
+		06EFB0781F94A8A000030BC8 /* LeftCacheCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EFB0771F94A8A000030BC8 /* LeftCacheCell.m */; };
 		06F263271F74DE00001FB3F5 /* MBProgressHUD+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F263261F74DE00001FB3F5 /* MBProgressHUD+Custom.m */; };
 		06F2632A1F74DFEB001FB3F5 /* HomeStatusCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F263291F74DFEB001FB3F5 /* HomeStatusCollectionViewCell.m */; };
 		06F263721F7507A0001FB3F5 /* HomeKeyWordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F263711F7507A0001FB3F5 /* HomeKeyWordRequest.m */; };
@@ -177,6 +178,8 @@
 		069C37521F6FD19900FE2BB0 /* ZXKeyWordsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXKeyWordsView.m; sourceTree = "<group>"; };
 		06B7A7FF1F8CB4C700240D71 /* HomePageLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageLabel.h; sourceTree = "<group>"; };
 		06B7A8001F8CB4C700240D71 /* HomePageLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageLabel.m; sourceTree = "<group>"; };
+		06EFB0761F94A8A000030BC8 /* LeftCacheCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeftCacheCell.h; sourceTree = "<group>"; };
+		06EFB0771F94A8A000030BC8 /* LeftCacheCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeftCacheCell.m; sourceTree = "<group>"; };
 		06F263251F74DE00001FB3F5 /* MBProgressHUD+Custom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Custom.h"; sourceTree = "<group>"; };
 		06F263261F74DE00001FB3F5 /* MBProgressHUD+Custom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Custom.m"; sourceTree = "<group>"; };
 		06F263281F74DFEB001FB3F5 /* HomeStatusCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeStatusCollectionViewCell.h; sourceTree = "<group>"; };
@@ -628,6 +631,8 @@
 			children = (
 				96D357711F6FAE6F00BF35EB /* LeftTableViewCell.h */,
 				96D357721F6FAE6F00BF35EB /* LeftTableViewCell.m */,
+				06EFB0761F94A8A000030BC8 /* LeftCacheCell.h */,
+				06EFB0771F94A8A000030BC8 /* LeftCacheCell.m */,
 				96D357981F6FD00000BF35EB /* ImageTextTableViewCell.h */,
 				96D357991F6FD00000BF35EB /* ImageTextTableViewCell.m */,
 			);
@@ -998,6 +1003,7 @@
 				0653D0371F6BABE50054A818 /* GCCGetInfo.m in Sources */,
 				0653CFDA1F6BA0300054A818 /* main.m in Sources */,
 				96D357C51F711E5900BF35EB /* SpecialHeaderView.m in Sources */,
+				06EFB0781F94A8A000030BC8 /* LeftCacheCell.m in Sources */,
 				0653D0431F6BAD8A0054A818 /* ConverUtil.m in Sources */,
 				0653D0391F6BABE50054A818 /* Helper.m in Sources */,
 				96D357731F6FAE6F00BF35EB /* LeftTableViewCell.m in Sources */,

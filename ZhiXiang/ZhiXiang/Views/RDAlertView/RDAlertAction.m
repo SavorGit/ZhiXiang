@@ -17,7 +17,7 @@
         [self setTitle:title forState:UIControlStateNormal];
         self.block = handler;
         if (bold) {
-            [self setTitleColor:UIColorFromRGB(0xff6a2f) forState:UIControlStateNormal];
+            [self setTitleColor:UIColorFromRGB(0x333333) forState:UIControlStateNormal];
             self.titleLabel.font = [UIFont boldSystemFontOfSize:16];
         }else{
             [self setTitleColor:UIColorFromRGB(0x333333) forState:UIControlStateNormal];
@@ -35,7 +35,7 @@
         [self setTitle:title forState:UIControlStateNormal];
         self.block = handler;
         if (bold) {
-            [self setTitleColor:UIColorFromRGB(0xff6a2f) forState:UIControlStateNormal];
+            [self setTitleColor:UIColorFromRGB(0x333333) forState:UIControlStateNormal];
             self.titleLabel.font = [UIFont boldSystemFontOfSize:17];
         }else{
             [self setTitleColor:UIColorFromRGB(0x333333) forState:UIControlStateNormal];

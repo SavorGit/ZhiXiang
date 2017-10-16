@@ -19,6 +19,7 @@
 #import "HomeKeyWordRequest.h"
 #import "HomePageControl.h"
 #import "ZXTools.h"
+#import "LeftViewController.h"
 
 @interface HomeViewController () <TYCyclePagerViewDataSource, TYCyclePagerViewDelegate, HomeStatusCellDelegate>
 {
@@ -116,6 +117,9 @@
         }];
         
         self.canShowKeyWords = NO;
+        
+        LeftViewController * left = (LeftViewController *)LGSide.leftViewController;
+        [left reloadCache];
     };
     LGSide.willHideLeftView = ^(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view) {
         [self.maskView removeFromSuperview];

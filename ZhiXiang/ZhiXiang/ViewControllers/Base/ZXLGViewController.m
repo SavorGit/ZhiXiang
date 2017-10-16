@@ -21,7 +21,7 @@
     
     CGFloat width = kMainBoundsHeight > kMainBoundsWidth ? kMainBoundsWidth : kMainBoundsHeight;
     
-    self.leftViewWidth = width * 0.8 - 30;
+    self.leftViewWidth = width / 3 * 2;
     self.leftViewStatusBarStyle = UIStatusBarStyleLightContent;
     self.leftViewSwipeGestureEnabled = NO;
     self.rootViewLayerShadowRadius = 0.f;

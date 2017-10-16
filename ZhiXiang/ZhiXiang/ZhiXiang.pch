@@ -9,7 +9,7 @@
 #ifndef ZhiXiang_pch
 #define ZhiXiang_pch
 
-#define TEST_DEV_TYPE 0 //测试环境切换宏，1代表线上环境，0代表测试环境
+#define TEST_DEV_TYPE 1 //测试环境切换宏，1代表线上环境，0代表测试环境
 
 #import "ColorMacro.h"
 #import "LayoutMacro.h"

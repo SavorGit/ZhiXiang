@@ -303,6 +303,9 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     }
     
     CGFloat startY = self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + 15;
+    if (subTitleHeight < 15.f) {
+        subTitleHeight = 15.f;
+    }
     if (descHeight >= subTitleHeight) {
         self.subTitleLabel.frame = CGRectMake(15, startY, width, subTitleHeight);
     }else{

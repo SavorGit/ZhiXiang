@@ -192,6 +192,10 @@
         }
     }
 
+    if (subTitleHeight < 15.f) {
+        subTitleHeight = 15.f;
+    }
+    
     if (descHeight >= subTitleHeight) {
         [self.subTitleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(self.bounds.size.width - 30, subTitleHeight));

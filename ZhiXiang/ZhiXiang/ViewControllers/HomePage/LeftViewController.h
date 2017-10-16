@@ -10,4 +10,6 @@
 
 @interface LeftViewController : ZXBaseViewController
 
+- (void)reloadCache;
+
 @end
