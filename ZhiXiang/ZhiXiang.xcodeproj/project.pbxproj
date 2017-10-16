@@ -74,6 +74,9 @@
 		96D357D41F73517900BF35EB /* HeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357D31F73517900BF35EB /* HeaderTableViewCell.m */; };
 		96D357D71F735D8C00BF35EB /* HomeDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357D61F735D8C00BF35EB /* HomeDetailRequest.m */; };
 		96D357DA1F73967A00BF35EB /* ZXIsOrCollectionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D357D91F73967A00BF35EB /* ZXIsOrCollectionRequest.m */; };
+		96E1B8231F944FEC0052D6C2 /* libUMessage_Sdk_1.5.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96E1B8211F944FEC0052D6C2 /* libUMessage_Sdk_1.5.0.a */; };
+		96E1B8251F9450CB0052D6C2 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96E1B8241F9450CB0052D6C2 /* UserNotifications.framework */; };
+		96E1B8281F9454E10052D6C2 /* UserNotificationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E1B8261F9454E10052D6C2 /* UserNotificationModel.m */; };
 		AF1D023FFA7FF8408D32CBC9 /* libPods-ZhiXiang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27456E740AED9D909E7AAB2D /* libPods-ZhiXiang.a */; };
 /* End PBXBuildFile section */
 
@@ -233,6 +236,12 @@
 		96D357D61F735D8C00BF35EB /* HomeDetailRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeDetailRequest.m; sourceTree = "<group>"; };
 		96D357D81F73967A00BF35EB /* ZXIsOrCollectionRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXIsOrCollectionRequest.h; sourceTree = "<group>"; };
 		96D357D91F73967A00BF35EB /* ZXIsOrCollectionRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXIsOrCollectionRequest.m; sourceTree = "<group>"; };
+		96E1B81F1F944EB80052D6C2 /* ZhiXiang.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ZhiXiang.entitlements; sourceTree = "<group>"; };
+		96E1B8211F944FEC0052D6C2 /* libUMessage_Sdk_1.5.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.5.0.a; sourceTree = "<group>"; };
+		96E1B8221F944FEC0052D6C2 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
+		96E1B8241F9450CB0052D6C2 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		96E1B8261F9454E10052D6C2 /* UserNotificationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserNotificationModel.m; sourceTree = "<group>"; };
+		96E1B8271F9454E10052D6C2 /* UserNotificationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserNotificationModel.h; sourceTree = "<group>"; };
 		C2D321DBE16B956F50EB6893 /* Pods-ZhiXiang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiXiang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiXiang/Pods-ZhiXiang.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -241,7 +250,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96E1B8251F9450CB0052D6C2 /* UserNotifications.framework in Frameworks */,
 				AF1D023FFA7FF8408D32CBC9 /* libPods-ZhiXiang.a in Frameworks */,
+				96E1B8231F944FEC0052D6C2 /* libUMessage_Sdk_1.5.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +343,7 @@
 		0653CFD71F6BA0300054A818 /* ZhiXiang */ = {
 			isa = PBXGroup;
 			children = (
+				96E1B81F1F944EB80052D6C2 /* ZhiXiang.entitlements */,
 				068692D81F78F88B00AE2EA1 /* Fonts */,
 				0653CFDB1F6BA0300054A818 /* AppDelegate.h */,
 				0653CFDC1F6BA0300054A818 /* AppDelegate.m */,
@@ -414,6 +426,7 @@
 		0653D00E1F6BA3080054A818 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				96E1B8201F944FEC0052D6C2 /* UMessage_Sdk_1.5.0 */,
 				068692E61F79018D00AE2EA1 /* GCCLayerCurve */,
 				06F263211F74DD9A001FB3F5 /* MBProgressHUD+Custom */,
 				069C37171F6F697C00FE2BB0 /* TYCyclePagerView */,
@@ -516,6 +529,8 @@
 		0667ED511F9099A2009FE427 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				96E1B8271F9454E10052D6C2 /* UserNotificationModel.h */,
+				96E1B8261F9454E10052D6C2 /* UserNotificationModel.m */,
 				0667ED521F9099B1009FE427 /* UserManager.h */,
 				0667ED531F9099B1009FE427 /* UserManager.m */,
 			);
@@ -718,9 +733,19 @@
 			path = HomeViewModel;
 			sourceTree = "<group>";
 		};
+		96E1B8201F944FEC0052D6C2 /* UMessage_Sdk_1.5.0 */ = {
+			isa = PBXGroup;
+			children = (
+				96E1B8211F944FEC0052D6C2 /* libUMessage_Sdk_1.5.0.a */,
+				96E1B8221F944FEC0052D6C2 /* UMessage.h */,
+			);
+			path = UMessage_Sdk_1.5.0;
+			sourceTree = "<group>";
+		};
 		BE940CDEEBF75CC16C2F528F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				96E1B8241F9450CB0052D6C2 /* UserNotifications.framework */,
 				27456E740AED9D909E7AAB2D /* libPods-ZhiXiang.a */,
 			);
 			name = Frameworks;
@@ -807,6 +832,11 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 922V2U92Z9;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					0653CFED1F6BA0300054A818 = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -938,6 +968,7 @@
 				069C37271F6F6A3400FE2BB0 /* HomeCollectionViewCell.m in Sources */,
 				0633AE8F1F7BA13500EA7A75 /* CheckUpdateRequest.m in Sources */,
 				96D357771F6FBDC000BF35EB /* MyCollectionViewController.m in Sources */,
+				96E1B8281F9454E10052D6C2 /* UserNotificationModel.m in Sources */,
 				96D357C81F725F6C00BF35EB /* AllArticelRequest.m in Sources */,
 				96D357AE1F70C8EB00BF35EB /* ZXAllArticleViewController.m in Sources */,
 				96D357DA1F73967A00BF35EB /* ZXIsOrCollectionRequest.m in Sources */,
@@ -1127,12 +1158,17 @@
 			baseConfigurationReference = C2D321DBE16B956F50EB6893 /* Pods-ZhiXiang.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ZhiXiang/ZhiXiang.entitlements;
 				DEVELOPMENT_TEAM = 922V2U92Z9;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ZhiXiang/ZhiXiang.pch;
 				INFOPLIST_FILE = ZhiXiang/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ZhiXiang/Helpers/UMessage_Sdk_1.5.0",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hottopics.zhixiang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "4acd7f33-02a2-4f8b-ac8c-f9d5f96fd3ec";
@@ -1146,6 +1182,7 @@
 			baseConfigurationReference = 5BD8DB7D842D638A790B92D6 /* Pods-ZhiXiang.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ZhiXiang/ZhiXiang.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 922V2U92Z9;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1153,6 +1190,10 @@
 				INFOPLIST_FILE = ZhiXiang/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ZhiXiang/Helpers/UMessage_Sdk_1.5.0",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hottopics.zhixiang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "e548d858-57a0-4137-a642-e769635ad001";

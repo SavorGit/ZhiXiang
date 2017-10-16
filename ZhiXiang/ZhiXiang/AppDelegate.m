@@ -13,8 +13,11 @@
 #import "ZXTools.h"
 #import "ZXLGViewController.h"
 #import "UMCustomSocialManager.h"
+#import "UMessage.h"
+#import <UserNotifications/UserNotifications.h>
+#import "UserNotificationModel.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<UNUserNotificationCenterDelegate>
 
 @property (nonatomic, assign) NSTimeInterval lastTime;
 
@@ -32,10 +35,35 @@
     self.lastTime = [[NSDate date] timeIntervalSince1970];
     
     [ZXTools configApplication];
+    //初始化推送
+    [self handleLaunchWorkWithOptions:launchOptions];
     
     [self createHomeViewController];
     
     return YES;
+}
+
+//处理启动时候的相关事务
+- (void)handleLaunchWorkWithOptions:(NSDictionary *)launchOptions
+{
+    //友盟推送
+    [UMessage startWithAppkey:UmengAppkey launchOptions:launchOptions];
+    [UMessage setAutoAlert:YES];
+    [UMessage registerForRemoteNotifications];
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10")) {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        center.delegate = self;
+        UNAuthorizationOptions types10 = UNAuthorizationOptionBadge|    UNAuthorizationOptionAlert|UNAuthorizationOptionSound;
+        [center requestAuthorizationWithOptions:types10 completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            if (granted) {
+                //点击允许
+                //这里可以添加一些自己的逻辑
+            } else {
+                //点击不允许
+                //这里可以添加一些自己的逻辑
+            }
+        }];
+    }
 }
 
 - (void)createHomeViewController
@@ -116,6 +144,70 @@
         return YES;
     }
     return result;
+}
+
+//iOS10以下使用这个方法接收通知
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    [UMessage didReceiveRemoteNotification:userInfo];
+    [self didReceiveNotificationWithInfo:userInfo];
+}
+
+//iOS10新增：处理前台收到通知的代理方法
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler
+{
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        //应用处于前台时的远程推送接受
+        //关闭U-Push自带的弹出框
+        [UMessage setAutoAlert:YES];
+        //必须加这句代码
+        [UMessage didReceiveRemoteNotification:userInfo];
+        
+    }else{
+        //应用处于前台时的本地推送接受
+    }
+    //当应用处于前台时提示设置，需要哪个可以设置哪一个
+    completionHandler(UNNotificationPresentationOptionSound|UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionAlert);
+}
+
+//iOS10新增：处理后台点击通知的代理方法
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler
+{
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    
+    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        //应用处于后台时的远程推送接受
+        //必须加这句代码
+        [UMessage didReceiveRemoteNotification:userInfo];
+        [self didReceiveNotificationWithInfo:userInfo];
+        
+    }else{
+        //应用处于后台时的本地推送接受
+    }
+}
+
+- (void)didReceiveNotificationWithInfo:(NSDictionary *)userInfo
+{
+    NSString * jsonStr = [userInfo objectForKey:@"params"];
+    
+    if (isEmptyString(jsonStr)) {
+        return;
+    }
+    
+    NSDictionary * data = [NSJSONSerialization JSONObjectWithData:[jsonStr dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil];
+    
+    if ([data isKindOfClass:[NSDictionary class]] && data.count > 0) {
+        
+        UserNotificationModel * model = [[UserNotificationModel alloc] initWithDictionary:data];
+        
+        if (!isEmptyString(model.error_id)) {
+            
+            NSLog(@"%@",data);
+            //跳转处理
+        }
+        
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
