@@ -93,38 +93,49 @@
     UITapGestureRecognizer * tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userViewDidBeClicked)];
     tap2.numberOfTapsRequired = 1;
     
-    self.iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 70, 70)];
-    self.iconImageView.contentMode = UIViewContentModeScaleAspectFill;
-    self.iconImageView.backgroundColor = [UIColor clearColor];
-    [topView addSubview:self.iconImageView];
-    [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(70);
-        make.height.mas_equalTo(70);
+    UIView * iconBGView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 78, 78)];
+    iconBGView.backgroundColor = UIColorFromRGB(0x808080);
+    [topView addSubview:iconBGView];
+    [iconBGView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(78);
+        make.height.mas_equalTo(78);
         make.top.mas_equalTo(65 * scale);
         make.centerX.mas_equalTo(0);
     }];
-    self.iconImageView.layer.cornerRadius = 35;
+    iconBGView.layer.cornerRadius = 39;
+    iconBGView.clipsToBounds = YES;
+    iconBGView.userInteractionEnabled = YES;
+    [iconBGView addGestureRecognizer:tap1];
+    
+    self.iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 74, 74)];
+    self.iconImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.iconImageView.backgroundColor = [UIColor clearColor];
+    [iconBGView addSubview:self.iconImageView];
+    [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(74);
+        make.height.mas_equalTo(74);
+        make.center.mas_equalTo(0);
+    }];
+    self.iconImageView.layer.cornerRadius = 37;
     self.iconImageView.clipsToBounds = YES;
-    self.iconImageView.userInteractionEnabled = YES;
-    [self.iconImageView addGestureRecognizer:tap1];
     
     self.nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    self.nameLabel.textColor = UIColorFromRGB(0xF0F0F0);
+    self.nameLabel.textColor = UIColorFromRGB(0x808080);
     self.nameLabel.textAlignment = NSTextAlignmentCenter;
     self.nameLabel.font = kPingFangRegular(15);
     [topView addSubview:self.nameLabel];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(0);
-        make.top.equalTo(self.iconImageView.mas_bottom).offset(10);
+        make.top.equalTo(self.iconImageView.mas_bottom).offset(20);
         make.width.mas_equalTo(100);
-        make.height.mas_equalTo(20);
+        make.height.mas_equalTo(15);
     }];
     self.nameLabel.userInteractionEnabled = YES;
     [self.nameLabel addGestureRecognizer:tap2];
     
     [self refreshLoginStatus];
     
-    CGFloat totalHeight = 65 * scale + 65 + 10 + 20 + 65 * scale;
+    CGFloat totalHeight = 65 * scale + 78 + 10 + 20 + 65 * scale;
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, totalHeight)];
     [headView addSubview:topView];
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {
