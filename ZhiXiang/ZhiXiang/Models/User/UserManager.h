@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UMSocialCore/UMSocialResponse.h>
 
 @interface UserManager : NSObject
 
@@ -23,5 +24,11 @@
 @property (nonatomic, copy) NSString * gender; //微信性别 例：m
 
 - (void)configWithDictionary:(NSDictionary *)userInfo;
+
+- (void)configWithUMengResponse:(UMSocialUserInfoResponse *)response;
+
+- (BOOL)saveUserInfo;
+
+- (void)canleLogin;
 
 @end
