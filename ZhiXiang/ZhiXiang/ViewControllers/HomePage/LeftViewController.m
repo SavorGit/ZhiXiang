@@ -24,6 +24,7 @@
 @property (nonatomic, strong) UIView * footView;
 
 @property (nonatomic, strong) UIImageView * iconImageView;
+@property (nonatomic, strong) UILabel * nameLabel;
 
 @end
 
@@ -44,17 +45,6 @@
         make.bottom.mas_equalTo(0);
         make.right.mas_equalTo(0);
     }];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(6.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:(UINavigationController *)self.sideMenuController.rootViewController completion:^(id result, NSError *error) {
-            if ([result isKindOfClass:[UMSocialUserInfoResponse class]]) {
-                
-                UMSocialUserInfoResponse * response = (UMSocialUserInfoResponse *)result;
-                
-                [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:response.iconurl]];
-            }
-        }];
-    });
 }
 
 - (void)initInfo{
@@ -92,19 +82,42 @@
     UIView *topView = [[UIView alloc] initWithFrame:CGRectZero];
     topView.backgroundColor = [UIColor clearColor];
     
-    self.iconImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userViewDidBeClicked)];
+    tap1.numberOfTapsRequired = 1;
+    
+    UITapGestureRecognizer * tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userViewDidBeClicked)];
+    tap2.numberOfTapsRequired = 1;
+    
+    self.iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 70, 70)];
     self.iconImageView.contentMode = UIViewContentModeScaleAspectFill;
-    self.iconImageView.image = [UIImage imageNamed:@"cd_logo"];
     self.iconImageView.backgroundColor = [UIColor clearColor];
     [topView addSubview:self.iconImageView];
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(70);
         make.height.mas_equalTo(70);
-        make.top.mas_equalTo(70);
-        make.centerX.mas_equalTo(topView);
+        make.centerY.mas_equalTo(-25);
+        make.centerX.mas_equalTo(0);
     }];
     self.iconImageView.layer.cornerRadius = 35;
     self.iconImageView.clipsToBounds = YES;
+    self.iconImageView.userInteractionEnabled = YES;
+    [self.iconImageView addGestureRecognizer:tap1];
+    
+    self.nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    self.nameLabel.textColor = UIColorFromRGB(0xF0F0F0);
+    self.nameLabel.textAlignment = NSTextAlignmentCenter;
+    self.nameLabel.font = kPingFangRegular(15);
+    [topView addSubview:self.nameLabel];
+    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(0);
+        make.centerY.mas_equalTo(25);
+        make.width.mas_equalTo(100);
+        make.height.mas_equalTo(20);
+    }];
+    self.nameLabel.userInteractionEnabled = YES;
+    [self.nameLabel addGestureRecognizer:tap2];
+    
+    [self refreshLoginStatus];
     
     CGFloat totalHeight = 232;
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, totalHeight)];
@@ -115,6 +128,38 @@
     }];
     self.tableView.tableHeaderView = headView;
     
+}
+
+- (void)refreshLoginStatus
+{
+    if ([UserManager shareManager].isLogin) {
+        self.nameLabel.text = [UserManager shareManager].wxUserName;
+        [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[UserManager shareManager].wxIcon] placeholderImage:[UIImage imageNamed:@"cd_logo"]];
+    }else{
+        self.nameLabel.text = @"点击登录";
+        self.iconImageView.image = [UIImage imageNamed:@"cd_logo"];
+    }
+}
+
+- (void)userViewDidBeClicked
+{
+    if ([UserManager shareManager].isLogin) {
+        
+        [[UserManager shareManager] canleLogin];
+        [self refreshLoginStatus];
+        
+    }else{
+        
+        [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:(UINavigationController *)self.sideMenuController.rootViewController completion:^(id result, NSError *error) {
+            if ([result isKindOfClass:[UMSocialUserInfoResponse class]]) {
+                
+                [[UserManager shareManager] configWithUMengResponse:result];
+                [[UserManager shareManager] saveUserInfo];
+                [self refreshLoginStatus];
+                
+            }
+        }];
+    }
 }
 
 - (UIView *)footView
