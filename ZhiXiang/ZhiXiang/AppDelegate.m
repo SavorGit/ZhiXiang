@@ -48,7 +48,7 @@
 {
     //友盟推送
     [UMessage startWithAppkey:UmengAppkey launchOptions:launchOptions];
-    [UMessage setAutoAlert:YES];
+    [UMessage setAutoAlert:NO];
     [UMessage registerForRemoteNotifications];
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10")) {
         UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
@@ -146,6 +146,16 @@
     return result;
 }
 
+//app注册推送deviceToken
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    NSString * token = [[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""]
+                         stringByReplacingOccurrencesOfString: @">" withString: @""]
+                        stringByReplacingOccurrencesOfString: @" " withString: @""];
+    
+    NSLog(@"%@",token);
+}
+
 //iOS10以下使用这个方法接收通知
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
@@ -160,7 +170,7 @@
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         //应用处于前台时的远程推送接受
         //关闭U-Push自带的弹出框
-        [UMessage setAutoAlert:YES];
+        [UMessage setAutoAlert:NO];
         //必须加这句代码
         [UMessage didReceiveRemoteNotification:userInfo];
         
