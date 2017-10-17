@@ -157,7 +157,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     ZXIsOrCollectionRequest * request = [[ZXIsOrCollectionRequest alloc] initWithDailyid:self.topModel.dailyid];
     [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
-        [hud hideAnimated:NO];
+        [hud hideAnimated:YES];
         self.collectBtn.selected = !self.collectBtn.isSelected;
         if (self.collectBtn.isSelected) {
             [MBProgressHUD showSuccessWithText:@"收藏成功" inView:self];

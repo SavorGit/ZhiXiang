@@ -20,7 +20,7 @@
             [self setTitleColor:UIColorFromRGB(0x333333) forState:UIControlStateNormal];
             self.titleLabel.font = [UIFont boldSystemFontOfSize:16];
         }else{
-            [self setTitleColor:UIColorFromRGB(0x333333) forState:UIControlStateNormal];
+            [self setTitleColor:UIColorFromRGB(0x777777) forState:UIControlStateNormal];
             self.titleLabel.font = [UIFont systemFontOfSize:16];
         }
         
@@ -38,7 +38,7 @@
             [self setTitleColor:UIColorFromRGB(0x333333) forState:UIControlStateNormal];
             self.titleLabel.font = [UIFont boldSystemFontOfSize:17];
         }else{
-            [self setTitleColor:UIColorFromRGB(0x333333) forState:UIControlStateNormal];
+            [self setTitleColor:UIColorFromRGB(0x777777) forState:UIControlStateNormal];
             self.titleLabel.font = [UIFont systemFontOfSize:17];
         }
         [self addTarget:self action:@selector(didBeCicked) forControlEvents:UIControlEventTouchUpInside];
