@@ -51,8 +51,8 @@
 
 - (void)initInfo{
     
-    _dataSource = @[@"我的收藏",@"全部知享",@"清除缓存", [@"当前版本" stringByAppendingString:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]];
-    _imageData = @[@"wdshc", @"qbzhx", @"qbzhx", @""];
+    _dataSource = @[@"我的收藏",@"全部知享",@"清除缓存"];
+    _imageData = @[@"wdshc", @"qbzhx", @"qingchu"];
 }
 
 #pragma mark -- 懒加载
@@ -67,10 +67,12 @@
         _tableView.backgroundView = nil;
         _tableView.showsVerticalScrollIndicator = NO;
         [self.view addSubview:_tableView];
+        CGFloat width = kMainBoundsHeight > kMainBoundsWidth ? kMainBoundsWidth : kMainBoundsHeight;
+        CGFloat scaleW = width / 375.f;
         [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(0);
             make.left.mas_equalTo(0);
-            make.bottom.mas_equalTo(0);
+            make.bottom.mas_equalTo(-60 * scaleW);
             make.right.mas_equalTo(0);
         }];
 
@@ -94,7 +96,7 @@
     tap2.numberOfTapsRequired = 1;
     
     UIView * iconBGView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 78, 78)];
-    iconBGView.backgroundColor = UIColorFromRGB(0x808080);
+    iconBGView.backgroundColor = UIColorFromRGB(0x404040);
     [topView addSubview:iconBGView];
     [iconBGView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(78);
@@ -122,12 +124,12 @@
     self.nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.nameLabel.textColor = UIColorFromRGB(0x808080);
     self.nameLabel.textAlignment = NSTextAlignmentCenter;
-    self.nameLabel.font = kPingFangRegular(15);
+    self.nameLabel.font = kPingFangRegular(14);
     [topView addSubview:self.nameLabel];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(0);
         make.top.equalTo(self.iconImageView.mas_bottom).offset(20);
-        make.width.mas_equalTo(100);
+        make.width.mas_equalTo(80);
         make.height.mas_equalTo(15);
     }];
     self.nameLabel.userInteractionEnabled = YES;
@@ -150,10 +152,23 @@
 {
     if ([UserManager shareManager].isLogin) {
         self.nameLabel.text = [UserManager shareManager].wxUserName;
+        
+        CGFloat width = [ZXTools getWidthByHeight:15 title:self.nameLabel.text font:kPingFangRegular(14)];
+        width += 10;
+        if (width < 80) {
+            width = 80;
+        }
+        
         [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[UserManager shareManager].wxIcon] placeholderImage:[UIImage imageNamed:@"wdl"]];
+        [self.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(width);
+        }];
     }else{
         self.nameLabel.text = @"点击登录";
         self.iconImageView.image = [UIImage imageNamed:@"wdl"];
+        [self.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(80);
+        }];
     }
 }
 
@@ -199,16 +214,14 @@
         lineView.backgroundColor = UIColorFromRGB(0x303030);
         [_footView addSubview:lineView];
         [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.right.mas_equalTo(0);
-            make.left.mas_equalTo(50);
+            make.top.mas_equalTo(0);
+            make.left.mas_equalTo(25);
+            make.right.mas_equalTo(0);
             make.height.mas_equalTo(.5f);
         }];
         
         CGFloat width = kMainBoundsHeight > kMainBoundsWidth ? kMainBoundsWidth : kMainBoundsHeight;
         CGFloat scaleW = width / 375.f;
-        
-        CGFloat height = kMainBoundsHeight > kMainBoundsWidth ? kMainBoundsHeight : kMainBoundsWidth;
-        CGFloat scaleH = height / 667.f;
         
         UIImageView * iconImgView = [[UIImageView alloc] initWithFrame:CGRectZero];
         iconImgView.contentMode = UIViewContentModeScaleAspectFill;
@@ -218,7 +231,7 @@
         [iconImgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(192 * scaleW);
             make.height.mas_equalTo(14 * scaleW);
-            make.bottom.mas_equalTo(-23 * scaleH);
+            make.centerY.mas_equalTo(0);
             make.left.mas_equalTo(35 * scaleW);
         }]; 
 
@@ -250,7 +263,7 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
-        
+        [cell hiddenLineView:YES];
         [cell configTitle:self.dataSource[indexPath.row] andImage:self.imageData[indexPath.row]];
         [cell setCacheSize:[self getApplicationCache]];
         
@@ -262,6 +275,7 @@
        cell = [[LeftTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
     
+    [cell hiddenLineView:NO];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
     
@@ -318,6 +332,7 @@
         [hud hideAnimated:YES];
         [[SDImageCache sharedImageCache] clearDisk];
         [MBProgressHUD showTextHUDWithText:@"清除成功" inView:[UIApplication sharedApplication].keyWindow];
+        [self reloadCache];
     });
 }
 

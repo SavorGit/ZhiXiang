@@ -10,6 +10,8 @@
 
 @interface LeftTableViewCell : UITableViewCell
 
+- (void)hiddenLineView:(BOOL)isHidden;
+
 - (void)configTitle:(NSString *)title andImage:(NSString *)imageStr;
 
 @end

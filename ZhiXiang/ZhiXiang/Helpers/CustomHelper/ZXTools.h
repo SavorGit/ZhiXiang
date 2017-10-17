@@ -20,6 +20,8 @@
 
 + (void)removeFileOnPath:(NSString *)path;
 
++ (CGFloat)getWidthByHeight:(CGFloat)height title:(NSString *)title font:(UIFont *)font;
+
 + (CGFloat)getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont *)font;
 
 + (CGFloat)getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont *)font lineModel:(NSLineBreakMode)model;

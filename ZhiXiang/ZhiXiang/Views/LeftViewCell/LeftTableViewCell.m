@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong) UILabel *titleLabel;
 
+@property (nonatomic, strong) UIView * lineView;
+
 @end
 
 @implementation LeftTableViewCell
@@ -56,15 +58,20 @@
         make.centerY.mas_equalTo(0);
     }];
     
-    UIView * lineView = [[UIView alloc] init];
-    lineView.backgroundColor = UIColorFromRGB(0x303030);
-    [self.contentView addSubview:lineView];
-    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.lineView = [[UIView alloc] init];
+    self.lineView.backgroundColor = UIColorFromRGB(0x303030);
+    [self.contentView addSubview:self.lineView];
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(_leftImageView.mas_right).offset(25);
         make.height.mas_equalTo(.5f);
-        make.right.mas_equalTo(-6);
+        make.right.mas_equalTo(0);
         make.bottom.mas_equalTo(0);
     }];
+}
+
+- (void)hiddenLineView:(BOOL)isHidden
+{
+    self.lineView.hidden = isHidden;
 }
 
 - (void)configTitle:(NSString *)title andImage:(NSString *)imageStr{

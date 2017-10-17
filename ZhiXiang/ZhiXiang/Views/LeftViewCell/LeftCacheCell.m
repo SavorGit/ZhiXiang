@@ -22,11 +22,10 @@
         self.cacheLabel.backgroundColor = [UIColor clearColor];
         self.cacheLabel.font = kPingFangLight(13);
         self.cacheLabel.textColor = UIColorFromRGB(0x808080);
-        self.cacheLabel.textAlignment = NSTextAlignmentRight;
         [self.contentView addSubview:self.cacheLabel];
         [self.cacheLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(155);
             make.right.mas_equalTo(0);
-            make.width.mas_equalTo(70);
             make.height.mas_equalTo(20);
             make.centerY.mas_equalTo(0);
         }];
