@@ -94,6 +94,7 @@
     
     [self.window addSubview:imageView];
     [self.window bringSubviewToFront:imageView];
+//    [self creatAssetsUI:imageView];
     [ZXTools postUMHandleWithContentId:@"news_share_start" key:@"news_share_start" value:@"success"];
     
     [UIView animateWithDuration:2.f animations:^{
@@ -115,6 +116,62 @@
         }];
         
     }];
+}
+
+- (void)creatAssetsUI:(UIImageView *)imgView{
+    
+    UIView * asSetView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    asSetView.backgroundColor = UIColorFromRGB(0xf5f5f5);
+    UIImageView *topImgView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    topImgView.image = [UIImage imageNamed:@""];
+    topImgView.backgroundColor = [UIColor cyanColor];
+    topImgView.contentMode = UIViewContentModeScaleAspectFill;
+    [asSetView addSubview:topImgView];
+    [topImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(85);
+        make.centerX.mas_equalTo(asSetView.mas_centerX);
+        make.width.mas_equalTo(113.5);
+        make.height.mas_equalTo(29.5);
+    }];
+    
+    UILabel *selectTitle = [[UILabel alloc] initWithFrame:CGRectZero];
+    selectTitle.font = kPingFangRegular(15);
+    selectTitle.text = @"请选择您所在的群体";
+    selectTitle.textColor = UIColorFromRGB(0x555555);
+    selectTitle.textAlignment = NSTextAlignmentCenter;
+    [asSetView addSubview:selectTitle];
+    [selectTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(topImgView.mas_bottom).offset(60);
+        make.centerX.mas_equalTo(asSetView.mas_centerX);
+        make.width.mas_equalTo(150);
+        make.height.mas_equalTo(30);
+    }];
+    
+    for (int i = 0; i < 4; i ++) {
+        UIButton *asSetButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        asSetButton.backgroundColor = [UIColor cyanColor];
+        [asSetButton addTarget:self action:@selector(asSetPress:) forControlEvents:UIControlEventTouchUpInside];
+        [asSetView addSubview:asSetButton];
+        [asSetButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(selectTitle.mas_bottom).offset(32 + i *15 + i *44);
+            make.centerX.mas_equalTo(asSetView.mas_centerX);
+            make.width.mas_equalTo(150);
+            make.height.mas_equalTo(44);
+        }];
+        
+    }
+    
+    
+    [self.window addSubview:asSetView];
+    [self.window insertSubview:asSetView belowSubview:imgView];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:3.f animations:^{
+            asSetView.alpha = 0;
+        } completion:^(BOOL finished) {
+            [asSetView removeFromSuperview];
+        }];
+    });
 }
 
 //通过其它应用打开APP时调用
