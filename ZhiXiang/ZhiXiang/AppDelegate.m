@@ -20,6 +20,9 @@
 @interface AppDelegate ()<UNUserNotificationCenterDelegate>
 
 @property (nonatomic, assign) NSTimeInterval lastTime;
+@property (nonatomic, strong) UIView * asSetView;
+@property (nonatomic, strong) NSMutableArray *asSetsArray;
+@property (nonatomic, copy)   NSString *selectSetString;
 
 @end
 
@@ -94,7 +97,12 @@
     
     [self.window addSubview:imageView];
     [self.window bringSubviewToFront:imageView];
-    [self creatAssetsUI:imageView];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *assetString = [defaults objectForKey:@"asSetValue"];
+    if (isEmptyString(assetString)) {
+        [self creatAssetsUI:imageView];
+    }
     [ZXTools postUMHandleWithContentId:@"news_share_start" key:@"news_share_start" value:@"success"];
     
     [UIView animateWithDuration:2.f animations:^{
@@ -120,18 +128,17 @@
 
 - (void)creatAssetsUI:(UIImageView *)imgView{
     
-    UIView * asSetView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    asSetView.backgroundColor = UIColorFromRGB(0xf5f5f5);
+    self.asSetView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.asSetView.backgroundColor = UIColorFromRGB(0xf5f5f5);
     UIImageView *topImgView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    topImgView.image = [UIImage imageNamed:@""];
-    topImgView.backgroundColor = [UIColor cyanColor];
+    topImgView.image = [UIImage imageNamed:@"zichan"];
     topImgView.contentMode = UIViewContentModeScaleAspectFill;
-    [asSetView addSubview:topImgView];
+    [self.asSetView addSubview:topImgView];
     [topImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(85);
-        make.centerX.mas_equalTo(asSetView.mas_centerX);
-        make.width.mas_equalTo(113.5);
-        make.height.mas_equalTo(29.5);
+        make.centerX.mas_equalTo(self.asSetView.mas_centerX);
+        make.width.mas_equalTo(topImgView.mas_width);
+        make.height.mas_equalTo(topImgView.mas_height);
     }];
     
     UILabel *selectTitle = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -139,18 +146,20 @@
     selectTitle.text = @"请选择您所在的群体";
     selectTitle.textColor = UIColorFromRGB(0x555555);
     selectTitle.textAlignment = NSTextAlignmentCenter;
-    [asSetView addSubview:selectTitle];
+    [self.asSetView addSubview:selectTitle];
     [selectTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(topImgView.mas_bottom).offset(60);
-        make.centerX.mas_equalTo(asSetView.mas_centerX);
+        make.centerX.mas_equalTo(self.asSetView.mas_centerX);
         make.width.mas_equalTo(150);
         make.height.mas_equalTo(30);
     }];
     
     NSArray *assetsArray = [NSArray arrayWithObjects:@"资产10亿以上",@"资产1亿以上",@"资产一千万以上",@"暂不透露", nil];
-    
+    self.asSetsArray = [[NSMutableArray alloc] init];
+    self.selectSetString = [[NSString alloc] init];
     for (int i = 0; i < 4; i ++) {
         UIButton *asSetButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        asSetButton.tag = i + 1;
         asSetButton.layer.cornerRadius = 3;
         asSetButton.layer.masksToBounds = YES;
         asSetButton.layer.borderWidth = 1;
@@ -158,13 +167,14 @@
         [asSetButton setTitleColor:UIColorFromRGB(0x555555) forState:UIControlStateNormal];
         [asSetButton setTitle:[assetsArray objectAtIndex:i] forState:UIControlStateNormal];
         [asSetButton addTarget:self action:@selector(asSetPress:) forControlEvents:UIControlEventTouchUpInside];
-        [asSetView addSubview:asSetButton];
+        [self.asSetView addSubview:asSetButton];
         [asSetButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(selectTitle.mas_bottom).offset(32 + i *15 + i *44);
-            make.centerX.mas_equalTo(asSetView.mas_centerX);
+            make.centerX.mas_equalTo(self.asSetView.mas_centerX);
             make.width.mas_equalTo(150);
             make.height.mas_equalTo(44);
         }];
+        [self.asSetsArray addObject:asSetButton];
     }
     
     UIButton *goButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -174,25 +184,42 @@
     [goButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
     [goButton setTitle:@"进入" forState:UIControlStateNormal];
     [goButton addTarget:self action:@selector(goPress:) forControlEvents:UIControlEventTouchUpInside];
-    [asSetView addSubview:goButton];
+    [self.asSetView addSubview:goButton];
     [goButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(asSetView.mas_bottom).offset(- 65);
-        make.centerX.mas_equalTo(asSetView.mas_centerX);
+        make.bottom.mas_equalTo(self.asSetView.mas_bottom).offset(- 65);
+        make.centerX.mas_equalTo(self.asSetView.mas_centerX);
         make.width.mas_equalTo(200);
         make.height.mas_equalTo(36);
     }];
     
+    [self.window addSubview:self.asSetView];
+    [self.window insertSubview:self.asSetView belowSubview:imgView];
+
+}
+
+- (void)asSetPress:(UIButton *)asBtn{
     
-    [self.window addSubview:asSetView];
-    [self.window insertSubview:asSetView belowSubview:imgView];
+    for (int i = 0 ; i < self.asSetsArray.count; i ++) {
+        UIButton *btn = self.asSetsArray[i];
+        btn.layer.borderColor = UIColorFromRGB(0xcecece).CGColor;
+    }
+    asBtn.layer.borderColor = UIColorFromRGB(0x000000).CGColor;
+    self.selectSetString = [NSString stringWithFormat:@"%ld", asBtn.tag];
     
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [UIView animateWithDuration:3.f animations:^{
-//            asSetView.alpha = 0;
-//        } completion:^(BOOL finished) {
-//            [asSetView removeFromSuperview];
-//        }];
-//    });
+}
+
+- (void)goPress:(UIButton *)goBtn{
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:self.selectSetString forKey:@"asSetValue"];
+    [defaults synchronize];
+    
+    [UIView animateWithDuration:3.f animations:^{
+        self.asSetView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.asSetView removeFromSuperview];
+    }];
+    
 }
 
 //通过其它应用打开APP时调用
