@@ -180,6 +180,7 @@
     if (tmpModel.modelType == HomeViewModelType_Command) {
         HomeCommandCollectionViewCell * cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"HomeCommandCollectionViewCell" forIndex:index];
         cell.backgroundColor = [UIColor whiteColor];
+        cell.VC = self.navigationController;
         return cell;
     }else if (tmpModel.modelType == HomeViewModelType_PageGuide) {
         HomeGuideCollectionViewCell * cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"HomeGuideCollectionViewCell" forIndex:index];
@@ -307,16 +308,19 @@
 - (void)pagerView:(TYCyclePagerView *)pageView didSelectedItemCell:(__kindof UICollectionViewCell *)cell atIndex:(NSInteger)index
 {
     if (index < self.dataSource.count && index == self.currentIndex) {
-        pageView.userInteractionEnabled = NO;
         HomeViewModel *tmpModel = [self.dataSource objectAtIndex:index];
-        [ZXTools postUMHandleWithContentId:@"news_share_home_menu" key:@"news_share_home_card_click" value:tmpModel.dailyid];
-        CGRect detailViewFrame = [cell convertRect:cell.bounds toView:[UIApplication sharedApplication].keyWindow];
-        HomeDetailView * detailView = [[HomeDetailView alloc] initWithFrame:detailViewFrame andData:tmpModel andVC:self];
-        [[UIApplication sharedApplication].keyWindow addSubview:detailView];
-        [detailView becomeScreenToReadCompelete:^{
-            pageView.userInteractionEnabled = YES;
-        }];
-        [ZXTools postUMHandleWithContentId:@"news_share_home_card_show" key:@"news_share_home_card_show" value:tmpModel.dailyid];
+        
+        if (tmpModel.modelType == HomeViewModelType_Default) {
+            pageView.userInteractionEnabled = NO;
+            [ZXTools postUMHandleWithContentId:@"news_share_home_menu" key:@"news_share_home_card_click" value:tmpModel.dailyid];
+            CGRect detailViewFrame = [cell convertRect:cell.bounds toView:[UIApplication sharedApplication].keyWindow];
+            HomeDetailView * detailView = [[HomeDetailView alloc] initWithFrame:detailViewFrame andData:tmpModel andVC:self];
+            [[UIApplication sharedApplication].keyWindow addSubview:detailView];
+            [detailView becomeScreenToReadCompelete:^{
+                pageView.userInteractionEnabled = YES;
+            }];
+            [ZXTools postUMHandleWithContentId:@"news_share_home_card_show" key:@"news_share_home_card_show" value:tmpModel.dailyid];
+        }
     }
 }
 
@@ -463,7 +467,7 @@
     if (self.keyWords && self.keyWords.count > 0) {
         [ZXTools postUMHandleWithContentId:@"news_share_key_words_show" key:nil value:nil];
         self.keyWordView = [[ZXKeyWordsView alloc] initWithKeyWordArray:self.keyWords];
-        [self.keyWordView showWithAnimation:NO inView:self.sideMenuController.view];
+        [self.keyWordView showWithAnimation:YES inView:self.sideMenuController.view];
         self.canShowKeyWords = NO;
         self.keyWords = nil;
         [userDefaults setObject:self.keyWordDate forKey:@"keyWordDate"];
