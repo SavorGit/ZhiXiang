@@ -10,4 +10,20 @@
 
 @implementation HomeCommandCollectionViewCell
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    if (self = [super initWithFrame:frame]) {
+        
+        [self createViews];
+        
+    }
+    return self;
+}
+
+- (void)createViews
+{
+    self.layer.cornerRadius = 10.f;
+    self.layer.masksToBounds = YES;
+}
+
 @end
