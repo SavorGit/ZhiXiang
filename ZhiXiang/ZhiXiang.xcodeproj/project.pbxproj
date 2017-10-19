@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		061C845E1F983E7C00D28123 /* HomeCommandCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061C845D1F983E7C00D28123 /* HomeCommandCollectionViewCell.m */; };
+		061C84611F983E8900D28123 /* HomeGuideCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061C84601F983E8900D28123 /* HomeGuideCollectionViewCell.m */; };
 		063380601F73B4AC00B07FE5 /* HomeDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0633805F1F73B4AC00B07FE5 /* HomeDateView.m */; };
 		0633AE8F1F7BA13500EA7A75 /* CheckUpdateRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0633AE8E1F7BA13500EA7A75 /* CheckUpdateRequest.m */; };
 		0633AE971F7BA1B900EA7A75 /* RDAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0633AE921F7BA18500EA7A75 /* RDAlertAction.m */; };
@@ -99,6 +101,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		061C845C1F983E7C00D28123 /* HomeCommandCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeCommandCollectionViewCell.h; sourceTree = "<group>"; };
+		061C845D1F983E7C00D28123 /* HomeCommandCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeCommandCollectionViewCell.m; sourceTree = "<group>"; };
+		061C845F1F983E8900D28123 /* HomeGuideCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeGuideCollectionViewCell.h; sourceTree = "<group>"; };
+		061C84601F983E8900D28123 /* HomeGuideCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeGuideCollectionViewCell.m; sourceTree = "<group>"; };
 		0633805E1F73B4AC00B07FE5 /* HomeDateView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDateView.h; sourceTree = "<group>"; };
 		0633805F1F73B4AC00B07FE5 /* HomeDateView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDateView.m; sourceTree = "<group>"; };
 		0633AE8D1F7BA13500EA7A75 /* CheckUpdateRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckUpdateRequest.h; sourceTree = "<group>"; };
@@ -595,6 +601,10 @@
 				069C37261F6F6A3400FE2BB0 /* HomeCollectionViewCell.m */,
 				06F263281F74DFEB001FB3F5 /* HomeStatusCollectionViewCell.h */,
 				06F263291F74DFEB001FB3F5 /* HomeStatusCollectionViewCell.m */,
+				061C845C1F983E7C00D28123 /* HomeCommandCollectionViewCell.h */,
+				061C845D1F983E7C00D28123 /* HomeCommandCollectionViewCell.m */,
+				061C845F1F983E8900D28123 /* HomeGuideCollectionViewCell.h */,
+				061C84601F983E8900D28123 /* HomeGuideCollectionViewCell.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -981,10 +991,12 @@
 				0653D02D1F6BABB70054A818 /* NetworkConfiguration.m in Sources */,
 				96D357911F6FC27D00BF35EB /* JastorRuntimeHelper.m in Sources */,
 				0653D0201F6BA9180054A818 /* UIImage+Additional.m in Sources */,
+				061C84611F983E8900D28123 /* HomeGuideCollectionViewCell.m in Sources */,
 				069C372A1F6F99B800FE2BB0 /* ZXLGViewController.m in Sources */,
 				96D357A21F70B81C00BF35EB /* NoDataView.m in Sources */,
 				06F263271F74DE00001FB3F5 /* MBProgressHUD+Custom.m in Sources */,
 				96D357D71F735D8C00BF35EB /* HomeDetailRequest.m in Sources */,
+				061C845E1F983E7C00D28123 /* HomeCommandCollectionViewCell.m in Sources */,
 				068692E91F7901B200AE2EA1 /* UIView+LayerCurve.m in Sources */,
 				96D357B61F71199000BF35EB /* HomeViewModel.m in Sources */,
 				96D357B21F7115E500BF35EB /* HomeViewRequest.m in Sources */,

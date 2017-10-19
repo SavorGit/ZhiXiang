@@ -20,6 +20,8 @@
 #import "HomePageControl.h"
 #import "ZXTools.h"
 #import "LeftViewController.h"
+#import "HomeGuideCollectionViewCell.h"
+#import "HomeCommandCollectionViewCell.h"
 
 @interface HomeViewController () <TYCyclePagerViewDataSource, TYCyclePagerViewDelegate, HomeStatusCellDelegate>
 {
@@ -55,7 +57,8 @@
 
 @property (nonatomic, strong) HomePageControl * pageControl;
 
-@property (nonatomic, assign) BOOL isHiddenDateAndPage;
+@property (nonatomic, assign) BOOL isHiddenDate;
+@property (nonatomic, assign) BOOL isHiddenPage;
 @property (nonatomic, assign) BOOL isUserClickCell;
 
 @property (nonatomic, copy) NSString * keyWordDate;
@@ -133,6 +136,8 @@
     self.pagerView.delegate = self;
     [self.pagerView registerClass:[HomeCollectionViewCell class] forCellWithReuseIdentifier:@"HomeCollectionViewCell"];
     [self.pagerView registerClass:[HomeStatusCollectionViewCell class] forCellWithReuseIdentifier:@"HomeStatusCollectionViewCell"];
+    [self.pagerView registerClass:[HomeCommandCollectionViewCell class] forCellWithReuseIdentifier:@"HomeCommandCollectionViewCell"];
+    [self.pagerView registerClass:[HomeGuideCollectionViewCell class] forCellWithReuseIdentifier:@"HomeGuideCollectionViewCell"];
     
     [self.view addSubview:self.pagerView];
     
@@ -160,12 +165,7 @@
 
 - (UICollectionViewCell *)pagerView:(TYCyclePagerView *)pagerView cellForItemAtIndex:(NSInteger)index {
     
-    if (index < self.dataSource.count) {
-        HomeViewModel *tmpModel = [self.dataSource objectAtIndex:index];
-        HomeCollectionViewCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"HomeCollectionViewCell" forIndex:index];
-        [cell configModelData:tmpModel];
-        return cell;
-    }else{
+    if (index >= self.dataSource.count) {
         HomeStatusCollectionViewCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"HomeStatusCollectionViewCell" forIndex:index];
         self.statusCell = cell;
         self.statusCell.delegate = self;
@@ -175,6 +175,21 @@
         
         return cell;
     }
+    
+    HomeViewModel *tmpModel = [self.dataSource objectAtIndex:index];
+    if (tmpModel.modelType == HomeViewModelType_Command) {
+        HomeCommandCollectionViewCell * cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"HomeCommandCollectionViewCell" forIndex:index];
+        cell.backgroundColor = [UIColor whiteColor];
+        return cell;
+    }else if (tmpModel.modelType == HomeViewModelType_PageGuide) {
+        HomeGuideCollectionViewCell * cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"HomeGuideCollectionViewCell" forIndex:index];
+        cell.backgroundColor = [UIColor whiteColor];
+        return cell;
+    }
+    
+    HomeCollectionViewCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"HomeCollectionViewCell" forIndex:index];
+    [cell configModelData:tmpModel];
+    return cell;
 }
 
 - (void)HomeStatusDidBeRetryLoadData
@@ -227,12 +242,23 @@
                 tmpModel.day = [dataDict objectForKey:@"day"];
                 tmpModel.month = [dataDict objectForKey:@"month"];
                 tmpModel.week = [dataDict objectForKey:@"week"];
+                tmpModel.modelType = HomeViewModelType_Default;
                 [self.dataSource addObject:tmpModel];
                 
                 if (i == 0) {
                     [self.dateView configWithModel:tmpModel];
                 }
                 
+            }
+            
+            HomeViewModel * guideModel = [[HomeViewModel alloc] init];
+            guideModel.modelType = HomeViewModelType_PageGuide;
+            [self.dataSource addObject:guideModel];
+            
+            if (self.currentIndex >= 12) {
+                [self.pageControl setCurrentIndex:(self.currentIndex - 1) % 11 + 1];
+            }else{
+                [self.pageControl setCurrentIndex:self.currentIndex % 11 + 1];
             }
             
             [self.pagerView reloadData];
@@ -299,18 +325,24 @@
 {
     [ZXTools postUMHandleWithContentId:@"news_share_home_card_slide" key:nil value:nil];
     self.currentIndex = toIndex;
-    if (toIndex == self.dataSource.count) {
+    if (toIndex < self.dataSource.count) {
+        HomeViewModel * model = [self.dataSource objectAtIndex:toIndex];
+        if (model.modelType == HomeViewModelType_Default) {
+            [self.dateView configWithModel:model];
+            [self showDateAndPage];
+            
+            if (toIndex >= 12) {
+                [self.pageControl setCurrentIndex:(toIndex - 1) % 11 + 1];
+            }else{
+                [self.pageControl setCurrentIndex:toIndex % 11 + 1];
+            }
+            
+        }else{
+            [self onlyHiddenPage];
+        }
+    }else {
         [self startLoadMoreData];
     }
-    if (toIndex < self.dataSource.count) {
-        [self showDateAndPage];
-        HomeViewModel * model = [self.dataSource objectAtIndex:toIndex];
-        if (model) {
-            [self.dateView configWithModel:model];
-        }
-    }
-    
-    [self.pageControl setCurrentIndex:toIndex % 10 + 1];
 }
 
 - (void)dataRequest{
@@ -350,12 +382,21 @@
             tmpModel.day = [dataDict objectForKey:@"day"];
             tmpModel.month = [dataDict objectForKey:@"month"];
             tmpModel.week = [dataDict objectForKey:@"week"];
+            tmpModel.modelType = HomeViewModelType_Default;
             
             if (i == 0) {
                 [self.dateView configWithModel:tmpModel];
             }
             
         }
+        
+        HomeViewModel * commandModel = [[HomeViewModel alloc] init];
+        commandModel.modelType = HomeViewModelType_Command;
+        [self.dataSource addObject:commandModel];
+        
+        HomeViewModel * guideModel = [[HomeViewModel alloc] init];
+        guideModel.modelType = HomeViewModelType_PageGuide;
+        [self.dataSource addObject:guideModel];
         
         [self.pagerView reloadData];
         self.isRequest = NO;
@@ -463,22 +504,35 @@
     return _pageControl;
 }
 
+- (void)onlyHiddenPage
+{
+    if (!self.isHiddenPage) {
+        self.pageControl.hidden = YES;
+        self.isHiddenPage = YES;
+    }
+}
+
 - (void)hiddenDateAndPage
 {
-    if (!self.isHiddenDateAndPage) {
-        self.isHiddenDateAndPage = YES;
-        self.pageControl.hidden = YES;
+    if (!self.isHiddenDate) {
+        self.isHiddenDate = YES;
         self.dateView.hidden = YES;
+    }
+    if (!self.isHiddenPage) {
+        self.pageControl.hidden = YES;
+        self.isHiddenPage = YES;
     }
 }
 
 - (void)showDateAndPage
 {
-    if (self.isHiddenDateAndPage) {
-        self.isHiddenDateAndPage = NO;
-        
-        self.pageControl.hidden = NO;
+    if (self.isHiddenDate) {
+        self.isHiddenDate = NO;
         self.dateView.hidden = NO;
+    }
+    if (self.isHiddenPage) {
+        self.isHiddenPage = NO;
+        self.pageControl.hidden = NO;
     }
 }
 

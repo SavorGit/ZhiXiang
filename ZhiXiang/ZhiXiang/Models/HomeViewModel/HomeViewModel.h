@@ -8,7 +8,15 @@
 
 #import "Jastor.h"
 
+typedef enum : NSUInteger {
+    HomeViewModelType_Default,
+    HomeViewModelType_Command,
+    HomeViewModelType_PageGuide
+} HomeViewModelType;
+
 @interface HomeViewModel : Jastor
+
+@property (nonatomic, assign) HomeViewModelType modelType;
 
 @property (nonatomic, copy) NSString * imageURL;
 @property (nonatomic, copy) NSString * img_url;
@@ -27,7 +35,6 @@
 @property(nonatomic, strong) NSString *stext;
 @property(nonatomic, strong) NSString *spicture;
 @property(nonatomic, strong) NSString *share_url;
-
 
 @property(nonatomic, strong) NSString *week;
 @property(nonatomic, strong) NSString *month;
