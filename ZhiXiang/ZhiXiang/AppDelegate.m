@@ -94,7 +94,7 @@
     
     [self.window addSubview:imageView];
     [self.window bringSubviewToFront:imageView];
-//    [self creatAssetsUI:imageView];
+    [self creatAssetsUI:imageView];
     [ZXTools postUMHandleWithContentId:@"news_share_start" key:@"news_share_start" value:@"success"];
     
     [UIView animateWithDuration:2.f animations:^{
@@ -147,9 +147,16 @@
         make.height.mas_equalTo(30);
     }];
     
+    NSArray *assetsArray = [NSArray arrayWithObjects:@"资产10亿以上",@"资产1亿以上",@"资产一千万以上",@"暂不透露", nil];
+    
     for (int i = 0; i < 4; i ++) {
         UIButton *asSetButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        asSetButton.backgroundColor = [UIColor cyanColor];
+        asSetButton.layer.cornerRadius = 3;
+        asSetButton.layer.masksToBounds = YES;
+        asSetButton.layer.borderWidth = 1;
+        asSetButton.layer.borderColor = UIColorFromRGB(0xcecece).CGColor;
+        [asSetButton setTitleColor:UIColorFromRGB(0x555555) forState:UIControlStateNormal];
+        [asSetButton setTitle:[assetsArray objectAtIndex:i] forState:UIControlStateNormal];
         [asSetButton addTarget:self action:@selector(asSetPress:) forControlEvents:UIControlEventTouchUpInside];
         [asSetView addSubview:asSetButton];
         [asSetButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -158,20 +165,34 @@
             make.width.mas_equalTo(150);
             make.height.mas_equalTo(44);
         }];
-        
     }
+    
+    UIButton *goButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    goButton.backgroundColor = UIColorFromRGB(0xcccccc);
+    goButton.layer.cornerRadius = 5;
+    goButton.layer.masksToBounds = YES;
+    [goButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+    [goButton setTitle:@"进入" forState:UIControlStateNormal];
+    [goButton addTarget:self action:@selector(goPress:) forControlEvents:UIControlEventTouchUpInside];
+    [asSetView addSubview:goButton];
+    [goButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(asSetView.mas_bottom).offset(- 65);
+        make.centerX.mas_equalTo(asSetView.mas_centerX);
+        make.width.mas_equalTo(200);
+        make.height.mas_equalTo(36);
+    }];
     
     
     [self.window addSubview:asSetView];
     [self.window insertSubview:asSetView belowSubview:imgView];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [UIView animateWithDuration:3.f animations:^{
-            asSetView.alpha = 0;
-        } completion:^(BOOL finished) {
-            [asSetView removeFromSuperview];
-        }];
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [UIView animateWithDuration:3.f animations:^{
+//            asSetView.alpha = 0;
+//        } completion:^(BOOL finished) {
+//            [asSetView removeFromSuperview];
+//        }];
+//    });
 }
 
 //通过其它应用打开APP时调用
