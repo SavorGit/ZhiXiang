@@ -51,6 +51,10 @@
     messageLabel.font = [UIFont systemFontOfSize:17];
     [self.showView addSubview:messageLabel];
     
+    if (isEmptyString(title)) {
+        messageLabel.frame = CGRectMake(10, 10, self.showView.frame.size.width - 20, 122);
+    }
+    
     UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 132, self.showView.frame.size.width, .5f)];
     lineView.backgroundColor = UIColorFromRGB(0xe8e8e8);
     [self.showView addSubview:lineView];

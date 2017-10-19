@@ -192,15 +192,19 @@
         
     }else{
         
-        [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:(UINavigationController *)self.sideMenuController.rootViewController completion:^(id result, NSError *error) {
-            if ([result isKindOfClass:[UMSocialUserInfoResponse class]]) {
-                
-                [[UserManager shareManager] configWithUMengResponse:result];
-                [[UserManager shareManager] saveUserInfo];
-                [self refreshLoginStatus];
-                
-            }
-        }];
+        if ([[UMSocialManager defaultManager] isInstall:UMSocialPlatformType_WechatSession]) {
+            [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:(UINavigationController *)self.sideMenuController.rootViewController completion:^(id result, NSError *error) {
+                if ([result isKindOfClass:[UMSocialUserInfoResponse class]]) {
+                    
+                    [[UserManager shareManager] configWithUMengResponse:result];
+                    [[UserManager shareManager] saveUserInfo];
+                    [self refreshLoginStatus];
+                    
+                }
+            }];
+        }else{
+            [MBProgressHUD showTextHUDWithText:@"请安装微信后使用" inView:[UIApplication sharedApplication].keyWindow];
+        }
     }
 }
 
