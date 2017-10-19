@@ -113,7 +113,7 @@ static CGFloat keyWordViewLineViewHeight = 55.f;
     button.layer.borderWidth = 0.8;
     [button addTarget:self action:@selector(IKnewItButtonDidBeClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:button];
-    [self keyWordView:button AnimationAfterDelay:self.lineNum * keyWordViewAnimationDuration];
+    [self keyWordView:button AnimationAfterDelay:.5f + keyWordViewAnimationDuration];
 }
 
 - (void)IKnewItButtonDidBeClicked
@@ -127,7 +127,7 @@ static CGFloat keyWordViewLineViewHeight = 55.f;
 {
     self.lineNum++;
     
-    CGFloat delay = (self.lineNum - 1) * keyWordViewAnimationDuration;
+//    CGFloat delay = (self.lineNum - 1) * keyWordViewAnimationDuration;
     
     CGFloat topDistance = [self scaleHeightWith:220] - keyWordViewLineViewHeight;
     
@@ -141,7 +141,7 @@ static CGFloat keyWordViewLineViewHeight = 55.f;
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(0);
         }];
-        [self keyWordView:lineView AnimationAfterDelay:delay];
+        [self keyWordView:lineView AnimationAfterDelay:.5f];
     }else{
         CGFloat margin = ([UIScreen mainScreen].bounds.size.width - totalWidth) / 2;
         UILabel * lastLabel;
@@ -164,7 +164,7 @@ static CGFloat keyWordViewLineViewHeight = 55.f;
             }];
             lastLabel = label;
         }
-        [self keyWordView:lineView AnimationAfterDelay:delay];
+        [self keyWordView:lineView AnimationAfterDelay:.5f];
     }
 }
 
@@ -179,27 +179,34 @@ static CGFloat keyWordViewLineViewHeight = 55.f;
             
         }];
         return;
+    }else{
+        view.alpha = 0;
+        [UIView animateWithDuration:keyWordViewAnimationDuration delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            view.alpha = 1.0f;
+        } completion:^(BOOL finished) {
+            
+        }];
     }
     
-    CGRect frame = view.frame;
-    frame.origin.y -= 15;
-    view.layer.transform = CATransform3DRotate(CATransform3DIdentity, -M_PI_2, 1, 0, 0);
-    view.alpha = 0.4;
-    
-    CGFloat totalHeight = frame.origin.y + frame.size.height + [self scaleHeightWith:150];
-    if (totalHeight > self.scrollView.contentSize.height) {
-        CGSize contentSize = self.scrollView.contentSize;
-        contentSize.height = totalHeight;
-        self.scrollView.contentSize = contentSize;
-    }
-    
-    [UIView animateWithDuration:keyWordViewAnimationDuration delay:delay usingSpringWithDamping:0.4 initialSpringVelocity:5 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        view.layer.transform = CATransform3DRotate(CATransform3DIdentity, 0, 1, 0, 0);
-        view.frame = frame;
-        view.alpha = 1;
-    } completion:^(BOOL finished) {
-        
-    }];
+//    CGRect frame = view.frame;
+//    frame.origin.y -= 15;
+//    view.layer.transform = CATransform3DRotate(CATransform3DIdentity, -M_PI_2, 1, 0, 0);
+//    view.alpha = 0.4;
+//
+//    CGFloat totalHeight = frame.origin.y + frame.size.height + [self scaleHeightWith:150];
+//    if (totalHeight > self.scrollView.contentSize.height) {
+//        CGSize contentSize = self.scrollView.contentSize;
+//        contentSize.height = totalHeight;
+//        self.scrollView.contentSize = contentSize;
+//    }
+//
+//    [UIView animateWithDuration:keyWordViewAnimationDuration delay:delay usingSpringWithDamping:0.4 initialSpringVelocity:5 options:UIViewAnimationOptionCurveEaseIn animations:^{
+//        view.layer.transform = CATransform3DRotate(CATransform3DIdentity, 0, 1, 0, 0);
+//        view.frame = frame;
+//        view.alpha = 1;
+//    } completion:^(BOOL finished) {
+//
+//    }];
 }
 
 - (UILabel *)labelWithKeyWord:(NSString *)keyWord

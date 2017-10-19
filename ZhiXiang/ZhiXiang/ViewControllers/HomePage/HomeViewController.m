@@ -183,7 +183,6 @@
         return cell;
     }else if (tmpModel.modelType == HomeViewModelType_PageGuide) {
         HomeGuideCollectionViewCell * cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"HomeGuideCollectionViewCell" forIndex:index];
-        cell.backgroundColor = [UIColor whiteColor];
         return cell;
     }
     
