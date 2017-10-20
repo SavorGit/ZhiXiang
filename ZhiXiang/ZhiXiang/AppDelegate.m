@@ -23,6 +23,7 @@
 @property (nonatomic, strong) UIView * asSetView;
 @property (nonatomic, strong) NSMutableArray *asSetsArray;
 @property (nonatomic, copy)   NSString *selectSetString;
+@property (nonatomic, strong) UIButton *goButton;
 
 @end
 
@@ -177,15 +178,16 @@
         [self.asSetsArray addObject:asSetButton];
     }
     
-    UIButton *goButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    goButton.backgroundColor = UIColorFromRGB(0xcccccc);
-    goButton.layer.cornerRadius = 5;
-    goButton.layer.masksToBounds = YES;
-    [goButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
-    [goButton setTitle:@"进入" forState:UIControlStateNormal];
-    [goButton addTarget:self action:@selector(goPress:) forControlEvents:UIControlEventTouchUpInside];
-    [self.asSetView addSubview:goButton];
-    [goButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.goButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.goButton.backgroundColor = UIColorFromRGB(0xcccccc);
+    self.goButton.layer.cornerRadius = 5;
+    self.goButton.layer.masksToBounds = YES;
+    [self.goButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+    [self.goButton setTitle:@"进入" forState:UIControlStateNormal];
+    [self.goButton addTarget:self action:@selector(goPress:) forControlEvents:UIControlEventTouchUpInside];
+    self.goButton.userInteractionEnabled = NO;
+    [self.asSetView addSubview:self.goButton];
+    [self.goButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.asSetView.mas_bottom).offset(- 65);
         make.centerX.mas_equalTo(self.asSetView.mas_centerX);
         make.width.mas_equalTo(200);
@@ -204,6 +206,8 @@
         btn.layer.borderColor = UIColorFromRGB(0xcecece).CGColor;
     }
     asBtn.layer.borderColor = UIColorFromRGB(0x000000).CGColor;
+    self.goButton.backgroundColor = UIColorFromRGB(0x333333);
+    self.goButton.userInteractionEnabled = YES;
     self.selectSetString = [NSString stringWithFormat:@"%ld", asBtn.tag];
     
 }
