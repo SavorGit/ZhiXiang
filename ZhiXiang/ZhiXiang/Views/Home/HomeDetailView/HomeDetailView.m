@@ -334,7 +334,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     footView.backgroundColor = UIColorFromRGB(0xf8f6f1);
     
     UILabel *bottomTitle = [[UILabel alloc] initWithFrame:CGRectZero];
-    bottomTitle.text = @"知世界.享生活";
+    bottomTitle.text = @"知世界·享生活";
     bottomTitle.textAlignment = NSTextAlignmentCenter;
     bottomTitle.textColor = UIColorFromRGB(0x808080);
     bottomTitle.font = kPingFangRegular(13);
