@@ -187,9 +187,45 @@
             make.right.mas_equalTo(0);
         }];
         
-        UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kMainBoundsWidth, 30)];
+        UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kMainBoundsWidth, 130)];
         footView.backgroundColor = UIColorFromRGB(0xf8f6f1);
+        
+        UILabel *bottomTitle = [[UILabel alloc] initWithFrame:CGRectZero];
+        bottomTitle.text = @"知世界.享生活";
+        bottomTitle.textAlignment = NSTextAlignmentCenter;
+        bottomTitle.textColor = UIColorFromRGB(0x808080);
+        bottomTitle.font = kPingFangRegular(13);
+        [footView addSubview:bottomTitle];
+        [bottomTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(60);
+            make.centerX.mas_equalTo(footView.mas_centerX);
+            make.width.mas_equalTo(90);
+            make.height.mas_equalTo(20);
+        }];
+        
+        CGFloat lineWidth = (kMainBoundsWidth - 90 - 30 - 50)/2;
+        UIView *leftLine = [[UIView alloc] init];
+        leftLine.backgroundColor = UIColorFromRGB(0xcccbc8);
+        [footView addSubview:leftLine];
+        [leftLine mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(69.5);
+            make.right.mas_equalTo(bottomTitle.mas_left).offset(- 15);
+            make.width.mas_equalTo(lineWidth);
+            make.height.mas_equalTo(1);
+        }];
+        
+        UIView *rightLine = [[UIView alloc] init];
+        rightLine.backgroundColor = UIColorFromRGB(0xcccbc8);
+        [footView addSubview:rightLine];
+        [rightLine mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(69.5);
+            make.left.mas_equalTo(bottomTitle.mas_right).offset(15);
+            make.width.mas_equalTo(lineWidth);
+            make.height.mas_equalTo(1);
+        }];
+        
         _tableView.tableFooterView= footView;
+        
     }
     
     return _tableView;

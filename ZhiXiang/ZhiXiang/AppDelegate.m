@@ -135,17 +135,21 @@
 
 - (void)creatAssetsUI:(UIImageView *)imgView{
     
+    CGFloat scaleH = kMainBoundsHeight / 667.f;
+    CGFloat scaleW = kMainBoundsWidth / 375.f;
+    
     self.asSetView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.asSetView.backgroundColor = UIColorFromRGB(0xf5f5f5);
     UIImageView *topImgView = [[UIImageView alloc] initWithFrame:CGRectZero];
     topImgView.image = [UIImage imageNamed:@"zichan"];
     topImgView.contentMode = UIViewContentModeScaleAspectFill;
     [self.asSetView addSubview:topImgView];
+    CGSize imageSize = topImgView.image.size;
     [topImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(85);
+        make.top.mas_equalTo(85 * scaleH);
         make.centerX.mas_equalTo(self.asSetView.mas_centerX);
-        make.width.mas_equalTo(topImgView.mas_width);
-        make.height.mas_equalTo(topImgView.mas_height);
+        make.width.mas_equalTo(imageSize.width*scaleW);
+        make.height.equalTo(topImgView.mas_width).multipliedBy(imageSize.height / imageSize.width);
     }];
     
     UILabel *selectTitle = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -155,10 +159,10 @@
     selectTitle.textAlignment = NSTextAlignmentCenter;
     [self.asSetView addSubview:selectTitle];
     [selectTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(topImgView.mas_bottom).offset(60);
+        make.top.mas_equalTo(topImgView.mas_bottom).offset(60*scaleH);
         make.centerX.mas_equalTo(self.asSetView.mas_centerX);
         make.width.mas_equalTo(150);
-        make.height.mas_equalTo(30);
+        make.height.mas_equalTo(15);
     }];
     
     NSArray *assetsArray = [NSArray arrayWithObjects:@"资产10亿以上",@"资产1亿以上",@"资产一千万以上",@"暂不透露", nil];
@@ -176,10 +180,10 @@
         [asSetButton addTarget:self action:@selector(asSetPress:) forControlEvents:UIControlEventTouchUpInside];
         [self.asSetView addSubview:asSetButton];
         [asSetButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(selectTitle.mas_bottom).offset(32 + i *15 + i *44);
+            make.top.mas_equalTo(selectTitle.mas_bottom).offset(32*scaleH + i *15*scaleH + i *44*scaleH);
             make.centerX.mas_equalTo(self.asSetView.mas_centerX);
             make.width.mas_equalTo(150);
-            make.height.mas_equalTo(44);
+            make.height.mas_equalTo(44 *scaleH);
         }];
         [self.asSetsArray addObject:asSetButton];
     }
@@ -194,7 +198,7 @@
     self.goButton.userInteractionEnabled = NO;
     [self.asSetView addSubview:self.goButton];
     [self.goButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.asSetView.mas_bottom).offset(- 65);
+        make.bottom.equalTo(self.asSetView.mas_bottom).offset(-65*scaleH);
         make.centerX.mas_equalTo(self.asSetView.mas_centerX);
         make.width.mas_equalTo(200);
         make.height.mas_equalTo(36);
