@@ -10,4 +10,6 @@
 
 @interface HomeCommandCollectionViewCell : UICollectionViewCell
 
+@property (nonatomic, strong) UIViewController * VC;
+
 @end

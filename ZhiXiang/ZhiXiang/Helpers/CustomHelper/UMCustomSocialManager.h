@@ -20,6 +20,11 @@
 /**
  *  分享至平台3.0改版调用
  */
-- (void)sharedToPlatform:(UMSocialPlatformType)platformType andController:(UIViewController *)VC  andView:(UIView *)view withModel:(HomeViewModel *)model andUmKeyString:(NSString *)keyString;
+- (void)sharedToPlatform:(UMSocialPlatformType)platformType andController:(UIViewController *)VC andView:(UIView *)view withModel:(HomeViewModel *)model andUmKeyString:(NSString *)keyString;
+
+/**
+ *  分享至平台3.0改版调用
+ */
+- (void)sharedAPPToPlatform:(UMSocialPlatformType)platformType andController:(UIViewController *)VC andView:(UIView *)view andUmKeyString:(NSString *)keyString;
 
 @end

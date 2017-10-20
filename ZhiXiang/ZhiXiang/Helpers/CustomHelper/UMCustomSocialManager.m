@@ -76,4 +76,26 @@
     }];
 }
 
+- (void)sharedAPPToPlatform:(UMSocialPlatformType)platformType andController:(UIViewController *)VC andView:(UIView *)view andUmKeyString:(NSString *)keyString
+{
+    NSString * url = @"https://itunes.apple.com/cn/app/id1284095616";
+    UIImage * image = [UIImage imageNamed:@"shareDefalut"];
+    
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    //创建网页分享类型
+    UMShareWebpageObject * object = [UMShareWebpageObject shareObjectWithTitle:@"每日知享，高端人士的内容管家" descr:@"它摈弃所有无意义的内容，\n每天精编全网最有价值的10条，\n最高效的满足您对价值和品味的需求。" thumImage:image];
+    [object setWebpageUrl:url];
+    messageObject.shareObject = object;
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:VC completion:^(id result, NSError *error) {
+        
+        if (error) {
+            [MBProgressHUD showTextHUDWithText:@"分享失败" inView:view];
+        }else{
+            [MBProgressHUD showTextHUDWithText:@"分享成功" inView:view];
+        }
+        
+    }];
+}
+
 @end

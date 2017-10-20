@@ -31,8 +31,9 @@
 #define isNull(x)             (!x || [x isKindOfClass:[NSNull class]])
 #define isEmptyString(x)      (isNull(x) || [x isEqual:@""] || [x isEqual:@"(null)"])
 
-#define isiPhone_X [UIScreen mainScreen].bounds.size.height == 812
-#define isiPhone_Plus [UIScreen mainScreen].bounds.size.width == 414
+#define isiPhone_X [UIScreen mainScreen].bounds.size.height == 812.f
+#define isiPhone_Plus [UIScreen mainScreen].bounds.size.width == 414.f
+#define isiPhone4S [UIScreen mainScreen].bounds.size.height == 480.f
 
 //-------------------字体大小-------------------------
 #define FontSizeDefault 14.0f

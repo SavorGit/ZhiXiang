@@ -99,10 +99,14 @@
     [self.window addSubview:imageView];
     [self.window bringSubviewToFront:imageView];
     
+    BOOL hasAsValue;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *assetString = [defaults objectForKey:@"asSetValue"];
     if (isEmptyString(assetString)) {
         [self creatAssetsUI:imageView];
+        hasAsValue = NO;
+    }else{
+        hasAsValue = YES;
     }
     [ZXTools postUMHandleWithContentId:@"news_share_start" key:@"news_share_start" value:@"success"];
     
@@ -112,11 +116,13 @@
         
     } completion:^(BOOL finished) {
         
-        menu.rootViewStatusBarStyle = UIStatusBarStyleLightContent;
-        [menu setNeedsStatusBarAppearanceUpdate];
-        
-        home.canShowKeyWords = YES;
-        [home showKeyWord];
+        if (hasAsValue) {
+            menu.rootViewStatusBarStyle = UIStatusBarStyleLightContent;
+            [menu setNeedsStatusBarAppearanceUpdate];
+            
+            home.canShowKeyWords = YES;
+            [home showKeyWord];
+        }
         
         [UIView animateWithDuration:.5f animations:^{
             imageView.alpha = 0;
@@ -194,7 +200,6 @@
         make.height.mas_equalTo(36);
     }];
     
-    [self.window addSubview:self.asSetView];
     [self.window insertSubview:self.asSetView belowSubview:imgView];
 
 }
@@ -209,7 +214,6 @@
     self.goButton.backgroundColor = UIColorFromRGB(0x333333);
     self.goButton.userInteractionEnabled = YES;
     self.selectSetString = [NSString stringWithFormat:@"%ld", asBtn.tag];
-    
 }
 
 - (void)goPress:(UIButton *)goBtn{
@@ -218,7 +222,17 @@
     [defaults setObject:self.selectSetString forKey:@"asSetValue"];
     [defaults synchronize];
     
-    [UIView animateWithDuration:3.f animations:^{
+    LGSideMenuController * menu = (LGSideMenuController *)self.window.rootViewController;
+    UINavigationController * na = (UINavigationController *)menu.rootViewController;
+    HomeViewController * home = (HomeViewController *)na.topViewController;
+    
+    menu.rootViewStatusBarStyle = UIStatusBarStyleLightContent;
+    [menu setNeedsStatusBarAppearanceUpdate];
+    
+    home.canShowKeyWords = YES;
+    [home showKeyWord];
+    
+    [UIView animateWithDuration:.2f animations:^{
         self.asSetView.alpha = 0;
     } completion:^(BOOL finished) {
         [self.asSetView removeFromSuperview];
