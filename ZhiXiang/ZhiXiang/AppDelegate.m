@@ -23,6 +23,7 @@
 @property (nonatomic, strong) UIView * asSetView;
 @property (nonatomic, strong) NSMutableArray *asSetsArray;
 @property (nonatomic, copy)   NSString *selectSetString;
+@property (nonatomic, strong) UIButton *goButton;
 
 @end
 
@@ -134,30 +135,33 @@
 
 - (void)creatAssetsUI:(UIImageView *)imgView{
     
+    CGFloat scaleH = kMainBoundsHeight / 667.f;
+    
     self.asSetView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.asSetView.backgroundColor = UIColorFromRGB(0xf5f5f5);
-    UIImageView *topImgView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    topImgView.image = [UIImage imageNamed:@"zichan"];
-    topImgView.contentMode = UIViewContentModeScaleAspectFill;
-    [self.asSetView addSubview:topImgView];
-    [topImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(85);
-        make.centerX.mas_equalTo(self.asSetView.mas_centerX);
-        make.width.mas_equalTo(topImgView.mas_width);
-        make.height.mas_equalTo(topImgView.mas_height);
-    }];
     
     UILabel *selectTitle = [[UILabel alloc] initWithFrame:CGRectZero];
-    selectTitle.font = kPingFangRegular(15);
+    selectTitle.font = kPingFangMedium(20);
     selectTitle.text = @"请选择您所在的群体";
-    selectTitle.textColor = UIColorFromRGB(0x555555);
+    selectTitle.textColor = UIColorFromRGB(0x333333);
     selectTitle.textAlignment = NSTextAlignmentCenter;
     [self.asSetView addSubview:selectTitle];
     [selectTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(topImgView.mas_bottom).offset(60);
-        make.centerX.mas_equalTo(self.asSetView.mas_centerX);
-        make.width.mas_equalTo(150);
-        make.height.mas_equalTo(30);
+        make.top.mas_equalTo(95 * scaleH);
+        make.left.right.mas_equalTo(0);
+        make.height.mas_equalTo(20);
+    }];
+    
+    UILabel * subLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    subLabel.font = kPingFangRegular(16);
+    subLabel.text = @"我们为不同的人群提供最合适的内容";
+    subLabel.textColor = UIColorFromRGB(0x333333);
+    subLabel.textAlignment = NSTextAlignmentCenter;
+    [self.asSetView addSubview:subLabel];
+    [subLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(selectTitle.mas_bottom).offset(12);
+        make.left.right.mas_equalTo(0);
+        make.height.mas_equalTo(16);
     }];
     
     NSArray *assetsArray = [NSArray arrayWithObjects:@"资产10亿以上",@"资产1亿以上",@"资产一千万以上",@"暂不透露", nil];
@@ -175,26 +179,25 @@
         [asSetButton addTarget:self action:@selector(asSetPress:) forControlEvents:UIControlEventTouchUpInside];
         [self.asSetView addSubview:asSetButton];
         [asSetButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(selectTitle.mas_bottom).offset(32 + i *15 + i *44);
+            make.top.mas_equalTo(selectTitle.mas_bottom).offset(32*scaleH + i *15*scaleH + i *44*scaleH);
             make.centerX.mas_equalTo(self.asSetView.mas_centerX);
             make.width.mas_equalTo(150);
-            make.height.mas_equalTo(44);
+            make.height.mas_equalTo(44 *scaleH);
         }];
         [self.asSetsArray addObject:asSetButton];
     }
     
-    UIButton *goButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    goButton.backgroundColor = UIColorFromRGB(0xcccccc);
-    goButton.tag = 999;
-    goButton.layer.cornerRadius = 5;
-    goButton.layer.masksToBounds = YES;
-    [goButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
-    [goButton setTitle:@"进入" forState:UIControlStateNormal];
-    [goButton addTarget:self action:@selector(goPress:) forControlEvents:UIControlEventTouchUpInside];
-    goButton.enabled = NO;
-    [self.asSetView addSubview:goButton];
-    [goButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.asSetView.mas_bottom).offset(- 65);
+    self.goButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.goButton.backgroundColor = UIColorFromRGB(0xcccccc);
+    self.goButton.layer.cornerRadius = 5;
+    self.goButton.layer.masksToBounds = YES;
+    [self.goButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+    [self.goButton setTitle:@"进入" forState:UIControlStateNormal];
+    [self.goButton addTarget:self action:@selector(goPress:) forControlEvents:UIControlEventTouchUpInside];
+    self.goButton.enabled = NO;
+    [self.asSetView addSubview:self.goButton];
+    [self.goButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.asSetView.mas_bottom).offset(-65*scaleH);
         make.centerX.mas_equalTo(self.asSetView.mas_centerX);
         make.width.mas_equalTo(200);
         make.height.mas_equalTo(36);
@@ -206,9 +209,8 @@
 
 - (void)asSetPress:(UIButton *)asBtn{
     
-    UIButton * goButton = (UIButton *)[self.asSetView viewWithTag:999];
-    goButton.enabled = YES;
-    [goButton setBackgroundColor:UIColorFromRGB(0x333333)];
+    self.goButton.enabled = YES;
+    [self.goButton setBackgroundColor:UIColorFromRGB(0x333333)];
     for (int i = 0 ; i < self.asSetsArray.count; i ++) {
         UIButton *btn = self.asSetsArray[i];
         btn.layer.borderColor = UIColorFromRGB(0xcecece).CGColor;
