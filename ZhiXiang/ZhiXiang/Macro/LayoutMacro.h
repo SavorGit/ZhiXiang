@@ -30,6 +30,7 @@
 #define kPingFangMedium(x) ([UIFont fontWithName:@"PingFangSC-Medium" size:x] ? [UIFont fontWithName:@"PingFangSC-Medium" size:x] : [UIFont systemFontOfSize:x])
 #define kACaslonProItalic(x) ([UIFont fontWithName:@"ACaslonPro-Italic" size:x] ? [UIFont fontWithName:@"ACaslonPro-Italic" size:x] : [UIFont systemFontOfSize:x])
 #define kACaslonProRegular(x) ([UIFont fontWithName:@"ACaslonPro-Regular" size:x] ? [UIFont fontWithName:@"ACaslonPro-Regular" size:x] : [UIFont systemFontOfSize:x])
+#define KQXYingBiKai(x) ([UIFont fontWithName:@"QXyingbikai" size:x] ? [UIFont fontWithName:@"QXyingbikai" size:x] : [UIFont systemFontOfSize:x])
 
 
 #endif /* LayoutMacro_h */

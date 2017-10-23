@@ -113,6 +113,18 @@
     }
 }
 
++ (CGFloat)autoWidthWith:(CGFloat)width
+{
+    CGFloat result = (width / 375.f) * kMainBoundsWidth;
+    return result;
+}
+
++ (CGFloat)autoHeightWith:(CGFloat)height
+{
+    CGFloat result = (height / 667.f) * kMainBoundsHeight;
+    return result;
+}
+
 + (CGFloat)getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont *)font
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 0)];

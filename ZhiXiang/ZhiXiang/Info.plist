@@ -92,6 +92,7 @@
 	<array>
 		<string>ACaslonPro-Italic.otf</string>
 		<string>ACaslonPro-Regular.otf</string>
+		<string>QXyingbikai.ttf</string>
 	</array>
 	<key>UIApplicationExitsOnSuspend</key>
 	<false/>

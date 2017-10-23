@@ -17,6 +17,7 @@
 #import "RDAlertView.h"
 #import "MBProgressHUD+Custom.h"
 #import "WeixinLoginRequest.h"
+#import "GetDailyConfigRequest.h"
 
 @interface LeftViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate>
 
@@ -39,7 +40,6 @@
     self.navigationController.delegate = self;
     self.view.backgroundColor = UIColorFromRGB(0x222222);
     [self initInfo];
-    [self.tableView reloadData];
     [self setUpTableHeaderView];
     [self.view addSubview:self.footView];
     [self.footView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -52,8 +52,27 @@
 
 - (void)initInfo{
     
-    _dataSource = @[@"我的收藏",@"全部知享",@"清除缓存"];
-    _imageData = @[@"wdshc", @"qbzhx", @"qingchu"];
+    _dataSource = @[@"我的收藏",@"全部知享"];
+    _imageData = @[@"wdshc", @"qbzhx"];
+    [self.tableView reloadData];
+    
+    GetDailyConfigRequest * request = [[GetDailyConfigRequest alloc] init];
+    [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+        
+        NSDictionary * dataDict = [response objectForKey:@"result"];
+        if (dataDict && [dataDict isKindOfClass:[NSDictionary class]]) {
+            if ([[dataDict objectForKey:@"state"] integerValue] == 1) {
+                _dataSource = @[@"我的收藏",@"全部知享",@"清除缓存"];
+                _imageData = @[@"wdshc", @"qbzhx", @"qingchu"];
+                [self.tableView reloadData];
+            }
+        }
+        
+    } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+        
+    } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
+        
+    }];
 }
 
 #pragma mark -- 懒加载
@@ -187,7 +206,7 @@
 
 - (void)userViewDidBeClicked
 {
-    if ([UserManager shareManager].isLoginWithWX) {
+    if ([UserManager shareManager].isLoginWithWX || [UserManager shareManager].isLoginWithTel) {
         
         RDAlertView * alert = [[RDAlertView alloc] initWithTitle:@"" message:@"退出登录?"];
         RDAlertAction * action1 = [[RDAlertAction alloc] initWithTitle:@"取消" handler:^{
@@ -252,21 +271,16 @@
             make.height.mas_equalTo(.5f);
         }];
         
-        CGFloat width = kMainBoundsHeight > kMainBoundsWidth ? kMainBoundsWidth : kMainBoundsHeight;
-        CGFloat scaleW = width / 375.f;
-        
-        UIImageView * iconImgView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        iconImgView.contentMode = UIViewContentModeScaleAspectFill;
-        iconImgView.image = [UIImage imageNamed:@"cd_slogan"];
-        iconImgView.backgroundColor = [UIColor clearColor];
-        [_footView addSubview:iconImgView];
-        [iconImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(192 * scaleW);
-            make.height.mas_equalTo(14 * scaleW);
-            make.centerY.mas_equalTo(0);
-            make.left.mas_equalTo(35 * scaleW);
-        }]; 
-
+        UILabel * sloganLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        sloganLabel.textAlignment = NSTextAlignmentLeft;
+        sloganLabel.font = kPingFangRegular([ZXTools autoWidthWith:13]);
+        sloganLabel.textColor = UIColorFromRGB(0x808080);
+        sloganLabel.text = @"每天精选十条内容  高效·价值·品味";
+        [_footView addSubview:sloganLabel];
+        [sloganLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(25);
+            make.top.bottom.right.mas_equalTo(0);
+        }];
     }
     
     return _footView;
@@ -370,7 +384,9 @@
 
 - (void)reloadCache
 {
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    if (self.dataSource.count >= 3) {
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated{

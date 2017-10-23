@@ -216,10 +216,11 @@
         [self.statusCell showLoading];
     }
     
+    NSInteger totalIndex = self.dataSource.count;
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         HomeViewModel *tmpModel = [self.dataSource lastObject];
-        NSDictionary * dict = tmpModel.detailDic;
-        HomeViewRequest * request = [[HomeViewRequest alloc] initWithIBespeakTime:[dict objectForKey:@"bespeak_time"]];
+        HomeViewRequest * request = [[HomeViewRequest alloc] initWithIBespeakTime:tmpModel.bespeak_time];
         [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
             
             NSDictionary *dic = (NSDictionary *)response;
@@ -243,7 +244,9 @@
                 tmpModel.day = [dataDict objectForKey:@"day"];
                 tmpModel.month = [dataDict objectForKey:@"month"];
                 tmpModel.week = [dataDict objectForKey:@"week"];
+                tmpModel.bespeak_time = [tmpModel.detailDic objectForKey:@"bespeak_time"];
                 tmpModel.modelType = HomeViewModelType_Default;
+                
                 [self.dataSource addObject:tmpModel];
                 
                 if (i == 0) {
@@ -252,19 +255,24 @@
                 
             }
             
+            HomeViewModel * model = [self.dataSource lastObject];
+            
             HomeViewModel * guideModel = [[HomeViewModel alloc] init];
             guideModel.modelType = HomeViewModelType_PageGuide;
+            guideModel.bespeak_time = model.bespeak_time;
             [self.dataSource addObject:guideModel];
             
-            if (self.currentIndex >= 12) {
-                [self.pageControl setCurrentIndex:(self.currentIndex - 1) % 11 + 1];
-            }else{
-                [self.pageControl setCurrentIndex:self.currentIndex % 11 + 1];
+            if (self.currentIndex >= totalIndex) {
+                if (self.currentIndex >= 12) {
+                    [self.pageControl setCurrentIndex:(self.currentIndex - 1) % 11 + 1];
+                }else{
+                    [self.pageControl setCurrentIndex:self.currentIndex % 11 + 1];
+                }
+                [self showDateAndPage];
             }
             
             [self.pagerView reloadData];
             self.isRequest = NO;
-            [self showDateAndPage];
             self.isUserClickCell = NO;
             
         } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
@@ -386,22 +394,26 @@
             tmpModel.day = [dataDict objectForKey:@"day"];
             tmpModel.month = [dataDict objectForKey:@"month"];
             tmpModel.week = [dataDict objectForKey:@"week"];
+            tmpModel.bespeak_time = [tmpModel.detailDic objectForKey:@"bespeak_time"];
             tmpModel.modelType = HomeViewModelType_Default;
             
             if (i == 0) {
                 [self.dateView configWithModel:tmpModel];
             }
-            
         }
+        
+        HomeViewModel * model = [self.dataSource lastObject];
         
         HomeViewModel * commandModel = [[HomeViewModel alloc] init];
         commandModel.modelType = HomeViewModelType_Command;
+        commandModel.bespeak_time = model.bespeak_time;
         [self.dataSource addObject:commandModel];
         
         HomeViewModel * guideModel = [[HomeViewModel alloc] init];
         guideModel.modelType = HomeViewModelType_PageGuide;
         guideModel.dailyart = [dataDict objectForKey:@"dailyart"];
         guideModel.dailyauthor = [dataDict objectForKey:@"dailyauthor"];
+        guideModel.bespeak_time = model.bespeak_time;
         [self.dataSource addObject:guideModel];
         
         [self.pagerView reloadData];
@@ -512,10 +524,10 @@
 
 - (void)onlyHiddenPage
 {
-    if (!self.isHiddenPage) {
-        self.pageControl.hidden = YES;
-        self.isHiddenPage = YES;
-    }
+    self.pageControl.hidden = YES;
+    self.isHiddenPage = YES;
+    self.dateView.hidden = NO;
+    self.isHiddenDate = NO;
 }
 
 - (void)hiddenDateAndPage

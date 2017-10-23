@@ -154,6 +154,7 @@
     
     UILabel * subLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     subLabel.font = kPingFangRegular(16);
+    subLabel.numberOfLines = 0;
     subLabel.text = @"我们为不同的人群提供最合适的内容";
     subLabel.textColor = UIColorFromRGB(0x333333);
     subLabel.textAlignment = NSTextAlignmentCenter;
@@ -161,7 +162,6 @@
     [subLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(selectTitle.mas_bottom).offset(12);
         make.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(16);
     }];
     
     NSArray *assetsArray = [NSArray arrayWithObjects:@"资产10亿以上",@"资产1亿以上",@"资产一千万以上",@"暂不透露", nil];
@@ -179,7 +179,7 @@
         [asSetButton addTarget:self action:@selector(asSetPress:) forControlEvents:UIControlEventTouchUpInside];
         [self.asSetView addSubview:asSetButton];
         [asSetButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(selectTitle.mas_bottom).offset(32*scaleH + i *15*scaleH + i *44*scaleH);
+            make.top.mas_equalTo(subLabel.mas_bottom).offset(90*scaleH + i *15*scaleH + i *44*scaleH);
             make.centerX.mas_equalTo(self.asSetView.mas_centerX);
             make.width.mas_equalTo(150);
             make.height.mas_equalTo(44 *scaleH);
