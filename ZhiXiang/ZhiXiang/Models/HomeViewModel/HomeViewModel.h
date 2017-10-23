@@ -45,4 +45,10 @@ typedef enum : NSUInteger {
 @property(nonatomic, strong) NSString *title;
 @property(nonatomic, strong) NSString *desc;
 
+@property(nonatomic, strong) NSString * artpro;
+
+//HomeViewModelType_PageGuide
+@property(nonatomic, strong) NSString *dailyauthor;
+@property(nonatomic, strong) NSString * dailyart;
+
 @end

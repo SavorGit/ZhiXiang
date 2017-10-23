@@ -107,23 +107,23 @@
     self.fromLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.fromLabel.text = @"";
     self.fromLabel.textAlignment = NSTextAlignmentRight;
-    self.fromLabel.textColor = UIColorFromRGB(0x999999);
-    self.fromLabel.font = kPingFangRegular(12);
+    self.fromLabel.textColor = UIColorFromRGB(0xcd313e);
+    self.fromLabel.font = kPingFangRegular(16);
     [self.contentView addSubview:self.fromLabel];
     [self.fromLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
         make.bottom.mas_equalTo(-13);
         make.right.mas_equalTo(-15);
-        make.height.mas_equalTo(15);
+        make.height.mas_equalTo(16);
     }];
 }
 
 - (void)configModelData:(HomeViewModel *)model{
     
-    if (isEmptyString(model.sourceName)) {
+    if (isEmptyString(model.artpro)) {
         self.fromLabel.text = @"";
     }else{
-        self.fromLabel.text = [@"选自: " stringByAppendingString:model.sourceName];
+        self.fromLabel.text = [NSString stringWithFormat:@"[ %@ ]", model.artpro];
     }
     
     self.titleLabel.text = model.title;

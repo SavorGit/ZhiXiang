@@ -185,11 +185,13 @@
     
     UIButton *goButton = [UIButton buttonWithType:UIButtonTypeCustom];
     goButton.backgroundColor = UIColorFromRGB(0xcccccc);
+    goButton.tag = 999;
     goButton.layer.cornerRadius = 5;
     goButton.layer.masksToBounds = YES;
     [goButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
     [goButton setTitle:@"进入" forState:UIControlStateNormal];
     [goButton addTarget:self action:@selector(goPress:) forControlEvents:UIControlEventTouchUpInside];
+    goButton.enabled = NO;
     [self.asSetView addSubview:goButton];
     [goButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.asSetView.mas_bottom).offset(- 65);
@@ -204,6 +206,9 @@
 
 - (void)asSetPress:(UIButton *)asBtn{
     
+    UIButton * goButton = (UIButton *)[self.asSetView viewWithTag:999];
+    goButton.enabled = YES;
+    [goButton setBackgroundColor:UIColorFromRGB(0x333333)];
     for (int i = 0 ; i < self.asSetsArray.count; i ++) {
         UIButton *btn = self.asSetsArray[i];
         btn.layer.borderColor = UIColorFromRGB(0xcecece).CGColor;

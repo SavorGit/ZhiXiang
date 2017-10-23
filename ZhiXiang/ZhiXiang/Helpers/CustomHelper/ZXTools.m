@@ -48,7 +48,8 @@
             
         }else {
             
-            [UserManager shareManager].isLogin = NO;
+            [UserManager shareManager].isLoginWithTel = NO;
+            [UserManager shareManager].isLoginWithWX = NO;
             
         }
     }

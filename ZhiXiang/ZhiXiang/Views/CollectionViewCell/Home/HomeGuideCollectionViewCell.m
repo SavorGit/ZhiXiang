@@ -95,4 +95,21 @@
     }];
 }
 
+- (void)configWithModel:(HomeViewModel *)model
+{
+    
+    if (isEmptyString(model.dailyauthor) || isEmptyString(model.dailyart)) {
+        return;
+    }
+    
+    self.fromLabel.text = [@"———— " stringByAppendingString:model.dailyauthor];
+    self.detailLabel.text = model.dailyart;
+    
+    CGFloat height = [ZXTools getHeightByWidth:self.frame.size.width - 56 title:self.detailLabel.text font:kPingFangLight(16)];
+    
+    [self.detailLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(height);
+    }];
+}
+
 @end

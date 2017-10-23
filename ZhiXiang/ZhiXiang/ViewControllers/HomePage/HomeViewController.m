@@ -184,6 +184,7 @@
         return cell;
     }else if (tmpModel.modelType == HomeViewModelType_PageGuide) {
         HomeGuideCollectionViewCell * cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"HomeGuideCollectionViewCell" forIndex:index];
+        [cell configWithModel:tmpModel];
         return cell;
     }
     
@@ -399,6 +400,8 @@
         
         HomeViewModel * guideModel = [[HomeViewModel alloc] init];
         guideModel.modelType = HomeViewModelType_PageGuide;
+        guideModel.dailyart = [dataDict objectForKey:@"dailyart"];
+        guideModel.dailyauthor = [dataDict objectForKey:@"dailyauthor"];
         [self.dataSource addObject:guideModel];
         
         [self.pagerView reloadData];

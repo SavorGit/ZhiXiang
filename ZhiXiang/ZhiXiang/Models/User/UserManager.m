@@ -22,16 +22,24 @@
 
 - (void)configWithDictionary:(NSDictionary *)userInfo
 {
-    self.wxUserName = [userInfo objectForKey:@"wxUserName"];
-    self.wxIcon = [userInfo objectForKey:@"wxIcon"];
-    self.wxUID = [userInfo objectForKey:@"wxUID"];
-    self.wxOpenID = [userInfo objectForKey:@"wxOpenID"];
-    self.wxUnionID = [userInfo objectForKey:@"wxUnionID"];
-    self.unionGender = [userInfo objectForKey:@"unionGender"];
-    self.gender = [userInfo objectForKey:@"gender"];
-    self.wxOriginalResponse = [userInfo objectForKey:@"wxOriginalResponse"];
+    BOOL isWX = [[userInfo objectForKey:@"isLoginWithWX"] boolValue];
+    self.isLoginWithWX = isWX;
+    if (isWX) {
+        self.wxUserName = [userInfo objectForKey:@"wxUserName"];
+        self.wxIcon = [userInfo objectForKey:@"wxIcon"];
+        self.wxUID = [userInfo objectForKey:@"wxUID"];
+        self.wxOpenID = [userInfo objectForKey:@"wxOpenID"];
+        self.wxUnionID = [userInfo objectForKey:@"wxUnionID"];
+        self.unionGender = [userInfo objectForKey:@"unionGender"];
+        self.gender = [userInfo objectForKey:@"gender"];
+        self.wxOriginalResponse = [userInfo objectForKey:@"wxOriginalResponse"];
+    }
     
-    self.isLogin = YES;
+    BOOL isTel = [[userInfo objectForKey:@"isLoginWithTel"] boolValue];
+    self.isLoginWithTel = isTel;
+    if (isTel) {
+        self.tel = [userInfo objectForKey:@"tel"];
+    }
 }
 
 - (void)configWithUMengResponse:(UMSocialUserInfoResponse *)response
@@ -45,27 +53,52 @@
     self.gender = response.gender;
     self.wxOriginalResponse = response.originalResponse;
     
-    self.isLogin = YES;
+    self.isLoginWithWX = YES;
 }
 
 - (BOOL)saveUserInfo
 {
-    NSDictionary * userInfo = @{@"wxUserName" : self.wxUserName,
-                                @"wxIcon"     : self.wxIcon,
-                                @"wxUID"      : self.wxUID,
-                                @"wxOpenID"   : self.wxOpenID,
-                                @"wxUnionID"  : self.wxUnionID,
-                                @"unionGender": self.unionGender,
-                                @"gender"     : self.gender,
-                                @"wxOriginalResponse" : self.wxOriginalResponse
-                                };
+    NSDictionary * userInfo;
+    if (self.isLoginWithWX && self.isLoginWithTel) {
+        userInfo = @{@"wxUserName" : self.wxUserName,
+                     @"wxIcon"     : self.wxIcon,
+                     @"wxUID"      : self.wxUID,
+                     @"wxOpenID"   : self.wxOpenID,
+                     @"wxUnionID"  : self.wxUnionID,
+                     @"unionGender": self.unionGender,
+                     @"gender"     : self.gender,
+                     @"tel"        : self.tel,
+                     @"wxOriginalResponse" : self.wxOriginalResponse,
+                     @"isLoginWithWX" : @(self.isLoginWithWX),
+                     @"isLoginWithTel":@(self.isLoginWithTel)
+                     };
+    }else if (self.isLoginWithWX){
+        userInfo = @{@"wxUserName" : self.wxUserName,
+                     @"wxIcon"     : self.wxIcon,
+                     @"wxUID"      : self.wxUID,
+                     @"wxOpenID"   : self.wxOpenID,
+                     @"wxUnionID"  : self.wxUnionID,
+                     @"unionGender": self.unionGender,
+                     @"gender"     : self.gender,
+                     @"wxOriginalResponse" : self.wxOriginalResponse,
+                     @"isLoginWithWX" : @(self.isLoginWithWX)
+                     };
+    }else if (self.isLoginWithTel){
+        userInfo = @{
+                     @"tel"            : self.tel,
+                     @"isLoginWithTel" : @(self.isLoginWithTel)
+                     };
+    }else{
+        return NO;
+    }
     
     return [userInfo writeToFile:UserInfoPath atomically:YES];
 }
 
 - (void)canleLogin
 {
-    self.isLogin = NO;
+    self.isLoginWithWX = NO;
+    self.isLoginWithTel = NO;
     if ([[NSFileManager defaultManager] fileExistsAtPath:UserInfoPath]) {
         [[NSFileManager defaultManager] removeItemAtPath:UserInfoPath error:nil];
     }

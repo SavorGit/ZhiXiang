@@ -16,6 +16,7 @@
 #import <UMSocialCore/UMSocialCore.h>
 #import "RDAlertView.h"
 #import "MBProgressHUD+Custom.h"
+#import "WeixinLoginRequest.h"
 
 @interface LeftViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate>
 
@@ -150,7 +151,7 @@
 
 - (void)refreshLoginStatus
 {
-    if ([UserManager shareManager].isLogin) {
+    if ([UserManager shareManager].isLoginWithWX) {
         self.nameLabel.text = [UserManager shareManager].wxUserName;
         
         CGFloat width = [ZXTools getWidthByHeight:15 title:self.nameLabel.text font:kPingFangRegular(14)];
@@ -160,6 +161,18 @@
         }
         
         [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[UserManager shareManager].wxIcon] placeholderImage:[UIImage imageNamed:@"wdl"]];
+        [self.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(width);
+        }];
+    }else if([UserManager shareManager].isLoginWithTel){
+        self.nameLabel.text = [UserManager shareManager].tel;
+        CGFloat width = [ZXTools getWidthByHeight:15 title:self.nameLabel.text font:kPingFangRegular(14)];
+        width += 10;
+        if (width < 80) {
+            width = 80;
+        }
+        
+        self.iconImageView.image = [UIImage imageNamed:@"wdl"];
         [self.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(width);
         }];
@@ -174,7 +187,7 @@
 
 - (void)userViewDidBeClicked
 {
-    if ([UserManager shareManager].isLogin) {
+    if ([UserManager shareManager].isLoginWithWX) {
         
         RDAlertView * alert = [[RDAlertView alloc] initWithTitle:@"" message:@"退出登录?"];
         RDAlertAction * action1 = [[RDAlertAction alloc] initWithTitle:@"取消" handler:^{
@@ -198,6 +211,7 @@
                     
                     [[UserManager shareManager] configWithUMengResponse:result];
                     [[UserManager shareManager] saveUserInfo];
+                    [self loginSuccessWithWeixin];
                     [self refreshLoginStatus];
                     
                 }
@@ -206,6 +220,20 @@
             [MBProgressHUD showTextHUDWithText:@"请安装微信后使用" inView:[UIApplication sharedApplication].keyWindow];
         }
     }
+}
+
+- (void)loginSuccessWithWeixin
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *assetString = [defaults objectForKey:@"asSetValue"];
+    WeixinLoginRequest * request = [[WeixinLoginRequest alloc] initWithDailyid:[UserManager shareManager].wxOpenID ptype:assetString tel:[UserManager shareManager].tel];
+    [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+        
+    } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+        
+    } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
+        
+    }];
 }
 
 - (UIView *)footView

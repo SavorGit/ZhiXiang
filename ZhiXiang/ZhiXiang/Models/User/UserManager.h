@@ -13,7 +13,7 @@
 
 + (instancetype)shareManager;
 
-@property (nonatomic, assign) BOOL isLogin;
+@property (nonatomic, assign) BOOL isLoginWithWX; //是否微信登录
 @property (nonatomic, copy) NSString * wxUserName; //微信用户名称
 @property (nonatomic, copy) NSString * wxIcon; //微信头像
 @property (nonatomic, copy) NSString * wxUID; //微信uid
@@ -22,6 +22,9 @@
 @property (nonatomic, strong) NSDictionary * wxOriginalResponse; //微信用户相关信息
 @property (nonatomic, copy) NSString * unionGender; //微信性别 例：男
 @property (nonatomic, copy) NSString * gender; //微信性别 例：m
+
+@property (nonatomic, assign) BOOL isLoginWithTel; //是否手机号登录
+@property (nonatomic, copy) NSString * tel; //电话号码
 
 - (void)configWithDictionary:(NSDictionary *)userInfo;
 
