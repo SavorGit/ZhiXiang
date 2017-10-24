@@ -20,6 +20,7 @@
 #import "UserLoginWayViewController.h"
 #import "UserTelLoginViewController.h"
 #import "leftMenuModel.h"
+#import "ZXSearchBoxViewController.h"
 
 @interface LeftViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate>
 
@@ -84,8 +85,8 @@
             
             if (touping == 1) {
                 leftMenuModel * model3 = [[leftMenuModel alloc] init];
-                model3.title = @"投屏";
-                model3.imageURL = @"qingchu";
+                model3.title = @"餐厅投屏";
+                model3.imageURL = @"touping";
                 model3.type = MenuModelType_Screen;
                 [self.dataSource addObject:model3];
             }
@@ -358,16 +359,18 @@
         [ZXTools postUMHandleWithContentId:@"news_share_menu_collect" key:nil value:nil];
         [self hideLeftViewAnimated:nil];
         MyCollectionViewController *mcVC = [[MyCollectionViewController alloc] init];
-         [(UINavigationController *)self.sideMenuController.rootViewController pushViewController:mcVC  animated:NO];
+         [(UINavigationController *)self.sideMenuController.rootViewController pushViewController:mcVC animated:NO];
     }else if (model.type == MenuModelType_All){
         [ZXTools postUMHandleWithContentId:@"news_share_menu_all" key:nil value:nil];
         [self hideLeftViewAnimated:nil];
         ZXAllArticleViewController *arVC = [[ZXAllArticleViewController alloc] init];
-        [(UINavigationController *)self.sideMenuController.rootViewController pushViewController:arVC  animated:NO];
+        [(UINavigationController *)self.sideMenuController.rootViewController pushViewController:arVC animated:NO];
     }else if (model.type == MenuModelType_Cache){
         [self clearApplicationCache];
     }else if (model.type == MenuModelType_Screen){
-        
+        [self hideLeftViewAnimated:nil];
+        ZXSearchBoxViewController * search = [[ZXSearchBoxViewController alloc] init];
+        [(UINavigationController *)self.sideMenuController.rootViewController pushViewController:search animated:NO];
     }
 }
 

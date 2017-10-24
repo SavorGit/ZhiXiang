@@ -51,6 +51,11 @@
 		069C37531F6FD19900FE2BB0 /* ZXKeyWordsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C37521F6FD19900FE2BB0 /* ZXKeyWordsView.m */; };
 		06B7A8011F8CB4C700240D71 /* HomePageLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B7A8001F8CB4C700240D71 /* HomePageLabel.m */; };
 		06D39AC81F9F4081004899D4 /* leftMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D39AC71F9F4081004899D4 /* leftMenuModel.m */; };
+		06D39ACC1F9F4467004899D4 /* ZXSearchBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D39ACB1F9F4467004899D4 /* ZXSearchBoxViewController.m */; };
+		06D39AD41F9F4527004899D4 /* GCCDLNA.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D39AD11F9F450B004899D4 /* GCCDLNA.m */; };
+		06D39ADD1F9F4596004899D4 /* HSGetIpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D39ADC1F9F4596004899D4 /* HSGetIpRequest.m */; };
+		06D39ADE1F9F45CB004899D4 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D39AD81F9F4578004899D4 /* GCDAsyncSocket.m */; };
+		06D39ADF1F9F45CB004899D4 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D39ADA1F9F4578004899D4 /* GCDAsyncUdpSocket.m */; };
 		06EDA4BD1F9D91FF00334B7D /* WeixinLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EDA4BC1F9D91FF00334B7D /* WeixinLoginRequest.m */; };
 		06EDA4C11F9DCB0900334B7D /* QXyingbikai.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06EDA4C01F9DCB0300334B7D /* QXyingbikai.ttf */; };
 		06EDA4C51F9DCE4400334B7D /* UserLoginWayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EDA4C41F9DCE4400334B7D /* UserLoginWayViewController.m */; };
@@ -200,6 +205,17 @@
 		06B7A8001F8CB4C700240D71 /* HomePageLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageLabel.m; sourceTree = "<group>"; };
 		06D39AC61F9F4081004899D4 /* leftMenuModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = leftMenuModel.h; sourceTree = "<group>"; };
 		06D39AC71F9F4081004899D4 /* leftMenuModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = leftMenuModel.m; sourceTree = "<group>"; };
+		06D39ACA1F9F4467004899D4 /* ZXSearchBoxViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXSearchBoxViewController.h; sourceTree = "<group>"; };
+		06D39ACB1F9F4467004899D4 /* ZXSearchBoxViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXSearchBoxViewController.m; sourceTree = "<group>"; };
+		06D39AD01F9F450B004899D4 /* GCCDLNA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCCDLNA.h; sourceTree = "<group>"; };
+		06D39AD11F9F450B004899D4 /* GCCDLNA.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCCDLNA.m; sourceTree = "<group>"; };
+		06D39AD61F9F4578004899D4 /* About.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = About.txt; sourceTree = "<group>"; };
+		06D39AD71F9F4578004899D4 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		06D39AD81F9F4578004899D4 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		06D39AD91F9F4578004899D4 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		06D39ADA1F9F4578004899D4 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		06D39ADB1F9F4596004899D4 /* HSGetIpRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSGetIpRequest.h; sourceTree = "<group>"; };
+		06D39ADC1F9F4596004899D4 /* HSGetIpRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSGetIpRequest.m; sourceTree = "<group>"; };
 		06EDA4BB1F9D91FF00334B7D /* WeixinLoginRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeixinLoginRequest.h; sourceTree = "<group>"; };
 		06EDA4BC1F9D91FF00334B7D /* WeixinLoginRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeixinLoginRequest.m; sourceTree = "<group>"; };
 		06EDA4C01F9DCB0300334B7D /* QXyingbikai.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = QXyingbikai.ttf; sourceTree = "<group>"; };
@@ -423,6 +439,7 @@
 		0653D00B1F6BA2E50054A818 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				06D39AC91F9F4450004899D4 /* Screen */,
 				06EDA4C21F9DCE0900334B7D /* User */,
 				96D357AB1F70C8AB00BF35EB /* AllArticle */,
 				96D357741F6FBD9700BF35EB /* MyCollection */,
@@ -459,6 +476,7 @@
 		0653D00E1F6BA3080054A818 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				06D39ACD1F9F450B004899D4 /* GCCDLNA */,
 				96E1B8201F944FEC0052D6C2 /* UMessage_Sdk_1.5.0 */,
 				068692E61F79018D00AE2EA1 /* GCCLayerCurve */,
 				06F263211F74DD9A001FB3F5 /* MBProgressHUD+Custom */,
@@ -644,6 +662,37 @@
 			path = ZXKeyWordsView;
 			sourceTree = "<group>";
 		};
+		06D39AC91F9F4450004899D4 /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				06D39ACA1F9F4467004899D4 /* ZXSearchBoxViewController.h */,
+				06D39ACB1F9F4467004899D4 /* ZXSearchBoxViewController.m */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		06D39ACD1F9F450B004899D4 /* GCCDLNA */ = {
+			isa = PBXGroup;
+			children = (
+				06D39AD51F9F4578004899D4 /* CocoaAsyncSocket */,
+				06D39AD01F9F450B004899D4 /* GCCDLNA.h */,
+				06D39AD11F9F450B004899D4 /* GCCDLNA.m */,
+			);
+			path = GCCDLNA;
+			sourceTree = "<group>";
+		};
+		06D39AD51F9F4578004899D4 /* CocoaAsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				06D39AD61F9F4578004899D4 /* About.txt */,
+				06D39AD71F9F4578004899D4 /* GCDAsyncSocket.h */,
+				06D39AD81F9F4578004899D4 /* GCDAsyncSocket.m */,
+				06D39AD91F9F4578004899D4 /* GCDAsyncUdpSocket.h */,
+				06D39ADA1F9F4578004899D4 /* GCDAsyncUdpSocket.m */,
+			);
+			path = CocoaAsyncSocket;
+			sourceTree = "<group>";
+		};
 		06EDA4BA1F9D91EA00334B7D /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -729,6 +778,8 @@
 				96D357C71F725F6C00BF35EB /* AllArticelRequest.m */,
 				06EDA4C91F9DE65100334B7D /* GetDailyConfigRequest.h */,
 				06EDA4CA1F9DE65100334B7D /* GetDailyConfigRequest.m */,
+				06D39ADB1F9F4596004899D4 /* HSGetIpRequest.h */,
+				06D39ADC1F9F4596004899D4 /* HSGetIpRequest.m */,
 			);
 			path = leftViewReauest;
 			sourceTree = "<group>";
@@ -1025,6 +1076,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06D39ADE1F9F45CB004899D4 /* GCDAsyncSocket.m in Sources */,
+				06D39ADF1F9F45CB004899D4 /* GCDAsyncUdpSocket.m in Sources */,
+				06D39AD41F9F4527004899D4 /* GCCDLNA.m in Sources */,
+				06D39ADD1F9F4596004899D4 /* HSGetIpRequest.m in Sources */,
 				0633AE971F7BA1B900EA7A75 /* RDAlertAction.m in Sources */,
 				0633AE981F7BA1B900EA7A75 /* RDAlertView.m in Sources */,
 				0633AE991F7BA1B900EA7A75 /* RDTextAlertView.m in Sources */,
@@ -1072,6 +1127,7 @@
 				063AE1BE1F9F1B4600248E1A /* GetTelCodeRequest.m in Sources */,
 				96D357941F6FC2AF00BF35EB /* MyCollectionModel.m in Sources */,
 				0653D0371F6BABE50054A818 /* GCCGetInfo.m in Sources */,
+				06D39ACC1F9F4467004899D4 /* ZXSearchBoxViewController.m in Sources */,
 				0653CFDA1F6BA0300054A818 /* main.m in Sources */,
 				96D357C51F711E5900BF35EB /* SpecialHeaderView.m in Sources */,
 				06D39AC81F9F4081004899D4 /* leftMenuModel.m in Sources */,
