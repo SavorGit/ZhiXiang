@@ -19,12 +19,12 @@
 #import "GetDailyConfigRequest.h"
 #import "UserLoginWayViewController.h"
 #import "UserTelLoginViewController.h"
+#import "leftMenuModel.h"
 
 @interface LeftViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UITableView * tableView; //表格展示视图
-@property (nonatomic, strong) NSArray * dataSource; //数据源
-@property (nonatomic, strong) NSArray * imageData; //数据源
+@property (nonatomic, strong) NSMutableArray * dataSource; //数据源
 
 @property (nonatomic, strong) UIView * footView;
 
@@ -60,8 +60,17 @@
 
 - (void)initInfo{
     
-    _dataSource = @[@"我的收藏",@"全部知享"];
-    _imageData = @[@"wdshc", @"qbzhx"];
+    leftMenuModel * model1 = [[leftMenuModel alloc] init];
+    model1.title = @"我的收藏";
+    model1.imageURL = @"wdshc";
+    model1.type = MenuModelType_Collect;
+    
+    leftMenuModel * model2 = [[leftMenuModel alloc] init];
+    model2.title = @"全部知享";
+    model2.imageURL = @"qbzhx";
+    model2.type = MenuModelType_All;
+    
+    self.dataSource = [NSMutableArray arrayWithArray:@[model1, model2]];
     [self.tableView reloadData];
     
     GetDailyConfigRequest * request = [[GetDailyConfigRequest alloc] init];
@@ -69,11 +78,26 @@
         
         NSDictionary * dataDict = [response objectForKey:@"result"];
         if (dataDict && [dataDict isKindOfClass:[NSDictionary class]]) {
-            if ([[dataDict objectForKey:@"state"] integerValue] == 1) {
-                _dataSource = @[@"我的收藏",@"全部知享",@"清除缓存"];
-                _imageData = @[@"wdshc", @"qbzhx", @"qingchu"];
-                [self.tableView reloadData];
+            
+            NSInteger qingchu = [[dataDict objectForKey:@"state"] integerValue];
+            NSInteger touping = [[dataDict objectForKey:@"touping"] integerValue];
+            
+            if (touping == 1) {
+                leftMenuModel * model3 = [[leftMenuModel alloc] init];
+                model3.title = @"投屏";
+                model3.imageURL = @"qingchu";
+                model3.type = MenuModelType_Screen;
+                [self.dataSource addObject:model3];
             }
+            
+            if (qingchu == 1) {
+                leftMenuModel * model4 = [[leftMenuModel alloc] init];
+                model4.title = @"清除缓存";
+                model4.imageURL = @"qingchu";
+                model4.type = MenuModelType_Cache;
+            }
+            
+            [self.tableView reloadData];
         }
         
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
@@ -289,7 +313,9 @@
     static NSString *cellID = @"leftTableCell";
     static NSString *cacheCellID = @"leftCacheCell";
     
-    if (indexPath.row == 2) {
+    leftMenuModel * model = [self.dataSource objectAtIndex:indexPath.row];
+    
+    if (model.type == MenuModelType_Cache) {
         LeftCacheCell *cell = [tableView dequeueReusableCellWithIdentifier:cacheCellID];
         if (cell == nil) {
             cell = [[LeftCacheCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cacheCellID];
@@ -298,7 +324,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
         [cell hiddenLineView:YES];
-        [cell configTitle:self.dataSource[indexPath.row] andImage:self.imageData[indexPath.row]];
+        [cell configTitle:model.title andImage:model.imageURL];
         [cell setCacheSize:[self getApplicationCache]];
         
         return cell;
@@ -313,7 +339,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
     
-    [cell configTitle:self.dataSource[indexPath.row] andImage:self.imageData[indexPath.row]];
+    [cell configTitle:model.title andImage:model.imageURL];
     
     return cell;
 }
@@ -326,18 +352,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.row == 0) {
+    leftMenuModel * model = [self.dataSource objectAtIndex:indexPath.row];
+    
+    if (model.type == MenuModelType_Collect) {
         [ZXTools postUMHandleWithContentId:@"news_share_menu_collect" key:nil value:nil];
         [self hideLeftViewAnimated:nil];
         MyCollectionViewController *mcVC = [[MyCollectionViewController alloc] init];
          [(UINavigationController *)self.sideMenuController.rootViewController pushViewController:mcVC  animated:NO];
-    }else if (indexPath.row == 1){
+    }else if (model.type == MenuModelType_All){
         [ZXTools postUMHandleWithContentId:@"news_share_menu_all" key:nil value:nil];
         [self hideLeftViewAnimated:nil];
         ZXAllArticleViewController *arVC = [[ZXAllArticleViewController alloc] init];
         [(UINavigationController *)self.sideMenuController.rootViewController pushViewController:arVC  animated:NO];
-    }else if (indexPath.row == 2){
+    }else if (model.type == MenuModelType_Cache){
         [self clearApplicationCache];
+    }else if (model.type == MenuModelType_Screen){
+        
     }
 }
 

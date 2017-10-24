@@ -50,6 +50,7 @@
 		069C372A1F6F99B800FE2BB0 /* ZXLGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C37291F6F99B800FE2BB0 /* ZXLGViewController.m */; };
 		069C37531F6FD19900FE2BB0 /* ZXKeyWordsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C37521F6FD19900FE2BB0 /* ZXKeyWordsView.m */; };
 		06B7A8011F8CB4C700240D71 /* HomePageLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B7A8001F8CB4C700240D71 /* HomePageLabel.m */; };
+		06D39AC81F9F4081004899D4 /* leftMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D39AC71F9F4081004899D4 /* leftMenuModel.m */; };
 		06EDA4BD1F9D91FF00334B7D /* WeixinLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EDA4BC1F9D91FF00334B7D /* WeixinLoginRequest.m */; };
 		06EDA4C11F9DCB0900334B7D /* QXyingbikai.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06EDA4C01F9DCB0300334B7D /* QXyingbikai.ttf */; };
 		06EDA4C51F9DCE4400334B7D /* UserLoginWayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EDA4C41F9DCE4400334B7D /* UserLoginWayViewController.m */; };
@@ -197,6 +198,8 @@
 		069C37521F6FD19900FE2BB0 /* ZXKeyWordsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXKeyWordsView.m; sourceTree = "<group>"; };
 		06B7A7FF1F8CB4C700240D71 /* HomePageLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageLabel.h; sourceTree = "<group>"; };
 		06B7A8001F8CB4C700240D71 /* HomePageLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageLabel.m; sourceTree = "<group>"; };
+		06D39AC61F9F4081004899D4 /* leftMenuModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = leftMenuModel.h; sourceTree = "<group>"; };
+		06D39AC71F9F4081004899D4 /* leftMenuModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = leftMenuModel.m; sourceTree = "<group>"; };
 		06EDA4BB1F9D91FF00334B7D /* WeixinLoginRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeixinLoginRequest.h; sourceTree = "<group>"; };
 		06EDA4BC1F9D91FF00334B7D /* WeixinLoginRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeixinLoginRequest.m; sourceTree = "<group>"; };
 		06EDA4C01F9DCB0300334B7D /* QXyingbikai.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = QXyingbikai.ttf; sourceTree = "<group>"; };
@@ -735,6 +738,8 @@
 			children = (
 				96D357921F6FC2AF00BF35EB /* MyCollectionModel.h */,
 				96D357931F6FC2AF00BF35EB /* MyCollectionModel.m */,
+				06D39AC61F9F4081004899D4 /* leftMenuModel.h */,
+				06D39AC71F9F4081004899D4 /* leftMenuModel.m */,
 			);
 			path = LeftViewModel;
 			sourceTree = "<group>";
@@ -1069,6 +1074,7 @@
 				0653D0371F6BABE50054A818 /* GCCGetInfo.m in Sources */,
 				0653CFDA1F6BA0300054A818 /* main.m in Sources */,
 				96D357C51F711E5900BF35EB /* SpecialHeaderView.m in Sources */,
+				06D39AC81F9F4081004899D4 /* leftMenuModel.m in Sources */,
 				06EFB0781F94A8A000030BC8 /* LeftCacheCell.m in Sources */,
 				0653D0431F6BAD8A0054A818 /* ConverUtil.m in Sources */,
 				0653D0391F6BABE50054A818 /* Helper.m in Sources */,
