@@ -24,6 +24,8 @@ extern NSString * const ZXUserDidLoginSuccessNotification; //用户登录成功�
 @property (nonatomic, strong) NSDictionary * wxOriginalResponse; //微信用户相关信息
 @property (nonatomic, copy) NSString * unionGender; //微信性别 例：男
 @property (nonatomic, copy) NSString * gender; //微信性别 例：m
+@property (nonatomic, copy) NSString * access_token; //调用凭证
+@property (nonatomic, copy) NSString * refresh_token; //刷新凭证
 
 @property (nonatomic, assign) BOOL isLoginWithTel; //是否手机号登录
 @property (nonatomic, copy) NSString * tel; //电话号码
@@ -35,5 +37,7 @@ extern NSString * const ZXUserDidLoginSuccessNotification; //用户登录成功�
 - (BOOL)saveUserInfo;
 
 - (void)canleLogin;
+
+- (void)updateUserAccessToken;
 
 @end

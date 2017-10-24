@@ -46,6 +46,7 @@
         if (userInfo && [userInfo isKindOfClass:[NSDictionary class]]) {
             
             [[UserManager shareManager] configWithDictionary:userInfo];
+            [[UserManager shareManager] updateUserAccessToken];
             
         }else {
             

@@ -39,6 +39,7 @@
     
     self.bgImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     self.bgImageView.contentMode = UIViewContentModeScaleAspectFill;
+    [self.bgImageView setImage:[UIImage imageNamed:@"tuijian"]];
     self.bgImageView.layer.masksToBounds = YES;
     self.bgImageView.backgroundColor = UIColorFromRGB(0xf8f6f1);
     [self.contentView addSubview:self.bgImageView];

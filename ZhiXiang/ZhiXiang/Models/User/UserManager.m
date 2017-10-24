@@ -7,8 +7,15 @@
 //
 
 #import "UserManager.h"
+#import <AFNetworking.h>
 
 NSString * const ZXUserDidLoginSuccessNotification = @"ZXUserDidLoginSuccessNotification";
+
+@interface UserManager ()
+
+@property (nonatomic, strong) NSURLSessionDataTask * updateTask;
+
+@end
 
 @implementation UserManager
 
@@ -35,6 +42,8 @@ NSString * const ZXUserDidLoginSuccessNotification = @"ZXUserDidLoginSuccessNoti
         self.unionGender = [userInfo objectForKey:@"unionGender"];
         self.gender = [userInfo objectForKey:@"gender"];
         self.wxOriginalResponse = [userInfo objectForKey:@"wxOriginalResponse"];
+        self.access_token = [userInfo objectForKey:@"access_token"];
+        self.refresh_token = [userInfo objectForKey:@"refresh_token"];
     }
     
     BOOL isTel = [[userInfo objectForKey:@"isLoginWithTel"] boolValue];
@@ -54,6 +63,8 @@ NSString * const ZXUserDidLoginSuccessNotification = @"ZXUserDidLoginSuccessNoti
     self.unionGender = response.unionGender;
     self.gender = response.gender;
     self.wxOriginalResponse = response.originalResponse;
+    self.access_token = response.accessToken;
+    self.refresh_token = response.refreshToken;
     
     self.isLoginWithWX = YES;
 }
@@ -72,7 +83,9 @@ NSString * const ZXUserDidLoginSuccessNotification = @"ZXUserDidLoginSuccessNoti
                      @"tel"        : self.tel,
                      @"wxOriginalResponse" : self.wxOriginalResponse,
                      @"isLoginWithWX" : @(self.isLoginWithWX),
-                     @"isLoginWithTel":@(self.isLoginWithTel)
+                     @"isLoginWithTel": @(self.isLoginWithTel),
+                     @"access_token"   : self.access_token,
+                     @"refresh_token"  : self.refresh_token
                      };
     }else if (self.isLoginWithWX){
         userInfo = @{@"wxUserName" : self.wxUserName,
@@ -83,7 +96,9 @@ NSString * const ZXUserDidLoginSuccessNotification = @"ZXUserDidLoginSuccessNoti
                      @"unionGender": self.unionGender,
                      @"gender"     : self.gender,
                      @"wxOriginalResponse" : self.wxOriginalResponse,
-                     @"isLoginWithWX" : @(self.isLoginWithWX)
+                     @"isLoginWithWX" : @(self.isLoginWithWX),
+                     @"access_token"   : self.access_token,
+                     @"refresh_token"  : self.refresh_token
                      };
     }else if (self.isLoginWithTel){
         userInfo = @{
@@ -103,6 +118,40 @@ NSString * const ZXUserDidLoginSuccessNotification = @"ZXUserDidLoginSuccessNoti
     self.isLoginWithTel = NO;
     if ([[NSFileManager defaultManager] fileExistsAtPath:UserInfoPath]) {
         [[NSFileManager defaultManager] removeItemAtPath:UserInfoPath error:nil];
+    }
+}
+
+- (void)updateUserAccessToken
+{
+    NSString * refreshToken = self.refresh_token;
+    if (!isEmptyString(refreshToken)) {
+        
+        AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/plain",nil];
+        manager.requestSerializer.timeoutInterval = 15.f;
+        NSString * url = [NSString stringWithFormat:@"https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=wxa5ea2522d1a6785e&grant_type=refresh_token&refresh_token=%@", refreshToken];
+        self.updateTask = [manager GET:url parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            
+            if ([responseObject objectForKey:@"refresh_token"]) {
+                NSString * refreshToken = [responseObject objectForKey:@"refresh_token"];
+                if (!isEmptyString(refreshToken)) {
+                    self.refresh_token = refreshToken;
+                    self.access_token = [responseObject objectForKey:@"access_token"];
+                    self.wxOpenID = [responseObject objectForKey:@"openid"];
+                    [self saveUserInfo];
+                    return;
+                }
+            }
+            [[UserManager shareManager] canleLogin];
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+        }];
+        
+    }else{
+        [self canleLogin];
     }
 }
 
