@@ -14,6 +14,9 @@
 		0633AE971F7BA1B900EA7A75 /* RDAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0633AE921F7BA18500EA7A75 /* RDAlertAction.m */; };
 		0633AE981F7BA1B900EA7A75 /* RDAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0633AE941F7BA18500EA7A75 /* RDAlertView.m */; };
 		0633AE991F7BA1B900EA7A75 /* RDTextAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0633AE961F7BA18500EA7A75 /* RDTextAlertView.m */; };
+		063AE1BB1F9EE7C300248E1A /* UserTelLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 063AE1BA1F9EE7C300248E1A /* UserTelLoginViewController.m */; };
+		063AE1BE1F9F1B4600248E1A /* GetTelCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 063AE1BD1F9F1B4600248E1A /* GetTelCodeRequest.m */; };
+		063AE1C11F9F1D0E00248E1A /* TelLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 063AE1C01F9F1D0E00248E1A /* TelLoginRequest.m */; };
 		064304FA1F70EAC5004EC8A9 /* HomeDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 064304F91F70EAC5004EC8A9 /* HomeDetailView.m */; };
 		0653CFDA1F6BA0300054A818 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653CFD91F6BA0300054A818 /* main.m */; };
 		0653CFDD1F6BA0300054A818 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0653CFDC1F6BA0300054A818 /* AppDelegate.m */; };
@@ -119,6 +122,12 @@
 		0633AE941F7BA18500EA7A75 /* RDAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDAlertView.m; sourceTree = "<group>"; };
 		0633AE951F7BA18500EA7A75 /* RDTextAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDTextAlertView.h; sourceTree = "<group>"; };
 		0633AE961F7BA18500EA7A75 /* RDTextAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDTextAlertView.m; sourceTree = "<group>"; };
+		063AE1B91F9EE7C300248E1A /* UserTelLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserTelLoginViewController.h; sourceTree = "<group>"; };
+		063AE1BA1F9EE7C300248E1A /* UserTelLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserTelLoginViewController.m; sourceTree = "<group>"; };
+		063AE1BC1F9F1B4600248E1A /* GetTelCodeRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetTelCodeRequest.h; sourceTree = "<group>"; };
+		063AE1BD1F9F1B4600248E1A /* GetTelCodeRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetTelCodeRequest.m; sourceTree = "<group>"; };
+		063AE1BF1F9F1D0E00248E1A /* TelLoginRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TelLoginRequest.h; sourceTree = "<group>"; };
+		063AE1C01F9F1D0E00248E1A /* TelLoginRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TelLoginRequest.m; sourceTree = "<group>"; };
 		064304F81F70EAC5004EC8A9 /* HomeDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeDetailView.h; sourceTree = "<group>"; };
 		064304F91F70EAC5004EC8A9 /* HomeDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeDetailView.m; sourceTree = "<group>"; };
 		0653CFD51F6BA0300054A818 /* ZhiXiang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhiXiang.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -637,6 +646,10 @@
 			children = (
 				06EDA4BB1F9D91FF00334B7D /* WeixinLoginRequest.h */,
 				06EDA4BC1F9D91FF00334B7D /* WeixinLoginRequest.m */,
+				063AE1BC1F9F1B4600248E1A /* GetTelCodeRequest.h */,
+				063AE1BD1F9F1B4600248E1A /* GetTelCodeRequest.m */,
+				063AE1BF1F9F1D0E00248E1A /* TelLoginRequest.h */,
+				063AE1C01F9F1D0E00248E1A /* TelLoginRequest.m */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -646,6 +659,8 @@
 			children = (
 				06EDA4C31F9DCE4400334B7D /* UserLoginWayViewController.h */,
 				06EDA4C41F9DCE4400334B7D /* UserLoginWayViewController.m */,
+				063AE1B91F9EE7C300248E1A /* UserTelLoginViewController.h */,
+				063AE1BA1F9EE7C300248E1A /* UserTelLoginViewController.m */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1012,6 +1027,7 @@
 				0653D03D1F6BAC5E0054A818 /* ZXTools.m in Sources */,
 				06EDA4BD1F9D91FF00334B7D /* WeixinLoginRequest.m in Sources */,
 				0653D01A1F6BA8810054A818 /* ZXBaseNavigationController.m in Sources */,
+				063AE1BB1F9EE7C300248E1A /* UserTelLoginViewController.m in Sources */,
 				0667ED541F9099B1009FE427 /* UserManager.m in Sources */,
 				9698020B1F78D515008510DB /* UMCustomSocialManager.m in Sources */,
 				0653D0211F6BA9180054A818 /* UIView+Additional.m in Sources */,
@@ -1044,9 +1060,11 @@
 				96D357C11F711B8F00BF35EB /* SpecialTextCell.m in Sources */,
 				068692D71F78ED7D00AE2EA1 /* HomePageControl.m in Sources */,
 				068692D41F78A14600AE2EA1 /* IsCollectionRequest.m in Sources */,
+				063AE1C11F9F1D0E00248E1A /* TelLoginRequest.m in Sources */,
 				0653D0471F6BB5920054A818 /* LeftViewController.m in Sources */,
 				0653D0381F6BABE50054A818 /* GCCKeyChain.m in Sources */,
 				96D357C01F711B8F00BF35EB /* SpecialImageCell.m in Sources */,
+				063AE1BE1F9F1B4600248E1A /* GetTelCodeRequest.m in Sources */,
 				96D357941F6FC2AF00BF35EB /* MyCollectionModel.m in Sources */,
 				0653D0371F6BABE50054A818 /* GCCGetInfo.m in Sources */,
 				0653CFDA1F6BA0300054A818 /* main.m in Sources */,

@@ -8,6 +8,8 @@
 
 #import "UserManager.h"
 
+NSString * const ZXUserDidLoginSuccessNotification = @"ZXUserDidLoginSuccessNotification";
+
 @implementation UserManager
 
 + (instancetype)shareManager

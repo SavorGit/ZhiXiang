@@ -8,6 +8,7 @@
 
 #import "HomeCommandCollectionViewCell.h"
 #import "UMCustomSocialManager.h"
+#import "MBProgressHUD+Custom.h"
 #import "ZXTools.h"
 
 @interface HomeCommandCollectionViewCell ()
@@ -280,10 +281,28 @@
 
 - (void)shareAction:(UIButton *)button
 {
-    if (button.tag == 100) {
-        [[UMCustomSocialManager defaultManager] sharedAPPToPlatform:UMSocialPlatformType_WechatSession andController:self.VC andView:self.VC.view andUmKeyString:@""];
+    if ([UserManager shareManager].isLoginWithWX) {
+        if (button.tag == 100) {
+            [[UMCustomSocialManager defaultManager] sharedAPPToPlatform:UMSocialPlatformType_WechatSession andController:self.VC andView:self.VC.view andUmKeyString:@""];
+        }else{
+            [[UMCustomSocialManager defaultManager] sharedAPPToPlatform:UMSocialPlatformType_WechatTimeLine andController:self.VC andView:self.VC.view andUmKeyString:@""];
+        }
     }else{
-        [[UMCustomSocialManager defaultManager] sharedAPPToPlatform:UMSocialPlatformType_WechatTimeLine andController:self.VC andView:self.VC.view andUmKeyString:@""];
+        [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:self.VC completion:^(id result, NSError *error) {
+            
+            if (nil == error && [result isKindOfClass:[UMSocialUserInfoResponse class]]) {
+                
+                [MBProgressHUD showTextHUDWithText:@"授权成功" inView:self.VC.view];
+                [[UserManager shareManager] configWithUMengResponse:result];
+                [[UserManager shareManager] saveUserInfo];
+                [ZXTools weixinLoginUpdate];
+                [[NSNotificationCenter defaultCenter] postNotificationName:ZXUserDidLoginSuccessNotification object:nil];
+                [(UINavigationController *)self.VC popToRootViewControllerAnimated:YES];
+                
+            }else{
+                [MBProgressHUD showTextHUDWithText:@"授权失败" inView:self.VC.view];
+            }
+        }];
     }
 }
 

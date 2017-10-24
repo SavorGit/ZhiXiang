@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UMSocialCore/UMSocialResponse.h>
 
+extern NSString * const ZXUserDidLoginSuccessNotification; //用户登录成功通知
+
 @interface UserManager : NSObject
 
 + (instancetype)shareManager;

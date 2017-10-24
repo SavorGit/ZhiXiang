@@ -16,8 +16,9 @@
 #import <UMSocialCore/UMSocialCore.h>
 #import "RDAlertView.h"
 #import "MBProgressHUD+Custom.h"
-#import "WeixinLoginRequest.h"
 #import "GetDailyConfigRequest.h"
+#import "UserLoginWayViewController.h"
+#import "UserTelLoginViewController.h"
 
 @interface LeftViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate>
 
@@ -34,6 +35,11 @@
 
 @implementation LeftViewController
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ZXUserDidLoginSuccessNotification object:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -48,6 +54,8 @@
         make.bottom.mas_equalTo(0);
         make.right.mas_equalTo(0);
     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshLoginStatus) name:ZXUserDidLoginSuccessNotification object:nil];
 }
 
 - (void)initInfo{
@@ -224,35 +232,15 @@
         
     }else{
         
+        [self hideLeftViewAnimated:nil];
         if ([[UMSocialManager defaultManager] isInstall:UMSocialPlatformType_WechatSession]) {
-            [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:(UINavigationController *)self.sideMenuController.rootViewController completion:^(id result, NSError *error) {
-                if ([result isKindOfClass:[UMSocialUserInfoResponse class]]) {
-                    
-                    [[UserManager shareManager] configWithUMengResponse:result];
-                    [[UserManager shareManager] saveUserInfo];
-                    [self loginSuccessWithWeixin];
-                    [self refreshLoginStatus];
-                    
-                }
-            }];
+            UserLoginWayViewController * loginWay = [[UserLoginWayViewController alloc] init];
+            [(UINavigationController *)self.sideMenuController.rootViewController pushViewController:loginWay animated:NO];
         }else{
-            [MBProgressHUD showTextHUDWithText:@"请安装微信后使用" inView:[UIApplication sharedApplication].keyWindow];
+            UserTelLoginViewController * tel = [[UserTelLoginViewController alloc] init];
+            [(UINavigationController *)self.sideMenuController.rootViewController pushViewController:tel animated:YES];
         }
     }
-}
-
-- (void)loginSuccessWithWeixin
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *assetString = [defaults objectForKey:@"asSetValue"];
-    WeixinLoginRequest * request = [[WeixinLoginRequest alloc] initWithDailyid:[UserManager shareManager].wxOpenID ptype:assetString tel:[UserManager shareManager].tel];
-    [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
-        
-    } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
-        
-    } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
-        
-    }];
 }
 
 - (UIView *)footView

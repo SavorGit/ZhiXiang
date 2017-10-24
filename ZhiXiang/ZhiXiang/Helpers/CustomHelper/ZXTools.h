@@ -53,4 +53,7 @@
  */
 + (void)postUMHandleWithContentId:(NSString *)eventId withParmDic:(NSDictionary *)parmDic;
 
++ (void)weixinLoginUpdate;
+
+
 @end
