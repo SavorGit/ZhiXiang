@@ -48,6 +48,7 @@
 }
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     [self initInfo];
