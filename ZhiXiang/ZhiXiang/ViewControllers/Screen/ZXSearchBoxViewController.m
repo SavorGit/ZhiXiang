@@ -11,8 +11,8 @@
 #import "RDKeyBoard.h"
 #import "GCCDLNA.h"
 #import "Helper.h"
-#import "ResSliderViewController.h"
-#import "RestaurantPhotoTool.h"
+//#import "ResSliderViewController.h"
+//#import "RestaurantPhotoTool.h"
 
 @interface ZXSearchBoxViewController ()<RDKeyBoradDelegate>
 
@@ -40,7 +40,7 @@
     self.dlna = [[GCCDLNA alloc] init];
     [self.dlna startSearchPlatform];
     
-    [self performSelector:@selector(searchResult) withObject:nil afterDelay:3.5f];
+    [self performSelector:@selector(searchResult) withObject:nil afterDelay:10.f];
 }
 
 - (void)createViews
@@ -146,18 +146,18 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [hud hideAnimated:YES];
         [MBProgressHUD showSuccessWithText:@"绑定成功" inView:self.navigationController.view];
-        [RestaurantPhotoTool checkUserLibraryAuthorizationStatusWithSuccess:^{
-            ResSliderViewController * res = [[ResSliderViewController alloc] init];
-            [self.navigationController pushViewController:res animated:YES];
-        } failure:^(NSError *error) {
-            
-        }];
+//        [RestaurantPhotoTool checkUserLibraryAuthorizationStatusWithSuccess:^{
+//            ResSliderViewController * res = [[ResSliderViewController alloc] init];
+//            [self.navigationController pushViewController:res animated:YES];
+//        } failure:^(NSError *error) {
+//
+//        }];
     });
 }
 
 - (void)searchResult
 {
-    BOOL success = YES;
+    BOOL success = NO;
     
     if (success) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -168,6 +168,10 @@
             [self.blackView removeFromSuperview];
         }];
     }else{
+        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD showTextHUDWithText:@"未发现可投屏设备" inView:self.navigationController.view];
+        [self.navigationController popToRootViewControllerAnimated:YES];
         
     }
 }
