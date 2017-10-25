@@ -16,14 +16,16 @@
 #import <UMSocialCore/UMSocialCore.h>
 #import "RDAlertView.h"
 #import "MBProgressHUD+Custom.h"
-#import "WeixinLoginRequest.h"
 #import "GetDailyConfigRequest.h"
+#import "UserLoginWayViewController.h"
+#import "UserTelLoginViewController.h"
+#import "leftMenuModel.h"
+#import "ZXSearchBoxViewController.h"
 
 @interface LeftViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UITableView * tableView; //表格展示视图
-@property (nonatomic, strong) NSArray * dataSource; //数据源
-@property (nonatomic, strong) NSArray * imageData; //数据源
+@property (nonatomic, strong) NSMutableArray * dataSource; //数据源
 
 @property (nonatomic, strong) UIView * footView;
 
@@ -33,6 +35,11 @@
 @end
 
 @implementation LeftViewController
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ZXUserDidLoginSuccessNotification object:nil];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,12 +55,28 @@
         make.bottom.mas_equalTo(0);
         make.right.mas_equalTo(0);
     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshLoginStatus) name:ZXUserDidLoginSuccessNotification object:nil];
 }
 
 - (void)initInfo{
     
-    _dataSource = @[@"我的收藏",@"全部知享"];
-    _imageData = @[@"wdshc", @"qbzhx"];
+    leftMenuModel * model1 = [[leftMenuModel alloc] init];
+    model1.title = @"我的收藏";
+    model1.imageURL = @"wdshc";
+    model1.type = MenuModelType_Collect;
+    
+    leftMenuModel * model2 = [[leftMenuModel alloc] init];
+    model2.title = @"全部知享";
+    model2.imageURL = @"qbzhx";
+    model2.type = MenuModelType_All;
+    
+    leftMenuModel * model3 = [[leftMenuModel alloc] init];
+    model3.title = @"餐厅投屏";
+    model3.imageURL = @"touping";
+    model3.type = MenuModelType_Screen;
+    
+    self.dataSource = [NSMutableArray arrayWithArray:@[model1, model2, model3]];
     [self.tableView reloadData];
     
     GetDailyConfigRequest * request = [[GetDailyConfigRequest alloc] init];
@@ -61,11 +84,22 @@
         
         NSDictionary * dataDict = [response objectForKey:@"result"];
         if (dataDict && [dataDict isKindOfClass:[NSDictionary class]]) {
-            if ([[dataDict objectForKey:@"state"] integerValue] == 1) {
-                _dataSource = @[@"我的收藏",@"全部知享",@"清除缓存"];
-                _imageData = @[@"wdshc", @"qbzhx", @"qingchu"];
-                [self.tableView reloadData];
+            
+            NSInteger qingchu = [[dataDict objectForKey:@"state"] integerValue];
+            NSInteger touping = [[dataDict objectForKey:@"touping"] integerValue];
+            
+            if (touping == 0) {
+                [self.dataSource removeLastObject];
             }
+            
+            if (qingchu == 1) {
+                leftMenuModel * model4 = [[leftMenuModel alloc] init];
+                model4.title = @"清除缓存";
+                model4.imageURL = @"qingchu";
+                model4.type = MenuModelType_Cache;
+            }
+            
+            [self.tableView reloadData];
         }
         
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
@@ -224,35 +258,15 @@
         
     }else{
         
+        [self hideLeftViewAnimated:nil];
         if ([[UMSocialManager defaultManager] isInstall:UMSocialPlatformType_WechatSession]) {
-            [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:(UINavigationController *)self.sideMenuController.rootViewController completion:^(id result, NSError *error) {
-                if ([result isKindOfClass:[UMSocialUserInfoResponse class]]) {
-                    
-                    [[UserManager shareManager] configWithUMengResponse:result];
-                    [[UserManager shareManager] saveUserInfo];
-                    [self loginSuccessWithWeixin];
-                    [self refreshLoginStatus];
-                    
-                }
-            }];
+            UserLoginWayViewController * loginWay = [[UserLoginWayViewController alloc] init];
+            [(UINavigationController *)self.sideMenuController.rootViewController pushViewController:loginWay animated:NO];
         }else{
-            [MBProgressHUD showTextHUDWithText:@"请安装微信后使用" inView:[UIApplication sharedApplication].keyWindow];
+            UserTelLoginViewController * tel = [[UserTelLoginViewController alloc] init];
+            [(UINavigationController *)self.sideMenuController.rootViewController pushViewController:tel animated:YES];
         }
     }
-}
-
-- (void)loginSuccessWithWeixin
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *assetString = [defaults objectForKey:@"asSetValue"];
-    WeixinLoginRequest * request = [[WeixinLoginRequest alloc] initWithDailyid:[UserManager shareManager].wxOpenID ptype:assetString tel:[UserManager shareManager].tel];
-    [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
-        
-    } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
-        
-    } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
-        
-    }];
 }
 
 - (UIView *)footView
@@ -301,7 +315,9 @@
     static NSString *cellID = @"leftTableCell";
     static NSString *cacheCellID = @"leftCacheCell";
     
-    if (indexPath.row == 2) {
+    leftMenuModel * model = [self.dataSource objectAtIndex:indexPath.row];
+    
+    if (model.type == MenuModelType_Cache) {
         LeftCacheCell *cell = [tableView dequeueReusableCellWithIdentifier:cacheCellID];
         if (cell == nil) {
             cell = [[LeftCacheCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cacheCellID];
@@ -310,7 +326,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
         [cell hiddenLineView:YES];
-        [cell configTitle:self.dataSource[indexPath.row] andImage:self.imageData[indexPath.row]];
+        [cell configTitle:model.title andImage:model.imageURL];
         [cell setCacheSize:[self getApplicationCache]];
         
         return cell;
@@ -325,7 +341,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
     
-    [cell configTitle:self.dataSource[indexPath.row] andImage:self.imageData[indexPath.row]];
+    [cell configTitle:model.title andImage:model.imageURL];
     
     return cell;
 }
@@ -338,18 +354,24 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.row == 0) {
+    leftMenuModel * model = [self.dataSource objectAtIndex:indexPath.row];
+    
+    if (model.type == MenuModelType_Collect) {
         [ZXTools postUMHandleWithContentId:@"news_share_menu_collect" key:nil value:nil];
         [self hideLeftViewAnimated:nil];
         MyCollectionViewController *mcVC = [[MyCollectionViewController alloc] init];
-         [(UINavigationController *)self.sideMenuController.rootViewController pushViewController:mcVC  animated:NO];
-    }else if (indexPath.row == 1){
+         [(UINavigationController *)self.sideMenuController.rootViewController pushViewController:mcVC animated:NO];
+    }else if (model.type == MenuModelType_All){
         [ZXTools postUMHandleWithContentId:@"news_share_menu_all" key:nil value:nil];
         [self hideLeftViewAnimated:nil];
         ZXAllArticleViewController *arVC = [[ZXAllArticleViewController alloc] init];
-        [(UINavigationController *)self.sideMenuController.rootViewController pushViewController:arVC  animated:NO];
-    }else if (indexPath.row == 2){
+        [(UINavigationController *)self.sideMenuController.rootViewController pushViewController:arVC animated:NO];
+    }else if (model.type == MenuModelType_Cache){
         [self clearApplicationCache];
+    }else if (model.type == MenuModelType_Screen){
+        [self hideLeftViewAnimated:nil];
+        ZXSearchBoxViewController * search = [[ZXSearchBoxViewController alloc] init];
+        [(UINavigationController *)self.sideMenuController.rootViewController pushViewController:search animated:NO];
     }
 }
 

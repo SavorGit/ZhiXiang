@@ -85,12 +85,12 @@
     if (isiPhone_X) {
         
         UIImageView *iphoneX_imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, imageView.bounds.size.width, imageView.bounds.size.height - 34)];
-        iphoneX_imageView.contentMode = UIViewContentModeScaleAspectFill;
+        iphoneX_imageView.contentMode = UIViewContentModeScaleAspectFit;
         [iphoneX_imageView setImage:[UIImage imageNamed:@"launchImage375x667"]];
         [imageView addSubview:iphoneX_imageView];
         
     }else{
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
         [imageView setImage:[UIImage imageNamed:@"launchImage375x667"]];
     }
     

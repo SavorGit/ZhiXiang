@@ -15,6 +15,8 @@
 #import <UMMobClick/MobClick.h>
 #import "CheckUpdateRequest.h"
 #import "RDAlertView.h"
+#import "WeixinLoginRequest.h"
+#import "GCCGetInfo.h"
 
 @implementation ZXTools
 
@@ -45,6 +47,7 @@
         if (userInfo && [userInfo isKindOfClass:[NSDictionary class]]) {
             
             [[UserManager shareManager] configWithDictionary:userInfo];
+            [[UserManager shareManager] updateUserAccessToken];
             
         }else {
             
@@ -310,6 +313,20 @@
     if (parmDic != nil) {
         [MobClick event:eventId attributes:parmDic];
     }
+}
+
++ (void)weixinLoginUpdate
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *assetString = [defaults objectForKey:@"asSetValue"];
+    WeixinLoginRequest * request = [[WeixinLoginRequest alloc] initWithDailyid:[UserManager shareManager].wxOpenID ptype:assetString tel:[UserManager shareManager].tel];
+    [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+        
+    } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+        
+    } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
+        
+    }];
 }
 
 @end
