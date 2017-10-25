@@ -71,7 +71,12 @@
     model2.imageURL = @"qbzhx";
     model2.type = MenuModelType_All;
     
-    self.dataSource = [NSMutableArray arrayWithArray:@[model1, model2]];
+    leftMenuModel * model3 = [[leftMenuModel alloc] init];
+    model3.title = @"餐厅投屏";
+    model3.imageURL = @"touping";
+    model3.type = MenuModelType_Screen;
+    
+    self.dataSource = [NSMutableArray arrayWithArray:@[model1, model2, model3]];
     [self.tableView reloadData];
     
     GetDailyConfigRequest * request = [[GetDailyConfigRequest alloc] init];
@@ -83,12 +88,8 @@
             NSInteger qingchu = [[dataDict objectForKey:@"state"] integerValue];
             NSInteger touping = [[dataDict objectForKey:@"touping"] integerValue];
             
-            if (touping == 1) {
-                leftMenuModel * model3 = [[leftMenuModel alloc] init];
-                model3.title = @"餐厅投屏";
-                model3.imageURL = @"touping";
-                model3.type = MenuModelType_Screen;
-                [self.dataSource addObject:model3];
+            if (touping == 0) {
+                [self.dataSource removeLastObject];
             }
             
             if (qingchu == 1) {

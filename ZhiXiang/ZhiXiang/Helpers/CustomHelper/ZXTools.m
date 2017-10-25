@@ -16,6 +16,7 @@
 #import "CheckUpdateRequest.h"
 #import "RDAlertView.h"
 #import "WeixinLoginRequest.h"
+#import "GCCGetInfo.h"
 
 @implementation ZXTools
 
