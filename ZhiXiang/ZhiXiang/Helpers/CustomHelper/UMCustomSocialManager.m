@@ -84,7 +84,7 @@
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     //创建网页分享类型
-    UMShareWebpageObject * object = [UMShareWebpageObject shareObjectWithTitle:@"每日知享，高端人士的内容管家" descr:@"每日精选十条内容\n高效  价值  品味" thumImage:image];
+    UMShareWebpageObject * object = [UMShareWebpageObject shareObjectWithTitle:@"每日知享，高端人士的内容管家" descr:@"每日精选十条内容\n高效  价值  品位" thumImage:image];
     [object setWebpageUrl:url];
     messageObject.shareObject = object;
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:VC completion:^(id result, NSError *error) {

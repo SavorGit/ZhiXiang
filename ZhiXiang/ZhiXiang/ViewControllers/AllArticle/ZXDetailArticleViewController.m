@@ -419,27 +419,31 @@
 
 - (void)collectAction
 {
-    MBProgressHUD * hud = [MBProgressHUD showLoadingHUDWithText:@"正在加载" inView:self.view];
+//    MBProgressHUD * hud = [MBProgressHUD showLoadingHUDWithText:@"正在加载" inView:self.view];
+    self.collectBtn.userInteractionEnabled = NO;
     ZXIsOrCollectionRequest * request = [[ZXIsOrCollectionRequest alloc] initWithDailyid:self.dailyid];
     [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
-        [hud hideAnimated:YES];
+//        [hud hideAnimated:YES];
         self.collectBtn.selected = !self.collectBtn.isSelected;
         if (self.collectBtn.isSelected) {
-            [MBProgressHUD showSuccessWithText:@"收藏成功" inView:self.view];
+            [MBProgressHUD showTextHUDWithText:@"收藏成功" inView:self.view];
         }else{
-            [MBProgressHUD showSuccessWithText:@"取消成功" inView:self.view];
+            [MBProgressHUD showTextHUDWithText:@"取消成功" inView:self.view];
         }
         [self autoCollectButton];
+        self.collectBtn.userInteractionEnabled = YES;
         
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
-        [hud hideAnimated:NO];
+//        [hud hideAnimated:NO];
+        self.collectBtn.userInteractionEnabled = YES;
         [MBProgressHUD showTextHUDWithText:@"操作失败" inView:self.view];
         
     } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
         
-        [hud hideAnimated:NO];
+//        [hud hideAnimated:NO];
+        self.collectBtn.userInteractionEnabled = YES;
         [MBProgressHUD showTextHUDWithText:@"暂无网络，请稍后重试" inView:self.view];
         
     }];

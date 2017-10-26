@@ -148,31 +148,36 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
 
 - (void)collectAction
 {
+    self.collectBtn.userInteractionEnabled = NO;
+    
     if (self.isCheckCollectting) {
         [MBProgressHUD showTextHUDWithText:@"正在获取收藏状态" inView:self];
         return;
     }
     
-    MBProgressHUD * hud = [MBProgressHUD showLoadingHUDWithText:@"正在加载" inView:self];
+//    MBProgressHUD * hud = [MBProgressHUD showLoadingHUDWithText:@"正在加载" inView:self];
     ZXIsOrCollectionRequest * request = [[ZXIsOrCollectionRequest alloc] initWithDailyid:self.topModel.dailyid];
     [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
-        [hud hideAnimated:YES];
+//        [hud hideAnimated:YES];
         self.collectBtn.selected = !self.collectBtn.isSelected;
         if (self.collectBtn.isSelected) {
-            [MBProgressHUD showSuccessWithText:@"收藏成功" inView:self];
+            [MBProgressHUD showTextHUDWithText:@"收藏成功" inView:self];
         }else{
-            [MBProgressHUD showSuccessWithText:@"取消成功" inView:self];
+            [MBProgressHUD showTextHUDWithText:@"取消成功" inView:self];
         }
         [self autoCollectButton];
+        self.collectBtn.userInteractionEnabled = YES;
     } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
-        [hud hideAnimated:NO];
+//        [hud hideAnimated:NO];
+        self.collectBtn.userInteractionEnabled = YES;
         [MBProgressHUD showTextHUDWithText:@"操作失败" inView:self];
         
     } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
         
-        [hud hideAnimated:NO];
+//        [hud hideAnimated:NO];
+        self.collectBtn.userInteractionEnabled = YES;
         [MBProgressHUD showTextHUDWithText:@"暂无网络，请稍后重试" inView:self];
         
     }];
@@ -183,9 +188,11 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     if (self.collectBtn.isSelected) {
         [self.collectBtn setImage:[UIImage imageNamed:@"yishoucang"] forState:UIControlStateNormal];
         [self.collectBtn setImage:[UIImage imageNamed:@"yishoucang"] forState:UIControlStateHighlighted];
+        [self.collectBtn setAdjustsImageWhenHighlighted:NO];
     }else{
         [self.collectBtn setImage:[UIImage imageNamed:@"shoucang"] forState:UIControlStateNormal];
         [self.collectBtn setImage:[UIImage imageNamed:@"shoucang"] forState:UIControlStateHighlighted];
+        [self.collectBtn setAdjustsImageWhenHighlighted:NO];
     }
 }
 

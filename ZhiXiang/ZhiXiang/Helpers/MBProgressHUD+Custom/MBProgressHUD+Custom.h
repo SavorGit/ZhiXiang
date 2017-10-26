@@ -12,7 +12,7 @@
 
 + (MBProgressHUD *)showLoadingHUDWithText:(NSString *)text inView:(UIView *)view;
 
-+ (MBProgressHUD *)showTextHUDWithText:(NSString *)text inView:(UIView *)view;
++ (void)showTextHUDWithText:(NSString *)text inView:(UIView *)view;
 
 + (MBProgressHUD *)showSuccessWithText:(NSString *)text inView:(UIView *)view;
 

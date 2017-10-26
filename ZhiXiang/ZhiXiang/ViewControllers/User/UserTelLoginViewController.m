@@ -152,7 +152,7 @@
     [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
         
         [hud hideAnimated:YES];
-        [MBProgressHUD showSuccessWithText:@"登录成功" inView:self.navigationController.view];
+        [MBProgressHUD showTextHUDWithText:@"登录成功" inView:self.navigationController.view];
         [self closeKeyBoard];
         [UserManager shareManager].tel = telNumber;
         [UserManager shareManager].isLoginWithTel = YES;

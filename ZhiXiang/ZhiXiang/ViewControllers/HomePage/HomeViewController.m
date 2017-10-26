@@ -260,6 +260,20 @@
             HomeViewModel * guideModel = [[HomeViewModel alloc] init];
             guideModel.modelType = HomeViewModelType_PageGuide;
             guideModel.bespeak_time = model.bespeak_time;
+            
+            if ([dataDict objectForKey:@"nextpage"]) {
+                NSDictionary * nextPageDict = [dataDict objectForKey:@"nextpage"];
+                NSInteger next = [[nextPageDict objectForKey:@"next"] integerValue];
+                if (next == 0) {
+                    guideModel.contentType = 3;
+                }else{
+                    guideModel.contentType = 2;
+                    guideModel.month = [nextPageDict objectForKey:@"month"];
+                    guideModel.day = [nextPageDict objectForKey:@"day"];
+                    guideModel.week = [nextPageDict objectForKey:@"week"];
+                }
+            }
+            
             [self.dataSource addObject:guideModel];
             
             if (self.currentIndex >= totalIndex) {

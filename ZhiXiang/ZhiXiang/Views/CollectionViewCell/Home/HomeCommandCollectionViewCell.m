@@ -67,7 +67,7 @@
     
     self.subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width - 30, self.bounds.size.height - self.bounds.size.width * 488.f/750.f)];
     
-    self.subTitleLabel.text = @"它摈弃所有无意义的内容，\n每天精编全网最有价值的10条，\n最高效的满足您对价值和品味的需求。";
+    self.subTitleLabel.text = @"它摈弃所有无意义的内容，\n每天精编全网最有价值的10条，\n最高效的满足您对价值和品位的需求。";
     if (isiPhone_Plus) {
         self.subTitleLabel.font = kPingFangRegular(18);
     }else{
@@ -208,7 +208,7 @@
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = mainColor;
     label.font = kPingFangRegular(14);
-    label.text = @"推荐APP给好友";
+    label.text = @"推荐App给好友";
     [shareView addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(0);
@@ -299,6 +299,7 @@
                 [ZXTools weixinLoginUpdate];
                 [[NSNotificationCenter defaultCenter] postNotificationName:ZXUserDidLoginSuccessNotification object:nil];
                 [(UINavigationController *)self.VC popToRootViewControllerAnimated:YES];
+                [self shareAction:button];
                 
             }else{
                 [MBProgressHUD showTextHUDWithText:@"授权失败" inView:self.VC.view];

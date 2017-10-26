@@ -30,8 +30,17 @@
 
 - (void)createSubViews
 {
-    self.layer.borderColor = UIColorFromRGB(0x666666).CGColor;
-    self.layer.borderWidth = .5f;
+    self.dayLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    self.dayLabel.textColor = UIColorFromRGB(0x666666);
+    self.dayLabel.font = kPingFangRegular(30);
+    self.dayLabel.textAlignment = NSTextAlignmentRight;
+    self.dayLabel.text = @"21";
+    [self addSubview:self.dayLabel];
+    [self.dayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(5);
+        make.left.mas_equalTo(0);
+        make.size.mas_equalTo(CGSizeMake(45, 30));
+    }];
     
     self.monthLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.monthLabel.textColor = UIColorFromRGB(0x4e4e4e);
@@ -39,9 +48,10 @@
     self.monthLabel.text = @"9月";
     [self addSubview:self.monthLabel];
     [self.monthLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(5);
-        make.right.mas_equalTo(-3);
-        make.size.mas_equalTo(CGSizeMake(40, 15));
+        make.top.mas_equalTo(9);
+        make.left.mas_equalTo(self.dayLabel.mas_right).offset(3);
+        make.right.mas_equalTo(0);
+        make.height.mas_equalTo(11);
     }];
     
     self.weekLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -50,21 +60,10 @@
     self.weekLabel.text = @"星期四";
     [self addSubview:self.weekLabel];
     [self.weekLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(-5);
-        make.right.mas_equalTo(-3);
-        make.size.mas_equalTo(CGSizeMake(40, 15));
-    }];
-    
-    self.dayLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    self.dayLabel.textColor = UIColorFromRGB(0x666666);
-    self.dayLabel.font = kPingFangRegular(30);
-    self.dayLabel.textAlignment = NSTextAlignmentCenter;
-    self.dayLabel.text = @"21";
-    [self addSubview:self.dayLabel];
-    [self.dayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(5);
-        make.left.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(45, 30));
+        make.top.mas_equalTo(self.monthLabel.mas_bottom).offset(2);
+        make.left.mas_equalTo(self.dayLabel.mas_right).offset(3);
+        make.right.mas_equalTo(0);
+        make.height.mas_equalTo(11);
     }];
 }
 

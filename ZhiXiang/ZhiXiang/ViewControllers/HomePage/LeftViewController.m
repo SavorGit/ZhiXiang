@@ -76,7 +76,12 @@
     model3.imageURL = @"touping";
     model3.type = MenuModelType_Screen;
     
-    self.dataSource = [NSMutableArray arrayWithArray:@[model1, model2, model3]];
+    leftMenuModel * model4 = [[leftMenuModel alloc] init];
+    model4.title = @"清除缓存";
+    model4.imageURL = @"qingchu";
+    model4.type = MenuModelType_Cache;
+    
+    self.dataSource = [NSMutableArray arrayWithArray:@[model1, model2, model3, model4]];
     [self.tableView reloadData];
     
     GetDailyConfigRequest * request = [[GetDailyConfigRequest alloc] init];
@@ -88,15 +93,12 @@
             NSInteger qingchu = [[dataDict objectForKey:@"state"] integerValue];
             NSInteger touping = [[dataDict objectForKey:@"touping"] integerValue];
             
-            if (touping == 0) {
+            if (qingchu == 0) {
                 [self.dataSource removeLastObject];
             }
             
-            if (qingchu == 1) {
-                leftMenuModel * model4 = [[leftMenuModel alloc] init];
-                model4.title = @"清除缓存";
-                model4.imageURL = @"qingchu";
-                model4.type = MenuModelType_Cache;
+            if (touping == 0) {
+                [self.dataSource removeLastObject];
             }
             
             [self.tableView reloadData];
@@ -289,7 +291,7 @@
         sloganLabel.textAlignment = NSTextAlignmentLeft;
         sloganLabel.font = kPingFangRegular([ZXTools autoWidthWith:13]);
         sloganLabel.textColor = UIColorFromRGB(0x808080);
-        sloganLabel.text = @"每天精选十条内容  高效·价值·品味";
+        sloganLabel.text = @"每天精选十条内容  高效·价值·品位";
         [_footView addSubview:sloganLabel];
         [sloganLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(25);
@@ -406,8 +408,10 @@
 
 - (void)reloadCache
 {
-    if (self.dataSource.count >= 3) {
+    if (self.dataSource.count == 3) {
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    }else if (self.dataSource.count == 4) {
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:3 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
 

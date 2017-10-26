@@ -53,13 +53,13 @@
     
     self.detailLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.detailLabel.textAlignment = NSTextAlignmentLeft;
-    self.detailLabel.font = KQXYingBiKai(16);
+    self.detailLabel.font = KQXYingBiKai(19);
     self.detailLabel.textColor = UIColorFromRGB(0xd3d3d3);
     self.detailLabel.numberOfLines = 0;
     self.detailLabel.text = @"土地是以它的肥沃和收获而被估价的；才能也是土地，不过它生产的不是粮食，而是真理。如果只能滋生瞑想和幻想的话，即使再大的才能也只是砂地或盐池，那上面连小草也长不出来的。";
     [self.contentView addSubview:self.detailLabel];
     
-    CGFloat height = [ZXTools getHeightByWidth:self.frame.size.width - 56 title:self.detailLabel.text font:KQXYingBiKai(16)];
+    CGFloat height = [ZXTools getHeightByWidth:self.frame.size.width - 56 title:self.detailLabel.text font:KQXYingBiKai(19)];
     
     [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(80 * scale);
@@ -70,7 +70,7 @@
     
     self.fromLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.fromLabel.textAlignment = NSTextAlignmentRight;
-    self.fromLabel.font = KQXYingBiKai(16);
+    self.fromLabel.font = KQXYingBiKai(19);
     self.fromLabel.textColor = UIColorFromRGB(0xd3d3d3);
     self.fromLabel.text = @"—— 别林斯基";
     [self.contentView addSubview:self.fromLabel];
@@ -108,18 +108,31 @@
 - (void)configWithModel:(HomeViewModel *)model
 {
     
-    if (isEmptyString(model.dailyauthor) || isEmptyString(model.dailyart)) {
-        return;
+    if (!isEmptyString(model.dailyart)) {
+        self.detailLabel.text = model.dailyart;
+        
+        CGFloat height = [ZXTools getHeightByWidth:self.frame.size.width - 56 title:self.detailLabel.text font:KQXYingBiKai(19)];
+        
+        [self.detailLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(height);
+        }];
     }
     
-    self.fromLabel.text = [@"—— " stringByAppendingString:model.dailyauthor];
-    self.detailLabel.text = model.dailyart;
+    if (!isEmptyString(model.dailyauthor)) {
+        self.fromLabel.text = [@"—— " stringByAppendingString:model.dailyauthor];
+    }
     
-    CGFloat height = [ZXTools getHeightByWidth:self.frame.size.width - 56 title:self.detailLabel.text font:KQXYingBiKai(16)];
-    
-    [self.detailLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(height);
-    }];
+    if (model.contentType == 2) {
+        self.nextPageLabel.text = [NSString stringWithFormat:@"滑动阅读%@月%@日的知享", model.month, model.day];
+        self.titleLabel.hidden = YES;
+    }else if (model.contentType == 3) {
+        self.nextPageLabel.hidden = YES;
+        self.titleLabel.text = @"您已读完全部知享";
+        self.titleLabel.hidden = NO;
+    }else{
+        self.titleLabel.hidden = NO;
+        self.nextPageLabel.hidden = NO;
+    }
 }
 
 @end

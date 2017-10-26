@@ -165,7 +165,7 @@
         make.left.right.mas_equalTo(0);
     }];
     
-    NSArray *assetsArray = [NSArray arrayWithObjects:@"资产10亿以上",@"资产1亿以上",@"资产一千万以上",@"暂不透露", nil];
+    NSArray *assetsArray = [NSArray arrayWithObjects:@"资产10亿以上",@"资产1亿以上",@"资产1千万以上",@"暂不透露", nil];
     self.asSetsArray = [[NSMutableArray alloc] init];
     self.selectSetString = [[NSString alloc] init];
     for (int i = 0; i < 4; i ++) {
