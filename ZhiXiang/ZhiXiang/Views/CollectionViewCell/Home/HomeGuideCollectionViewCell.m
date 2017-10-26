@@ -52,7 +52,7 @@
     }];
     
     self.detailLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    self.detailLabel.textAlignment = NSTextAlignmentLeft;
+    self.detailLabel.textAlignment = NSTextAlignmentJustified;
     self.detailLabel.font = KQXYingBiKai(19);
     self.detailLabel.textColor = UIColorFromRGB(0xd3d3d3);
     self.detailLabel.numberOfLines = 0;
@@ -123,7 +123,7 @@
     }
     
     if (model.contentType == 2) {
-        self.nextPageLabel.text = [NSString stringWithFormat:@"滑动阅读%@月%@日的知享", model.month, model.day];
+        self.nextPageLabel.text = [NSString stringWithFormat:@"滑动阅读%@月%@日知享", model.month, model.day];
         self.titleLabel.hidden = YES;
     }else if (model.contentType == 3) {
         self.nextPageLabel.hidden = YES;

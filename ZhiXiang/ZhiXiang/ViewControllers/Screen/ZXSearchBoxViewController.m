@@ -186,6 +186,8 @@
 {
     [super viewWillDisappear:animated];
     [self.dlna stopSearchDeviceWithNetWorkChange];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(searchResult) object:nil];
 }
 
 - (void)didReceiveMemoryWarning {

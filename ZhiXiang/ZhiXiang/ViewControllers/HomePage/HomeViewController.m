@@ -84,7 +84,7 @@
     [self.leftButton addTarget:self action:@selector(leftButtonDidClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.leftButton];
     [self.leftButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(kStatusBarHeight);
+        make.top.mas_equalTo(kStatusBarHeight + 5);
         make.left.mas_equalTo(0);
         make.size.mas_equalTo(CGSizeMake(50, 44));
     }];
@@ -509,7 +509,7 @@
         _dateView = [[HomeDateView alloc] initWithFrame:CGRectMake(0, 0, 88, 40)];
         [self.view addSubview:_dateView];
         [_dateView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(kStatusBarHeight + 5);
+            make.top.mas_equalTo(kStatusBarHeight + 10);
             make.right.mas_equalTo(-15);
             make.size.mas_equalTo(CGSizeMake(88, 40));
         }];

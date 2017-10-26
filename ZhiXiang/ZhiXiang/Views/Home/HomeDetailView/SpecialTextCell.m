@@ -28,6 +28,7 @@
     self.artTextLabel.font = kPingFangRegular(16);
     self.artTextLabel.textColor = UIColorFromRGB(0x444444);
     self.artTextLabel.numberOfLines = 0;
+    self.artTextLabel.textAlignment = NSTextAlignmentJustified;
     [self.contentView addSubview:self.artTextLabel];
     [self.artTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
@@ -48,7 +49,7 @@
     style.headIndent = 0;//头部缩进，相当于左padding
     style.tailIndent = 0;//相当于右padding
     style.lineHeightMultiple = 1;//行间距是多少倍
-    style.alignment = NSTextAlignmentLeft;//对齐方式
+    style.alignment = NSTextAlignmentJustified;//对齐方式
     style.firstLineHeadIndent = 0;//首行头缩进
     style.paragraphSpacing = 30;//段落后面的间距
     style.paragraphSpacingBefore = 0;//段落之前的间距

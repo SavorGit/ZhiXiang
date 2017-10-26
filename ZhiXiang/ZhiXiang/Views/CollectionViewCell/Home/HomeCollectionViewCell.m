@@ -89,6 +89,7 @@
     
     self.subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width - 30, self.bounds.size.height - self.bounds.size.width * 488.f/750.f)];
     self.subTitleLabel.text = @"";
+    self.subTitleLabel.textAlignment = NSTextAlignmentJustified;
     if (isiPhone_Plus) {
         self.subTitleLabel.font = kPingFangRegular(18);
     }else{
@@ -147,7 +148,7 @@
     style.headIndent = 0;//头部缩进，相当于左padding
     style.tailIndent = 0;//相当于右padding
     style.lineHeightMultiple = 1;//行间距是多少倍
-    style.alignment = NSTextAlignmentLeft;//对齐方式
+    style.alignment = NSTextAlignmentJustified;//对齐方式
     style.firstLineHeadIndent = 0;//首行头缩进
     style.paragraphSpacing = 30;//段落后面的间距
     style.paragraphSpacingBefore = 0;//段落之前的间距

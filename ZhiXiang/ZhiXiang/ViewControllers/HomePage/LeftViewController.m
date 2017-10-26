@@ -288,10 +288,10 @@
         }];
         
         UILabel * sloganLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        sloganLabel.textAlignment = NSTextAlignmentLeft;
-        sloganLabel.font = kPingFangRegular([ZXTools autoWidthWith:13]);
+        sloganLabel.textAlignment = NSTextAlignmentCenter;
+        sloganLabel.font = kPingFangRegular(14);
         sloganLabel.textColor = UIColorFromRGB(0x808080);
-        sloganLabel.text = @"每天精选十条内容  高效·价值·品位";
+        sloganLabel.text = @"知世界 · 享生活";
         [_footView addSubview:sloganLabel];
         [sloganLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(25);
