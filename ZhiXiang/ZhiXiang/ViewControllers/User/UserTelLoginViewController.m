@@ -209,7 +209,7 @@
     if (self.isChangeTime) {
         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(changeTime) object:nil];
         self.isChangeTime = NO;
-        [self.sendButton setTitle:@"发送验证码" forState:UIControlStateNormal];
+        [self.sendButton setTitle:@"获取验证码" forState:UIControlStateNormal];
     }
     
     if (self.telTextField.text.length == 0) {
@@ -292,7 +292,7 @@
 - (void)changeTime
 {
     if (self.number == 0) {
-        [self.sendButton setTitle:@"发送验证码" forState:UIControlStateNormal];
+        [self.sendButton setTitle:@"获取验证码" forState:UIControlStateNormal];
         if (self.telTextField.text.length != 0) {
             [self sendButtonEnable];
         }

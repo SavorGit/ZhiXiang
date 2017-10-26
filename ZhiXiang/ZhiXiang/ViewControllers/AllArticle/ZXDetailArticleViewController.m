@@ -44,7 +44,7 @@
     if (self = [super init]) {
         self.dailyid = dailyid;
     }
-    return self;
+    return self; 
 }
 
 - (void)viewDidLoad {
