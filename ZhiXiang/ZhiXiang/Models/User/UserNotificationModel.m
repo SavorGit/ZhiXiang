@@ -10,4 +10,9 @@
 
 @implementation UserNotificationModel
 
+-(NSDictionary *)attrMapDict{
+    
+    return @{@"cid":@"id"};
+}
+
 @end

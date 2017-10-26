@@ -16,6 +16,7 @@
 #import "UMessage.h"
 #import <UserNotifications/UserNotifications.h>
 #import "UserNotificationModel.h"
+#import "ZXDetailArticleViewController.h"
 
 @interface AppDelegate ()<UNUserNotificationCenterDelegate>
 
@@ -325,24 +326,24 @@
 
 - (void)didReceiveNotificationWithInfo:(NSDictionary *)userInfo
 {
-    NSString * jsonStr = [userInfo objectForKey:@"params"];
-    
-    if (isEmptyString(jsonStr)) {
-        return;
-    }
-    
-    NSDictionary * data = [NSJSONSerialization JSONObjectWithData:[jsonStr dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil];
-    
-    if ([data isKindOfClass:[NSDictionary class]] && data.count > 0) {
-        
-        UserNotificationModel * model = [[UserNotificationModel alloc] initWithDictionary:data];
-        
-        if (!isEmptyString(model.error_id)) {
+    if ([userInfo objectForKey:@"type"]) {
+        if ([[userInfo objectForKey:@"type"] integerValue] == 1) {
             
-            NSLog(@"%@",data);
-            //跳转处理
+        }else if([[userInfo objectForKey:@"type"] integerValue] == 2){
+            
+            //如果type等于2，代表是一个进入详情的item推送
+            NSDictionary * dict = [userInfo objectForKey:@"params"];
+            
+            if ([dict isKindOfClass:[NSDictionary class]] && dict.count > 0) {
+                
+                UserNotificationModel * model = [[UserNotificationModel alloc] initWithDictionary:dict];
+                ZXDetailArticleViewController * detail = [[ZXDetailArticleViewController alloc] initWithtopDailyID:model.cid];
+                UINavigationController * na = (UINavigationController *)self.window.rootViewController;
+                [na popToRootViewControllerAnimated:NO];
+                [na pushViewController:detail animated:YES];
+                
+            }
         }
-        
     }
 }
 

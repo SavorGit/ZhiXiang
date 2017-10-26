@@ -10,6 +10,6 @@
 
 @interface UserNotificationModel : Jastor
 
-@property (nonatomic, copy) NSString * error_id;
+@property (nonatomic, copy) NSString * cid;
 
 @end
