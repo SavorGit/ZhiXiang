@@ -397,13 +397,9 @@
 #pragma mark -- 清除当前系统缓存
 - (void)clearApplicationCache
 {
-    MBProgressHUD * hud = [MBProgressHUD showLoadingHUDWithText:@"正在清除缓存" inView:[UIApplication sharedApplication].keyWindow];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [hud hideAnimated:YES];
-        [[SDImageCache sharedImageCache] clearDisk];
-        [MBProgressHUD showTextHUDWithText:@"清除成功" inView:[UIApplication sharedApplication].keyWindow];
-        [self reloadCache];
-    });
+    [[SDImageCache sharedImageCache] clearDisk];
+    [MBProgressHUD showTextHUDWithText:@"清除成功" inView:[UIApplication sharedApplication].keyWindow];
+    [self reloadCache];
 }
 
 - (void)reloadCache

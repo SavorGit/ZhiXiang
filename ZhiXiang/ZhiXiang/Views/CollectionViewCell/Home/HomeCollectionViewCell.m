@@ -71,6 +71,7 @@
     self.bottoView.backgroundColor = UIColorFromRGB(0xf8f6f1);
     
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    self.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
     self.titleLabel.text = @"";
     self.titleLabel.textColor = UIColorFromRGB(0x222222);
     if (isiPhone_Plus) {
@@ -93,9 +94,9 @@
     if (isiPhone_Plus) {
         self.subTitleLabel.font = kPingFangRegular(18);
     }else{
-        self.subTitleLabel.font = kPingFangRegular(15);
+        self.subTitleLabel.font = kPingFangRegular(16);
     }
-    self.subTitleLabel.textColor = UIColorFromRGB(0x575757);
+    self.subTitleLabel.textColor = UIColorFromRGB(0x444444);
     self.subTitleLabel.backgroundColor = [UIColor clearColor];
     self.subTitleLabel.numberOfLines = 0;
     [self.bottoView addSubview:self.subTitleLabel];
@@ -141,7 +142,7 @@
     if (isiPhone_Plus) {
         [attrString addAttribute:NSFontAttributeName value:kPingFangRegular(18) range:NSMakeRange(0, length)];//设置所有的字体
     }else{
-        [attrString addAttribute:NSFontAttributeName value:kPingFangRegular(15) range:NSMakeRange(0, length)];//设置所有的字体
+        [attrString addAttribute:NSFontAttributeName value:kPingFangRegular(16) range:NSMakeRange(0, length)];//设置所有的字体
     }
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.lineSpacing = 5;//行间距
@@ -165,7 +166,7 @@
     CGFloat titleHeight;
     CGFloat subTitleHeight;
     if (isiPhone_Plus) {
-        titleHeight = [ZXTools getHeightByWidth:self.bounds.size.width - 30 title:self.titleLabel.text font:kPingFangMedium(21)];
+        titleHeight = [ZXTools getHeightByWidth:self.bounds.size.width - 30 title:self.titleLabel.text font:kPingFangMedium(21) lineModel:NSLineBreakByCharWrapping];
         if (titleHeight > 32) {
             [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.height.mas_equalTo(60);
@@ -178,7 +179,7 @@
             subTitleHeight = bottomHeight - 25 - 15 - 22 - 15 - 15 - 10;
         }
     }else{
-        titleHeight = [ZXTools getHeightByWidth:self.bounds.size.width - 30 title:self.titleLabel.text font:kPingFangMedium(19)];
+        titleHeight = [ZXTools getHeightByWidth:self.bounds.size.width - 30 title:self.titleLabel.text font:kPingFangMedium(19) lineModel:NSLineBreakByCharWrapping];
         
         if (titleHeight > 32) {
             [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {

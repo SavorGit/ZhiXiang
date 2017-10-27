@@ -32,16 +32,16 @@
 - (void)createViews
 {
     self.currentLabel = [[HomePageLabel alloc] initWithFrame:CGRectMake(0, 4, self.bounds.size.width / 2 - 1.5, 20)];
-    self.currentLabel.font = kACaslonProItalic(20);
+    self.currentLabel.font = kACaslonProItalic(22);
     self.currentLabel.textAlignment = NSTextAlignmentRight;
-    self.currentLabel.textColor = UIColorFromRGB(0x9a9a9a);
+    self.currentLabel.textColor = UIColorFromRGB(0xd8d8d8);
     self.currentLabel.text = @"1";
     [self addSubview:self.currentLabel];
     
     self.totalLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.bounds.size.width / 2 + 2, 19, self.bounds.size.width / 2 - 1, 13)];
     self.totalLabel.font = kACaslonProRegular(13);
     self.totalLabel.textAlignment = NSTextAlignmentLeft;
-    self.totalLabel.textColor = UIColorFromRGB(0x666666);
+    self.totalLabel.textColor = UIColorFromRGB(0x7b7b7b);
     self.totalLabel.text = [NSString stringWithFormat:@"%ld", self.totalNumber];
     [self addSubview:self.totalLabel];
     

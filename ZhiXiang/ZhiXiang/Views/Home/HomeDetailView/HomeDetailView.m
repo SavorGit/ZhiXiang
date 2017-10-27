@@ -224,6 +224,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     [self.bottoView addSubview:self.baseView];
     
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 25, self.bottoView.frame.size.width - 30, 22)];
+    self.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
     self.titleLabel.text = self.topModel.title;
     self.titleLabel.textColor = UIColorFromRGB(0x222222);
     if (isiPhone_Plus) {
@@ -239,9 +240,9 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     if (isiPhone_Plus) {
         self.subTitleLabel.font = kPingFangRegular(18);
     }else{
-        self.subTitleLabel.font = kPingFangRegular(15);
+        self.subTitleLabel.font = kPingFangRegular(16);
     }
-    self.subTitleLabel.textColor = UIColorFromRGB(0x575757);
+    self.subTitleLabel.textColor = UIColorFromRGB(0x444444);
     self.subTitleLabel.backgroundColor = [UIColor clearColor];
     self.subTitleLabel.numberOfLines = 0;
     [self.baseView addSubview:self.subTitleLabel];
@@ -250,7 +251,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     if (!isEmptyString(self.topModel.sourceName)) {
         self.fromLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, self.bottoView.frame.size.height - 30, self.bottoView.frame.size.width - 30, 15)];
         self.fromLabel.text = [@"选自: " stringByAppendingString:self.topModel.sourceName];
-        self.fromLabel.textAlignment = NSTextAlignmentRight;
+        self.fromLabel.textAlignment = NSTextAlignmentJustified;
         self.fromLabel.textColor = UIColorFromRGB(0x999999);
         self.fromLabel.font = kPingFangRegular(12);
         [self.baseView addSubview:self.fromLabel];
@@ -264,14 +265,14 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     if (isiPhone_Plus) {
         [attrString addAttribute:NSFontAttributeName value:kPingFangRegular(18) range:NSMakeRange(0, length)];//设置所有的字体
     }else{
-        [attrString addAttribute:NSFontAttributeName value:kPingFangRegular(15) range:NSMakeRange(0, length)];//设置所有的字体
+        [attrString addAttribute:NSFontAttributeName value:kPingFangRegular(16) range:NSMakeRange(0, length)];//设置所有的字体
     }
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.lineSpacing = 5;//行间距
     style.headIndent = 0;//头部缩进，相当于左padding
     style.tailIndent = 0;//相当于右padding
     style.lineHeightMultiple = 1;//行间距是多少倍
-    style.alignment = NSTextAlignmentLeft;//对齐方式
+    style.alignment = NSTextAlignmentJustified;//对齐方式
     style.firstLineHeadIndent = 0;//首行头缩进
     style.paragraphSpacing = 30;//段落后面的间距
     style.paragraphSpacingBefore = 0;//段落之前的间距
@@ -288,7 +289,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
     CGFloat titleHeight;
     CGFloat subTitleHeight;
     if (isiPhone_Plus) {
-        titleHeight = [ZXTools getHeightByWidth:self.bounds.size.width - 30 title:self.titleLabel.text font:kPingFangMedium(21)];
+        titleHeight = [ZXTools getHeightByWidth:self.bounds.size.width - 30 title:self.titleLabel.text font:kPingFangMedium(21) lineModel:NSLineBreakByCharWrapping];
         
         if (titleHeight > 32) {
             self.titleLabel.frame = CGRectMake(15, 25, self.bottoView.frame.size.width - 30, 60);
@@ -298,7 +299,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
             subTitleHeight = bottomHight - 25 - 15 - 22 - 15 - 15 - 10;
         }
     }else{
-        titleHeight = [ZXTools getHeightByWidth:self.bounds.size.width - 30 title:self.titleLabel.text font:kPingFangMedium(19)];
+        titleHeight = [ZXTools getHeightByWidth:self.bounds.size.width - 30 title:self.titleLabel.text font:kPingFangMedium(19) lineModel:NSLineBreakByCharWrapping];
         
         if (titleHeight > 32) {
             self.titleLabel.frame = CGRectMake(15, 25, self.bottoView.frame.size.width - 30, 54);
@@ -568,7 +569,7 @@ CGFloat HomeDetailViewHiddenAnimationDuration = .3f;
 {
     if (_blackView == nil) {
         
-        _blackView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kMainBoundsWidth, 44 + kStatusBarHeight)];
+        _blackView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kMainBoundsWidth, 125)];
         _blackView.userInteractionEnabled = YES;
         _blackView.contentMode = UIViewContentModeScaleToFill;
         [_blackView setImage:[UIImage imageNamed:@"quanpingmc"]];

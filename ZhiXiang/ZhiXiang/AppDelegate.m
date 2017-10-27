@@ -331,17 +331,22 @@
             
         }else if([[userInfo objectForKey:@"type"] integerValue] == 2){
             
-            //如果type等于2，代表是一个进入详情的item推送
-            NSDictionary * dict = [userInfo objectForKey:@"params"];
-            
-            if ([dict isKindOfClass:[NSDictionary class]] && dict.count > 0) {
+            if ([userInfo objectForKey:@"params"]) {
+                //如果type等于2，代表是一个进入详情的item推送
+                NSDictionary * dict = [userInfo objectForKey:@"params"];
                 
-                UserNotificationModel * model = [[UserNotificationModel alloc] initWithDictionary:dict];
-                ZXDetailArticleViewController * detail = [[ZXDetailArticleViewController alloc] initWithtopDailyID:model.cid];
-                UINavigationController * na = (UINavigationController *)self.window.rootViewController;
-                [na popToRootViewControllerAnimated:NO];
-                [na pushViewController:detail animated:YES];
-                
+                if ([dict isKindOfClass:[NSDictionary class]] && dict.count > 0) {
+                    
+                    UserNotificationModel * model = [[UserNotificationModel alloc] initWithDictionary:dict];
+                    ZXDetailArticleViewController * detail = [[ZXDetailArticleViewController alloc] initWithtopDailyID:model.cid];
+                    LGSideMenuController * lg = (LGSideMenuController *)self.window.rootViewController;
+                    UINavigationController * na = (UINavigationController *)lg.rootViewController;
+                    [na popToRootViewControllerAnimated:NO];
+                    [na presentViewController:detail animated:NO completion:^{
+                        
+                    }];
+                    
+                }
             }
         }
     }

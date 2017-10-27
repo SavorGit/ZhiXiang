@@ -260,6 +260,8 @@
             HomeViewModel * guideModel = [[HomeViewModel alloc] init];
             guideModel.modelType = HomeViewModelType_PageGuide;
             guideModel.bespeak_time = model.bespeak_time;
+            guideModel.dailyart = [dataDict objectForKey:@"dailyart"];
+            guideModel.dailyauthor = [dataDict objectForKey:@"dailyauthor"];
             
             if ([dataDict objectForKey:@"nextpage"]) {
                 NSDictionary * nextPageDict = [dataDict objectForKey:@"nextpage"];

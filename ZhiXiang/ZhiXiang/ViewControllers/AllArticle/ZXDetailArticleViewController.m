@@ -62,7 +62,7 @@
     
     [self.view addSubview:self.topView];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(44 + kStatusBarHeight);
+        make.height.mas_equalTo(125);
         make.top.mas_equalTo(0);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(0);
