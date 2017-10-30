@@ -123,7 +123,7 @@
     }
     
     if (model.contentType == 2) {
-        self.nextPageLabel.text = [NSString stringWithFormat:@"滑动阅读%@月%@日知享", model.month, model.day];
+        self.nextPageLabel.text = [NSString stringWithFormat:@"滑动阅读%@月%@日知享", model.nextMonth, model.nextDay];
         self.titleLabel.hidden = YES;
     }else if (model.contentType == 3) {
         self.nextPageLabel.hidden = YES;

@@ -110,13 +110,17 @@
     self.fromLabel.text = @"";
     self.fromLabel.textAlignment = NSTextAlignmentRight;
     self.fromLabel.textColor = UIColorFromRGB(0xcd313e);
-    self.fromLabel.font = kPingFangRegular(16);
+    if (isiPhone_Plus) {
+        self.fromLabel.font = kPingFangRegular(18);
+    }else{
+        self.fromLabel.font = kPingFangRegular(16);
+    }
     [self.contentView addSubview:self.fromLabel];
     [self.fromLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
         make.bottom.mas_equalTo(-13);
         make.right.mas_equalTo(-15);
-        make.height.mas_equalTo(16);
+        make.height.mas_equalTo(18);
     }];
 }
 

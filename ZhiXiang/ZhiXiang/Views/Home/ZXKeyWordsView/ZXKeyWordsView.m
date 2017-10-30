@@ -100,7 +100,12 @@ static CGFloat keyWordViewLineViewHeight = 55.f;
 //创建我知道了的按钮
 - (void)createButtonWithIKnewIt
 {
-    CGFloat topDistance = self.lineNum * keyWordViewLineViewHeight + [self scaleHeightWith:290] - keyWordViewLineViewHeight;
+    CGFloat topDistance;
+    if (isiPhone4S) {
+        topDistance = self.lineNum * keyWordViewLineViewHeight + [self scaleHeightWith:290] - keyWordViewLineViewHeight - 5;
+    }else{
+        topDistance = self.lineNum * keyWordViewLineViewHeight + [self scaleHeightWith:290] - keyWordViewLineViewHeight + 20;
+    }
     
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(([UIScreen mainScreen].bounds.size.width - 80) / 2,topDistance + 10, 80, 32);
@@ -129,7 +134,7 @@ static CGFloat keyWordViewLineViewHeight = 55.f;
     
 //    CGFloat delay = (self.lineNum - 1) * keyWordViewAnimationDuration;
     
-    CGFloat topDistance = [self scaleHeightWith:220] - keyWordViewLineViewHeight;
+    CGFloat topDistance = [self scaleHeightWith:200] - keyWordViewLineViewHeight;
     
     if (array.count == 1) {
         

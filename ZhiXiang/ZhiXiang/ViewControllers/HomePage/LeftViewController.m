@@ -94,11 +94,11 @@
             NSInteger touping = [[dataDict objectForKey:@"touping"] integerValue];
             
             if (qingchu == 0) {
-                [self.dataSource removeLastObject];
+                [self.dataSource removeObject:model4];
             }
             
             if (touping == 0) {
-                [self.dataSource removeLastObject];
+                [self.dataSource removeObject:model3];
             }
             
             [self.tableView reloadData];

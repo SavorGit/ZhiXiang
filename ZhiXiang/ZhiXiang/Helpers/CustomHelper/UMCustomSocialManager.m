@@ -78,7 +78,16 @@
 
 - (void)sharedAPPToPlatform:(UMSocialPlatformType)platformType andController:(UIViewController *)VC andView:(UIView *)view andUmKeyString:(NSString *)keyString
 {
-    NSString * url = @"https://itunes.apple.com/cn/app/id1284095616";
+    NSString * url = [UserManager shareManager].shareURL;
+    
+    if (isEmptyString(url)) {
+        url = @"http://admin.littlehotspot.com/dailycontentshow/shareapp";
+    }
+    
+    if (!isEmptyString([UserManager shareManager].wxOpenID)) {
+        url = [NSString stringWithFormat:@"%@?openid=%@", url, [UserManager shareManager].wxOpenID];
+    }
+    
     UIImage * image = [UIImage imageNamed:@"shareDefalut"];
     
     //创建分享消息对象

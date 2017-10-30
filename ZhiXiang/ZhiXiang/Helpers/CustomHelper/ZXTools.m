@@ -16,6 +16,7 @@
 #import "CheckUpdateRequest.h"
 #import "RDAlertView.h"
 #import "WeixinLoginRequest.h"
+#import "ShareAppRequest.h"
 #import "GCCGetInfo.h"
 
 @implementation ZXTools
@@ -60,6 +61,26 @@
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
     [self checkUpdate];
+    [self getShareAPPURL];
+}
+
++ (void)getShareAPPURL
+{
+    ShareAppRequest * request = [[ShareAppRequest alloc] init];
+    [request sendRequestWithSuccess:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+        
+        if ([response objectForKey:@"result"]) {
+            NSDictionary * dataDict = [response objectForKey:@"result"];
+            if (dataDict && [dataDict isKindOfClass:[NSDictionary class]]) {
+                [UserManager shareManager].shareURL = [dataDict objectForKey:@"url"];
+            }
+        }
+        
+    } businessFailure:^(BGNetworkRequest * _Nonnull request, id  _Nullable response) {
+        
+    } networkFailure:^(BGNetworkRequest * _Nonnull request, NSError * _Nullable error) {
+        
+    }];
 }
 
 + (NSString *)getCurrentTimeWithFormat:(NSString *)format

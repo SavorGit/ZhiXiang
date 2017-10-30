@@ -26,29 +26,32 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) NSInteger contentType;
 
 //文章详情
-@property(nonatomic, strong) NSString *dailyid;
-@property(nonatomic, strong) NSString *imgUrl;
-@property(nonatomic, strong) NSString *sourceName;
-@property(nonatomic, strong) NSString *bespeak_time;
+@property(nonatomic, copy) NSString *dailyid;
+@property(nonatomic, copy) NSString *imgUrl;
+@property(nonatomic, copy) NSString *sourceName;
+@property(nonatomic, copy) NSString *bespeak_time;
 @property(nonatomic, assign) NSInteger is_collect;
 @property(nonatomic, assign) NSInteger dailytype;
-@property(nonatomic, strong) NSString *stext;
-@property(nonatomic, strong) NSString *spicture;
-@property(nonatomic, strong) NSString *share_url;
+@property(nonatomic, copy) NSString *stext;
+@property(nonatomic, copy) NSString *spicture;
+@property(nonatomic, copy) NSString *share_url;
 
-@property(nonatomic, strong) NSString *week;
-@property(nonatomic, strong) NSString *month;
-@property(nonatomic, strong) NSString *day;
+@property(nonatomic, copy) NSString *week;
+@property(nonatomic, copy) NSString *month;
+@property(nonatomic, copy) NSString *day;
 
 @property(nonatomic, strong) NSDictionary *detailDic;
 
-@property(nonatomic, strong) NSString *title;
-@property(nonatomic, strong) NSString *desc;
+@property(nonatomic, copy) NSString *title;
+@property(nonatomic, copy) NSString *desc;
 
-@property(nonatomic, strong) NSString * artpro;
+@property(nonatomic, copy) NSString * artpro;
 
 //HomeViewModelType_PageGuide
-@property(nonatomic, strong) NSString *dailyauthor;
-@property(nonatomic, strong) NSString * dailyart;
+@property(nonatomic, copy) NSString *dailyauthor;
+@property(nonatomic, copy) NSString * dailyart;
+@property(nonatomic, copy) NSString * nextMonth;
+@property(nonatomic, copy) NSString * nextWeek;
+@property(nonatomic, copy) NSString * nextDay;
 
 @end

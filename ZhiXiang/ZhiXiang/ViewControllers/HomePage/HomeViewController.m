@@ -262,6 +262,9 @@
             guideModel.bespeak_time = model.bespeak_time;
             guideModel.dailyart = [dataDict objectForKey:@"dailyart"];
             guideModel.dailyauthor = [dataDict objectForKey:@"dailyauthor"];
+            guideModel.day = model.day;
+            guideModel.week = model.week;
+            guideModel.month = model.month;
             
             if ([dataDict objectForKey:@"nextpage"]) {
                 NSDictionary * nextPageDict = [dataDict objectForKey:@"nextpage"];
@@ -270,9 +273,9 @@
                     guideModel.contentType = 3;
                 }else{
                     guideModel.contentType = 2;
-                    guideModel.month = [nextPageDict objectForKey:@"month"];
-                    guideModel.day = [nextPageDict objectForKey:@"day"];
-                    guideModel.week = [nextPageDict objectForKey:@"week"];
+                    guideModel.nextMonth = [nextPageDict objectForKey:@"month"];
+                    guideModel.nextDay = [nextPageDict objectForKey:@"day"];
+                    guideModel.nextWeek = [nextPageDict objectForKey:@"week"];
                 }
             }
             
@@ -355,8 +358,8 @@
     self.currentIndex = toIndex;
     if (toIndex < self.dataSource.count) {
         HomeViewModel * model = [self.dataSource objectAtIndex:toIndex];
+        [self.dateView configWithModel:model];
         if (model.modelType == HomeViewModelType_Default) {
-            [self.dateView configWithModel:model];
             [self showDateAndPage];
             
             if (toIndex >= 12) {
@@ -423,6 +426,9 @@
         HomeViewModel * commandModel = [[HomeViewModel alloc] init];
         commandModel.modelType = HomeViewModelType_Command;
         commandModel.bespeak_time = model.bespeak_time;
+        commandModel.day = model.day;
+        commandModel.week = model.week;
+        commandModel.month = model.month;
         [self.dataSource addObject:commandModel];
         
         HomeViewModel * guideModel = [[HomeViewModel alloc] init];
@@ -430,6 +436,26 @@
         guideModel.dailyart = [dataDict objectForKey:@"dailyart"];
         guideModel.dailyauthor = [dataDict objectForKey:@"dailyauthor"];
         guideModel.bespeak_time = model.bespeak_time;
+        guideModel.day = model.day;
+        guideModel.week = model.week;
+        guideModel.month = model.month;
+        
+        if ([[dataDict objectForKey:@"is_same_day"] integerValue] == 0) {
+            
+            if ([dataDict objectForKey:@"nextpage"]) {
+                NSDictionary * nextPageDict = [dataDict objectForKey:@"nextpage"];
+                NSInteger next = [[nextPageDict objectForKey:@"next"] integerValue];
+                if (next == 0) {
+                    guideModel.contentType = 3;
+                }else{
+                    guideModel.contentType = 2;
+                    guideModel.nextMonth = [nextPageDict objectForKey:@"month"];
+                    guideModel.nextDay = [nextPageDict objectForKey:@"day"];
+                    guideModel.nextWeek = [nextPageDict objectForKey:@"week"];
+                }
+            }
+        }
+        
         [self.dataSource addObject:guideModel];
         
         [self.pagerView reloadData];

@@ -201,10 +201,15 @@
 
 + (NSString *)addURLParamsShareWith:(NSString *)url
 {
+    NSString * params = [NSString stringWithFormat:@"app=inner"];
+    if (!isEmptyString([UserManager shareManager].wxOpenID)) {
+        params = [NSString stringWithFormat:@"app=inner&openid=%@", [UserManager shareManager].wxOpenID];
+    }
+    
     if ([url containsString:@"?"]) {
-        return [url stringByAppendingString:@"&app=inner"];
+        return [NSString stringWithFormat:@"%@&%@", url, params];
     }else{
-        return [url stringByAppendingString:@"?app=inner"];
+        return [NSString stringWithFormat:@"%@?%@", url, params];
     }
 }
 

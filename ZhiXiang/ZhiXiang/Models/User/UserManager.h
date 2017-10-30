@@ -30,6 +30,8 @@ extern NSString * const ZXUserDidLoginSuccessNotification; //用户登录成功�
 @property (nonatomic, assign) BOOL isLoginWithTel; //是否手机号登录
 @property (nonatomic, copy) NSString * tel; //电话号码
 
+@property (nonatomic, copy) NSString * shareURL;
+
 - (void)configWithDictionary:(NSDictionary *)userInfo;
 
 - (void)configWithUMengResponse:(UMSocialUserInfoResponse *)response;
